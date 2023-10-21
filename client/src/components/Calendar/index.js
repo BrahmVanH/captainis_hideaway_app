@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
+import { QUERY_UNAVAILABLE_DATES } from '../../utils/queries';
+import { useQuery } from '@apollo/client';
+
 import 'react-calendar/dist/Calendar.css';
 
-function Calendar(props) {
+
+function Calendar() {
+
 	const [date, setDate] = useState(new Date());
+  const [unavailableDates, setUnavailableDates] = useState([]);
+
+  const {error, loading, data } = useQuery(QUERY_UNAVAILABLE_DATES);
+
+  useEffect(() => {
+    if (!loading && data) {
+      setUnavailableDates(data);
+    } else {
+      return
+    }
+  }, [data])
+
 
 	const tileContent = ({ date, view }) => {
-		const unavailableDates = props.unavailableDates;
-		// const unavailableDates = [new Date('2023-10-25'), new Date('2023-10-27')];
 		const isUnavailable = unavailableDates.some((unavailableDate) =>
 			view === 'month'
 				? unavailableDate.getFullYear() === date.getFullYear() && unavailableDate.getMonth() === date.getMonth() && unavailableDate.toDateString() === date.toDateString()
@@ -25,7 +40,9 @@ function Calendar(props) {
 		<div>
 			<h1>Calendar App</h1>
 			<div className='calendar-container'>
-				<Calendar onChange={handleDateChange} value={date} tileContent={tileContent} />
+        {loading ? <div> Loading Calendar... </div> : (
+          <Calendar onChange={handleDateChange} value={date} tileContent={tileContent} />
+        )}
 			</div>
 		</div>
 	);

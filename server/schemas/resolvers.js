@@ -17,6 +17,7 @@ const resolvers = {
 	},
 	Mutation: {
 		createUnavailableDate: async (parent, { date }) => {
+			console.log("creating unavailable date in server");
 			try {
 				if (!date) {
 					throw new Error('date object is undefined');
@@ -26,6 +27,7 @@ const resolvers = {
 				if (!unavailableDate) {
 					throw new Error('Could not create new date');
 				}
+				console.log("successfully created unavailableDate...")
 				return unavailableDate;
 			} catch (err) {
 				return [{ message: 'Something went wrong creating a new unavailable date...', details: err.message }];
@@ -40,6 +42,8 @@ const resolvers = {
 				if (!unavailableDate) {
 					throw new Error('could not find unavailable date with that value...');
 				}
+				console.log('successfully removed unavailableDate...');
+
 				return unavailableDate;
 			} catch (err) {
 				return [{ message: 'Something went wrong creating a new unavailable date...', details: err.message }];
