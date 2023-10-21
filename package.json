@@ -1,7 +1,7 @@
 {
   "name": "captains_hideaway-app",
   "version": "1.0.0",
-  "description": "This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "start": "node server/server.js",

@@ -11,8 +11,8 @@ const typeDefs = gql`
 		queryUnavailableDates: [Date]
 	}
 	type Mutation {
-		createUnavailableDate(date: String): [Date]
-		removeUnavailableDate(date: String): [Date]
+		createUnavailableDate(date: String): Date
+		removeUnavailableDate(date: String): Date
 	}
 `;
 
