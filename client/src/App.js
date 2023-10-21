@@ -5,6 +5,7 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import Calendar from 'react-calendar';
 import AdminCalendar from './components/AdminCalendar';
 import { Button } from 'react-bootstrap';
+import AvailabilityCalendar from './components/Calendar';
 
 const client = new ApolloClient({
 	uri: 'http://localhost:3001/graphql',
@@ -28,7 +29,7 @@ function App() {
 	return (
 		<ApolloProvider client={client}>
 			<div className='App'>
-				<AdminCalendar />
+				<AvailabilityCalendar />
 				{/* <Button onClick={handleButtonClick}>Click</Button> */}
 			</div>
 		</ApolloProvider>
