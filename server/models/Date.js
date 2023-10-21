@@ -7,6 +7,6 @@ const dateSchema = new Schema({
   }
 });
 
-const Date = model("Date", dateSchema);
+const UnavailableDate = model("UnavailableDate", dateSchema);
 
-module.exports = Date;
+module.exports = UnavailableDate;

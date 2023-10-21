@@ -1,3 +1,3 @@
-const Date = require('./Date');
+const UnavailableDate = require('./Date');
 
-module.exports = { Date };
+module.exports = { UnavailableDate };
