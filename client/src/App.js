@@ -1,7 +1,10 @@
-import logo from './logo.svg';
-import './App.css';
 import { useState } from 'react';
+
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import Navbar from './components/Navbar';
+import Home from './pages/Home';
 import Calendar from 'react-calendar';
 import AdminCalendar from './components/AdminCalendar';
 import { Button } from 'react-bootstrap';
@@ -28,10 +31,12 @@ function App() {
 	// };
 	return (
 		<ApolloProvider client={client}>
-			<div className='App'>
-				<AvailabilityCalendar />
-				{/* <Button onClick={handleButtonClick}>Click</Button> */}
-			</div>
+			<Router>
+				<Navbar />
+				<Routes>
+					<Route path='/' element={<Home />} />
+				</Routes>
+			</Router>
 		</ApolloProvider>
 	);
 }
