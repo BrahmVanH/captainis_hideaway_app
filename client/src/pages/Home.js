@@ -12,7 +12,7 @@ function Home() {
   const captainsCottageCardImgPath = 'assets/img/back_exterior_side_with_lake.png'
 	return (
 		<div>
-			<header className='text-center text-white masthead'>
+			<header className='home-header text-center text-white masthead'>
 				<div className='overlay'>
 					<div className='container welcome-message-container'>
 						<div className='row'>
@@ -31,7 +31,7 @@ function Home() {
 							Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.
 						</p>
 						<div style={{ width: '35%' }}>
-							<Link className='info-booking-btn'>Info and Booking</Link>
+							<Link to='/captains_hideaway' className='info-booking-btn'>Info and Booking</Link>
 						</div>
 					</div>
 					<Image rounded src={captainsHideawayCardImgPath} className='card-img-bottom w-100 d-block' height='100%' />

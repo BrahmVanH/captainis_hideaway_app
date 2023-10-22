@@ -10,9 +10,9 @@ function Navbar() {
   return (
 		<nav className='navbar navbar-expand bg-light navigation-clean navbar-light'>
 			<div className='container'>
-				<a className='navbar-brand' href='#'>
+				<Link className='navbar-brand' to={'/'}>
 					Captains Rentals
-				</a>
+				</Link>
 				<button data-bs-toggle='collapse' className='navbar-toggler' data-bs-target='#navcol-1'></button>
 				<div className='collapse navbar-collapse' id='navcol-1'></div>
 				<Link to={'/'} className="navbar-link">
