@@ -1,0 +1,51 @@
+header {
+  background-image: url("../../public/assets/img/arial_shot_over_beach_side.png");
+  background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.overview-card {
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.overview-card .card-title {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  
+}
+
+.overview {
+  padding: 0.5rem;
+  margin: 0.5rem;
+
+}
+
+.rooms-and-beds-card {
+  padding: 0.5rem;
+  margin: 1rem;
+}
+
+.rooms-and-beds-card .card-body {
+  padding: 0px;
+}
+
+.rooms-and-beds-inner-container {
+
+}
+
+.important-information-card {
+  margin: 1rem;
+}
+
+.important-information {
+  height: 100%;
+  padding: 0.5rem;
+}
+
+
+.important-information-text p {
+  margin: 0;
+  padding: 0.5rem;
+  width: 75%;
+}

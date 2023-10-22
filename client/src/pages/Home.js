@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Button } from 'react-bootstrap';
+import { Button, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './style.css';
+import './Home.css';
 
 function Home() {
 
@@ -34,7 +34,7 @@ function Home() {
 							<Link className='info-booking-btn'>Info and Booking</Link>
 						</div>
 					</div>
-					<img src={captainsHideawayCardImgPath} className='card-img-bottom w-100 d-block' height='100%' />
+					<Image rounded src={captainsHideawayCardImgPath} className='card-img-bottom w-100 d-block' height='100%' />
 				</div>
 				<div className='rental-card card'>
 					<div className='card-body d-flex flex-column justify-content-center align-items-center align-content-center'>
@@ -46,7 +46,7 @@ function Home() {
 							<Link className='info-booking-btn'>Info and Booking</Link>
 						</div>
 					</div>
-					<img src={captainsCottageCardImgPath} className='card-img-bottom w-100 d-block' height='100%' />
+					<Image rounded src={captainsCottageCardImgPath} className='card-img-bottom w-100 d-block' height='100%' />
 				</div>
 			</section>
 		</div>
