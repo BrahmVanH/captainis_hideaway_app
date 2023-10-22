@@ -1,57 +1,52 @@
 import React from 'react';
 
+import { Button } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './style.css';
 
 function Home() {
+
+  const captainsHideawayCardImgPath = 'assets/img/stairs_from_beach_2.png'
+  const captainsCottageCardImgPath = 'assets/img/back_exterior_side_with_lake.png'
 	return (
 		<div>
-			<header class='text-center text-white masthead' style="background:url('assets/img/bg-masthead.jpg')no-repeat center center;background-size:cover;">
-				<div class='overlay'></div>
-				<div class='container'>
-					<div class='row'>
-						<div class='col-xl-9 mx-auto position-relative'>
-							<h1 class='mb-5'>Welcome to Captains Rentals</h1>
+			<header className='text-center text-white masthead'>
+				<div className='overlay'>
+					<div className='container welcome-message-container'>
+						<div className='row'>
+							<div className='col-xl-9 mx-auto position-relative'>
+								<h1 className='mb-5'>Welcome to Captains Rentals</h1>
+							</div>
 						</div>
 					</div>
 				</div>
 			</header>
-			<section class='text-center bg-light d-flex flex-column justify-content-between align-items-center features-icons' style='padding: 1rem 0rem;'>
-				<div class='card flex-row' style='width: 80%;margin: 1rem;'>
-					<div class='card-body d-flex flex-column justify-content-center align-items-center align-content-center'>
-						<h4 class='card-title'>Captains Hideaway</h4>
-						<p class='card-text' style='width: 50%;'>
+			<section className='text-center bg-light rental-cards features-icons'>
+				<div className='rental-card card'>
+					<div className='card-body d-flex flex-column justify-content-center align-items-center align-content-center'>
+						<h4 className='card-title'>Captains Hideaway</h4>
+						<p className='card-text rental-description'>
 							Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.
 						</p>
-						<div style='background: var(--bs-emphasis-color);width: 35%;'>
-							<a href='#' style='background: var(--bs-emphasis-color);color: var(--bs-body-bg);font-weight: bold;'>
-								Info and Booking
-							</a>
+						<div style={{ width: '35%' }}>
+							<Link className='info-booking-btn'>Info and Booking</Link>
 						</div>
 					</div>
-					<img class='card-img-bottom w-100 d-block' height='100%' />
+					<img src={captainsHideawayCardImgPath} className='card-img-bottom w-100 d-block' height='100%' />
 				</div>
-				<div class='card flex-row' style='width: 80%;margin: 1rem;'>
-					<div class='card-body d-flex flex-column justify-content-center align-items-center align-content-center'>
-						<h4 class='card-title'>Captains Hideaway</h4>
-						<p class='card-text' style='width: 50%;'>
+				<div className='rental-card card'>
+					<div className='card-body d-flex flex-column justify-content-center align-items-center align-content-center'>
+						<h4 className='card-title'>Captains Hideaway</h4>
+						<p className='card-text rental-description'>
 							Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.
 						</p>
-						<div style='background: var(--bs-emphasis-color);width: 35%;'>
-							<a href='#' style='background: var(--bs-emphasis-color);color: var(--bs-body-bg);font-weight: bold;'>
-								Info and Booking
-							</a>
+						<div style={{ width: '35%' }}>
+							<Link className='info-booking-btn'>Info and Booking</Link>
 						</div>
 					</div>
-					<img class='card-img-bottom w-100 d-block' height='100%' />
-				</div>
-			</section>
-			<section class='showcase'>
-				<div class='container-fluid p-0'>
-					<div class='row g-0'>
-						<div class='col-lg-6 text-white showcase-img' style='background-image:url("assets/img/bg-showcase-2.jpg");'>
-							<span></span>
-						</div>
-					</div>
+					<img src={captainsCottageCardImgPath} className='card-img-bottom w-100 d-block' height='100%' />
 				</div>
 			</section>
 		</div>
