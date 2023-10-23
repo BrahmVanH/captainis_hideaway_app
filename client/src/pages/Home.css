@@ -11,32 +11,5 @@
   align-items: center;
 }
 
-.rental-cards {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0rem;
-}
-.rental-card {
-  display: flex;
-  flex-direction: row;
-  width: 80%;
-  margin: 1rem;
-}
 
-.rental-description {
-  width: 50%;
-}
-
-.card-img-bottom {
-  height: 200px;
-  width: 350px;
-  margin: 1rem;
-}
-
-.info-booking-btn {
-  background-color: grey;
-  font-weight: bold;
-}
 
