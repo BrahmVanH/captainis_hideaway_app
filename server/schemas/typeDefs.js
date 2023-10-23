@@ -21,12 +21,12 @@ const typeDefs = gql`
 	}
 
 	type Query {
-		getUser(userId: ID!): [User]
+		getAllUsers: [User]
 		queryUnavailableDates: [Date]
 	}
 	type Mutation {
-		loginUser(username: String!, password: String!): Auth
-		logoutUser(username: String!, password: String!): Auth
+		createUser(firstName: String!, lastName: String!, username: String!, userPassword: String!): Auth
+		loginUser(username: String!, userPassword: String!): Auth
 		createUnavailableDate(date: String): Date
 		removeUnavailableDate(date: String): Date
 	}

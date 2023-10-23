@@ -1,11 +1,17 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { UnavailableDate } = require('../models');
+const { UnavailableDate, User } = require('../models');
+const { signToken } = require('../utils/auth');
+const bcrypt = require('bcrypt');
+
+
+
+
 
 const resolvers = {
 	Query: {
 		getAllUsers: async () => {
 			try {
-				const allUsers = await UserActivation.find({});
+				const allUsers = await User.find({});
 
 				if (!allUsers) {
 					throw new Error('Cannot find user with that ID!');
@@ -29,9 +35,50 @@ const resolvers = {
 		},
 	},
 	Mutation: {
-		loginUser: async (parent, {username, password}) => {
+		createUser: async (parent, { firstName, lastName, username, userPassword })=> {
 			try {
-				const user = await
+
+				const password = bcrypt.hashSync(userPassword, 10);
+
+
+				const newUser = await User.create({
+					firstName,
+					lastName,
+					username,
+					password,
+				});
+				
+				if (!newUser) {
+					throw new AuthenticationError("There was an error creating user. Try again.");
+				}
+				
+				const token = signToken(newUser);
+				
+				return { token, newUser };
+			} catch (err) {
+				return [{ message: 'Error in creating user', details: err.message }];
+
+			}
+		},
+		loginUser: async (parent, { username, userPassword }) => {
+			try {
+				const user = await User.findOne({ username });
+				if (!user) {
+					throw new AuthenticationError("Can't find user with that username");
+				}
+
+				const isPasswordValid = bcrypt.compareSync(userPassword, hashedPassword);
+
+
+				if (!isPasswordValid) {
+					throw new AuthenticationError('Incorrect Password!');
+				}
+
+				const token = signToken(user);
+
+				return { token, user };
+			} catch (err) {
+				return [{ message: 'Error in logging in user', details: err.message }];
 			}
 		},
 		createUnavailableDate: async (parent, { date }) => {
