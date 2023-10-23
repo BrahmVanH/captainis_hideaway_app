@@ -3,6 +3,19 @@ const { UnavailableDate } = require('../models');
 
 const resolvers = {
 	Query: {
+		getAllUsers: async () => {
+			try {
+				const allUsers = await UserActivation.find({});
+
+				if (!allUsers) {
+					throw new Error('Cannot find user with that ID!');
+				}
+
+				return allUsers;
+			} catch (err) {
+				console.error({ message: 'error in finding user', details: err });
+			}
+		},
 		queryUnavailableDates: async () => {
 			try {
 				const dates = await UnavailableDate.find({});
@@ -16,8 +29,13 @@ const resolvers = {
 		},
 	},
 	Mutation: {
+		loginUser: async (parent, {username, password}) => {
+			try {
+				const user = await
+			}
+		},
 		createUnavailableDate: async (parent, { date }) => {
-			console.log("creating unavailable date in server");
+			console.log('creating unavailable date in server');
 			try {
 				if (!date) {
 					throw new Error('date object is undefined');
@@ -27,7 +45,7 @@ const resolvers = {
 				if (!unavailableDate) {
 					throw new Error('Could not create new date');
 				}
-				console.log("successfully created unavailableDate...")
+				console.log('successfully created unavailableDate...');
 				return unavailableDate;
 			} catch (err) {
 				return [{ message: 'Something went wrong creating a new unavailable date...', details: err.message }];
