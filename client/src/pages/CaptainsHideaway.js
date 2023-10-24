@@ -3,7 +3,7 @@ import { GiBathtub, GiBunkBeds, GiBeachBucket, GiThermometerCold, GiHeatHaze } f
 import { BsFillDoorOpenFill } from 'react-icons/bs';
 import { LuBedDouble, LuBedSingle } from 'react-icons/lu';
 import { IoBedOutline } from 'react-icons/io5';
-import { PiCouch, PiCookingPot } from 'react-icons/pi';
+import { PiCookingPot } from 'react-icons/pi';
 import { MdOutdoorGrill } from 'react-icons/md';
 import { TbWifi, TbWashMachine, TbWashDry1, TbToolsKitchen2, TbDeviceTv, TbKayak } from 'react-icons/tb';
 
@@ -16,7 +16,7 @@ function CaptainsHideaway() {
 		<div>
 			<header className='captains-hideaway-header text-center text-white masthead'></header>
 			<div className='d-flex align-items-center flex-column'>
-				<div>
+				<div className='d-flex'>
 					<div className=''>
 						<div className='overview-card card'>
 							<div className='card-body d-flex flex-column'>

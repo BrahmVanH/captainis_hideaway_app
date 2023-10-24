@@ -1,3 +1,14 @@
+.calendar-container {
+  position: sticky;
+  z-index: 100;
+  top: 0;
+}
+
+.react-calendar {
+  border-radius: 6px;
+}
+
+
 .unavailable-day {
   background-color: black;
   color: black;

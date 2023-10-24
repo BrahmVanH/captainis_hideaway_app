@@ -47,7 +47,9 @@ function AvailabilityCalendar(props) {
 
 	return (
 		<div>
-			<div className='p-2 m-2 calendar-container'>{loading ? <div> Loading Calendar... </div> : <Calendar onChange={handleDateChange} value={date} tileContent={tileContent} />}</div>
+			<div className=' calendar-container p-2 m-2 calendar-container'>
+				{loading ? <div> Loading Calendar... </div> : <Calendar onChange={handleDateChange} value={date} tileContent={tileContent} />}
+			</div>
 		</div>
 	);
 }

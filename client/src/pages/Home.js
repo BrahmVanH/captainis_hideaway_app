@@ -9,14 +9,15 @@ import PropertyCard from '../components/PropertyCard';
 function Home() {
 	const captainsHideaway = {
 		title: 'Captains Hideaway',
-		description: 'Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.',
+		description:
+			"This 4 bedroom, 3 full bath home overlooking spectacular Lake Superior is every vacationer's dream. Spend your days hunting for agates on the beaches of Lake Superior, beach access is simply a few steps away from the back porch. If relaxing indoors is more your speed, spend the day lounging in the 4 season room that overlooks miles and miles of unobstructed views of Lake Superior.",
 		urlEndpoint: '/captains_hideaway',
 		imagePath: 'assets/img/stairs_from_beach_2.png',
 	};
 
 	const captainsCottage = {
 		title: 'Captains Cottage',
-		description: 'Nullam id dolor id nibh ultricies vehicula ut id elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus.',
+		description: '3 acres of private Lake Superior beach front! Located on the North Country Trail. Muskallonge Lake located directly behind the property for great fishing, hiking or kayaking. ',
 		utlEndpoint: '/captains_cottage',
 		imagePath: 'assets/img/back_exterior_side_with_lake.png',
 	};
