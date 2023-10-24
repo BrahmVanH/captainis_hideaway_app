@@ -16,6 +16,15 @@
   text-align: left;
 }
 
+.card-title-container {
+  border-bottom: 3px solid transparent;
+  border-image-source: linear-gradient(to right, white, #ABCCD8, #5f8fa5, #ABCCD8, white);
+  border-image-slice: 1;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+  margin-bottom: 10px;
+}
+
 .card-img-bottom {
   max-height: 200px;
   max-width: 350px;
@@ -29,9 +38,14 @@
 
 .info-btn {
   padding: 0.5rem;
-  background-color: grey;
+  background-color: #5f8fa5;
   color: white;
   font-weight: bold;
   text-decoration: none;
   border-radius: 6px;
+
+}
+
+.info-btn:hover {
+  opacity: 0.9;
 }

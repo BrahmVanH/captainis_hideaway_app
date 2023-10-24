@@ -5,11 +5,7 @@
   height: 400px;
 }
 
-/* .calendar-container {
-  position: sticky;
-  z-index: 100;
-  top: 0;
-} */
+
 
 .overview-card {
   padding: 1rem;
@@ -19,6 +15,12 @@
 .overview-card .card-title {
   padding: 0.5rem;
   margin: 0.5rem;
+  align-self: center;
+  border-bottom: 3px solid transparent;
+    border-image-source: linear-gradient(to right, white, #ABCCD8, #5f8fa5, #ABCCD8, white);
+    border-image-slice: 1;
+    border-image-outset: 0;
+    border-image-repeat: stretch;
   
 }
 
@@ -50,17 +52,64 @@
   padding: 0px;
 }
 
-.rooms-and-beds-inner-container {
+.bedroom-description-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
 
+.bedroom-description-text {
+  font-size: 14px;
+}
+
+.spaces-header-text {
+  padding: 0.5rem;
+}
+
+.spaces-text {
+  font-size: 16px;
+  
+}
+
+.about-property-subheader {
+  font-size: 16px;
+}
+
+.about-property-text {
+  font-size: 14px;
+}
+
+.house-rules-container {
+  display: flex;
+  padding: 0.5rem 0.5rem 1rem 0.5rem;
+  border-bottom: 1px solid transparent;
+  border-image-source: linear-gradient(to right, white, #ABCCD8, #5f8fa5, #ABCCD8, white);
+  border-image-slice: 1;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+}
+
+.damage-incidentals-container {
+  display: flex;
+  padding: 0.5rem;
+  margin: 0.5rem 0rem;
 }
 
 .important-information-card {
   margin: 1rem;
 }
 
+.important-information-card h5 {
+  align-self: center;
+  margin: 0.5rem 0rem 1rem 0rem;
+}
+
 .important-information {
   height: 100%;
-  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0rem 10rem;
+  
 }
 
 
@@ -68,4 +117,7 @@
   margin: 0;
   padding: 0.5rem;
   width: 75%;
+  text-align: start;
+  align-self: left;
+  
 }

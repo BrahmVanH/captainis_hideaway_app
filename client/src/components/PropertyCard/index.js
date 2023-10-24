@@ -11,7 +11,10 @@ function PropertyCard(props) {
   return (
 		<div className='col-lg-8 col-md-10 col-sm-11 flex-sm-row rental-card card'>
 			<div className='card-body d-flex flex-column justify-content-center align-items-center align-content-center'>
+				<div className='card-title-container'>
+
 				<h4 className='card-title'>{property.title}</h4>
+				</div>
 				<p className='card-text rental-description'>{property.description}</p>
 				<div className="info-btn-container">
 					<Link to={property.urlEndpoint} className='info-btn'>

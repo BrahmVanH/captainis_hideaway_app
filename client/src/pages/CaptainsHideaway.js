@@ -21,7 +21,7 @@ function CaptainsHideaway() {
 					<div className='col-8'>
 						<div className='overview-card card'>
 							<div className='card-body d-flex flex-column'>
-								<h4 className='card-title'>Captain's Hideaway Lake Superior</h4>
+								<h3 className='card-title'>Captain's Hideaway</h3>
 								<div className='overview d-flex justify-content-around' style={{ padding: '0.5rem', margin: '0.5rem' }}>
 									<div className='overview-item'>
 										<BsFillDoorOpenFill size='24px' className='overview-item-icon' />
@@ -41,36 +41,38 @@ function CaptainsHideaway() {
 						<div className='rooms-and-beds-card card'>
 							<div className='card-body d-flex flex-column'>
 								<div className='rooms-and-beds-inner-container d-flex' style={{ padding: '0.5rem' }}>
-									<h2 style={{ padding: '0.5rem', margin: '0px' }}>Rooms &amp; Beds</h2>
+									<h3 style={{ padding: '0.5rem', margin: '0px' }}>Rooms &amp; Beds</h3>
 									<div className='d-flex flex-row justify-content-between' style={{ padding: '0.5rem', width: '100%', margin: '0.5rem' }}>
-										<div className='d-flex align-items-center flex-column'>
+										<div className='bedroom-description-container'>
 											<p>Bedroom 1</p>
 											<IoBedOutline size='22px' />
-											<p style={{ fontSize: '14px' }}>1 King Bed</p>
+											<p className='bedroom-description-text'>1 King Bed</p>
 										</div>
-										<div className='d-flex align-items-center flex-column'>
+										<div className='bedroom-description-container'>
 											<p>Bedroom 2</p>
-											<LuBedDouble size='18px' />
+											<LuBedDouble style={{ marginTop: '0.25rem' }} size='18px' />
 
-											<p style={{ fontSize: '14px' }}>1 Queen Bed</p>
+											<p className='bedroom-description-text'>1 Queen Bed</p>
 										</div>
-										<div className='d-flex align-items-center flex-column'>
+										<div className='bedroom-description-container'>
 											<p>Bedroom 3</p>
-											<LuBedSingle size='18px' />
-											<p style={{ fontSize: '14px' }}>1 Double Bed</p>
+											<LuBedSingle style={{ marginTop: '0.25rem' }} size='18px' />
+											<p className='bedroom-description-text'>1 Double Bed</p>
 										</div>
-										<div className='d-flex align-items-center flex-column'>
+										<div className='bedroom-description-container'>
 											<p>Bedroom 4</p>
-											<GiBunkBeds size='18px' />
-											<p style={{ fontSize: '14px' }}>1 Twin Bunk Bed</p>
+											<GiBunkBeds style={{ marginTop: '0.25rem' }} size='18px' />
+											<p className='bedroom-description-text'>1 Twin Bunk Bed</p>
 										</div>
-										<div className='d-flex align-items-center flex-column'>
+										<div className='bedroom-description-container'>
 											<p>Common Area</p>
-											<div style={{ display: 'inline-block' }}>
-												<LuBedDouble size='16px' />
-												<LuBedDouble size='16px' />
+											<div style={{ lineHeight: '20px', display: 'inline-block' }}>
+												<LuBedSingle style={{ marginTop: '0.25rem' }} size='16px' />
+												<LuBedSingle style={{ marginTop: '0.25rem' }} size='16px' />
 											</div>
-											<p style={{ fontSize: '14px' }}>2 Double Beds</p>
+											<p style={{ padding: '0px' }} className='bedroom-description-text'>
+												2 Double Beds
+											</p>
 										</div>
 									</div>
 								</div>
@@ -80,13 +82,13 @@ function CaptainsHideaway() {
 						<div className='card ' style={{ margin: '1rem', padding: '0.5rem' }}>
 							<div className='card-body d-flex flex-column'>
 								<div className='d-flex' style={{ padding: '0.5rem' }}>
-									<h2 style={{ padding: '0.5rem' }}>Spaces</h2>
+									<h3 className='spaces-header-text'>Spaces</h3>
 									<div className='d-flex flex-row justify-content-around' style={{ width: '100%', padding: '0.5rem' }}>
-										<p style={{ fontSize: '14px' }}>Dining Area</p>
-										<p style={{ fontSize: '14px' }}>Deck/Patio</p>
-										<p style={{ fontSize: '14px' }}>Porch/Veranda</p>
-										<p style={{ fontSize: '14px' }}>Kitchen</p>
-										<p style={{ fontSize: '14px' }}>Lawn &amp; Garden</p>
+										<p className='spaces-text'>Dining Area</p>
+										<p className='spaces-text'>Deck/Patio</p>
+										<p className='spaces-text'>Porch/Veranda</p>
+										<p className='spaces-text'>Kitchen</p>
+										<p className='spaces-text'>Lawn &amp; Garden</p>
 									</div>
 								</div>
 							</div>
@@ -98,11 +100,11 @@ function CaptainsHideaway() {
 				<div className='card col-sm-11 col-md-10 ' style={{ padding: '0.5rem' }}>
 					<div className='card-body d-flex flex-column'>
 						<div className='d-flex' style={{ padding: '0.5rem' }}>
-							<h2 style={{ margin: '0px', padding: '0.5rem' }}>About the Property</h2>
+							<h3 style={{ margin: '0px', padding: '0.5rem' }}>About the Property</h3>
 							<div className='d-flex justify-content-center'>
 								<div className='d-flex flex-column justify-content-between' style={{ width: '100%', padding: '0.5rem' }}>
-									<p style={{ fontSize: '14px' }}>Captains Hideaway on Lake Superior</p>
-									<p style={{ padding: '0.5rem' }}>
+									<p className='about-property-subheader'>Captains Hideaway on Lake Superior</p>
+									<p className='about-property-text' style={{ padding: '0.5rem' }}>
 										Captain's Hideaway in Deer Park, Newberry, The Official Moose Capital of Michigan, offers a spacious layout that will accommodate up to 10 guests in utmost comfort. This 4 bedroom,
 										3 full bath home overlooking spectacular Lake Superior is every vacationer's dream. Spend your days hunting for agates on the beaches of Lake Superior, beach access is simply a few
 										steps away from the back porch. If relaxing indoors is more your speed, spend the day lounging in the 4 season room that overlooks miles and miles of unobstructed views of Lake
@@ -120,7 +122,7 @@ function CaptainsHideaway() {
 				<div className='card col-sm-11 col-md-10 ' style={{ margin: '0.5rem' }}>
 					<div className='card-body d-flex flex-column' style={{ padding: '0.5rem' }}>
 						<div className='d-flex' style={{ padding: '0.5rem' }}>
-							<h2 style={{ margin: '0px', padding: '0.5rem' }}>Amenities</h2>
+							<h3 style={{ margin: '0px', padding: '0.5rem' }}>Amenities</h3>
 							<div className='d-flex flex-column justify-content-center' style={{ margin: '0.5rem', fontSize: '14px', width: '90%', padding: '0.5rem' }}>
 								<div className='d-flex flex-row justify-content-between' style={{ width: '100%', height: '100%' }}>
 									<div style={{ padding: '0.5rem' }}>
@@ -202,8 +204,8 @@ function CaptainsHideaway() {
 				</div>
 				<div className='card col-sm-11 col-md-10 ' style={{ margin: '1rem' }}>
 					<div className='card-body d-flex flex-column' style={{ padding: '0.5rem' }}>
-						<div className='d-flex' style={{ padding: '0.5rem' }}>
-							<h2 style={{ padding: '0.5rem' }}>House Rules</h2>
+						<div className='house-rules-container'>
+							<h3 style={{ padding: '0.5rem' }}>House Rules</h3>
 							<div className='d-flex flex-column justify-content-center align-items-center' style={{ padding: '0.5rem, 0rem', height: '100%' }}>
 								<div className='d-flex' style={{ padding: '0.5rem', width: '50%' }}>
 									<div style={{ padding: '0.5rem' }}>
@@ -216,15 +218,15 @@ function CaptainsHideaway() {
 								</div>
 								<div className='d-flex'>
 									<div style={{ padding: '0.5rem' }}>
-										<h2>Children</h2>
+										<h5>Children</h5>
 										<p style={{ fontSize: '14px' }}>All ages</p>
-										<h2>Pets</h2>
+										<h5>Pets</h5>
 										<p style={{ fontSize: '14px' }}>No pets allowed</p>
 									</div>
 									<div style={{ padding: '0.5rem' }}>
-										<h3>Events</h3>
+										<h5>Events</h5>
 										<p style={{ fontSize: '14px' }}>No events allowed</p>
-										<h3>Smoking</h3>
+										<h5>Smoking</h5>
 										<p style={{ fontSize: '14px' }}>Smoking is not permitted</p>
 									</div>
 								</div>
@@ -237,8 +239,8 @@ function CaptainsHideaway() {
 								</div>
 							</div>
 						</div>
-						<div className='d-flex' style={{ padding: '0.5rem' }}>
-							<h2 style={{ padding: '0.5rem' }}>Damage and Incidentals</h2>
+						<div className='damage-incidentals-container'>
+							<h3 style={{ padding: '0.5rem' }}>Damage and Incidentals</h3>
 							<div className='d-flex flex-column justify-content-center align-items-center' style={{ height: '100%', padding: '0.5rem' }}>
 								<p style={{ margin: '0px', padding: '0.5rem' }}>You will be responsible for any damage to the rental property caused by you or your party during your stay.</p>
 							</div>
@@ -248,9 +250,9 @@ function CaptainsHideaway() {
 				<div className='important-information-card card col-sm-11 col-md-10 '>
 					<div className='card-body d-flex flex-column' style={{ padding: '0.5rem' }}>
 						<div className='d-flex' style={{ padding: '0.5rem' }}>
-							<h2 style={{ padding: '0.5rem' }}>Important Information</h2>
-							<div className='important-information d-flex flex-column justify-content-center align-items-center'>
-								<h3 className='important-information-text'>You Need To Know</h3>
+							<h3 style={{ padding: '0.5rem' }}>Important Information</h3>
+							<div className='important-information'>
+								<h5>You Need To Know</h5>
 								<p className='important-information-text'>Extra-person charges may apply and vary depending on property policy</p>
 								<p className='important-information-text'>Government-issued photo identification and a credit card, debit card, or cash deposit may be required at check-in for incidental charges</p>
 								<p className='important-information-text'>Special requests are subject to availability upon check-in and may incur additional charges; special requests cannot be guaranteed</p>

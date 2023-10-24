@@ -18,7 +18,7 @@ function Navbar() {
 				<Link to={'/'} className="navbar-link">
 					About Us
 				</Link>
-				<Link to={'/'} className="navbar-link">
+				<Link to={'/contact'} className="navbar-link">
 					Contact
 				</Link>
 			</div>
