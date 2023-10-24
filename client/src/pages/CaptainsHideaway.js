@@ -1,10 +1,11 @@
 import React from 'react';
+import { CiCoffeeBean } from 'react-icons/ci';
 import { GiBathtub, GiBunkBeds, GiBeachBucket, GiThermometerCold, GiHeatHaze } from 'react-icons/gi';
-import { BsFillDoorOpenFill } from 'react-icons/bs';
+import { BsFillDoorOpenFill, BsSun } from 'react-icons/bs';
 import { LuBedDouble, LuBedSingle } from 'react-icons/lu';
 import { IoBedOutline } from 'react-icons/io5';
 import { PiCookingPot } from 'react-icons/pi';
-import { MdOutdoorGrill } from 'react-icons/md';
+import { MdOutlineOutdoorGrill } from 'react-icons/md';
 import { TbWifi, TbWashMachine, TbWashDry1, TbToolsKitchen2, TbDeviceTv, TbKayak } from 'react-icons/tb';
 
 import './CaptainsHideaway.css';
@@ -15,9 +16,9 @@ function CaptainsHideaway() {
 	return (
 		<div>
 			<header className='captains-hideaway-header text-center text-white masthead'></header>
-			<div className='d-flex align-items-center flex-column'>
-				<div className='d-flex'>
-					<div className=''>
+			<div className='d-flex align-items-center flex-column '>
+				<div className='col-11 d-flex' style={{ padding: '0rem 2.5rem' }}>
+					<div className='col-8'>
 						<div className='overview-card card'>
 							<div className='card-body d-flex flex-column'>
 								<h4 className='card-title'>Captain's Hideaway Lake Superior</h4>
@@ -146,7 +147,7 @@ function CaptainsHideaway() {
 											<p>Cable TV</p>
 										</div>
 										<div>
-											<MdOutdoorGrill />
+											<BsSun />
 										</div>
 										<p>Outdoor Space</p>
 									</div>
@@ -180,8 +181,14 @@ function CaptainsHideaway() {
 									</div>
 									<div style={{ padding: '0.5rem' }}>
 										<p>Dishwasher</p>
-										<p>Grill</p>
-										<p>Coffee Grinder</p>
+										<div>
+											<MdOutlineOutdoorGrill />
+											<p>Grill</p>
+										</div>
+										<div>
+											<CiCoffeeBean />
+											<p>Coffee Grinder</p>
+										</div>
 									</div>
 								</div>
 								{/* <div className='d-flex justify-content-end'>
