@@ -5,14 +5,16 @@ import { useQuery } from '@apollo/client';
 import { getDateValues } from '../../utils/helpers';
 
 import 'react-calendar/dist/Calendar.css';
-import './style.css'
+import './style.css';
 
-
-function AvailabilityCalendar() {
+function AvailabilityCalendar(props) {
+	const propertyName = props.propertyName;
 	const [date, setDate] = useState(new Date());
 	const [unavailableDates, setUnavailableDates] = useState([]);
 
-	const { loading, error, data } = useQuery(QUERY_UNAVAILABLE_DATES);
+	const { loading, error, data } = useQuery(QUERY_UNAVAILABLE_DATES, {
+		variables: { propertyName: propertyName },
+	});
 
 	useEffect(() => {
 		if (!loading && data) {
@@ -45,8 +47,7 @@ function AvailabilityCalendar() {
 
 	return (
 		<div>
-			<h1>Calendar App</h1>
-			<div className='calendar-container'>{loading ? <div> Loading Calendar... </div> : <Calendar onChange={handleDateChange} value={date} tileContent={tileContent} />}</div>
+			<div className='p-2 m-2 calendar-container'>{loading ? <div> Loading Calendar... </div> : <Calendar onChange={handleDateChange} value={date} tileContent={tileContent} />}</div>
 		</div>
 	);
 }

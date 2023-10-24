@@ -17,12 +17,13 @@ const typeDefs = gql`
 
 	type Date {
 		_id: ID!
+		propertyName: String!
 		dateValue: String!
 	}
 
 	type Query {
 		getAllUsers: [User]
-		queryUnavailableDates: [Date]
+		queryUnavailableDatesByProperty(propertyName: String!): [Date]
 	}
 	type Mutation {
 		createUser(firstName: String!, lastName: String!, username: String!, userPassword: String!): Auth

@@ -8,83 +8,92 @@ import { MdOutdoorGrill } from 'react-icons/md';
 import { TbWifi, TbWashMachine, TbWashDry1, TbToolsKitchen2, TbDeviceTv, TbKayak } from 'react-icons/tb';
 
 import './CaptainsHideaway.css';
+import AvailabilityCalendar from '../components/Calendar';
 
 function CaptainsHideaway() {
+	const propertyName = 'captainsHideaway';
 	return (
 		<div>
 			<header className='captains-hideaway-header text-center text-white masthead'></header>
 			<div className='d-flex align-items-center flex-column'>
-				<div className='overview-card card col-sm-11 col-md-10 '>
-					<div className='card-body d-flex flex-column'>
-						<h4 className='card-title'>Captain's Hideaway Lake Superior</h4>
-						<div className='overview d-flex justify-content-around' style={{ padding: '0.5rem', margin: '0.5rem' }}>
-							<div className='overview-item'>
-								<BsFillDoorOpenFill size='24px' className='overview-item-icon' />
-								<p>4 bedrooms</p>
-							</div>
-							<div className='overview-item'>
-								<GiBathtub size='24px' className='overview-item-icon' />
-								<p>3 bathrooms</p>
-							</div>
-							<div className='overview-item'>
-								<LuBedDouble size='24px' className='overview-item-icon' />
-								<p>Sleeps 10</p>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div className='rooms-and-beds-card card col-sm-11 col-md-10 '>
-					<div className='card-body d-flex flex-column'>
-						<div className='rooms-and-beds-inner-container d-flex' style={{ padding: '0.5rem' }}>
-							<h2 style={{ padding: '0.5rem', margin: '0px' }}>Rooms &amp; Beds</h2>
-							<div className='d-flex flex-row justify-content-between' style={{ padding: '0.5rem', width: '100%', margin: '0.5rem' }}>
-								<div className='d-flex align-items-center flex-column'>
-									<p>Bedroom 1</p>
-									<IoBedOutline size='22px' />
-									<p style={{ fontSize: '14px' }}>1 King Bed</p>
-								</div>
-								<div className='d-flex align-items-center flex-column'>
-									<p>Bedroom 2</p>
-									<LuBedDouble size='18px' />
-
-									<p style={{ fontSize: '14px' }}>1 Queen Bed</p>
-								</div>
-								<div className='d-flex align-items-center flex-column'>
-									<p>Bedroom 3</p>
-									<LuBedSingle size='18px' />
-									<p style={{ fontSize: '14px' }}>1 Double Bed</p>
-								</div>
-								<div className='d-flex align-items-center flex-column'>
-									<p>Bedroom 4</p>
-									<GiBunkBeds size='18px' />
-									<p style={{ fontSize: '14px' }}>1 Twin Bunk Bed</p>
-								</div>
-								<div className='d-flex align-items-center flex-column'>
-									<p>Common Area</p>
-									<div style={{ display: 'inline-block' }}>
-										<LuBedDouble size='16px' />
-										<LuBedDouble size='16px' />
+				<div>
+					<div className=''>
+						<div className='overview-card card'>
+							<div className='card-body d-flex flex-column'>
+								<h4 className='card-title'>Captain's Hideaway Lake Superior</h4>
+								<div className='overview d-flex justify-content-around' style={{ padding: '0.5rem', margin: '0.5rem' }}>
+									<div className='overview-item'>
+										<BsFillDoorOpenFill size='24px' className='overview-item-icon' />
+										<p>4 bedrooms</p>
 									</div>
-									<p style={{ fontSize: '14px' }}>2 Double Beds</p>
+									<div className='overview-item'>
+										<GiBathtub size='24px' className='overview-item-icon' />
+										<p>3 bathrooms</p>
+									</div>
+									<div className='overview-item'>
+										<LuBedDouble size='24px' className='overview-item-icon' />
+										<p>Sleeps 10</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className='rooms-and-beds-card card'>
+							<div className='card-body d-flex flex-column'>
+								<div className='rooms-and-beds-inner-container d-flex' style={{ padding: '0.5rem' }}>
+									<h2 style={{ padding: '0.5rem', margin: '0px' }}>Rooms &amp; Beds</h2>
+									<div className='d-flex flex-row justify-content-between' style={{ padding: '0.5rem', width: '100%', margin: '0.5rem' }}>
+										<div className='d-flex align-items-center flex-column'>
+											<p>Bedroom 1</p>
+											<IoBedOutline size='22px' />
+											<p style={{ fontSize: '14px' }}>1 King Bed</p>
+										</div>
+										<div className='d-flex align-items-center flex-column'>
+											<p>Bedroom 2</p>
+											<LuBedDouble size='18px' />
+
+											<p style={{ fontSize: '14px' }}>1 Queen Bed</p>
+										</div>
+										<div className='d-flex align-items-center flex-column'>
+											<p>Bedroom 3</p>
+											<LuBedSingle size='18px' />
+											<p style={{ fontSize: '14px' }}>1 Double Bed</p>
+										</div>
+										<div className='d-flex align-items-center flex-column'>
+											<p>Bedroom 4</p>
+											<GiBunkBeds size='18px' />
+											<p style={{ fontSize: '14px' }}>1 Twin Bunk Bed</p>
+										</div>
+										<div className='d-flex align-items-center flex-column'>
+											<p>Common Area</p>
+											<div style={{ display: 'inline-block' }}>
+												<LuBedDouble size='16px' />
+												<LuBedDouble size='16px' />
+											</div>
+											<p style={{ fontSize: '14px' }}>2 Double Beds</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div className='card ' style={{ margin: '1rem', padding: '0.5rem' }}>
+							<div className='card-body d-flex flex-column'>
+								<div className='d-flex' style={{ padding: '0.5rem' }}>
+									<h2 style={{ padding: '0.5rem' }}>Spaces</h2>
+									<div className='d-flex flex-row justify-content-around' style={{ width: '100%', padding: '0.5rem' }}>
+										<p style={{ fontSize: '14px' }}>Dining Area</p>
+										<p style={{ fontSize: '14px' }}>Deck/Patio</p>
+										<p style={{ fontSize: '14px' }}>Porch/Veranda</p>
+										<p style={{ fontSize: '14px' }}>Kitchen</p>
+										<p style={{ fontSize: '14px' }}>Lawn &amp; Garden</p>
+									</div>
 								</div>
 							</div>
 						</div>
 					</div>
+					<AvailabilityCalendar propertyName={propertyName} />
 				</div>
-				<div className='card col-sm-11 col-md-10 ' style={{ margin: '1rem', padding: '0.5rem' }}>
-					<div className='card-body d-flex flex-column'>
-						<div className='d-flex' style={{ padding: '0.5rem' }}>
-							<h2 style={{ padding: '0.5rem' }}>Spaces</h2>
-							<div className='d-flex flex-row justify-content-around' style={{ width: '100%', padding: '0.5rem' }}>
-								<p style={{ fontSize: '14px' }}>Dining Area</p>
-								<p style={{ fontSize: '14px' }}>Deck/Patio</p>
-								<p style={{ fontSize: '14px' }}>Porch/Veranda</p>
-								<p style={{ fontSize: '14px' }}>Kitchen</p>
-								<p style={{ fontSize: '14px' }}>Lawn &amp; Garden</p>
-							</div>
-						</div>
-					</div>
-				</div>
+
 				<div className='card col-sm-11 col-md-10 ' style={{ padding: '0.5rem' }}>
 					<div className='card-body d-flex flex-column'>
 						<div className='d-flex' style={{ padding: '0.5rem' }}>

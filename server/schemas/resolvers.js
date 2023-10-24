@@ -22,9 +22,9 @@ const resolvers = {
 				console.error({ message: 'error in finding user', details: err });
 			}
 		},
-		queryUnavailableDates: async () => {
+		queryUnavailableDatesByProperty: async (parent, { propertyName }) => {
 			try {
-				const dates = await UnavailableDate.find({});
+				const dates = await UnavailableDate.find({propertyName: propertyName});
 				if (!dates) {
 					throw new Error('Cannot find all dates in database');
 				}
