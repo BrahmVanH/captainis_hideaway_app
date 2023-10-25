@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import ContactPage from './pages/Contact';
+import AdminPage from './pages/Admin';
 import CaptainsHideaway from './pages/CaptainsHideaway';
 
 
@@ -36,6 +37,7 @@ function App() {
 					<Route path='/' element={<Home />} />
 					<Route path='/captains_hideaway' element={<CaptainsHideaway />} />
 					<Route path='/contact' element={<ContactPage />} />
+					<Route path='/admin' element={<AdminPage />} />
 				</Routes>
 			</Router>
 		</ApolloProvider>

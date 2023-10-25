@@ -1,14 +1,16 @@
 const db = require('../config/connection');
-const {} = require('../models');
+const { User } = require('../models');
+const userSeeds = require('./userSeeds.json');
 
 db.once('open', async () => {
 	try {
-		// Add code to delete existing model entries in database
-		
+		await User.deleteMany();
+
+		await User.create(userSeeds);
 	} catch (err) {
 		console.error(err);
 		process.exit(1);
 	}
-	console.log('done seeding flashcard');
+	console.log('done seeding users');
 	process.exit(0);
 });

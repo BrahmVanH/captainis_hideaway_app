@@ -3,10 +3,6 @@ const { UnavailableDate, User } = require('../models');
 const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
 
-
-
-
-
 const resolvers = {
 	Query: {
 		getAllUsers: async () => {
@@ -24,7 +20,7 @@ const resolvers = {
 		},
 		queryUnavailableDatesByProperty: async (parent, { propertyName }) => {
 			try {
-				const dates = await UnavailableDate.find({propertyName: propertyName});
+				const dates = await UnavailableDate.find({ propertyName: propertyName });
 				if (!dates) {
 					throw new Error('Cannot find all dates in database');
 				}
@@ -35,11 +31,9 @@ const resolvers = {
 		},
 	},
 	Mutation: {
-		createUser: async (parent, { firstName, lastName, username, userPassword })=> {
+		createUser: async (parent, { firstName, lastName, username, userPassword }) => {
 			try {
-
 				const password = bcrypt.hashSync(userPassword, 10);
-
 
 				const newUser = await User.create({
 					firstName,
@@ -47,21 +41,21 @@ const resolvers = {
 					username,
 					password,
 				});
-				
+
 				if (!newUser) {
-					throw new AuthenticationError("There was an error creating user. Try again.");
+					throw new AuthenticationError('There was an error creating user. Try again.');
 				}
-				
+
 				const token = signToken(newUser);
-				
+
 				return { token, newUser };
 			} catch (err) {
-				return [{ message: 'Error in creating user', details: err.message }];
-
+				throw new Error('Error in creating user: ' + err.message);
 			}
 		},
 		loginUser: async (parent, { username, userPassword }) => {
 			try {
+				console.log("signing in");
 				const user = await User.findOne({ username });
 				if (!user) {
 					throw new AuthenticationError("Can't find user with that username");
@@ -69,16 +63,15 @@ const resolvers = {
 
 				const isPasswordValid = bcrypt.compareSync(userPassword, hashedPassword);
 
-
 				if (!isPasswordValid) {
 					throw new AuthenticationError('Incorrect Password!');
 				}
 
 				const token = signToken(user);
-
+				console.log("successfully logged in");
 				return { token, user };
 			} catch (err) {
-				return [{ message: 'Error in logging in user', details: err.message }];
+				throw new Error('Error in creating user: ' + err.message);
 			}
 		},
 		createUnavailableDate: async (parent, { date }) => {
@@ -95,7 +88,7 @@ const resolvers = {
 				console.log('successfully created unavailableDate...');
 				return unavailableDate;
 			} catch (err) {
-				return [{ message: 'Something went wrong creating a new unavailable date...', details: err.message }];
+				throw new Error('Error in creating user: ' + err.message);
 			}
 		},
 		removeUnavailableDate: async (parent, { date }) => {
@@ -111,7 +104,7 @@ const resolvers = {
 
 				return unavailableDate;
 			} catch (err) {
-				return [{ message: 'Something went wrong creating a new unavailable date...', details: err.message }];
+				throw new Error('Error in creating user: ' + err.message);
 			}
 		},
 	},

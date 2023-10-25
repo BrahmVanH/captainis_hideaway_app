@@ -1,10 +1,56 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import {useMutation } from '@apollo/client';
 import emailjs from '@emailjs/browser';
 import { Form, Button } from 'react-bootstrap';
+import { LOGIN_USER } from '../../utils/mutations';
+import Auth from '../../utils/auth';
 
 
 function SigninForm() {
-	
+	const [loginFormData, setLoginFormData] = useState({
+		username: '',
+		userPassword: '',
+	});
+
+	const [validated] = useState(false);
+
+	const [showAlert, setShowAlert] = useState(false);
+
+	const [loginUser] = useMutation(LOGIN_USER);
+
+	const handleInputChange = (event) => {
+		const { name, value } = event.target;
+		setLoginFormData({ ...loginFormData, [name]: value });
+	};
+
+	const handleFormSubmit = async (event) => {
+		event.preventDefault();
+
+		const form = event.currentTarget;
+		if (form.checkValidity() === false) {
+			event.preventDefault();
+			event.stopPropagation();
+		}
+
+		if (!loginFormData) {
+			throw new Error('You must fill out all fields!');
+		}
+
+		try {
+			const { data } = await loginUser({
+				variables: {
+					...loginFormData,
+				},
+			});
+			// Logs user in and stores token
+			Auth.login(data.loginUser.token);
+
+			// window.location.assign('/profile');
+		} catch (err) {
+			console.error(err);
+			setShowAlert(true);
+		}
+	};
 
 	return (
 		<div className='contact-form-container'>
@@ -12,17 +58,17 @@ function SigninForm() {
 			<Form className='contact-form d-flex'>
 				<div className='mb-3'>
 					<Form.Group controlId='formBasicUsername' required>
-						<Form.Control type='username' name='username' placeholder='Username' />
+						<Form.Control onChange={handleInputChange} value={loginFormData.username} type='username' name='username' placeholder='Username' />
 					</Form.Group>
 				</div>
 				<div className='mb-3'>
 					<Form.Group controlId='formBasicPassword' required>
-						<Form.Control type='password' name='password' placeholder='Password' />
+						<Form.Control onChange={handleInputChange} value={loginFormData.userPassword} type='password' name='password' placeholder='Password' />
 					</Form.Group>
 				</div>
 				<div>
-					<Button className='btn btn-dark d-block w-100' type='submit'>
-						Send
+					<Button onClick={handleFormSubmit} className='btn btn-dark d-block w-100' type='submit'>
+						Sign In
 					</Button>
 				</div>
 			</Form>

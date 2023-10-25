@@ -15,11 +15,14 @@ function Navbar() {
 				</Link>
 				<button data-bs-toggle='collapse' className='navbar-toggler' data-bs-target='#navcol-1'></button>
 				<div className='collapse navbar-collapse' id='navcol-1'></div>
-				<Link to={'/'} className="navbar-link">
+				<Link to={'/'} className='navbar-link'>
 					About Us
 				</Link>
-				<Link to={'/contact'} className="navbar-link">
+				<Link to={'/contact'} className='navbar-link'>
 					Contact
+				</Link>
+				<Link to={'/admin'} className='navbar-link'>
+					Admin
 				</Link>
 			</div>
 		</nav>
