@@ -12,12 +12,13 @@ import './style.css';
 
 function AdminCalendar(props) {
 	const propertyName = props.propertyName;
+	console.log(propertyName);
 
 	const [date, setDate] = useState(new Date());
 	const [unavailableDates, setUnavailableDates] = useState([]);
 
 	const { loading, error, data } = useQuery(QUERY_UNAVAILABLE_DATES, {
-		variables: { propertyName: propertyName },
+		variables: { propertyName },
 	});
 	if (error) {
 		console.error({ message: 'There was an error querying the db from calendar', details: error });
@@ -28,12 +29,15 @@ function AdminCalendar(props) {
 	// Set the unavailableDates state to the query response. Contains an array of dates
 	useEffect(() => {
 		if (!loading && data) {
-			setUnavailableDates(data.queryUnavailableDates);
-			console.log(data.queryUnavailableDates);
+			setUnavailableDates(data.queryUnavailableDatesByProperty);
+			console.log(data);
 		} else {
 			return;
 		}
 	}, [data]);
+	useEffect(() => {
+		console.log(unavailableDates);
+	}, [unavailableDates]);
 
 	const reloadPage = () => {
 		window.location.reload();
@@ -107,7 +111,7 @@ function AdminCalendar(props) {
 		<div>
 			<h1>Calendar App</h1>
 			<div className='calendar-container'>
-				<Calendar onChange={handleDateChange} value={date} tileContent={tileContent} onClickDay={onClickDay} />
+				<Calendar onChange={handleDateChange} tileContent={tileContent} value={date} onClickDay={onClickDay} />
 			</div>
 		</div>
 	);

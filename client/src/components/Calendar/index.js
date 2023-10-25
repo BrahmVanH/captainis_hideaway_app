@@ -18,7 +18,7 @@ function AvailabilityCalendar(props) {
 
 	useEffect(() => {
 		if (!loading && data) {
-			setUnavailableDates(data.queryUnavailableDates);
+			setUnavailableDates(data.queryUnavailableDatesByProperty);
 		} else {
 			return;
 		}
