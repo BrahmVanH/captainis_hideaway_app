@@ -67,7 +67,7 @@ function AdminCalendar(props) {
 	const handleAddUnavailableDate = async (value) => {
 		try {
 			const { data } = await createUnavailableDate({ variables: { propertyName: propertyName, dateValue: value } });
-			// reloadPage();
+			reloadPage();
 		} catch (err) {
 			console.error(err);
 		}
@@ -109,7 +109,6 @@ function AdminCalendar(props) {
 
 	return (
 		<div>
-			<h1>Calendar App</h1>
 			<div className='calendar-container'>
 				<Calendar onChange={handleDateChange} tileContent={tileContent} value={date} onClickDay={onClickDay} />
 			</div>
