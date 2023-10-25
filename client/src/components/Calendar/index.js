@@ -13,7 +13,7 @@ function AvailabilityCalendar(props) {
 	const [unavailableDates, setUnavailableDates] = useState([]);
 
 	const { loading, error, data } = useQuery(QUERY_UNAVAILABLE_DATES, {
-		variables: { propertyName: propertyName },
+		variables: { propertyName },
 	});
 
 	useEffect(() => {

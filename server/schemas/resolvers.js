@@ -20,6 +20,9 @@ const resolvers = {
 		},
 		queryUnavailableDatesByProperty: async (parent, { propertyName }) => {
 			try {
+				if (!propertyName) {
+					throw new Error("No property name was presented for querying dates");
+				}
 				const dates = await UnavailableDate.find({ propertyName: propertyName });
 				if (!dates) {
 					throw new Error('Cannot find all dates in database');

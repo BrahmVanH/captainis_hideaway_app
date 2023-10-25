@@ -13,7 +13,7 @@ function AdminPage() {
 			{/* <SigninForm /> */}
 			<div className='admin-container'>
 				<AdminPropertyCard propertyName={captainsHideaway} />
-				<AdminPropertyCard propertyName={captainsCottage} />
+				{/* <AdminPropertyCard propertyName={captainsCottage} /> */}
 			</div>
 		</div>
 	);

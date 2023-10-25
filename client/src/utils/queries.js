@@ -11,7 +11,7 @@ export const GET_ALL_USERS = gql`
 `;
 
 export const QUERY_UNAVAILABLE_DATES = gql`
-	query queryUnavailableDatesByProperty($propertyName: String) {
+	query queryUnavailableDatesByProperty($propertyName: String!) {
 		queryUnavailableDatesByProperty(propertyName: $propertyName) {
 			_id
 			dateValue

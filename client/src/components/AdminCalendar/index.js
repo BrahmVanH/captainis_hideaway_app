@@ -17,9 +17,11 @@ function AdminCalendar(props) {
 	const [unavailableDates, setUnavailableDates] = useState([]);
 
 	const { loading, error, data } = useQuery(QUERY_UNAVAILABLE_DATES, {
-		variables: { propertyName },
+		variables: { propertyName: propertyName },
 	});
-
+	if (error) {
+		console.error({ message: 'There was an error querying the db from calendar', details: error });
+	}
 	const [createUnavailableDate] = useMutation(CREATE_UNAVAILABLE_DATE);
 	const [removeUnavailableDate] = useMutation(REMOVE_UNAVAILABLE_DATE);
 
@@ -27,6 +29,7 @@ function AdminCalendar(props) {
 	useEffect(() => {
 		if (!loading && data) {
 			setUnavailableDates(data.queryUnavailableDates);
+			console.log(data.queryUnavailableDates);
 		} else {
 			return;
 		}
@@ -59,8 +62,8 @@ function AdminCalendar(props) {
 	// This adds an entry to the datebase representing a date that is unavailable to rent
 	const handleAddUnavailableDate = async (value) => {
 		try {
-			const { data } = await createUnavailableDate({ variables: {propertyName: propertyName, dateValue: value } });
-			reloadPage();
+			const { data } = await createUnavailableDate({ variables: { propertyName: propertyName, dateValue: value } });
+			// reloadPage();
 		} catch (err) {
 			console.error(err);
 		}
@@ -70,7 +73,7 @@ function AdminCalendar(props) {
 	const handleRemoveUnavailableDate = async (value) => {
 		console.log('removing unavailable date...', value);
 		try {
-			const { data } = await removeUnavailableDate({ variables: {propertyName: propertyName, dateValue: value } });
+			const { data } = await removeUnavailableDate({ variables: { propertyName: propertyName, dateValue: value } });
 			console.log('removed unavailable date', data);
 			reloadPage();
 		} catch (err) {
