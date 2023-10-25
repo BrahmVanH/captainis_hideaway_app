@@ -1,7 +1,10 @@
 const { Schema, model } = require("mongoose");
 
 const dateSchema = new Schema({
-  
+  propertyName: {
+    type: String,
+    require: true
+  },
   dateValue: {
     type: String,
     require: true

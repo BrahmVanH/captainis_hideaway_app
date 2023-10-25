@@ -28,15 +28,15 @@ export const LOGIN_USER = gql`
 `;
 
 export const CREATE_UNAVAILABLE_DATE = gql`
-	mutation createUnavailableDate($date: String!) {
-		createUnavailableDate(date: $date) {
+	mutation createUnavailableDate($propertyName: String!, $dateValue: String!) {
+		createUnavailableDate(propertyName: $propertyName, dateValue: $dateValue) {
 			dateValue
 		}
 	}
 `;
 export const REMOVE_UNAVAILABLE_DATE = gql`
-	mutation removeUnavailableDate($date: String!) {
-		removeUnavailableDate(date: $date) {
+	mutation removeUnavailableDate($propertyName: String!, $dateValue: String!) {
+		removeUnavailableDate(propertyName: $propertyName, dateValue: $dateValue) {
 			_id
 			dateValue
 		}

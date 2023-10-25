@@ -10,16 +10,20 @@ import { getDateValues } from '../../utils/helpers';
 import 'react-calendar/dist/Calendar.css';
 import './style.css';
 
-function AdminCalendar() {
+function AdminCalendar(props) {
+	const propertyName = props.propertyName;
+
 	const [date, setDate] = useState(new Date());
 	const [unavailableDates, setUnavailableDates] = useState([]);
 
-	const { loading, error, data } = useQuery(QUERY_UNAVAILABLE_DATES);
+	const { loading, error, data } = useQuery(QUERY_UNAVAILABLE_DATES, {
+		variables: { propertyName },
+	});
 
 	const [createUnavailableDate] = useMutation(CREATE_UNAVAILABLE_DATE);
 	const [removeUnavailableDate] = useMutation(REMOVE_UNAVAILABLE_DATE);
 
-  // Set the unavailableDates state to the query response. Contains an array of dates
+	// Set the unavailableDates state to the query response. Contains an array of dates
 	useEffect(() => {
 		if (!loading && data) {
 			setUnavailableDates(data.queryUnavailableDates);
@@ -28,15 +32,12 @@ function AdminCalendar() {
 		}
 	}, [data]);
 
-
 	const reloadPage = () => {
-    window.location.reload();
-  };
+		window.location.reload();
+	};
 
-
-
-  // This creates an elements to be appended to each date on the calendar that matches a date in a new unavailableDates array
-  // created from calling getDateValues
+	// This creates an elements to be appended to each date on the calendar that matches a date in a new unavailableDates array
+	// created from calling getDateValues
 	const tileContent = ({ date, view }) => {
 		const unavailableDateValues = getDateValues(unavailableDates);
 		if (unavailableDates.length > 0) {
@@ -55,32 +56,31 @@ function AdminCalendar() {
 	const handleDateChange = (date) => {
 		setDate(date);
 	};
-  // This adds an entry to the datebase representing a date that is unavailable to rent
+	// This adds an entry to the datebase representing a date that is unavailable to rent
 	const handleAddUnavailableDate = async (value) => {
 		try {
-			const { data } = await createUnavailableDate({ variables: { date: value } });
-      reloadPage();
+			const { data } = await createUnavailableDate({ variables: {propertyName: propertyName, dateValue: value } });
+			reloadPage();
 		} catch (err) {
 			console.error(err);
 		}
 	};
 
-  // This removes an entry from the database representing a date that was unavailable to rent
+	// This removes an entry from the database representing a date that was unavailable to rent
 	const handleRemoveUnavailableDate = async (value) => {
-    console.log('removing unavailable date...', value);
-    try {
-      const { data } = await removeUnavailableDate({ variables: {date: value}});
-      console.log('removed unavailable date', data);
-      reloadPage();
-
-    } catch (err) {
-      console.error(err);
-    }
+		console.log('removing unavailable date...', value);
+		try {
+			const { data } = await removeUnavailableDate({ variables: {propertyName: propertyName, dateValue: value } });
+			console.log('removed unavailable date', data);
+			reloadPage();
+		} catch (err) {
+			console.error(err);
+		}
 	};
 
-  // This takes in the selected date value from the calendar and compares to the unavailableDates state 
-  // and returns a value if there is a match. the value is created as an unavailableDate object in db
-  // if there is no return value from the filter, the matching date object will be removed from the db
+	// This takes in the selected date value from the calendar and compares to the unavailableDates state
+	// and returns a value if there is a match. the value is created as an unavailableDate object in db
+	// if there is no return value from the filter, the matching date object will be removed from the db
 	const checkIfUnavailable = (value) => {
 		if (unavailableDates.length > 0) {
 			const proposedDate = unavailableDates.filter((date) => date.dateValue === value);
@@ -93,7 +93,7 @@ function AdminCalendar() {
 			handleAddUnavailableDate(value);
 		}
 	};
-  // This is a handler function that is called when the user clicks on a date on the calendar
+	// This is a handler function that is called when the user clicks on a date on the calendar
 	const onClickDay = (value, event) => {
 		const date = new Date(value);
 		console.log(date.toISOString());

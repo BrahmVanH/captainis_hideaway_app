@@ -1,0 +1,10 @@
+.property-information-container {
+  display: flex;
+  justify-content: center;
+}
+
+.admin-calendar-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
