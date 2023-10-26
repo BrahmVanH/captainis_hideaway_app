@@ -29,7 +29,7 @@ function Home() {
 					<div className='container welcome-message-container'>
 						<div className='row'>
 							<div className='col-xl-9 mx-auto position-relative'>
-								<h1 className='mb-5'>Welcome to Captains Rentals</h1>
+								{/* <h1 className='mb-5'>Welcome to Captains Rentals</h1> */}
 							</div>
 						</div>
 					</div>

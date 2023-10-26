@@ -45,7 +45,7 @@ function SigninForm() {
 			// Logs user in and stores token
 			Auth.login(data.loginUser.token);
 
-			// window.location.assign('/profile');
+			window.location.assign('/admin');
 		} catch (err) {
 			console.error(err);
 			setShowAlert(true);

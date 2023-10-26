@@ -89,7 +89,7 @@
 
 }
 
-.card-body {
+.captains-hideaway-card-body {
   border-left: 3px solid transparent;
     border-image-source: linear-gradient(white, #ABCCD8, #5f8fa5, #ABCCD8, white);
     border-image-slice: 1;
@@ -114,6 +114,29 @@
   margin: 0.5rem;
 }
 
+.amenities-item-wrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+}
+
+.amenities-item-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: row;
+}
+
+.amenities-item {
+  display: flex;
+  align-items: center;
+}
+
+.amenities-item p {
+  margin: 0rem;
+  padding: 0.5rem;
+}
+
 .house-rules-card {
   padding: 0.5rem;
   margin: 0.5rem;
@@ -129,10 +152,33 @@
   border-image-repeat: stretch;
 }
 
+.house-rules-text-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  
+}
+
+.house-rules-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .damage-incidentals-container {
   display: flex;
   padding: 0.5rem;
   margin: 0.5rem 0rem;
+}
+
+.damage-incidentals-text-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .important-information-card {

@@ -1,9 +1,19 @@
 .contact-card {
   margin: 2rem;
+  padding: 1rem;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   align-items: center;
   justify-content: space-around;
+}
+
+.contact-card h3 {
+border-bottom: 2px solid transparent;
+  border-image-source: linear-gradient(to right, white, #ABCCD8, #5f8fa5, #ABCCD8, white);
+  border-image-slice: 1;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+
 }
 .contact-container {
   display: flex;

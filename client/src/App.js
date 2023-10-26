@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Navbar from './components/Navbar';
 import Home from './pages/Home';
+import About from './pages/About';
 import ContactPage from './pages/Contact';
 import AdminPage from './pages/Admin';
 import CaptainsHideaway from './pages/CaptainsHideaway';
@@ -54,6 +55,7 @@ function App() {
 				<Routes>
 						<Route path='/' element={<Home />} />
 						<Route path='/captains_hideaway' element={<CaptainsHideaway />} />
+						<Route path='/about' element={<About />} />
 						<Route path='/contact' element={<ContactPage />} />
 						<Route path='/admin' element={<AdminPage />} />
 				</Routes>

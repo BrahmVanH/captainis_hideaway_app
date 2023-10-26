@@ -8,7 +8,7 @@ import './style.css';
 
 function Navbar() {
 	return (
-		<nav className='navbar navbar-expand bg-light navigation-clean navbar-light'>
+		<nav className='navbar navbar-expand navigation-clean navbar-light'>
 			<div className='navbar-inner-container container'>
 				<Link className='navbar-brand' to={'/'}>
 					Captains Rentals
@@ -16,7 +16,8 @@ function Navbar() {
 				<div className='link-container'>
 					<Link to={'/'} className='navbar-link'>
 						Home
-						<Link to={'/'} className='navbar-link'></Link>
+					</Link>
+					<Link to={'/about'} className='navbar-link'>
 						About Us
 					</Link>
 					<Link to={'/contact'} className='navbar-link'>

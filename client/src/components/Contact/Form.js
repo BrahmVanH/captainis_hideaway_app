@@ -32,7 +32,7 @@ function ContactForm() {
 
 	return (
 		<div className='contact-form-container'>
-			<h3 className='contact-header-text text-center mb-4'>Send us a message!</h3>
+			
 			<Form className='contact-form d-flex'>
 				<div className='mb-3'>
 					<Form.Group controlId='formBasicName' required>

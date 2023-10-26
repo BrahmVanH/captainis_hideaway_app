@@ -1,3 +1,7 @@
+.navbar {
+ border-bottom: 5px solid rgb(200, 188, 167, 0.6)
+}
+
 .navbar-inner-container {
   display: flex;
   justify-content: space-between;

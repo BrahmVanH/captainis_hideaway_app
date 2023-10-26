@@ -4,6 +4,11 @@
 .property-information-container {
   display: flex;
   justify-content: center;
+  border-bottom: 2px solid transparent;
+  border-image-source: linear-gradient(to right, white, #ABCCD8, #5f8fa5, #ABCCD8, white);
+  border-image-slice: 1;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
 }
 
 .property-information-container h3 {
