@@ -6,6 +6,8 @@ import { MdEmail, MdOutlinePhoneEnabled } from 'react-icons/md';
 
 function ContactCard() {
 
+	const linkIconColor = 'black';
+
 	const openInNewTab = (url) => {
   const newWindow = window.open(url, '_blank', 'noopener,noreferrer')
   if (newWindow) newWindow.opener = null
@@ -27,7 +29,7 @@ function ContactCard() {
 					}}>
 					<li>
 						<Link className='contact-information-link' onClick={onClickUrl('https://www.facebook.com/captainshideaway1')}>
-							<FaFacebookF size='14px' />
+							<FaFacebookF color={linkIconColor} size='14px' />
 							<p>facebook/captainshideaway</p>
 						</Link>
 					</li>
@@ -38,19 +40,19 @@ function ContactCard() {
 								event.preventDefault();
 								window.location.href = 'mailto:elysevanh@gmail.com';
 							}}>
-							<MdEmail size='14px' />
+							<MdEmail color={linkIconColor} size='14px' />
 							<p>ElyseVanH@gmail.com</p>
 						</Link>
 					</li>
 					<li>
 						<div className='contact-information-link'>
-							<MdOutlinePhoneEnabled size='14px' />
+							<MdOutlinePhoneEnabled color={linkIconColor} size='14px' />
 							<p>(248) 361- 5821</p>
 						</div>
 					</li>
 					<li>
 						<Link className='contact-information-link' onClick={onClickUrl('https://www.instagram.com/captainshideaway1/')}>
-							<FaInstagram size='14px' />
+							<FaInstagram color={linkIconColor} size='14px' />
 							<p>instagram/captainshideaway</p>
 						</Link>
 					</li>

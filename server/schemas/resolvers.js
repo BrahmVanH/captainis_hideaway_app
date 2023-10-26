@@ -61,12 +61,18 @@ const resolvers = {
 		},
 		loginUser: async (parent, { username, userPassword }) => {
 			try {
+
+				if (!username || !userPassword ) {
+					throw new Error("username and password fields must be filled to log in")
+				}
 				console.log('signing in');
 				const user = await User.findOne({ username });
 				if (!user) {
 					throw new AuthenticationError("Can't find user with that username");
 				}
 
+				const hashedPassword = user.password;
+				
 				const isPasswordValid = bcrypt.compareSync(userPassword, hashedPassword);
 
 				if (!isPasswordValid) {
@@ -77,11 +83,10 @@ const resolvers = {
 				console.log('successfully logged in');
 				return { token, user };
 			} catch (err) {
-				throw new Error('Error in creating user: ' + err.message);
+				throw new Error('Error in logging in user: ' + err.message);
 			}
 		},
 		createUnavailableDate: async (parent, { propertyName, dateValue }) => {
-			console.log('creating unavailable date in server');
 			try {
 				if (!dateValue) {
 					throw new Error('date object is undefined');
@@ -93,7 +98,6 @@ const resolvers = {
 				if (!unavailableDate) {
 					throw new Error('Could not create new date');
 				}
-				console.log('successfully created unavailableDate...');
 				return unavailableDate;
 			} catch (err) {
 				throw new Error('Error in creating date in db: ' + err.message);
@@ -110,7 +114,6 @@ const resolvers = {
 				if (!unavailableDate) {
 					throw new Error('could not find unavailable date with that value...');
 				}
-				console.log('successfully removed unavailableDate...');
 
 				return unavailableDate;
 			} catch (err) {

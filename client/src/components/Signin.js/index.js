@@ -63,7 +63,7 @@ function SigninForm() {
 				</div>
 				<div className='mb-3'>
 					<Form.Group controlId='formBasicPassword' required>
-						<Form.Control onChange={handleInputChange} value={loginFormData.userPassword} type='password' name='password' placeholder='Password' />
+						<Form.Control onChange={handleInputChange} value={loginFormData.userPassword} type='password' name='userPassword' placeholder='Password' />
 					</Form.Group>
 				</div>
 				<div>

@@ -17,12 +17,12 @@ function CaptainsHideaway() {
 		<div>
 			<header className='captains-hideaway-header text-center text-white masthead'></header>
 			<div className='d-flex align-items-center flex-column '>
-				<div className='col-11 d-flex' style={{ padding: '0rem 2.5rem' }}>
+				<div className='col-md-10 d-flex'>
 					<div className='col-8'>
 						<div className='overview-card card'>
 							<div className='card-body d-flex flex-column'>
 								<h3 className='card-title'>Captain's Hideaway</h3>
-								<div className='overview d-flex justify-content-around' style={{ padding: '0.5rem', margin: '0.5rem' }}>
+								<div className='overview d-flex justify-content-around'>
 									<div className='overview-item'>
 										<BsFillDoorOpenFill size='24px' className='overview-item-icon' />
 										<p>4 bedrooms</p>
@@ -40,8 +40,8 @@ function CaptainsHideaway() {
 						</div>
 						<div className='rooms-and-beds-card card'>
 							<div className='card-body d-flex flex-column'>
-								<div className='rooms-and-beds-inner-container d-flex' style={{ padding: '0.5rem' }}>
-									<h3 style={{ padding: '0.5rem', margin: '0px' }}>Rooms &amp; Beds</h3>
+								<div className='rooms-and-beds-inner-container d-flex'>
+									<h3 style={{ padding: '0.5rem 0.5rem 0.5rem 1rem', margin: '0px' }}>Rooms &amp; Beds</h3>
 									<div className='d-flex flex-row justify-content-between' style={{ padding: '0.5rem', width: '100%', margin: '0.5rem' }}>
 										<div className='bedroom-description-container'>
 											<p>Bedroom 1</p>
@@ -79,7 +79,7 @@ function CaptainsHideaway() {
 							</div>
 						</div>
 
-						<div className='card ' style={{ margin: '1rem', padding: '0.5rem' }}>
+						<div className='spaces-card card' >
 							<div className='card-body d-flex flex-column'>
 								<div className='d-flex' style={{ padding: '0.5rem' }}>
 									<h3 className='spaces-header-text'>Spaces</h3>
@@ -97,10 +97,10 @@ function CaptainsHideaway() {
 					<AvailabilityCalendar propertyName={propertyName} />
 				</div>
 
-				<div className='card col-sm-11 col-md-10 ' style={{ padding: '0.5rem' }}>
+				<div className='about-property-card card col-sm-11 col-md-10 ' style={{ padding: '0.5rem' }}>
 					<div className='card-body d-flex flex-column'>
 						<div className='d-flex' style={{ padding: '0.5rem' }}>
-							<h3 style={{ margin: '0px', padding: '0.5rem' }}>About the Property</h3>
+							<h3 className='about-property-header' style={{ margin: '0px', padding: '0.5rem' }}>About the Property</h3>
 							<div className='d-flex justify-content-center'>
 								<div className='d-flex flex-column justify-content-between' style={{ width: '100%', padding: '0.5rem' }}>
 									<p className='about-property-subheader'>Captains Hideaway on Lake Superior</p>
@@ -119,7 +119,7 @@ function CaptainsHideaway() {
 						</div>
 					</div>
 				</div>
-				<div className='card col-sm-11 col-md-10 ' style={{ margin: '0.5rem' }}>
+				<div className='amenities-card card col-sm-11 col-md-10 ' style={{ margin: '0.5rem' }}>
 					<div className='card-body d-flex flex-column' style={{ padding: '0.5rem' }}>
 						<div className='d-flex' style={{ padding: '0.5rem' }}>
 							<h3 style={{ margin: '0px', padding: '0.5rem' }}>Amenities</h3>
@@ -202,7 +202,7 @@ function CaptainsHideaway() {
 						</div>
 					</div>
 				</div>
-				<div className='card col-sm-11 col-md-10 ' style={{ margin: '1rem' }}>
+				<div className='house-rules-card card col-sm-11 col-md-10 '>
 					<div className='card-body d-flex flex-column' style={{ padding: '0.5rem' }}>
 						<div className='house-rules-container'>
 							<h3 style={{ padding: '0.5rem' }}>House Rules</h3>

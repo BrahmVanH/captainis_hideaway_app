@@ -1,29 +1,35 @@
-import React from "react";
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Nav } from 'react-bootstrap';
+import { Nav, Button } from 'react-bootstrap';
+import Auth from '../../utils/auth';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
-
 function Navbar() {
-  return (
+	return (
 		<nav className='navbar navbar-expand bg-light navigation-clean navbar-light'>
-			<div className='container'>
+			<div className='navbar-inner-container container'>
 				<Link className='navbar-brand' to={'/'}>
 					Captains Rentals
 				</Link>
-				<button data-bs-toggle='collapse' className='navbar-toggler' data-bs-target='#navcol-1'></button>
-				<div className='collapse navbar-collapse' id='navcol-1'></div>
-				<Link to={'/'} className='navbar-link'>
-					About Us
-				</Link>
-				<Link to={'/contact'} className='navbar-link'>
-					Contact
-				</Link>
-				<Link to={'/admin'} className='navbar-link'>
-					Admin
-				</Link>
+				<div className='link-container'>
+					<Link to={'/'} className='navbar-link'>
+						Home
+						<Link to={'/'} className='navbar-link'></Link>
+						About Us
+					</Link>
+					<Link to={'/contact'} className='navbar-link'>
+						Contact
+					</Link>
+					{Auth.loggedIn() ? (
+						<Link to='#' onClick={() => Auth.logout()} className='navbar-link'>
+							Log Out
+						</Link>
+					) : (
+						<></>
+					)}
+				</div>
 			</div>
 		</nav>
 	);

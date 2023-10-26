@@ -1,6 +1,9 @@
-
+.navbar-inner-container {
+  display: flex;
+  justify-content: space-between;
+}
 .navbar-link {
   padding: 1rem;
-  text-decoration: none;
   color: black;
+  text-decoration: none;
 }

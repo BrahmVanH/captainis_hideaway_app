@@ -10,8 +10,7 @@ import Home from './pages/Home';
 import ContactPage from './pages/Contact';
 import AdminPage from './pages/Admin';
 import CaptainsHideaway from './pages/CaptainsHideaway';
-
-
+import Footer from './components/Footer';
 
 const httpLink = createHttpLink({
 	uri: 'http://localhost:3001/graphql',
@@ -33,7 +32,6 @@ const client = new ApolloClient({
 	cache: new InMemoryCache(),
 });
 
-
 function App() {
 	const [calendarVisible, setCalendarVisible] = useState(true);
 	const [adminCalendarVisible, setAdminCalendarVisible] = useState(false);
@@ -52,12 +50,15 @@ function App() {
 		<ApolloProvider client={client}>
 			<Router>
 				<Navbar />
+					<div className='wrapper'>
 				<Routes>
-					<Route path='/' element={<Home />} />
-					<Route path='/captains_hideaway' element={<CaptainsHideaway />} />
-					<Route path='/contact' element={<ContactPage />} />
-					<Route path='/admin' element={<AdminPage />} />
+						<Route path='/' element={<Home />} />
+						<Route path='/captains_hideaway' element={<CaptainsHideaway />} />
+						<Route path='/contact' element={<ContactPage />} />
+						<Route path='/admin' element={<AdminPage />} />
 				</Routes>
+					</div>
+				<Footer />
 			</Router>
 		</ApolloProvider>
 	);

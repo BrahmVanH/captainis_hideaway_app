@@ -9,7 +9,7 @@
 
 .overview-card {
   padding: 1rem;
-  margin: 1rem;
+  margin: 1rem 0rem;
 }
 
 .overview-card .card-title {
@@ -22,6 +22,10 @@
     border-image-outset: 0;
     border-image-repeat: stretch;
   
+}
+
+.overview-card .card-body {
+  border: none;
 }
 
 .overview {
@@ -45,12 +49,17 @@
 
 .rooms-and-beds-card {
   padding: 0.5rem;
-  margin: 1rem;
+  margin: 1rem 0rem;
 }
 
 .rooms-and-beds-card .card-body {
   padding: 0px;
 }
+
+.room-and-beds-inner-container {
+  padding: 0.5rem;
+}
+
 
 .bedroom-description-container {
   display: flex;
@@ -62,21 +71,52 @@
   font-size: 14px;
 }
 
+.spaces-card {
+  padding: 0.5rem;
+  margin: 1rem 0rem 0.5rem 0rem;
+}
+
+.spaces-card .card-body {
+  padding: 0.5rem;
+}
+
 .spaces-header-text {
   padding: 0.5rem;
 }
 
 .spaces-text {
   font-size: 16px;
-  
+
 }
 
+.card-body {
+  border-left: 3px solid transparent;
+    border-image-source: linear-gradient(white, #ABCCD8, #5f8fa5, #ABCCD8, white);
+    border-image-slice: 1;
+    border-image-outset: 0;
+    
+    border-image-repeat: stretch;
+}
+
+.about-property-card {
+  margin: 0.5rem;
+}
 .about-property-subheader {
   font-size: 16px;
 }
 
 .about-property-text {
   font-size: 14px;
+}
+
+.amenities-card {
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+
+.house-rules-card {
+  padding: 0.5rem;
+  margin: 0.5rem;
 }
 
 .house-rules-container {
@@ -96,7 +136,8 @@
 }
 
 .important-information-card {
-  margin: 1rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
 }
 
 .important-information-card h5 {
