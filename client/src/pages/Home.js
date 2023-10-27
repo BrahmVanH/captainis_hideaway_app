@@ -5,6 +5,7 @@ import { Button, Image } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css';
 import PropertyCard from '../components/PropertyCard';
+// import test_image from '../assets/img/side_patio.avif';
 
 function Home() {
 	const captainsHideaway = {
