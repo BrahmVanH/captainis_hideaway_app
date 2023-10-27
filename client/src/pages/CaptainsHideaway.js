@@ -1,4 +1,7 @@
 import React from 'react';
+
+import ImageGallery from 'react-image-gallery';
+
 import { CiCoffeeBean } from 'react-icons/ci';
 import { GiBathtub, GiBunkBeds, GiBeachBucket, GiThermometerCold, GiHeatHaze } from 'react-icons/gi';
 import { BsFillDoorOpenFill, BsSun } from 'react-icons/bs';
@@ -13,12 +16,17 @@ import AvailabilityCalendar from '../components/Calendar';
 import dishwasherIcon from '../assets/icons/dishwasher_icon.svg';
 
 import './CaptainsHideaway.css';
+// import '~react-image-gallery/styles/css/image-gallery.css';
+
+import { hideawayGalleryImages } from '../utils/gallery_image_helpers';
 
 function CaptainsHideaway() {
 	const propertyName = 'captainsHideaway';
 	return (
 		<div>
-			<header className='captains-hideaway-header text-center text-white masthead'></header>
+			{/* <header className='captains-hideaway-header text-center text-white masthead'></header>
+			 */}
+			<ImageGallery items={hideawayGalleryImages} />
 			<div className='d-flex align-items-center flex-column '>
 				<div className='col-md-10 d-flex'>
 					<div className='col-8'>
