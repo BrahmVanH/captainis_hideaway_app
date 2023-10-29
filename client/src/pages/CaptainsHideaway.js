@@ -7,7 +7,7 @@ import { GiBathtub, GiBunkBeds, GiBeachBucket, GiThermometerCold, GiHeatHaze } f
 import { BsFillDoorOpenFill, BsSun } from 'react-icons/bs';
 import { LuBedDouble, LuBedSingle } from 'react-icons/lu';
 import { IoBedOutline } from 'react-icons/io5';
-import { PiCookingPot } from 'react-icons/pi';
+import { PiCookingPot, PiCouch } from 'react-icons/pi';
 import { MdOutlineOutdoorGrill } from 'react-icons/md';
 import { TbWifi, TbWashMachine, TbWashDry1, TbToolsKitchen2, TbDeviceTv, TbKayak } from 'react-icons/tb';
 
@@ -24,9 +24,9 @@ function CaptainsHideaway() {
 	const propertyName = 'captainsHideaway';
 	return (
 		<div>
-			{/* <header className='captains-hideaway-header text-center text-white masthead'></header>
-			 */}
-			<ImageGallery items={hideawayGalleryImages} />
+			<header className='captains-hideaway-header text-center text-white masthead'></header>
+
+			{/* <ImageGallery items={hideawayGalleryImages} /> */}
 			<div className='d-flex align-items-center flex-column '>
 				<div className='col-md-10 d-flex'>
 					<div className='col-8'>
@@ -78,11 +78,11 @@ function CaptainsHideaway() {
 										<div className='bedroom-description-container'>
 											<p>Common Area</p>
 											<div style={{ lineHeight: '20px', display: 'inline-block' }}>
-												<LuBedSingle style={{ marginTop: '0.25rem' }} size='16px' />
-												<LuBedSingle style={{ marginTop: '0.25rem' }} size='16px' />
+												<PiCouch style={{ marginTop: '0.25rem' }} size='16px' />
+												<PiCouch style={{ marginTop: '0.25rem' }} size='16px' />
 											</div>
 											<p style={{ padding: '0px' }} className='bedroom-description-text'>
-												2 Double Beds
+												2 Sleeper Sofas
 											</p>
 										</div>
 									</div>
@@ -124,8 +124,7 @@ function CaptainsHideaway() {
 										Superior. Lake Muskallonge is a short walk from the property and boasts terrific inland fishing, boating and much more! Grand Marais, MI is a short drive 18 miles west and is the
 										eastern Gateway to Pictured Rocks National Lakeshore. The North Country Trail is accessible from the beach for endless miles of hiking or go fishing in the famous Two Hearted
 										River. Trail maps are available in the house or download AllTrails app. Bring your clubs for golfing at beautiful Newberry Country Club. A stay at Captain's Hideaway will truly
-										refuel your soul and provide unparalleled memories for years to come.*Due to recent problems, we will no longer accept dogs. If your dog is noted on the property without being
-										registered with us, or unattended in the house for more than 2 hrs, you security deposit will be forfeited.facebook.com/captainshideaway1
+										refuel your soul and provide unparalleled memories for years to come.facebook.com/captainshideaway1
 									</p>
 								</div>
 							</div>

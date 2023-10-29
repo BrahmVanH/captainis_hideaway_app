@@ -8,9 +8,9 @@ function AdminPropertyCard(props) {
 	const propertyName = props.propertyName;
 	let formattedName = '';
 	if (propertyName === 'captainsHideaway') {
-		formattedName = 'Captains Hideaway'
+		formattedName = "Captain's Hideaway"
 	} else if (propertyName === 'captainsCottage') {
-		formattedName = 'Captains Cottage';
+		formattedName = "Captain's Cottage";
 	}
 	return (
 		<div className='property-card card col-4'>

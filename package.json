@@ -17,10 +17,10 @@
   },
   "keywords": [],
   "author": "Brahm Van Houzen",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "apollo-server-express": "^3.12.1",
-    "graphql": "^16.8.1",
-    "react-icons": "^4.11.0"
+    "graphql": "^16.8.1"
+    
   }
 }

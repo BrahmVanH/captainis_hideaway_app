@@ -1,9 +1,9 @@
 .home-header {
   background-image: url('../../public/assets/img/arial_shot_over_beach_side.png');
-  background-image: url('../../public/assets/img/captains_cottage_png/USE_THIS_FOR_WEBSITE-arial_shot_from_over_beach.png');
+  /* background-image: url('../../public/assets/img/captains_cottage_png/USE_THIS_FOR_WEBSITE-arial_shot_from_over_beach.png'); */
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: 0px -200px;
+  background-position: 0px -50px;
 }
 
 .welcome-message-container {
