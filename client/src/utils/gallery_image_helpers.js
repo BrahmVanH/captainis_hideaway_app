@@ -9,42 +9,20 @@ const cottageThumbnails100 = require.context('../assets/img/thumbnails/cottage_t
 const cottageThumbnails150 = require.context('../assets/img/thumbnails/cottage_thumbnails_150', false, /\.avif$/);
 const cottageThumbnails300 = require.context('../assets/img/thumbnails/cottage_thumbnails_300', false, /\.avif$/);
 
-// let hideawayThumbnailsResponsive;
-// let cottageThumbnailsResponsive;
-// const isMobileViewport = () => {
-// 	return window.innerWidth < 577;
-// };
+ const createHideawayGalleryImages = () => {
+	let array = [];
+	fullSizeHideawayImages.keys().map((file) => {
+		const original = fullSizeHideawayImages(file);
+		console.log('Original Image:', original);
 
-// const isMediumViewport = () => {
-// 	return window.innerWidth < 766;
-// };
+		array.push({
+			original: original,
+			thumbnail: original,
+		});
+	});
+	return array;
+};
 
-// const isLargeViewport = () => {
-// 	return window.innerWidth > 766;
-// };
-
-// const selectThumnailSize = () => {
-// 	if (isMobileViewport) {
-// 		console.log('this is a mobile viewport!');
-// 		hideawayThumbnailsResponsive = hideawayThumbnails100;
-// 	} else if (isMediumViewport) {
-// 		console.log('this is a medium viewport!');
-// 		hideawayThumbnailsResponsive = hideawayThumbnails150;
-// 	} else {
-// 		console.log('this is a large viewport!');
-
-// 		hideawayThumbnailsResponsive = hideawayThumbnails300;
-// 	}
-// };
-
-export const hideawayGalleryImages = fullSizeHideawayImages.keys().map((file) => {
-	const original = fullSizeHideawayImages(file).default;
-	console.log('Original Image:', original);
-
-	return {
-		original: original,
-		thumbnail: original,
-	};
-});
+export const hideawayGalleryImages = createHideawayGalleryImages();
 
 console.log('Gallery Images:', hideawayGalleryImages);

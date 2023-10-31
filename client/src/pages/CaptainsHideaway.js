@@ -26,9 +26,9 @@ function CaptainsHideaway() {
 	const propertyName = 'captainsHideaway';
 	return (
 		<div>
-			<header className='captains-hideaway-header text-center text-white masthead'></header>
+			{/* <header className='captains-hideaway-header text-center text-white masthead'></header> */}
 
-			{/* <ImageGallery items={hideawayGalleryImages} /> */}
+			<ImageGallery use showThumbnails={true} thumbnailWidth={25} thumbnailHeight={25} items={hideawayGalleryImages} />
 			<div className='d-flex align-items-center flex-column '>
 				<div className='col-md-10 d-flex'>
 					<div className='col-8'>
