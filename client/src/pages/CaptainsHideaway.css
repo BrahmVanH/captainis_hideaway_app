@@ -1,210 +1,210 @@
 .captains-hideaway-header {
-  background-image: url("../../public/assets/img/stairs_from_beach_2.png");
-  background-repeat: no-repeat;
-    background-size: cover;
-  height: 400px;
+	background-image: url('../../public/assets/img/captains_hideaway_png/stairs_from_beach_rotated.png');
+	background-position: 0 -200px;
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 400px;
 }
 
-
-
 .overview-card {
-  padding: 1rem;
-  margin: 1rem 0rem;
+	padding: 1rem;
+	margin: 1rem 0rem;
 }
 
 .overview-card .card-title {
-  padding: 0.5rem;
-  margin: 0.5rem;
-  align-self: center;
-  border-bottom: 3px solid transparent;
-    border-image-source: linear-gradient(to right, white, #ABCCD8, #5f8fa5, #ABCCD8, white);
-    border-image-slice: 1;
-    border-image-outset: 0;
-    border-image-repeat: stretch;
-  
+	padding: 0.5rem;
+	margin: 0.5rem;
+	align-self: center;
+	border-bottom: 3px solid transparent;
+	border-image-source: linear-gradient(to right, white, #abccd8, #5f8fa5, #abccd8, white);
+	border-image-slice: 1;
+	border-image-outset: 0;
+	border-image-repeat: stretch;
 }
 
 .overview-card .card-body {
-  border: none;
+	border: none;
 }
 
 .overview {
-  padding: 0.5rem;
-  margin: 0.5rem;
-
+	padding: 0.5rem;
+	margin: 0.5rem;
 }
 
 .overview-item {
-  display: flex;
+	display: flex;
 }
 
 .overview-item-icon {
-  padding-top: 0.5rem;
+	padding-top: 0.5rem;
 }
 
 .overview-item p {
-  padding:0rem 0.5rem 0.5rem 0.5rem;
-
+	padding: 0rem 0.5rem 0.5rem 0.5rem;
 }
 
 .rooms-and-beds-card {
-  padding: 0.5rem;
-  margin: 1rem 0rem;
+	padding: 0.5rem;
+	margin: 1rem 0rem;
 }
 
 .rooms-and-beds-card .card-body {
-  padding: 0px;
+	padding: 0px;
 }
 
 .room-and-beds-inner-container {
-  padding: 0.5rem;
+	padding: 0.5rem;
 }
 
-
 .bedroom-description-container {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+	display: flex;
+	align-items: center;
+	flex-direction: column;
 }
 
 .bedroom-description-text {
-  font-size: 14px;
+	font-size: 14px;
 }
 
 .spaces-card {
-  padding: 0.5rem;
-  margin: 1rem 0rem 0.5rem 0rem;
+	padding: 0.5rem;
+	margin: 1rem 0rem 0.5rem 0rem;
 }
 
 .spaces-card .card-body {
-  padding: 0.5rem;
+	padding: 0.5rem;
 }
 
 .spaces-header-text {
-  padding: 0.5rem;
+	padding: 0.5rem;
 }
 
 .spaces-text {
-  font-size: 16px;
+	font-size: 16px;
+}
 
+.spaces-item-container {
+	display: flex;
+	align-items: center;
+	flex-direction: row;
+}
+
+.spaces-item-container p {
+	margin: 0rem 0.5rem;
+	padding: 0;
 }
 
 .captains-hideaway-card-body {
-  border-left: 3px solid transparent;
-    border-image-source: linear-gradient(white, #ABCCD8, #5f8fa5, #ABCCD8, white);
-    border-image-slice: 1;
-    border-image-outset: 0;
-    
-    border-image-repeat: stretch;
+	border-left: 3px solid transparent;
+	border-image-source: linear-gradient(white, #abccd8, #5f8fa5, #abccd8, white);
+	border-image-slice: 1;
+	border-image-outset: 0;
+
+	border-image-repeat: stretch;
 }
 
 .about-property-card {
-  margin: 0.5rem;
+	margin: 0.5rem;
 }
 .about-property-subheader {
-  font-size: 16px;
+	font-size: 16px;
 }
 
 .about-property-text {
-  font-size: 14px;
+	font-size: 14px;
 }
 
 .amenities-card {
-  padding: 0.5rem;
-  margin: 0.5rem;
+	padding: 0.5rem;
+	margin: 0.5rem;
 }
 
 .amenities-item-wrapper {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
 }
 
 .amenities-item-container {
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: row;
+	display: flex;
+	justify-content: space-evenly;
+	flex-direction: row;
 }
 
 .amenities-item {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .amenities-item p {
-  margin: 0rem;
-  padding: 0.5rem;
+	margin: 0rem;
+	padding: 0.5rem;
 }
 
 .house-rules-card {
-  padding: 0.5rem;
-  margin: 0.5rem;
+	padding: 0.5rem;
+	margin: 0.5rem;
 }
 
 .house-rules-container {
-  display: flex;
-  padding: 0.5rem 0.5rem 1rem 0.5rem;
-  border-bottom: 1px solid transparent;
-  border-image-source: linear-gradient(to right, white, #ABCCD8, #5f8fa5, #ABCCD8, white);
-  border-image-slice: 1;
-  border-image-outset: 0;
-  border-image-repeat: stretch;
+	display: flex;
+	padding: 0.5rem 0.5rem 1rem 0.5rem;
+	border-bottom: 1px solid transparent;
+	border-image-source: linear-gradient(to right, white, #abccd8, #5f8fa5, #abccd8, white);
+	border-image-slice: 1;
+	border-image-outset: 0;
+	border-image-repeat: stretch;
 }
 
 .house-rules-text-wrapper {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	flex-direction: row;
 }
 
 .house-rules-text {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .damage-incidentals-container {
-  display: flex;
-  padding: 0.5rem;
-  margin: 0.5rem 0rem;
+	display: flex;
+	padding: 0.5rem;
+	margin: 0.5rem 0rem;
 }
 
 .damage-incidentals-text-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .important-information-card {
-  padding: 0.5rem;
-  margin: 0.5rem;
+	padding: 0.5rem;
+	margin: 0.5rem;
 }
 
 .important-information-card h5 {
-  align-self: center;
-  margin: 0.5rem 0rem 1rem 0rem;
+	align-self: center;
+	margin: 0.5rem 0rem 1rem 0rem;
 }
 
 .important-information {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  padding: 0rem 10rem;
-  
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	padding: 0rem 10rem;
 }
 
-
 .important-information-text p {
-  margin: 0;
-  padding: 0.5rem;
-  width: 75%;
-  text-align: start;
-  align-self: left;
-  
+	margin: 0;
+	padding: 0.5rem;
+	width: 75%;
+	text-align: start;
+	align-self: left;
 }

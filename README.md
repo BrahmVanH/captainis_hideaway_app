@@ -27,7 +27,25 @@
 
   ## Credits 
 
-  N/A
+  ### Icons
+    The icons in this application are provided by 
+    -Circum Icons - https://circumicons.com/- 	MPL-2.0 license
+    -Game Icons - https://game-icons.net/ - CC BY 3.0
+
+    -Bootstrap Icons - https://github.com/twbs/icons - MIT License
+
+    -Lucide Icons - https://lucide.dev/
+
+    -Ion Icons 5 - https://ionicons.com/ - MIT License
+
+    -Philosopher Icons - https://github.com/phosphor-icons/core - MIT License
+
+    -Material Deisn Icons - http://google.github.io/material-design-icons/ - Apache License Version 2.0
+
+    -Tabler Icons - https://github.com/tabler/tabler-icons - MIT License 
+
+    - THIS ONE NEEDS DIRECT ATTRIBUTION ON WEBSITE ABOUT PAGE - Noun Project - https://thenounproject.com/browse/icons/term/title-of-icon/ - Creative Commons License - "This Page is Powered by Creative Commons Resources, Click for more info."
+
 
   ## License
 
