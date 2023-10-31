@@ -27,8 +27,9 @@ function CaptainsHideaway() {
 	return (
 		<div>
 			{/* <header className='captains-hideaway-header text-center text-white masthead'></header> */}
-
-			<ImageGallery use showThumbnails={true} thumbnailWidth={25} thumbnailHeight={25} items={hideawayGalleryImages} />
+			<div className='image-gallery-wrapper'>
+				<ImageGallery showThumbnails={false} items={hideawayGalleryImages} />
+			</div>
 			<div className='d-flex align-items-center flex-column '>
 				<div className='col-md-10 d-flex'>
 					<div className='col-8'>
