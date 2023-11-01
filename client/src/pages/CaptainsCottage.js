@@ -18,6 +18,7 @@ import dishwasherIcon from '../assets/icons/dishwasher_icon.svg';
 import porchIcon from '../assets/icons/porch-icon-noun.svg';
 import deckIcon from '../assets/icons/deck-icon-noun.svg';
 
+import './CaptainsCottage.css';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
 import { cottageGalleryImages, hcottageGalleryImages } from '../utils/gallery_image_helpers';

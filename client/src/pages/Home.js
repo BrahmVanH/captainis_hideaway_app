@@ -19,7 +19,7 @@ function Home() {
 	const captainsCottage = {
 		title: 'Captains Cottage',
 		description: '3 acres of private Lake Superior beach front! Located on the North Country Trail. Muskallonge Lake located directly behind the property for great fishing, hiking or kayaking. ',
-		utlEndpoint: '/captains_cottage',
+		urlEndpoint: '/captains_cottage',
 		imagePath: 'assets/img/back_exterior_side_with_lake.png',
 	};
 	return (
@@ -29,7 +29,7 @@ function Home() {
 					<div className='container welcome-message-container'>
 						<div className='row'>
 							<div className='col-xl-9 mx-auto position-relative'>
-								{/* <h1 className='mb-5'>Welcome to Captains Rentals</h1> */}
+								<h1>Welcome To Michigan's Upper Peninsula</h1>
 							</div>
 						</div>
 					</div>

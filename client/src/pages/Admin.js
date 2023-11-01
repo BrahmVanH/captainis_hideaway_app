@@ -9,7 +9,7 @@ function AdminPage() {
 	const captainsHideaway = 'captainsHideaway';
 	const captainsCottage = 'captainsCottage';
 	return (
-		<div style={{ height: '75vh' }}>
+		<div style={{ display: 'flex', justifyContent: 'center', height: '75vh' }}>
 			{!Auth.loggedIn() ? <SigninForm /> : <></>}
 			{Auth.loggedIn() ? (
 				<div className='admin-container'>

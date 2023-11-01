@@ -5,6 +5,8 @@ import { Form, Button } from 'react-bootstrap';
 import { LOGIN_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
+import './style.css';
+
 
 function SigninForm() {
 	const [loginFormData, setLoginFormData] = useState({
@@ -53,9 +55,9 @@ function SigninForm() {
 	};
 
 	return (
-		<div className='card col-4 contact-form-container'>
-			<h3 className='contact-header-text text-center mb-4'>Sign In</h3>
-			<Form className='contact-form d-flex'>
+		<div className='card col-lg-4 col-md-6 col-sm-11 signin-card' style={{height: 'minContent'}}>
+			<h3 className='signin-header-text text-center mb-4'>Sign In</h3>
+			<Form className='signin-form d-flex'>
 				<div className='mb-3'>
 					<Form.Group controlId='formBasicUsername' required>
 						<Form.Control onChange={handleInputChange} value={loginFormData.username} type='username' name='username' placeholder='Username' />
