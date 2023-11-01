@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 
 import ImageGallery from 'react-image-gallery';
+import Fullscreen from 'react-image-gallery';
 
 import { CiCoffeeBean } from 'react-icons/ci';
 import { GiBathtub, GiBunkBeds, GiBeachBucket, GiThermometerCold, GiHeatHaze } from 'react-icons/gi';
@@ -18,18 +19,39 @@ import porchIcon from '../assets/icons/porch-icon-noun.svg';
 import deckIcon from '../assets/icons/deck-icon-noun.svg';
 
 import './CaptainsHideaway.css';
-// import '~react-image-gallery/styles/css/image-gallery.css';
+import 'react-image-gallery/styles/css/image-gallery.css';
 
 import { hideawayGalleryImages } from '../utils/gallery_image_helpers';
 
 function CaptainsHideaway() {
+	const [imageGalleryHidden, setImageGalleryHidden] = useState(true);
+	const [imageGalleryStyle, setImageGalleryStyle] = useState({ display: 'none' });
+	const [isFullscreen, setIsFullscreen] = useState(true);
+
+	const imageGalleryRef = useRef(null);
+
+	const toggleGalleryFullScreen = () => {
+		imageGalleryRef.current.fullScreen();
+	};
+
+	const showImageGallery = () => {
+		if (imageGalleryHidden) {
+			// setImageGalleryStyle({ display: '' });
+			toggleGalleryFullScreen();
+			setImageGalleryHidden(false);
+		} else if (!imageGalleryHidden) {
+			setImageGalleryStyle({ display: 'none' });
+			setImageGalleryHidden(true);
+		}
+	};
+
 	const propertyName = 'captainsHideaway';
 	return (
 		<div>
-			{/* <header className='captains-hideaway-header text-center text-white masthead'></header> */}
-			<div className='image-gallery-wrapper'>
-				<ImageGallery showThumbnails={false} items={hideawayGalleryImages} />
-			</div>
+			{/* <Fullscreen onClick={onClick} isFullscreen={isFullscreen} /> */}
+			<header onClick={toggleGalleryFullScreen} className='captains-hideaway-header text-center text-white masthead'>
+			</header>
+
 			<div className='d-flex align-items-center flex-column '>
 				<div className='col-md-10 d-flex'>
 					<div className='col-8'>
@@ -296,6 +318,9 @@ function CaptainsHideaway() {
 							</div>
 						</div>
 					</div>
+				</div>
+				<div className='image-gallery-wrapper'>
+					<ImageGallery ref={imageGalleryRef} showPlayButton={false} isFullScreen={true} items={hideawayGalleryImages} />
 				</div>
 			</div>
 		</div>

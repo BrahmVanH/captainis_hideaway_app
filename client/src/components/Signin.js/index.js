@@ -53,7 +53,7 @@ function SigninForm() {
 	};
 
 	return (
-		<div className='contact-form-container'>
+		<div className='card col-4 contact-form-container'>
 			<h3 className='contact-header-text text-center mb-4'>Sign In</h3>
 			<Form className='contact-form d-flex'>
 				<div className='mb-3'>
