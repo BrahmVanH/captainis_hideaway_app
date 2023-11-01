@@ -18,42 +18,40 @@ import dishwasherIcon from '../assets/icons/dishwasher_icon.svg';
 import porchIcon from '../assets/icons/porch-icon-noun.svg';
 import deckIcon from '../assets/icons/deck-icon-noun.svg';
 
-import './CaptainsHideaway.css';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
-import { hideawayGalleryImages } from '../utils/gallery_image_helpers';
+import { cottageGalleryImages, hcottageGalleryImages } from '../utils/gallery_image_helpers';
 
-function CaptainsHideaway() {
+function CaptainsCottage() {
 	const imageGalleryRef = useRef(null);
 
 	const toggleGalleryFullScreen = () => {
 		imageGalleryRef.current.fullScreen();
 	};
 
-	const propertyName = 'captainsHideaway';
+	const propertyName = 'captainsCottage';
 	return (
 		<div>
-			{/* <Fullscreen onClick={onClick} isFullscreen={isFullscreen} /> */}
-			<header onClick={toggleGalleryFullScreen} className='captains-hideaway-headermasthead'></header>
+			<header onClick={toggleGalleryFullScreen} className='captains-cottage-header masthead'></header>
 
 			<div className='d-flex align-items-center flex-column '>
 				<div className='col-md-10 d-flex'>
 					<div className='col-8'>
 						<div className='overview-card card'>
 							<div className='captains-hideaway-card-body card-body d-flex flex-column'>
-								<h3 className='card-title'>Captain's Hideaway</h3>
+								<h3 className='card-title'>Captain's Cottage</h3>
 								<div className='overview d-flex justify-content-around'>
 									<div className='overview-item'>
 										<BsFillDoorOpenFill size='24px' className='overview-item-icon' />
-										<p>4 bedrooms</p>
+										<p>2 bedrooms</p>
 									</div>
 									<div className='overview-item'>
 										<GiBathtub size='24px' className='overview-item-icon' />
-										<p>3 bathrooms</p>
+										<p>1 bathrooms</p>
 									</div>
 									<div className='overview-item'>
 										<LuBedDouble size='24px' className='overview-item-icon' />
-										<p>Sleeps 10</p>
+										<p>Sleeps 7</p>
 									</div>
 								</div>
 							</div>
@@ -65,34 +63,24 @@ function CaptainsHideaway() {
 									<div className='d-flex flex-row justify-content-between' style={{ padding: '0.5rem', width: '100%', margin: '0.5rem' }}>
 										<div className='bedroom-description-container'>
 											<p>Bedroom 1</p>
-											<IoBedOutline size='22px' />
-											<p className='bedroom-description-text'>1 King Bed</p>
-										</div>
-										<div className='bedroom-description-container'>
-											<p>Bedroom 2</p>
 											<LuBedDouble style={{ marginTop: '0.25rem' }} size='18px' />
-
 											<p className='bedroom-description-text'>1 Queen Bed</p>
-										</div>
-										<div className='bedroom-description-container'>
-											<p>Bedroom 3</p>
-											<LuBedSingle style={{ marginTop: '0.25rem' }} size='18px' />
-											<p className='bedroom-description-text'>1 Double Bed</p>
-										</div>
-										<div className='bedroom-description-container'>
-											<p>Bedroom 4</p>
-											<GiBunkBeds style={{ marginTop: '0.25rem' }} size='18px' />
-											<p className='bedroom-description-text'>1 Twin Bunk Bed</p>
 										</div>
 										<div className='bedroom-description-container'>
 											<p>Common Area</p>
 											<div style={{ lineHeight: '20px', display: 'inline-block' }}>
 												<PiCouch style={{ marginTop: '0.25rem' }} size='16px' />
-												<PiCouch style={{ marginTop: '0.25rem' }} size='16px' />
 											</div>
 											<p style={{ padding: '0px' }} className='bedroom-description-text'>
-												2 Sleeper Sofas
+												1 Double Futon
 											</p>
+										</div>
+										<div className='bedroom-description-container'>
+											<p>Loft</p>
+											<LuBedDouble style={{ marginTop: '0.25rem' }} size='18px' />
+											<LuBedSingle style={{ marginTop: '0.25rem' }} size='18px' />
+											<GiBunkBeds style={{ marginTop: '0.25rem' }} size='18px' />
+											<p className='bedroom-description-text'>1 Queen, 1 Double, Twin Bunkbeds</p>
 										</div>
 									</div>
 								</div>
@@ -105,16 +93,8 @@ function CaptainsHideaway() {
 									<h3 className='spaces-header-text'>Spaces</h3>
 									<div className='d-flex flex-row justify-content-around' style={{ width: '100%', padding: '0.5rem' }}>
 										<div className='spaces-item-container'>
-											<MdOutlineBrunchDining size='18px' />
-											<p className='spaces-text'>Dining Area</p>
-										</div>
-										<div className='spaces-item-container'>
 											<img src={deckIcon} height={'18px'} />
 											<p className='spaces-text'>Deck/Patio</p>
-										</div>
-										<div className='spaces-item-container'>
-											<img src={porchIcon} height={'18px'} width={'18px'} />
-											<p className='spaces-text'>Porch/Veranda</p>
 										</div>
 										<div className='spaces-item-container'>
 											<MdOutlineKitchen size='18px' />
@@ -142,13 +122,8 @@ function CaptainsHideaway() {
 								<div className='d-flex flex-column justify-content-between' style={{ width: '100%', padding: '0.5rem' }}>
 									<p className='about-property-subheader'>Captains Hideaway on Lake Superior</p>
 									<p className='about-property-text' style={{ padding: '0.5rem' }}>
-										Captain's Hideaway in Deer Park, Newberry, The Official Moose Capital of Michigan, offers a spacious layout that will accommodate up to 10 guests in utmost comfort. This 4 bedroom,
-										3 full bath home overlooking spectacular Lake Superior is every vacationer's dream. Spend your days hunting for agates on the beaches of Lake Superior, beach access is simply a few
-										steps away from the back porch. If relaxing indoors is more your speed, spend the day lounging in the 4 season room that overlooks miles and miles of unobstructed views of Lake
-										Superior. Lake Muskallonge is a short walk from the property and boasts terrific inland fishing, boating and much more! Grand Marais, MI is a short drive 18 miles west and is the
-										eastern Gateway to Pictured Rocks National Lakeshore. The North Country Trail is accessible from the beach for endless miles of hiking or go fishing in the famous Two Hearted
-										River. Trail maps are available in the house or download AllTrails app. Bring your clubs for golfing at beautiful Newberry Country Club. A stay at Captain's Hideaway will truly
-										refuel your soul and provide unparalleled memories for years to come.facebook.com/captainshideaway1
+										3 acres of private Lake Superior beach front! Located on the North Country Trail. Muskallonge Lake located directly behind the property for great fishing. Hike or kayak on the
+										famous Two-Hearted river. Parking for RV and 2 out buildings for snowmobile, ORV and boat parking. 9 miles from Pine Stump Junction. Captain's Guest House coming this spring!
 									</p>
 								</div>
 							</div>
@@ -165,14 +140,6 @@ function CaptainsHideaway() {
 										<div className='amenities-item'>
 											<TbToolsKitchen2 />
 											<p>Kitchen</p>
-										</div>
-										<div className='amenities-item'>
-											<TbWashMachine />
-											<p>Washer</p>
-										</div>
-										<div className='amenities-item'>
-											<TbWashDry1 />
-											<p>Dryer</p>
 										</div>
 									</div>
 									<div style={{ padding: '0.5rem' }}>
@@ -193,10 +160,6 @@ function CaptainsHideaway() {
 										<div className='amenities-item'>
 											<GiHeatHaze />
 											<p>Heat</p>
-										</div>
-										<div className='amenities-item'>
-											<GiThermometerCold />
-											<p>Air Conditioning</p>
 										</div>
 										<div className='amenities-item'>
 											<GiBeachBucket />
@@ -228,7 +191,7 @@ function CaptainsHideaway() {
 										</div>
 										<div className='amenities-item'>
 											<CiCoffeeBean />
-											<p>Coffee Grinder</p>
+											<p>Coffee Maker</p>
 										</div>
 									</div>
 								</div>
@@ -298,17 +261,18 @@ function CaptainsHideaway() {
 								<p className='important-information-text'>Government-issued photo identification and a credit card, debit card, or cash deposit may be required at check-in for incidental charges</p>
 								<p className='important-information-text'>Special requests are subject to availability upon check-in and may incur additional charges; special requests cannot be guaranteed</p>
 								<p className='important-information-text'> Onsite parties or group events are strictly prohibited</p>
+								<p className='important-information-text'>Special requests are subject to availability upon check-in and may incur additional charges; special requests cannot be guaranteed</p>
 								<p className='important-information-text'>Safety features at this property include a carbon monoxide detector, a fire extinguisher, and a smoke detector</p>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div className='image-gallery-wrapper'>
-					<ImageGallery ref={imageGalleryRef} showPlayButton={false} isFullScreen={true} items={hideawayGalleryImages} />
+					<ImageGallery ref={imageGalleryRef} showPlayButton={false} isFullScreen={true} items={cottageGalleryImages} />
 				</div>
 			</div>
 		</div>
 	);
 }
 
-export default CaptainsHideaway;
+export default CaptainsCottage;

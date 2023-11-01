@@ -22,7 +22,6 @@ function Home() {
 		utlEndpoint: '/captains_cottage',
 		imagePath: 'assets/img/back_exterior_side_with_lake.png',
 	};
-	const captainsCottageCardImgPath = 'assets/img/back_exterior_side_with_lake.png';
 	return (
 		<div>
 			<header className='home-header text-center text-white masthead'>

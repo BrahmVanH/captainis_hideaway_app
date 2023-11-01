@@ -5,9 +5,9 @@ const hideawayThumbnails100 = require.context('../assets/img/thumbnails/hideaway
 const hideawayThumbnails150 = require.context('../assets/img/thumbnails/hideaway_thumbnails150_png', false, /\.(png|jpe?g|gif|svg)$/);
 const hideawayThumbnails300 = require.context('../assets/img/thumbnails/hideaway_thumbnails300_png', false, /\.(png|jpe?g|gif|svg)$/);
 
-const cottageThumbnails100 = require.context('../assets/img/thumbnails/cottage_thumbnails_100', false, /\.(png|jpe?g|gif|svg)$/);
-const cottageThumbnails150 = require.context('../assets/img/thumbnails/cottage_thumbnails_150', false, /\.(png|jpe?g|gif|svg)$/);
-const cottageThumbnails300 = require.context('../assets/img/thumbnails/cottage_thumbnails_300', false, /\.(png|jpe?g|gif|svg)$/);
+const cottageThumbnails100 = require.context('../assets/img/thumbnails/cottage_thumbnails100_png', false, /\.(png|jpe?g|gif|svg)$/);
+const cottageThumbnails150 = require.context('../assets/img/thumbnails/cottage_thumbnails150_png', false, /\.(png|jpe?g|gif|svg)$/);
+const cottageThumbnails300 = require.context('../assets/img/thumbnails/cottage_thumbnails300_png', false, /\.(png|jpe?g|gif|svg)$/);
 
 let hideawayThumbnailsResponsive;
 let cottageThumbnailsResponsive;
@@ -15,34 +15,24 @@ const isMobileViewport = () => {
 	return window.innerWidth < 577;
 };
 
-
 const isMediumViewport = () => {
 	return window.innerWidth < 766;
-};
-
-const isLargeViewport = () => {
-	return window.innerWidth > 766;
-};
-
-const selectThumnailSize = () => {
-	if (isMobileViewport) {
-		console.log('this is a mobile viewport!');
-		hideawayThumbnailsResponsive = hideawayThumbnails100;
-	} else if (isMediumViewport) {
-		console.log('this is a medium viewport!');
-		hideawayThumbnailsResponsive = hideawayThumbnails150;
-	} else {
-		console.log('this is a large viewport!');
-
-		hideawayThumbnailsResponsive = hideawayThumbnails300;
-	}
 };
 
 const createOriginalHideawayGalleryImages = () => {
 	let originalImageArray = [];
 	fullSizeHideawayImages.keys().map((file) => {
 		const original = fullSizeHideawayImages(file);
-		console.log('Original Image:', original);
+
+		originalImageArray.push(original);
+	});
+	return originalImageArray;
+};
+
+const createOriginalCottageGalleryImages = () => {
+	let originalImageArray = [];
+	fullSizeCottageImages.keys().map((file) => {
+		const original = fullSizeCottageImages(file);
 
 		originalImageArray.push(original);
 	});
@@ -57,6 +47,25 @@ const createThumbnailHideawayGalleryImages = () => {
 		thumbnailImages = hideawayThumbnails150;
 	} else {
 		thumbnailImages = hideawayThumbnails300;
+	}
+
+	let thumbnailArray = [];
+	thumbnailImages.keys().map((file) => {
+		const thumbnail = thumbnailImages(file);
+
+		thumbnailArray.push(thumbnail);
+	});
+	return thumbnailArray;
+};
+
+const createThumbnailCottageGalleryImages = () => {
+	let thumbnailImages;
+	if (isMobileViewport) {
+		thumbnailImages = cottageThumbnails100;
+	} else if (isMediumViewport) {
+		thumbnailImages = cottageThumbnails150;
+	} else {
+		thumbnailImages = cottageThumbnails300;
 	}
 
 	let thumbnailArray = [];
@@ -86,6 +95,23 @@ const createHideawayGalleryImages = () => {
 	return galleryImages;
 };
 
-export const hideawayGalleryImages = createHideawayGalleryImages();
+const createCottageGalleryImages = () => {
+	const originals = createOriginalCottageGalleryImages();
+	const thumbnails = createThumbnailCottageGalleryImages();
 
-console.log('Gallery Images:', hideawayGalleryImages);
+	if (originals.length != thumbnails.length) {
+		console.log('The lengths of the image arrays do not match');
+	}
+	let galleryImages = [];
+	for (let i = 0; i < originals.length; i++) {
+		galleryImages.push({
+			original: originals[i],
+			thumbnail: thumbnails[i],
+		});
+	}
+
+	return galleryImages;
+};
+
+export const hideawayGalleryImages = createHideawayGalleryImages();
+export const cottageGalleryImages = createCottageGalleryImages();

@@ -11,6 +11,7 @@ import About from './pages/About';
 import ContactPage from './pages/Contact';
 import AdminPage from './pages/Admin';
 import CaptainsHideaway from './pages/CaptainsHideaway';
+import CaptainsCottage from './pages/CaptainsCottage';
 import Footer from './components/Footer';
 
 const httpLink = createHttpLink({
@@ -34,19 +35,8 @@ const client = new ApolloClient({
 });
 
 function App() {
-	const [calendarVisible, setCalendarVisible] = useState(true);
-	const [adminCalendarVisible, setAdminCalendarVisible] = useState(false);
+	
 
-	// const handleButtonClick = (event) => {
-	// 	event.preventDefault();
-	// 	if (calendarVisible === true) {
-	// 		setCalendarVisible(false);
-	// 		setAdminCalendarVisible(true);
-	// 	} else {
-	// 		setCalendarVisible(true);
-	// 		setAdminCalendarVisible(false);
-	// 	}
-	// };
 	return (
 		<ApolloProvider client={client}>
 			<Router>
@@ -55,6 +45,7 @@ function App() {
 				<Routes>
 						<Route path='/' element={<Home />} />
 						<Route path='/captains_hideaway' element={<CaptainsHideaway />} />
+						<Route path='/captains_cottage' element={<CaptainsCottage />} />
 						<Route path='/about' element={<About />} />
 						<Route path='/contact' element={<ContactPage />} />
 						<Route path='/admin' element={<AdminPage />} />
