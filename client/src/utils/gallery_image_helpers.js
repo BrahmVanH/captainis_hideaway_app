@@ -81,9 +81,6 @@ const createHideawayGalleryImages = () => {
 	const originals = createOriginalHideawayGalleryImages();
 	const thumbnails = createThumbnailHideawayGalleryImages();
 
-	if (originals.length != thumbnails.length) {
-		console.log('The lengths of the image arrays do not match');
-	}
 	let galleryImages = [];
 	for (let i = 0; i < originals.length; i++) {
 		galleryImages.push({
@@ -99,9 +96,6 @@ const createCottageGalleryImages = () => {
 	const originals = createOriginalCottageGalleryImages();
 	const thumbnails = createThumbnailCottageGalleryImages();
 
-	if (originals.length != thumbnails.length) {
-		console.log('The lengths of the image arrays do not match');
-	}
 	let galleryImages = [];
 	for (let i = 0; i < originals.length; i++) {
 		galleryImages.push({

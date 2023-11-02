@@ -65,7 +65,6 @@ const resolvers = {
 				if (!username || !userPassword ) {
 					throw new Error("username and password fields must be filled to log in")
 				}
-				console.log('signing in');
 				const user = await User.findOne({ username });
 				if (!user) {
 					throw new AuthenticationError("Can't find user with that username");
@@ -80,7 +79,6 @@ const resolvers = {
 				}
 
 				const token = signToken(user);
-				console.log('successfully logged in');
 				return { token, user };
 			} catch (err) {
 				throw new Error('Error in logging in user: ' + err.message);

@@ -12,7 +12,6 @@ import './style.css';
 
 function AdminCalendar(props) {
 	const propertyName = props.propertyName;
-	console.log(propertyName);
 
 	const [date, setDate] = useState(new Date());
 	const [unavailableDates, setUnavailableDates] = useState([]);
@@ -30,14 +29,11 @@ function AdminCalendar(props) {
 	useEffect(() => {
 		if (!loading && data) {
 			setUnavailableDates(data.queryUnavailableDatesByProperty);
-			console.log(data);
 		} else {
 			return;
 		}
 	}, [data]);
-	useEffect(() => {
-		console.log(unavailableDates);
-	}, [unavailableDates]);
+	
 
 	const reloadPage = () => {
 		window.location.reload();
@@ -75,10 +71,8 @@ function AdminCalendar(props) {
 
 	// This removes an entry from the database representing a date that was unavailable to rent
 	const handleRemoveUnavailableDate = async (value) => {
-		console.log('removing unavailable date...', value);
 		try {
 			const { data } = await removeUnavailableDate({ variables: { propertyName: propertyName, dateValue: value } });
-			console.log('removed unavailable date', data);
 			reloadPage();
 		} catch (err) {
 			console.error(err);
@@ -103,7 +97,6 @@ function AdminCalendar(props) {
 	// This is a handler function that is called when the user clicks on a date on the calendar
 	const onClickDay = (value, event) => {
 		const date = new Date(value);
-		console.log(date.toISOString());
 		checkIfUnavailable(date.toISOString());
 	};
 

@@ -1,4 +1,7 @@
-import React from 'react';
+import React, { useLayoutEffect, useEffect, useRef } from 'react';
+import gsap, { Power1 } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 import { Button, Image } from 'react-bootstrap';
 
@@ -7,7 +10,23 @@ import './Home.css';
 import PropertyCard from '../components/PropertyCard';
 // import test_image from '../assets/img/side_patio.avif';
 
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
 function Home() {
+	const main = useRef();
+	const smoother = useRef();
+
+	useEffect(() => {
+		const ctx = gsap.context(() => {
+			// create the smooth scroller FIRST!
+			smoother.current = ScrollSmoother.create({
+				smooth: 1, // seconds it takes to catch up to native scroll position
+				effects: true, // look for data-speed and data-lag attrivutes on elements and animate accordingly
+			});
+		}, main);
+		return () => ctx.revert();
+	}, [main, smoother]);
+
 	const captainsHideaway = {
 		title: 'Captains Hideaway',
 		description:
@@ -23,22 +42,24 @@ function Home() {
 		imagePath: 'assets/img/back_exterior_side_with_lake.png',
 	};
 	return (
-		<div>
-			<header className='home-header text-center text-white masthead'>
-				<div className='overlay'>
-					<div className='container welcome-message-container'>
-						<div className='row'>
-							<div className='col-xl-9 mx-auto position-relative'>
-								<h1>Welcome To Michigan's Upper Peninsula</h1>
+		<div id='smooth-wrapper' ref={main}>
+			<div id='smooth-content'>
+				<header className='home-header text-center text-white masthead'>
+					<div className='overlay'>
+						<div className='container welcome-message-container'>
+							<div className='row'>
+								<div className='col-xl-9 mx-auto position-relative'>
+									<h1>Welcome To Michigan's Upper Peninsula</h1>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-			</header>
-			<section className='text-center bg-light rental-cards features-icons'>
-				<PropertyCard property={captainsHideaway} />
-				<PropertyCard property={captainsCottage} />
-			</section>
+				</header>
+				<section className='text-center bg-light rental-cards features-icons'>
+					<PropertyCard data-speed='0.8' property={captainsHideaway} />
+					<PropertyCard data-speed='0.8' property={captainsCottage} />
+				</section>
+			</div>
 		</div>
 	);
 }

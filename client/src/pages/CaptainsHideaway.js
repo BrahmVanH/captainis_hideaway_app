@@ -1,4 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
+
+import gsap, { Power1 } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 import ImageGallery from 'react-image-gallery';
 import Fullscreen from 'react-image-gallery';
@@ -22,9 +26,19 @@ import './CaptainsHideaway.css';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
 import { hideawayGalleryImages } from '../utils/gallery_image_helpers';
+import { createScrollSmoother } from '../utils/gsapHelpers';
+
+
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 function CaptainsHideaway() {
 	const imageGalleryRef = useRef(null);
+	const main = useRef();
+	const smoother = useRef();
+
+	useEffect(() => {
+		createScrollSmoother(main, smoother);
+	}, []);
 
 	const toggleGalleryFullScreen = () => {
 		imageGalleryRef.current.fullScreen();
@@ -33,7 +47,6 @@ function CaptainsHideaway() {
 	const propertyName = 'captainsHideaway';
 	return (
 		<div>
-			{/* <Fullscreen onClick={onClick} isFullscreen={isFullscreen} /> */}
 			<header onClick={toggleGalleryFullScreen} className='captains-hideaway-headermasthead'></header>
 
 			<div className='d-flex align-items-center flex-column '>
