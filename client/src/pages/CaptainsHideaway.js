@@ -29,6 +29,7 @@ import { hideawayGalleryImages } from '../utils/gallery_image_helpers';
 import { createScrollSmoother } from '../utils/gsapHelpers';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import AmenitiesModal from '../components/AmenitiesModal';
 
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -250,11 +251,9 @@ useLayoutEffect(() => {
 											</div>
 										</div>
 									</div>
-									{/* <div className='d-flex justify-content-end'>
-								<button className='btn btn-sm' type='button' style='text-decoration: underline;margin: 0px 2rem;'>
-									See more...
-								</button>
-							</div> */}
+									<div className='d-flex justify-content-end'>
+								<AmenitiesModal />
+							</div>
 								</div>
 							</div>
 						</div>
