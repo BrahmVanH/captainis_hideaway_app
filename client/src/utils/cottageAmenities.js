@@ -1,6 +1,7 @@
 export const cottageAmenities = [
 	{
-		Essentials: [
+		type: 'Essentials',
+		items: [
 			'Wireless internet',
 			'Free wifi',
 			'Internet',
@@ -18,38 +19,48 @@ export const cottageAmenities = [
 		],
 	},
 	{
-		Kitchen: ['Kitchen', 'Refrigerator', 'Microwave', 'Grill', 'Dishes & utensils', 'Dining table', 'Coffee maker', 'Regular or Keurig. Coffee provided.', 'Kettle'],
+		type: 'Kitchen',
+		items: ['Kitchen', 'Refrigerator', 'Microwave', 'Grill', 'Dishes & utensils', 'Dining table', 'Coffee maker', 'Regular or Keurig. Coffee provided.', 'Kettle'],
 	},
 	{
-		'Pool & Spa': ['Spa whirlpool'],
+		type: 'Pool & Spa',
+		items: ['Spa whirlpool'],
 	},
 	{
-		Outside: ['Fire pit', "Fires permitted on the beach, 30' from bluff", 'Outdoor furniture', 'Beach towels'],
+		type: 'Outside',
+		items: ['Fire pit', "Fires permitted on the beach, 30' from bluff", 'Outdoor furniture', 'Beach towels'],
 	},
 	{
-		Entertainment: ['Games', 'Board games, Bocci ball, horseshoe pit', 'Books', 'Smart TV'],
+		type: 'Entertainment',
+		items: ['Games', 'Board games, Bocci ball, horseshoe pit', 'Books', 'Smart TV'],
 	},
 	{
-		'Baby & toddler': ['Travel crib', 'Games for kids', 'Dishes & utensils for kids'],
+		type: 'Baby & toddler',
+		items: ['Travel crib', 'Games for kids', 'Dishes & utensils for kids'],
 	},
 	{
-		Laundry: ['Coin laundry'],
+		type: 'Laundry',
+		items: ['Coin laundry'],
 	},
 	{
-		Parking: ['Parking', 'Room for 4 cars or RV'],
+		type: 'Parking',
+		items: ['Parking', 'Room for 4 cars or RV'],
 	},
 	{
-		'Location type': ['Beachfront', 'Waterfront', '3 acres on Lake Superior', 'Beach', 'Beach view'],
+		type: 'Location type',
+		items: ['Beachfront', 'Waterfront', '3 acres on Lake Superior', 'Beach', 'Beach view'],
 	},
 	{
-		'Nearby activities': ['Zoo', 'Swimming', 'Boating', 'Kayaking', 'Hiking', 'Wildlife viewing', 'Fishing'],
+		type: 'Nearby activities',
+		items: ['Zoo', 'Swimming', 'Boating', 'Kayaking', 'Hiking', 'Wildlife viewing', 'Fishing'],
 	},
 	{
-		Suitability: ['Minimum age limit for renters'],
+		type: 'Suitability',
+		items: ['Minimum age limit for renters'],
 	},
 	{
-		Notes: ['Stairway to the beach is shared with neighbor to the east. New staircase to be finished 4/24. Please be considerate and do not linger on their patio/deck area.'],
+		type: 'Notes',
+		items: ['Stairway to the beach is shared with neighbor to the east. New staircase to be finished 4/24. Please be considerate and do not linger on their patio/deck area.'],
 	},
 ];
 
-console.log(dataArrayUpdated);

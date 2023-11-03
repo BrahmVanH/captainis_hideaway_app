@@ -4,7 +4,7 @@ import Modal from 'react-modal';
 
 import "./style.css";
 
-function AmenitiesModal() {
+function AmenitiesModal(amenitiesArray) {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const customStyles = {
@@ -31,17 +31,9 @@ function AmenitiesModal() {
 			<Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles} contentLabel='Amenities Modal'>
 				<h3>Amenities</h3>
 				<div className='amenities-items-container'>
-					{/* {amenities.map((item) => {
-              <p className='amenity-item'>{item}</p>
-            })} */}
-					<p>sample item</p>
-					<p>sample item</p>
-					<p>sample item</p>
-					<p>sample item</p>
-					<p>sample item</p>
-					<p>sample item</p>
-					<p>sample item</p>
-					<p>sample item</p>
+					{amenitiesArray.map((amenityType) => {
+            
+          })}
 				</div>
         <div className='close-btn-container'>
           <Button onClick={closeModal}>Close</Button>
