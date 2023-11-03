@@ -27,8 +27,8 @@ function Navbar() {
 	// }, [main, smoother]);
 
 	return (
-		<nav ref={main} id='smooth-wrapper' className='navbar navbar-expand navigation-clean navbar-light'>
-			<div id='smooth-content' className='navbar-inner-container container'>
+		<nav className='navbar navbar-expand navigation-clean navbar-light'>
+			<div className='navbar-inner-container container'>
 				<Link className='navbar-brand' to={'/'}>
 					Captains Rentals
 				</Link>

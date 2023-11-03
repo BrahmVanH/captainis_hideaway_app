@@ -27,6 +27,8 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 
 import { hideawayGalleryImages } from '../utils/gallery_image_helpers';
 import { createScrollSmoother } from '../utils/gsapHelpers';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -56,6 +58,7 @@ function CaptainsHideaway() {
 	return (
 		<div ref={main} id='smooth-wrapper'>
 			<div id='smooth-content'>
+				<Navbar />
 				<header onClick={toggleGalleryFullScreen} className='captains-hideaway-header masthead'></header>
 
 				<div className='d-flex align-items-center flex-column '>
@@ -329,6 +332,7 @@ function CaptainsHideaway() {
 						<ImageGallery ref={imageGalleryRef} showPlayButton={false} isFullScreen={true} items={hideawayGalleryImages} />
 					</div>
 				</div>
+				<Footer />
 			</div>
 		</div>
 	);

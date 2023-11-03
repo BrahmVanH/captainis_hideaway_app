@@ -42,7 +42,7 @@ function App() {
 	return (
 		<ApolloProvider client={client}>
 			<Router>
-				<Navbar />
+				{/* <Navbar /> */}
 				<Routes>
 						<Route path='/' element={<Home />} />
 						<Route path='/captains_hideaway' element={<CaptainsHideaway />} />
@@ -51,7 +51,7 @@ function App() {
 						<Route path='/contact' element={<ContactPage />} />
 						<Route path='/admin' element={<AdminPage />} />
 				</Routes>
-				<Footer />
+				{/* <Footer /> */}
 			</Router>
 		</ApolloProvider>
 	);

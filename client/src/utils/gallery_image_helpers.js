@@ -19,6 +19,9 @@ const isMediumViewport = () => {
 	return window.innerWidth < 766;
 };
 
+const getWindowHeight = () => {
+	console.log(window.innerHeight);
+}
 const createOriginalHideawayGalleryImages = () => {
 	let originalImageArray = [];
 	fullSizeHideawayImages.keys().map((file) => {

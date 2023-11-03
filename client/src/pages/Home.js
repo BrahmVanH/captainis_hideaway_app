@@ -8,23 +8,30 @@ import { Button, Image } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css';
 import PropertyCard from '../components/PropertyCard';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 // import test_image from '../assets/img/side_patio.avif';
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 function Home() {
-	const main = useRef();
-	const smoother = useRef();
 
+	const getWindowHeight = () => {
+		console.log(window.innerHeight);
+	};
+	getWindowHeight();
+	const main = useRef();
+	// const smoother = useRef();
+	
+	gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 	useLayoutEffect(() => {
-		const ctx = gsap.context(() => {
+		// const ctx = gsap.context(() => {
 			// create the smooth scroller FIRST!
-			smoother.current = ScrollSmoother.create({
+			let smoother = ScrollSmoother.create({
 				smooth: 1, // seconds it takes to catch up to native scroll position
 				effects: true, // look for data-speed and data-lag attrivutes on elements and animate accordingly
 			});
-		}, main);
-		return () => ctx.revert();
+		// }, main);
+		return () => smoother.kill();
 	}, []);
 
 	const captainsHideaway = {
@@ -44,6 +51,7 @@ function Home() {
 	return (
 		<div id='smooth-wrapper' ref={main}>
 			<div id='smooth-content'>
+				<Navbar />
 				<header className='home-header text-center text-white masthead'>
 					<div className='overlay'>
 						<div className='container welcome-message-container'>
@@ -59,6 +67,7 @@ function Home() {
 					<PropertyCard data-speed='0.8' property={captainsHideaway} />
 					<PropertyCard data-speed='0.8' property={captainsCottage} />
 				</section>
+				<Footer />
 			</div>
 		</div>
 	);
