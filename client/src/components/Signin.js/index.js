@@ -1,12 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import {useMutation } from '@apollo/client';
+import React, { useState, useEffect } from 'react';
+import { useMutation } from '@apollo/client';
 import emailjs from '@emailjs/browser';
 import { Form, Button } from 'react-bootstrap';
 import { LOGIN_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 
 import './style.css';
-
 
 function SigninForm() {
 	const [loginFormData, setLoginFormData] = useState({
@@ -55,8 +54,10 @@ function SigninForm() {
 	};
 
 	return (
-		<div className='card col-lg-4 col-md-6 col-sm-11 signin-card' style={{height: 'minContent'}}>
-			<h3 className='signin-header-text text-center mb-4'>Sign In</h3>
+		<div className='card col-lg-4 col-md-6 col-sm-11 signin-card' style={{ height: 'minContent' }}>
+			<div className='signin-header-container'>
+				<h3 className='text-center'>Sign In</h3>
+			</div>
 			<Form className='signin-form d-flex'>
 				<div className='mb-3'>
 					<Form.Group controlId='formBasicUsername' required>

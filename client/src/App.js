@@ -1,5 +1,7 @@
 import { useState } from 'react';
-
+import gsap from 'gsap';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
@@ -16,6 +18,7 @@ import Footer from './components/Footer';
 
 import '@csstools/normalize.css';
 
+// HTTP link for server
 const httpLink = createHttpLink({
 	uri: 'http://localhost:3001/graphql',
 });
@@ -30,6 +33,7 @@ const httpLink = createHttpLink({
 // 	};
 // });
 
+// Create new Apollo Client instance for connection to server
 const client = new ApolloClient({
 	link: httpLink,
 
@@ -37,7 +41,10 @@ const client = new ApolloClient({
 });
 
 function App() {
-	
+
+	// Register GSAP plugins for all components. ScrollSmoother relies on ScrollTrigger
+	gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
 
 	return (
 		<ApolloProvider client={client}>

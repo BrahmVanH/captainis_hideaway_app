@@ -13,7 +13,7 @@ function AdminPropertyCard(props) {
 		formattedName = "Captain's Cottage";
 	}
 	return (
-		<div className='property-card card col-4'>
+		<div className='property-card card col-lg-6'>
 			<div className='property-information-container'>
 				<h3>{formattedName}</h3>
 			</div>

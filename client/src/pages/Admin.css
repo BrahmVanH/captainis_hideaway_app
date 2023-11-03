@@ -1,6 +1,33 @@
 .admin-container {
   width: 100%;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: calc(100vh - 140px);
+
 }
+
+.admin-header-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem;
+}
+
+.admin-header-container h1 {
+  border-bottom: 2px solid transparent;
+  border-image-source: linear-gradient(to right, white, #ABCCD8, #5f8fa5, #ABCCD8, white);
+  border-image-slice: 1;
+  border-image-outset: 0;
+  border-image-repeat: stretch;
+}
+
+.admin-property-card-container {
+  display: flex;
+  flex-direction: row;
+justify-content: center;
+}
+
 

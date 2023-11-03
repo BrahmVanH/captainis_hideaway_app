@@ -1,7 +1,6 @@
 import React, { useLayoutEffect, useEffect, useRef } from 'react';
-import gsap, { Power1 } from 'gsap';
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+import { createScrollSmoother } from '../utils/gsapHelpers';
 
 import { Button, Image } from 'react-bootstrap';
 
@@ -10,28 +9,13 @@ import './Home.css';
 import PropertyCard from '../components/PropertyCard';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-// import test_image from '../assets/img/side_patio.avif';
-
 
 function Home() {
-
-	const getWindowHeight = () => {
-		console.log(window.innerHeight);
-	};
-	getWindowHeight();
 	const main = useRef();
-	// const smoother = useRef();
-	
-	gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+	const smoother = useRef();
+
 	useLayoutEffect(() => {
-		// const ctx = gsap.context(() => {
-			// create the smooth scroller FIRST!
-			let smoother = ScrollSmoother.create({
-				smooth: 1, // seconds it takes to catch up to native scroll position
-				effects: true, // look for data-speed and data-lag attrivutes on elements and animate accordingly
-			});
-		// }, main);
-		return () => smoother.kill();
+		createScrollSmoother(main, smoother);
 	}, []);
 
 	const captainsHideaway = {

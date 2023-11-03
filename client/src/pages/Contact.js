@@ -7,19 +7,13 @@ import Footer from '../components/Footer';
 import './Contact.css';
 
 function ContactPage() {
-	const getWindowHeight = () => {
-		console.log(window.innerHeight);
-	};
-	getWindowHeight();
 	return (
 		<div>
-			<div>
-				<Navbar />
-				<div className='contact-container'>
-					<Contact />
-				</div>
-				<Footer />
+			<Navbar />
+			<div className='contact-container'>
+				<Contact />
 			</div>
+			<Footer />
 		</div>
 	);
 }
