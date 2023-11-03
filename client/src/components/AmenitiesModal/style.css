@@ -1,7 +1,16 @@
-
-
+.open-modal-btn {
+  font-size: 14px;
+  background-color: transparent;
+  color: black;
+  border: none;
+  text-decoration: underline;
+}
 .close-btn-container {
+  position: sticky;
+  bottom: 0px;
   display: flex;
   justify-content: end;
 }
+
+
 

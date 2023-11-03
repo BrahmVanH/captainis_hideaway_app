@@ -1,6 +1,6 @@
 .calendar-container {
   position: sticky;
-  z-index: 100;
+  z-index: 900;
   top: 0;
 }
 

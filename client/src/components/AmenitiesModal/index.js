@@ -4,8 +4,11 @@ import Modal from 'react-modal';
 
 import './style.css';
 
-function AmenitiesModal(amenitiesArray) {
-	const amenities = amenitiesArray.amenities;
+function AmenitiesModal(props) {
+	
+	const scrollFromModal = props.scrollFromModal;
+	const amenities = props.amenities;
+	const ref= props.btnRef;
 	const [isOpen, setIsOpen] = useState(false);
 
 	const customStyles = {
@@ -23,6 +26,7 @@ function AmenitiesModal(amenitiesArray) {
 			right: 'auto',
 			bottom: 'auto',
 			marginRight: '-50%',
+			maxHeight: '50vh',
 			overflowY: 'auto',
 			WebkitOverflowScrolling: 'touch',
 			transform: 'translate(-50%, -50%)',
@@ -32,6 +36,7 @@ function AmenitiesModal(amenitiesArray) {
 	console.log(amenities);
 
 	function openModal() {
+		scrollFromModal();
 		setIsOpen(true);
 	}
 
@@ -40,7 +45,7 @@ function AmenitiesModal(amenitiesArray) {
 	}
 	return (
 		<div>
-			<Button onClick={openModal}>See more...</Button>
+			<Button className='open-modal-btn' ref={ref} onClick={((event) => openModal())}>See more...</Button>
 			<Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles} contentLabel='Amenities Modal'>
 				<h3>Amenities</h3>
 				<div className='amenities-items-container'>

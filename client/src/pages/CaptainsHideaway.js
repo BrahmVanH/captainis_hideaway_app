@@ -39,6 +39,7 @@ function CaptainsHideaway() {
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
 	const smoother = useRef();
+	const amenitiesComponent = useRef(null);
 
 	useLayoutEffect(() => {
 		createScrollSmoother(main, smoother);
@@ -46,6 +47,13 @@ function CaptainsHideaway() {
 
 	const toggleGalleryFullScreen = () => {
 		imageGalleryRef.current.fullScreen();
+	};
+
+	function scrollToAmenitiesBtn() {
+		amenitiesComponent.current.scrollIntoView();
+	};
+	function scrollFromModal() {
+		scrollToAmenitiesBtn();
 	};
 
 	const propertyName = 'captainsHideaway';
@@ -148,7 +156,7 @@ function CaptainsHideaway() {
 								</div>
 							</div>
 						</div>
-						<AvailabilityCalendar propertyName={propertyName} />
+						<AvailabilityCalendar  propertyName={propertyName} />
 					</div>
 
 					<div className='about-property-card card col-sm-11 col-md-10 ' style={{ padding: '0.5rem' }}>
@@ -252,7 +260,10 @@ function CaptainsHideaway() {
 										</div>
 									</div>
 									<div className='d-flex justify-content-end'>
-										<AmenitiesModal amenities={hideawayAmenities} />
+										<AmenitiesModal btnRef={amenitiesComponent}
+										//  scrollToAmenitiesBtn={scrollToAmenitiesBtn}
+										scrollFromModal={scrollFromModal}
+										  amenities={hideawayAmenities} />
 									</div>
 								</div>
 							</div>
