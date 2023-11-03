@@ -7,6 +7,8 @@ import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import ImageGallery from 'react-image-gallery';
 import Fullscreen from 'react-image-gallery';
 
+import { hideawayAmenities } from '../utils/captainsHideawayAmenities';
+
 import { CiCoffeeBean } from 'react-icons/ci';
 import { GiBathtub, GiBunkBeds, GiBeachBucket, GiThermometerCold, GiHeatHaze } from 'react-icons/gi';
 import { BsFillDoorOpenFill, BsSun } from 'react-icons/bs';
@@ -31,7 +33,6 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AmenitiesModal from '../components/AmenitiesModal';
 
-
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 function CaptainsHideaway() {
@@ -39,10 +40,9 @@ function CaptainsHideaway() {
 	const main = useRef();
 	const smoother = useRef();
 
-	
-useLayoutEffect(() => {
-	createScrollSmoother(main, smoother);
-}, []);
+	useLayoutEffect(() => {
+		createScrollSmoother(main, smoother);
+	}, []);
 
 	const toggleGalleryFullScreen = () => {
 		imageGalleryRef.current.fullScreen();
@@ -252,8 +252,8 @@ useLayoutEffect(() => {
 										</div>
 									</div>
 									<div className='d-flex justify-content-end'>
-								<AmenitiesModal />
-							</div>
+										<AmenitiesModal amenities={hideawayAmenities} />
+									</div>
 								</div>
 							</div>
 						</div>
