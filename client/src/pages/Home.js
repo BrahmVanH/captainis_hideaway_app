@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useEffect, useRef } from 'react';
 import gsap, { Power1 } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { Button, Image } from 'react-bootstrap';
 
@@ -16,7 +16,7 @@ function Home() {
 	const main = useRef();
 	const smoother = useRef();
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const ctx = gsap.context(() => {
 			// create the smooth scroller FIRST!
 			smoother.current = ScrollSmoother.create({
@@ -25,7 +25,7 @@ function Home() {
 			});
 		}, main);
 		return () => ctx.revert();
-	}, [main, smoother]);
+	}, []);
 
 	const captainsHideaway = {
 		title: 'Captains Hideaway',

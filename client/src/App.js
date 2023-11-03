@@ -14,6 +14,8 @@ import CaptainsHideaway from './pages/CaptainsHideaway';
 import CaptainsCottage from './pages/CaptainsCottage';
 import Footer from './components/Footer';
 
+import '@csstools/normalize.css';
+
 const httpLink = createHttpLink({
 	uri: 'http://localhost:3001/graphql',
 });
@@ -41,7 +43,6 @@ function App() {
 		<ApolloProvider client={client}>
 			<Router>
 				<Navbar />
-					<div className='wrapper'>
 				<Routes>
 						<Route path='/' element={<Home />} />
 						<Route path='/captains_hideaway' element={<CaptainsHideaway />} />
@@ -50,7 +51,6 @@ function App() {
 						<Route path='/contact' element={<ContactPage />} />
 						<Route path='/admin' element={<AdminPage />} />
 				</Routes>
-					</div>
 				<Footer />
 			</Router>
 		</ApolloProvider>
