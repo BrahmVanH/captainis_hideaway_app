@@ -1,26 +1,24 @@
-import { useState } from 'react';
+import React from 'react';
 import gsap from 'gsap';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 
-import Navbar from './components/Navbar';
 import Home from './pages/Home';
 import About from './pages/About';
 import ContactPage from './pages/Contact';
 import AdminPage from './pages/Admin';
 import CaptainsHideaway from './pages/CaptainsHideaway';
 import CaptainsCottage from './pages/CaptainsCottage';
-import Footer from './components/Footer';
 
 import '@csstools/normalize.css';
 
 // HTTP link for server
 const httpLink = createHttpLink({
-	uri: process.env.REACT_APP_GRAPHQL_ENDPOINT || 'http://localhost:3001/graphql',
+	uri: 'http://localhost:3001/graphql' || '/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {
@@ -48,7 +46,6 @@ function App() {
 	return (
 		<ApolloProvider client={client}>
 			<Router>
-				{/* <Navbar /> */}
 				<Routes>
 						<Route path='/' element={<Home />} />
 						<Route path='/captains_hideaway' element={<CaptainsHideaway />} />
@@ -57,7 +54,6 @@ function App() {
 						<Route path='/contact' element={<ContactPage />} />
 						<Route path='/admin' element={<AdminPage />} />
 				</Routes>
-				{/* <Footer /> */}
 			</Router>
 		</ApolloProvider>
 	);
