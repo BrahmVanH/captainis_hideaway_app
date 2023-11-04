@@ -33,9 +33,18 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AmenitiesModal from '../components/AmenitiesModal';
 
-gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 function CaptainsHideaway() {
+	// gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+	 useEffect(() => {
+			const calendarElement = document.getElementById('calendar');
+
+			if (calendarElement) {
+				// Disable ScrollSmoother for the specific element
+				gsap.registerPlugin(ScrollSmoother).scrollSmoother.disable(calendarElement);
+			}
+			
+		}, []);
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
 	const smoother = useRef();
@@ -156,7 +165,7 @@ function CaptainsHideaway() {
 								</div>
 							</div>
 						</div>
-						<AvailabilityCalendar  propertyName={propertyName} />
+						<AvailabilityCalendar id='#calendar'  propertyName={propertyName} />
 					</div>
 
 					<div className='about-property-card card col-sm-11 col-md-10 ' style={{ padding: '0.5rem' }}>

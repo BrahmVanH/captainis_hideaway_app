@@ -20,22 +20,21 @@ import '@csstools/normalize.css';
 
 // HTTP link for server
 const httpLink = createHttpLink({
-	uri: 'http://localhost:3001/graphql',
+	uri: process.env.REACT_APP_GRAPHQL_ENDPOINT || 'http://localhost:3001/graphql',
 });
 
-// const authLink = setContext((_, { headers }) => {
-// 	const token = localStorage.getItem('id_token');
-// 	return {
-// 		headers: {
-// 			...headers,
-// 			authorization: token ? `Bearer ${token}` : '',
-// 		},
-// 	};
-// });
+const authLink = setContext((_, { headers }) => {
+	const token = localStorage.getItem('id_token');
+	return {
+		headers: {
+			...headers,
+			authorization: token ? `Bearer ${token}` : '',
+		},
+	};
+});
 
-// Create new Apollo Client instance for connection to server
 const client = new ApolloClient({
-	link: httpLink,
+	link: authLink.concat(httpLink),
 
 	cache: new InMemoryCache(),
 });

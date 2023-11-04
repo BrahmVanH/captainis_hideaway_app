@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
+import { Button } from 'react-bootstrap';
+
 import { QUERY_UNAVAILABLE_DATES } from '../../utils/queries';
 import { useQuery } from '@apollo/client';
+
 import { getDateValues } from '../../utils/helpers';
 
 import 'react-calendar/dist/Calendar.css';
@@ -17,6 +20,12 @@ function AvailabilityCalendar(props) {
 	});
 
 	useEffect(() => {
+		if (error) {
+			console.error({ message: 'There was an error querying the db from calendar', details: error });
+		}
+	}, [loading, error, data]);
+
+	useEffect(() => {
 		if (!loading && data) {
 			setUnavailableDates(data.queryUnavailableDatesByProperty);
 		} else {
@@ -24,8 +33,19 @@ function AvailabilityCalendar(props) {
 		}
 	}, [loading, data]);
 
+	// Function to generate custom class for the current day
+	const tileClassName = ({ date, view }) => {
+		if (view === 'month') {
+			const currentDate = new Date();
+			if (date.getDate() === currentDate.getDate() && date.getMonth() === currentDate.getMonth() && date.getFullYear() === currentDate.getFullYear()) {
+				return 'current-day';
+			}
+		}
+		return '';
+	};
+
 	// This creates an elements to be appended to each date on the calendar that matches a date in a new unavailableDates array
-	// created from calling getDateValues
+	// 	created from calling getDateValues
 	const tileContent = ({ date, view }) => {
 		const unavailableDateValues = getDateValues(unavailableDates);
 		if (unavailableDates.length > 0) {
@@ -35,7 +55,7 @@ function AvailabilityCalendar(props) {
 					: unavailableDate.toDateString() === date.toDateString()
 			);
 
-			return isUnavailable ? <div className='unavailable-day'></div> : null;
+			return isUnavailable;
 		} else {
 			return null;
 		}
@@ -48,7 +68,13 @@ function AvailabilityCalendar(props) {
 	return (
 		<div>
 			<div className=' calendar-container p-2 m-2'>
-				{loading ? <div> Loading Calendar... </div> : <Calendar onChange={handleDateChange} value={date} tileContent={tileContent} />}
+				{loading ? <div> Loading Calendar... </div> : <Calendar onChange={handleDateChange} value={date} tileDisabled={tileContent} tileClassName={tileClassName} />}
+				<div className='calendar-key-container'>
+					<div className='calendar-key'>
+						<Button className='calendar-key-tile' disabled={true} />
+						<p className='calendar-key-text'>Booked</p>
+					</div>
+				</div>
 			</div>
 		</div>
 	);

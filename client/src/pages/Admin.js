@@ -22,8 +22,8 @@ function AdminPage() {
 	const captainsCottage = 'captainsCottage';
 	return (
 		<div ref={main} id='smooth-wrapper'>
-			<Navbar />
 			<div id='smooth-content'>
+				<Navbar />
 				<div className='admin-container'>
 					{Auth.loggedIn() ? (
 						<>
@@ -40,8 +40,8 @@ function AdminPage() {
 						<SigninForm />
 					)}
 				</div>
+				<Footer />
 			</div>
-			<Footer />
 		</div>
 	);
 }

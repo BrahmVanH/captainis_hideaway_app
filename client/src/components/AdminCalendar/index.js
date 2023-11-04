@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
+import { Button } from 'react-bootstrap';
 
 import { QUERY_UNAVAILABLE_DATES } from '../../utils/queries';
 import { CREATE_UNAVAILABLE_DATE, REMOVE_UNAVAILABLE_DATE } from '../../utils/mutations';
 import { useQuery, useMutation } from '@apollo/client';
 
-import { getDateValues } from '../../utils/helpers';
+import { getDateValues, isSameDay } from '../../utils/helpers';
 
 import 'react-calendar/dist/Calendar.css';
 import './style.css';
@@ -19,9 +20,13 @@ function AdminCalendar(props) {
 	const { loading, error, data } = useQuery(QUERY_UNAVAILABLE_DATES, {
 		variables: { propertyName },
 	});
-	if (error) {
-		console.error({ message: 'There was an error querying the db from calendar', details: error });
-	}
+
+	useEffect(() => {
+		if (error) {
+			console.error({ message: 'There was an error querying the db from calendar', details: error });
+		}
+	}, [loading, error, data]);
+
 	const [createUnavailableDate] = useMutation(CREATE_UNAVAILABLE_DATE);
 	const [removeUnavailableDate] = useMutation(REMOVE_UNAVAILABLE_DATE);
 
@@ -33,10 +38,18 @@ function AdminCalendar(props) {
 			return;
 		}
 	}, [data]);
-	
 
 	const reloadPage = () => {
 		window.location.reload();
+	};
+
+	// Function to generate custom class for the current day
+	const tileClassName = ({ date, view }) => {
+		const unavailableDateValues = getDateValues(unavailableDates);
+		if (unavailableDateValues.some((unavailableDate) => isSameDay(unavailableDate, date))) {
+			return 'admin-unavailable-day';
+		}
+		return '';
 	};
 
 	// This creates an elements to be appended to each date on the calendar that matches a date in a new unavailableDates array
@@ -50,7 +63,7 @@ function AdminCalendar(props) {
 					: unavailableDate.toDateString() === date.toDateString()
 			);
 
-			return isUnavailable ? <div className='unavailable-day'></div> : null;
+			return isUnavailable;
 		} else {
 			return null;
 		}
@@ -102,8 +115,8 @@ function AdminCalendar(props) {
 
 	return (
 		<div>
-			<div className='calendar-container'>
-				<Calendar onChange={handleDateChange} tileContent={tileContent} value={date} onClickDay={onClickDay} />
+			<div className='admin-calendar-container'>
+				<Calendar onChange={handleDateChange} value={date} onClickDay={onClickDay} tileClassName={tileClassName} />
 			</div>
 		</div>
 	);

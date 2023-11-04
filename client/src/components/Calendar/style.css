@@ -1,17 +1,48 @@
 .calendar-container {
-  position: sticky;
-  z-index: 900;
-  top: 0;
+	position: sticky;
+	z-index: 2000;
+	top: 0;
 }
 
 .react-calendar {
-  border-radius: 6px;
-  border: 3px solid #5f8fa5
+	border-radius: 6px;
+	border: 2px solid #5f8fa5;
 }
 
+.react-calendar__tile:disabled {
+	background-color: #5f8fa5 !important;
+	color: black !important;
+	cursor: not-allowed;
+}
+
+.current-day {
+	font-weight: bold !important;
+}
 
 .unavailable-day {
-  background-color: black;
+	background-color: black;
+	color: black;
+	height: 20%;
+}
+
+.calendar-key-container {
+  padding: 0.5rem;
+	display: flex;
+	justify-content: center;
+}
+
+.calendar-key {
+	display: flex;
+	flex-direction: row;
+}
+
+.calendar-key-tile {
+	background-color: #5f8fa5;
+	border-radius: 0px;
+  padding: 0rem 1.54rem
+}
+
+.calendar-key-text {
   color: black;
-  height: 20%;
+  padding-left: 0.5rem;
 }

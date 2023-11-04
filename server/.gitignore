@@ -6,6 +6,8 @@
 .pnp.js
 
 # testing
+/seed
+
 /coverage
 
 # production

@@ -3,11 +3,11 @@ html, body {
   width: 100vw;
 }
 
-body.ReactModal__Body--open {
+/* body.ReactModal__Body--open {
   height: 100vh;
   overflow-y: hidden;
   padding-right: 15px;
-}
+} */
 
 #root {
   display: flex;
