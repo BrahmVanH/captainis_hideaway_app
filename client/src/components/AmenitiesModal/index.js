@@ -6,7 +6,6 @@ import './style.css';
 
 function AmenitiesModal(props) {
 	
-	const scrollFromModal = props.scrollFromModal;
 	const amenities = props.amenities;
 	const ref= props.btnRef;
 	const [isOpen, setIsOpen] = useState(false);
@@ -35,8 +34,8 @@ function AmenitiesModal(props) {
 
 	console.log(amenities);
 
-	function openModal() {
-		scrollFromModal();
+	function openModal(event) {
+		event.preventDefault()
 		setIsOpen(true);
 	}
 
@@ -45,7 +44,7 @@ function AmenitiesModal(props) {
 	}
 	return (
 		<div>
-			<Button className='open-modal-btn' ref={ref} onClick={((event) => openModal())}>See more...</Button>
+			<Button className='open-modal-btn' ref={ref} onClick={((event) => openModal(event))}>See more...</Button>
 			<Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles} contentLabel='Amenities Modal'>
 				<h3>Amenities</h3>
 				<div className='amenities-items-container'>

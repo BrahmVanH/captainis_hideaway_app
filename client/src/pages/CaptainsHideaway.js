@@ -58,13 +58,6 @@ function CaptainsHideaway() {
 		imageGalleryRef.current.fullScreen();
 	};
 
-	function scrollToAmenitiesBtn() {
-		amenitiesComponent.current.scrollIntoView();
-	};
-	function scrollFromModal() {
-		scrollToAmenitiesBtn();
-	};
-
 	const propertyName = 'captainsHideaway';
 	return (
 		<div ref={main} id='smooth-wrapper'>
@@ -165,7 +158,7 @@ function CaptainsHideaway() {
 								</div>
 							</div>
 						</div>
-						<AvailabilityCalendar id='#calendar'  propertyName={propertyName} />
+						<AvailabilityCalendar id='#calendar' propertyName={propertyName} />
 					</div>
 
 					<div className='about-property-card card col-sm-11 col-md-10 ' style={{ padding: '0.5rem' }}>
@@ -269,10 +262,11 @@ function CaptainsHideaway() {
 										</div>
 									</div>
 									<div className='d-flex justify-content-end'>
-										<AmenitiesModal btnRef={amenitiesComponent}
-										//  scrollToAmenitiesBtn={scrollToAmenitiesBtn}
-										scrollFromModal={scrollFromModal}
-										  amenities={hideawayAmenities} />
+										<AmenitiesModal
+											btnRef={amenitiesComponent}
+											htmlOpenClassName={'ReactModal__Html--open'}
+											amenities={hideawayAmenities}
+										/>
 									</div>
 								</div>
 							</div>

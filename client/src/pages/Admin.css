@@ -4,7 +4,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  height: calc(100vh - 140px);
+  /* height: calc(100vh - 300px); */
+  height: 100vh;
 
 }
 

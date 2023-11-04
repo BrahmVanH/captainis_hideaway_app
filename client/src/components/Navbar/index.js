@@ -43,7 +43,7 @@ function Navbar() {
 						Contact
 					</Link>
 					{Auth.loggedIn() ? (
-						<Link to='#' onClick={() => Auth.logout()} className='navbar-link'>
+						<Link to='/' onClick={() => Auth.logout()} className='navbar-link'>
 							Log Out
 						</Link>
 					) : (
