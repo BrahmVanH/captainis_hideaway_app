@@ -18,7 +18,7 @@ import '@csstools/normalize.css';
 
 // HTTP link for server
 const httpLink = createHttpLink({
-	uri: 'http://localhost:3001/graphql' || '/graphql',
+	uri: '/graphql',
 });
 
 const authLink = setContext((_, { headers }) => {

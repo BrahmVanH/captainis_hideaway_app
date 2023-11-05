@@ -19,8 +19,8 @@
   "author": "Brahm Van Houzen",
   "license": "MIT",
   "dependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "apollo-server-express": "^3.12.1",
     "graphql": "^16.8.1"
-    
   }
 }
