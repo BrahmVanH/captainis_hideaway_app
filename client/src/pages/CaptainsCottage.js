@@ -4,19 +4,17 @@ import ImageGallery from 'react-image-gallery';
 import AvailabilityCalendar from '../components/Calendar';
 
 import { createScrollSmoother } from '../utils/gsapHelpers';
-import { cottageGalleryImages, hcottageGalleryImages } from '../utils/gallery_image_helpers';
+import { cottageGalleryImages } from '../utils/gallery_image_helpers';
 
 import { CiCoffeeBean } from 'react-icons/ci';
-import { GiBathtub, GiBunkBeds, GiBeachBucket, GiThermometerCold, GiHeatHaze } from 'react-icons/gi';
+import { GiBathtub, GiBunkBeds, GiBeachBucket, GiHeatHaze } from 'react-icons/gi';
 import { BsFillDoorOpenFill, BsSun } from 'react-icons/bs';
 import { LuBedDouble, LuBedSingle } from 'react-icons/lu';
-import { IoBedOutline } from 'react-icons/io5';
 import { PiCookingPot, PiCouch, PiFlowerTulipDuotone } from 'react-icons/pi';
 import { MdOutlineOutdoorGrill, MdOutlineBrunchDining, MdOutlineKitchen } from 'react-icons/md';
-import { TbWifi, TbWashMachine, TbWashDry1, TbToolsKitchen2, TbDeviceTv, TbKayak } from 'react-icons/tb';
+import { TbWifi, TbWashMachine, TbToolsKitchen2, TbDeviceTv, TbKayak } from 'react-icons/tb';
 
 import dishwasherIcon from '../assets/icons/dishwasher_icon.svg';
-import porchIcon from '../assets/icons/porch-icon-noun.svg';
 import deckIcon from '../assets/icons/deck-icon-noun.svg';
 
 import './CaptainsCottage.css';
@@ -103,7 +101,7 @@ useLayoutEffect(() => {
 										<h3 className='spaces-header-text'>Spaces</h3>
 										<div className='d-flex flex-row justify-content-around' style={{ width: '100%', padding: '0.5rem' }}>
 											<div className='spaces-item-container'>
-												<img src={deckIcon} height={'18px'} />
+												<img alt='deck icon' src={deckIcon} height={'18px'} />
 												<p className='spaces-text'>Deck/Patio</p>
 											</div>
 											<div className='spaces-item-container'>
@@ -192,7 +190,7 @@ useLayoutEffect(() => {
 										</div>
 										<div style={{ padding: '0.5rem' }}>
 											<div className='amenities-item'>
-												<img src={dishwasherIcon} height={'14px'} width={'14px'} />
+												<img alt='dishwasher icon' src={dishwasherIcon} height={'14px'} width={'14px'} />
 												<p>Dishwasher</p>
 											</div>
 											<div className='amenities-item'>

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import emailjs from '@emailjs/browser';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { LOGIN_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
@@ -13,15 +12,14 @@ function SigninForm() {
 		userPassword: '',
 	});
 
-	const [validated] = useState(false);
 
 	const [showAlert, setShowAlert] = useState(false);
 
-	const [loginUser, { data, loading, error }] = useMutation(LOGIN_USER);
+	const [loginUser] = useMutation(LOGIN_USER);
 
 	const resetLoginForm = () => {
 		setLoginFormData({ username: '', userPassword: '' });
-	}
+	};
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
 		setLoginFormData({ ...loginFormData, [name]: value });
@@ -47,7 +45,7 @@ function SigninForm() {
 				},
 			});
 
-			if (error) {
+			if (!loading && error) {
 				resetLoginForm();
 				setShowAlert(true);
 			}
@@ -59,6 +57,8 @@ function SigninForm() {
 			console.error(err);
 			setShowAlert(true);
 		}
+
+		event.target.reset();
 	};
 
 	return (
@@ -67,17 +67,9 @@ function SigninForm() {
 				<h3 className='text-center'>Sign In</h3>
 			</div>
 			<Form className='signin-form d-flex'>
-				<Alert
-						dismissible
-						onClose={() => setShowAlert(false)}
-						show={showAlert}
-						variant='danger'
-						className='m-auto'
-						style={{width: '100%', fontSize: '.75rem', padding: '0.5rem', margin: '0.5rem'}}
-						>
-						
-						Incorrect username/password
-					</Alert>
+				<Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger' className='m-auto' style={{ width: '100%', fontSize: '.75rem', padding: '0.5rem', margin: '0.5rem' }}>
+					Incorrect username/password
+				</Alert>
 				<div className='mb-3'>
 					<Form.Group controlId='formBasicUsername' required>
 						<Form.Control onChange={handleInputChange} value={loginFormData.username} type='username' name='username' placeholder='Username' />

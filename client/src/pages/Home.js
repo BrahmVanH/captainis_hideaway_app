@@ -1,8 +1,7 @@
-import React, { useLayoutEffect, useEffect, useRef } from 'react';
+import React, { useLayoutEffect,  useRef } from 'react';
 
 import { createScrollSmoother } from '../utils/gsapHelpers';
 
-import { Button, Image } from 'react-bootstrap';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css';

@@ -9,8 +9,7 @@ const cottageThumbnails100 = require.context('../assets/img/thumbnails/cottage_t
 const cottageThumbnails150 = require.context('../assets/img/thumbnails/cottage_thumbnails150_png', false, /\.(png|jpe?g|gif|svg)$/);
 const cottageThumbnails300 = require.context('../assets/img/thumbnails/cottage_thumbnails300_png', false, /\.(png|jpe?g|gif|svg)$/);
 
-let hideawayThumbnailsResponsive;
-let cottageThumbnailsResponsive;
+
 const isMobileViewport = () => {
 	return window.innerWidth < 577;
 };
@@ -89,6 +88,8 @@ const createHideawayGalleryImages = () => {
 		galleryImages.push({
 			original: originals[i],
 			thumbnail: thumbnails[i],
+			originalAlt: 'Full-size mage of property',
+			thumbnailAlt: 'Thumbnail image of property'
 		});
 	}
 

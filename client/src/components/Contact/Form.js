@@ -1,39 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { Form, Button } from 'react-bootstrap';
-// import Swal from 'sweetalert2';
-
-
-// Import EmailJS for form support
+import { Form, Button, Alert } from 'react-bootstrap';
 
 function ContactForm() {
-	// const handleOnSubmit = (e) => {
-	// 	e.preventDefault();
+	const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+	const [showErrorAlert, setShowErrorAlert] = useState(false);
 
-	// 	emailjs.sendForm(process.env.REACT_APP_EMAILJS_SERVICE_ID, process.env.REACT_APP_EMAILJS_TEMPLATE_ID, e.target, process.env.REACT_APP_EMAILJS_PUBLIC_KEY).then(
-	// 		(result) => {
-	// 			console.log(result.test);
-	// 			Swal.fire({
-	// 				icon: 'success',
-	// 				title: 'Message Sent Successfully',
-	// 			});
-	// 		},
-	// 		(error) => {
-	// 			Swal.fire({
-	// 				icon: 'error',
-	// 				title: 'Something went wrong!',
-	// 				text: error.text,
-	// 			});
-	// 		}
-	// 	);
+	const serviceId = 'service_lnxjo09';
+	const templateId = 'template_enw06at';
+	const publicKey = 'bh-E7v3RsFhe1yJ5-';
 
-	// 	e.target.reset();
-	// };
+	const handleFormSubmit = (event) => {
+		event.preventDefault();
+
+		emailjs.sendForm(serviceId, templateId, event.target, publicKey).then(
+			(result) => {
+				if (result) {
+					setShowSuccessAlert();
+				}
+			},
+			(error) => {
+				if (error) {
+					setShowErrorAlert(true);
+				}
+			}
+		);
+
+		event.target.reset();
+	};
 
 	return (
 		<div className='contact-form-container'>
-			
-			<Form className='contact-form d-flex'>
+			<Form onSubmit={handleFormSubmit} className='contact-form d-flex'>
+				<Alert
+					dismissible
+					onClose={() => setShowSuccessAlert(false)}
+					show={showSuccessAlert}
+					variant='success'
+					className='m-auto'
+					style={{ width: '100%', fontSize: '.75rem', padding: '0.5rem', margin: '0.5rem' }}>
+					Sent!
+				</Alert>
+				<Alert
+					dismissible
+					onClose={() => setShowErrorAlert(false)}
+					show={showErrorAlert}
+					variant='danger'
+					className='m-auto'
+					style={{ width: '100%', fontSize: '.75rem', padding: '0.5rem', margin: '0.5rem' }}>
+					There was an issue sending your message. Please refresh and try again.
+				</Alert>
 				<div className='mb-3'>
 					<Form.Group controlId='formBasicName' required>
 						<Form.Control type='name' name='from_name' placeholder='Name' />

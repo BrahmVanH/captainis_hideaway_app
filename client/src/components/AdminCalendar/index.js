@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
-import { Button } from 'react-bootstrap';
 
 import { QUERY_UNAVAILABLE_DATES } from '../../utils/queries';
 import { CREATE_UNAVAILABLE_DATE, REMOVE_UNAVAILABLE_DATE } from '../../utils/mutations';
@@ -37,7 +36,7 @@ function AdminCalendar(props) {
 		} else {
 			return;
 		}
-	}, [data]);
+	}, [data, loading]);
 
 	const reloadPage = () => {
 		window.location.reload();
@@ -75,8 +74,13 @@ function AdminCalendar(props) {
 	// This adds an entry to the datebase representing a date that is unavailable to rent
 	const handleAddUnavailableDate = async (value) => {
 		try {
-			const { data } = await createUnavailableDate({ variables: { propertyName: propertyName, dateValue: value } });
-			reloadPage();
+			const { data, error } = await createUnavailableDate({ variables: { propertyName: propertyName, dateValue: value } });
+			if (!error & data) {
+
+				reloadPage();
+			} else if (error) {
+				alert("There was an issue booking this date, please refresh and try again.");
+			}
 		} catch (err) {
 			console.error(err);
 		}

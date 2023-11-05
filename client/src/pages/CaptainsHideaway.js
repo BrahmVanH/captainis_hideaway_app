@@ -1,11 +1,6 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
-
-import gsap, { Power1 } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import React, { useRef, useLayoutEffect } from 'react';
 
 import ImageGallery from 'react-image-gallery';
-import Fullscreen from 'react-image-gallery';
 
 import { hideawayAmenities } from '../utils/captainsHideawayAmenities';
 
@@ -33,18 +28,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AmenitiesModal from '../components/AmenitiesModal';
 
-
 function CaptainsHideaway() {
-	// gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
-	 useEffect(() => {
-			const calendarElement = document.getElementById('calendar');
-
-			if (calendarElement) {
-				// Disable ScrollSmoother for the specific element
-				gsap.registerPlugin(ScrollSmoother).scrollSmoother.disable(calendarElement);
-			}
-			
-		}, []);
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
 	const smoother = useRef();
@@ -138,11 +122,11 @@ function CaptainsHideaway() {
 												<p className='spaces-text'>Dining Area</p>
 											</div>
 											<div className='spaces-item-container'>
-												<img src={deckIcon} height={'18px'} />
+												<img alt='deck icon' src={deckIcon} height={'18px'} />
 												<p className='spaces-text'>Deck/Patio</p>
 											</div>
 											<div className='spaces-item-container'>
-												<img src={porchIcon} height={'18px'} width={'18px'} />
+												<img alt='porch icon' src={porchIcon} height={'18px'} width={'18px'} />
 												<p className='spaces-text'>Porch/Veranda</p>
 											</div>
 											<div className='spaces-item-container'>
@@ -248,7 +232,7 @@ function CaptainsHideaway() {
 										</div>
 										<div style={{ padding: '0.5rem' }}>
 											<div className='amenities-item'>
-												<img src={dishwasherIcon} height={'14px'} width={'14px'} />
+												<im alt='dishwasher icon' src={dishwasherIcon} height={'14px'} width={'14px'} />
 												<p>Dishwasher</p>
 											</div>
 											<div className='amenities-item'>
@@ -262,11 +246,7 @@ function CaptainsHideaway() {
 										</div>
 									</div>
 									<div className='d-flex justify-content-end'>
-										<AmenitiesModal
-											btnRef={amenitiesComponent}
-											htmlOpenClassName={'ReactModal__Html--open'}
-											amenities={hideawayAmenities}
-										/>
+										<AmenitiesModal btnRef={amenitiesComponent} htmlOpenClassName={'ReactModal__Html--open'} amenities={hideawayAmenities} />
 									</div>
 								</div>
 							</div>

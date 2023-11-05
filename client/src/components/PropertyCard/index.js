@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Button, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import "./style.css";
@@ -22,7 +22,7 @@ function PropertyCard(props) {
 					</Link>
 				</div>
 			</div>
-			<Image rounded src={property.imagePath} className='card-img-bottom w-100 d-block' height='100%' />
+			<Image rounded alt='captains hideaway house from the beach' src={property.imagePath} className='card-img-bottom w-100 d-block' height='100%' />
 		</div>
 	);
 }
