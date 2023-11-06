@@ -58,7 +58,6 @@ function SigninForm() {
 			setShowAlert(true);
 		}
 
-		event.target.reset();
 	};
 
 	return (
