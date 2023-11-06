@@ -39,7 +39,6 @@ function AmenitiesModal(props) {
 		},
 	};
 
-	console.log(amenities);
 
 	function openModal(event) {
 		event.preventDefault();
