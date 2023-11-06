@@ -4,7 +4,7 @@ const fullSizeCottageImages = require.context('../assets/img/captains_cottage_pn
 const createCottageGalleryImages = () => {
 	let array = [];
 	fullSizeCottageImages.keys().map((file) => {
-		const original = fullSizeHideawayImages(file);
+		const original = fullSizeCottageImages(file);
 
 		array.push({
 			original: original,
