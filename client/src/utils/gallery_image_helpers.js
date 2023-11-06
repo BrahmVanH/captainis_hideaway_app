@@ -21,95 +21,122 @@ const isMediumViewport = () => {
 const getWindowHeight = () => {
 	console.log(window.innerHeight);
 }
-const createOriginalHideawayGalleryImages = () => {
-	let originalImageArray = [];
-	fullSizeHideawayImages.keys().map((file) => {
-		const original = fullSizeHideawayImages(file);
+// const createOriginalHideawayGalleryImages = () => {
+// 	let originalImageArray = [];
+// 	fullSizeHideawayImages.keys().map((file) => {
+// 		const original = fullSizeHideawayImages(file);
 
-		originalImageArray.push(original);
-	});
-	return originalImageArray;
-};
+// 		originalImageArray.push(original);
+// 	});
+// 	return originalImageArray;
+// };
 
-const createOriginalCottageGalleryImages = () => {
-	let originalImageArray = [];
-	fullSizeCottageImages.keys().map((file) => {
-		const original = fullSizeCottageImages(file);
+// const createOriginalCottageGalleryImages = () => {
+// 	let originalImageArray = [];
+// 	fullSizeCottageImages.keys().map((file) => {
+// 		const original = fullSizeCottageImages(file);
 
-		originalImageArray.push(original);
-	});
-	return originalImageArray;
-};
+// 		originalImageArray.push(original);
+// 	});
+// 	return originalImageArray;
+// };
 
-const createThumbnailHideawayGalleryImages = () => {
-	let thumbnailImages;
-	if (isMobileViewport) {
-		thumbnailImages = hideawayThumbnails100;
-	} else if (isMediumViewport) {
-		thumbnailImages = hideawayThumbnails150;
-	} else {
-		thumbnailImages = hideawayThumbnails300;
-	}
+// const createThumbnailHideawayGalleryImages = () => {
+// 	let thumbnailImages;
+// 	if (isMobileViewport) {
+// 		thumbnailImages = hideawayThumbnails100;
+// 	} else if (isMediumViewport) {
+// 		thumbnailImages = hideawayThumbnails150;
+// 	} else {
+// 		thumbnailImages = hideawayThumbnails300;
+// 	}
 
-	let thumbnailArray = [];
-	thumbnailImages.keys().map((file) => {
-		const thumbnail = thumbnailImages(file);
+// 	let thumbnailArray = [];
+// 	thumbnailImages.keys().map((file) => {
+// 		const thumbnail = thumbnailImages(file);
 
-		thumbnailArray.push(thumbnail);
-	});
-	return thumbnailArray;
-};
+// 		thumbnailArray.push(thumbnail);
+// 	});
+// 	return thumbnailArray;
+// };
 
-const createThumbnailCottageGalleryImages = () => {
-	let thumbnailImages;
-	if (isMobileViewport) {
-		thumbnailImages = cottageThumbnails100;
-	} else if (isMediumViewport) {
-		thumbnailImages = cottageThumbnails150;
-	} else {
-		thumbnailImages = cottageThumbnails300;
-	}
+// const createThumbnailCottageGalleryImages = () => {
+// 	let thumbnailImages;
+// 	if (isMobileViewport) {
+// 		thumbnailImages = cottageThumbnails100;
+// 	} else if (isMediumViewport) {
+// 		thumbnailImages = cottageThumbnails150;
+// 	} else {
+// 		thumbnailImages = cottageThumbnails300;
+// 	}
 
-	let thumbnailArray = [];
-	thumbnailImages.keys().map((file) => {
-		const thumbnail = thumbnailImages(file);
+// 	let thumbnailArray = [];
+// 	thumbnailImages.keys().map((file) => {
+// 		const thumbnail = thumbnailImages(file);
 
-		thumbnailArray.push(thumbnail);
-	});
-	return thumbnailArray;
-};
+// 		thumbnailArray.push(thumbnail);
+// 	});
+// 	return thumbnailArray;
+// };
 
-const createHideawayGalleryImages = () => {
-	const originals = createOriginalHideawayGalleryImages();
-	const thumbnails = createThumbnailHideawayGalleryImages();
+// const createHideawayGalleryImages = () => {
+// 	const originals = createOriginalHideawayGalleryImages();
+// 	const thumbnails = createThumbnailHideawayGalleryImages();
 
-	let galleryImages = [];
-	for (let i = 0; i < originals.length; i++) {
-		galleryImages.push({
-			original: originals[i],
-			thumbnail: thumbnails[i],
-			originalAlt: 'Full-size mage of property',
-			thumbnailAlt: 'Thumbnail image of property'
+// 	let galleryImages = [];
+// 	for (let i = 0; i < originals.length; i++) {
+// 		galleryImages.push({
+// 			original: originals[i],
+// 			thumbnail: thumbnails[i],
+// 			originalAlt: 'Full-size mage of property',
+// 			thumbnailAlt: 'Thumbnail image of property'
+// 		});
+// 	}
+
+// 	return galleryImages;
+// };
+
+// const createCottageGalleryImages = () => {
+// 	const originals = createOriginalCottageGalleryImages();
+// 	const thumbnails = createThumbnailCottageGalleryImages();
+
+// 	let galleryImages = [];
+// 	for (let i = 0; i < originals.length; i++) {
+// 		galleryImages.push({
+// 			original: originals[i],
+// 			thumbnail: thumbnails[i],
+// 		});
+// 	}
+
+// 	return galleryImages;
+// };
+
+ const createCottageGalleryImages = () => {
+		let array = [];
+		fullSizeHideawayImages.keys().map((file) => {
+			const original = fullSizeHideawayImages(file);
+			console.log('Original Image:', original);
+
+			array.push({
+				original: original,
+				thumbnail: original,
+			});
 		});
-	}
+		return array;
+ };
 
-	return galleryImages;
-};
+ const createHideawayGalleryImages = () => {
+		let array = [];
+		fullSizeHideawayImages.keys().map((file) => {
+			const original = fullSizeHideawayImages(file);
 
-const createCottageGalleryImages = () => {
-	const originals = createOriginalCottageGalleryImages();
-	const thumbnails = createThumbnailCottageGalleryImages();
-
-	let galleryImages = [];
-	for (let i = 0; i < originals.length; i++) {
-		galleryImages.push({
-			original: originals[i],
-			thumbnail: thumbnails[i],
+			array.push({
+				original: original,
+				thumbnail: original,
+			});
 		});
-	}
-
-	return galleryImages;
-};
+		return array;
+ };
 
 export const hideawayGalleryImages = createHideawayGalleryImages();
 export const cottageGalleryImages = createCottageGalleryImages();

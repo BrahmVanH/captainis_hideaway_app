@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from 'react';
+import React, { useRef, useLayoutEffect, useEffect, useState } from 'react';
 
 import ImageGallery from 'react-image-gallery';
 
@@ -33,6 +33,26 @@ function CaptainsHideaway() {
 	const main = useRef();
 	const smoother = useRef();
 	const amenitiesComponent = useRef(null);
+
+	const [thumbnailSize, setThumbnailSize] = useState('300');
+
+	const isMobileViewport = () => {
+		return window.innerWidth < 577;
+	};
+
+	const isMediumViewport = () => {
+		return window.innerWidth < 766;
+	};
+
+	useEffect(() => {
+		if (isMobileViewport) {
+			setThumbnailSize('100');
+		} else if (isMediumViewport) {
+			setThumbnailSize('150');
+		} else {
+			setThumbnailSize('300');
+		}
+	});
 
 	useLayoutEffect(() => {
 		createScrollSmoother(main, smoother);
@@ -315,7 +335,7 @@ function CaptainsHideaway() {
 						</div>
 					</div>
 					<div className='image-gallery-wrapper'>
-						<ImageGallery ref={imageGalleryRef} showPlayButton={false} isFullScreen={true} items={hideawayGalleryImages} />
+						<ImageGallery ref={imageGalleryRef} thumbnailWidth={thumbnailSize} thumbnailHeight={thumbnailSize} showPlayButton={false} isFullScreen={true} items={hideawayGalleryImages} />
 					</div>
 				</div>
 				<Footer />
