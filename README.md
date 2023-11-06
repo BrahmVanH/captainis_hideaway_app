@@ -30,10 +30,10 @@ to initiate the development server for the application. You will be greeted with
 
 ## Usage
 
-To run this application in a local development server, first please download the source code and navigate to the root directory in your CLI. Run npm install to install the required dependencies, the use the npm run dev command. The application servers should start and open the webpage in your default browser.
+This application is meant to be visited in any web browser, or may be used as a template for your personal rental property organization. 
 
 ## Credits
-
+  
 ### Icons
 
     The icons in this application are provided by
