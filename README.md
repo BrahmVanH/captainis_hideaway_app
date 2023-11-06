@@ -24,7 +24,7 @@ Captains Hideaway vacation rentals is a web application designed to facilitate t
 
 To install this application for local development or use, please first fork the repository, or download the zipped file, from https://github.com/BrahmVanH/captainis_hideaway_app. Once the application source code is installed and unzipped as necessary, please navigate to the project's root directory within you CLI and enter
 `npm install`
-to install all dependencies. You will need to create your own Authentication Secret and add it to the .env file in the root of the server directory. Don't forget to change the file name from .env.example to .env. Once installed, you may run
+to install all dependencies. You will need to create your own `AUTH_SECRET` and add it to the .env file in the root of the server directory. Don't forget to change the file name from .env.example to .env. Once installed, you may run
 `npm run development`
 to initiate the development server for the application. You will be greeted with the webpage in your default browser.
 
@@ -33,7 +33,7 @@ to initiate the development server for the application. You will be greeted with
 This application is meant to be visited in any web browser, or may be used as a template for your personal rental property organization. 
 
 ## Credits
-  
+
 ### Icons
 
     The icons in this application are provided by
