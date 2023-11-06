@@ -1,7 +1,6 @@
 {
 	"name": "captains_hideaway-app",
 	"version": "0.1.0",
-	"proxy": "http://localhost:3001",
 	"private": true,
 	"dependencies": {
 		"@apollo/client": "^3.8.6",
@@ -15,6 +14,7 @@
 		"bootstrap": "^5.3.1",
 		"gsap": "file:gsap-bonus.tgz",
 		"jwt-decode": "^3.1.2",
+		"lodash": "^4.17.21",
 		"react": "^18.2.0",
 		"react-bootstrap": "^2.8.0",
 		"react-calendar": "^4.6.1",
