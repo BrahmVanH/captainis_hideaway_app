@@ -6,7 +6,7 @@ import Auth from '../../utils/auth';
 
 import './style.css';
 
-function SigninForm() {
+function CreateUser() {
 	const [createUserFormData, setCreateUserFormData] = useState({
 		firstName: '',
 		lastName: '',
@@ -21,7 +21,7 @@ function SigninForm() {
 	const [createUser] = useMutation(CREATE_USER);
 
 	const resetLoginForm = () => {
-		setcreateUserFormData({ firstName: '', lastName: '', username: '', userPassword: '', adminCode: '' });
+		setCreateUserFormData({ firstName: '', lastName: '', username: '', userPassword: '', adminCode: '' });
 	};
 	const handleInputChange = (event) => {
 		const { name, value } = event.target;
@@ -37,7 +37,7 @@ function SigninForm() {
 			event.stopPropagation();
 		}
 
-		if (!loginFormData) {
+		if (!createUserFormData) {
 			throw new Error('You must fill out all fields!');
 		}
 
@@ -108,4 +108,4 @@ function SigninForm() {
 	);
 }
 
-export default SigninForm;
+export default CreateUser;
