@@ -14,6 +14,8 @@ function AdminPage() {
 	const main = useRef();
 	const smoother = useRef();
 
+	
+
 	useLayoutEffect(() => {
 		createScrollSmoother(main, smoother);
 	}, []);
