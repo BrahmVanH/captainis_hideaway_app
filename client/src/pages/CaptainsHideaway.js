@@ -73,7 +73,7 @@ function CaptainsHideaway() {
 				<header onClick={toggleGalleryFullScreen} className='captains-hideaway-header masthead'></header>
 
 				<div className='d-flex align-items-center flex-column'>
-					<div className='col-md-10 d-flex flex-lg-row flex-column justify-content-center'>
+					<div className='col-lg-10 col-11 d-flex flex-lg-row flex-column justify-content-center'>
 						<div className='col-lg-8 col-12'>
 							<div className='overview-card card'>
 								<div className='captains-hideaway-card-body card-body d-flex flex-column'>
@@ -96,9 +96,9 @@ function CaptainsHideaway() {
 							</div>
 							<div className='rooms-and-beds-card card'>
 								<div className='captains-hideaway-card-body card-body d-flex flex-column'>
-									<div className='rooms-and-beds-inner-container d-flex'>
+									<div className='rooms-and-beds-inner-container d-flex flex-lg-row flex-column'>
 										<h3 style={{ padding: '0.5rem 0.5rem 0.5rem 1rem', margin: '0px' }}>Rooms &amp; Beds</h3>
-										<div className='d-flex flex-row justify-content-between' style={{ padding: '0.5rem', width: '100%', margin: '0.5rem' }}>
+										<div className='d-flex flex-row justify-content-between flex-lg-nowrap flex-wrap' style={{ padding: '0.5rem', width: '100%', margin: '0.5rem' }}>
 											<div className='bedroom-description-container'>
 												<p>Bedroom 1</p>
 												<IoBedOutline size='22px' />
@@ -137,9 +137,9 @@ function CaptainsHideaway() {
 
 							<div className='spaces-card card'>
 								<div className='captains-hideaway-card-body card-body d-flex flex-column'>
-									<div className='d-flex' style={{ padding: '0.5rem' }}>
+									<div className='d-flex flex-lg-row flex-column' style={{ padding: '0.5rem' }}>
 										<h3 className='spaces-header-text'>Spaces</h3>
-										<div className='d-flex flex-row justify-content-around' style={{ width: '100%', padding: '0.5rem' }}>
+										<div className='d-flex flex-lg-row flex-column align-items-center justify-content-around' style={{ width: '100%', padding: '0.5rem' }}>
 											<div className='spaces-item-container'>
 												<MdOutlineBrunchDining size='18px' />
 												<p className='spaces-text'>Dining Area</p>
@@ -170,7 +170,7 @@ function CaptainsHideaway() {
 
 					<div className='about-property-card card col-sm-11 col-md-10 ' style={{ padding: '0.5rem' }}>
 						<div className='captains-hideaway-card-body card-body d-flex flex-column'>
-							<div className='d-flex' style={{ padding: '0.5rem' }}>
+							<div className='d-flex flex-lg-row flex-column' style={{ padding: '0.5rem' }}>
 								<h3 className='about-property-header' style={{ margin: '0px', padding: '0.5rem' }}>
 									About the Property
 								</h3>
