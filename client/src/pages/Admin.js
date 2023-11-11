@@ -1,4 +1,5 @@
-import React, { useLayoutEffect, useRef, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import Mousetrap from 'mousetrap';
 
 import SigninForm from '../components/Signin.js';
 import CreateUser from '../components/CreateUser/index.js';
@@ -14,19 +15,16 @@ import './Admin.css';
 function AdminPage() {
 	const main = useRef();
 	const smoother = useRef();
-
 	const [showCreateUser, setShowCreateUser] = useState(false);
+	
 
-	const confirmCombo = (event) => {
-		 if (event.ctrlKey && event.altKey && event.key === '1' && event.key === '5' && event.key === '9') {
-			console.log('pressed');
-		 }
-		
-	};
-
-	document.addEventListener('keydown', function (event) {
-		if (confirmCombo(event)) {
+	Mousetrap.bind('ctrl+alt+1+5', function () {
+		if (showCreateUser === false) {
+			console.log('show create user');
 			setShowCreateUser(true);
+		} else {
+			console.log('hide create user');
+			setShowCreateUser(false);
 		}
 	});
 
@@ -42,9 +40,7 @@ function AdminPage() {
 				<Navbar />
 				<div className='admin-container'>
 					{showCreateUser ? (
-						<div>
-							<CreateUser />
-						</div>
+						<CreateUser />
 					) : (
 						<>
 							{Auth.loggedIn() ? (

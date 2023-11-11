@@ -66,7 +66,7 @@ function CreateUser() {
 	return (
 		<div className='card col-lg-4 col-md-6 col-sm-11 signin-card' style={{ height: 'minContent' }}>
 			<div className='signin-header-container'>
-				<h3 className='text-center'>Sign In</h3>
+				<h3 className='text-center'>Create User</h3>
 			</div>
 			<Form className='signin-form d-flex'>
 				<Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger' className='m-auto' style={{ width: '100%', fontSize: '.75rem', padding: '0.5rem', margin: '0.5rem' }}>

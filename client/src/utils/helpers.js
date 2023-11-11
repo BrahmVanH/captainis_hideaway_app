@@ -27,7 +27,11 @@ export const getItemsElement = (itemsArray) => {
 					return (
 						<ul className='amenities-list' key={list}>
 							{list.map((item) => {
-								return <li className='amenities-item' key={item}>{item}</li>;
+								return (
+									<li className='amenities-item' key={item}>
+										{item}
+									</li>
+								);
 							})}
 						</ul>
 					);
@@ -38,11 +42,22 @@ export const getItemsElement = (itemsArray) => {
 		itemsElement = (
 			<ul className='amenities-list'>
 				{itemsArray.map((item) => {
-					return <li className='amenities-item' key={item}>{item}</li>;
+					return (
+						<li className='amenities-item' key={item}>
+							{item}
+						</li>
+					);
 				})}
 			</ul>
 		);
 	}
 
-  return itemsElement;
+	return itemsElement;
+};
+
+export const isLocalEnvironment = () => {
+	if (window.location.hostname === 'localhost') {
+		return true;
+	}
+
 };
