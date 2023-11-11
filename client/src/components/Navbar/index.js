@@ -1,16 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
+import gsap from 'gsap';
 import { Link } from 'react-router-dom';
 import Auth from '../../utils/auth';
 import { RxHamburgerMenu } from 'react-icons/rx';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
-import { Button } from 'react-bootstrap';
 
 function Navbar() {
 	const [mobileViewport, setMobileViewport] = useState(false);
 	const [showDropdownMenu, setShowDropdownMenu] = useState(false);
 	const [dropdownMenuDisplay, setDropdownMenuDisplay] = useState('none');
+
+	const nav = useRef();
+	const dropdown = useRef();
+
+	useLayoutEffect(() => {
+		let ctx = gsap.context(() => {
+			let tl = gsap.timeline();
+			tl.fromTo(dropdown.current, { y: -200 }, { y: 0, duration: 1, ease: 'power1.in' });
+		}, nav);
+
+		return () => ctx.revert();
+	}, [showDropdownMenu]);
+
+	const dropdownOut = () => {
+		let ctx = gsap.context(() => {
+			let tl = gsap.timeline();
+			tl.fromTo(dropdown.current, {y: 0}, {
+				y: -200,
+				duration: 1,
+				ease: 'power1.out'
+			});
+			tl.add(() => setTimeout(setDropdownMenuDisplay('none'), 1))
+		});
+
+		return () => ctx.revert();
+	};
 
 	const isMediumViewport = () => {
 		return window.innerWidth < 766;
@@ -26,19 +52,19 @@ function Navbar() {
 	}, []);
 
 	useEffect(() => {
-		showDropdownMenu ? setDropdownMenuDisplay('') : setDropdownMenuDisplay('none');
+		showDropdownMenu ? setDropdownMenuDisplay('') : dropdownOut();
 	}, [showDropdownMenu]);
 
 	return (
 		<>
-			<nav className='navbar navbar-expand navigation-clean navbar-light'>
+			<nav ref={nav} className='navbar navbar-expand navigation-clean navbar-light'>
 				<div className='navbar-inner-container container'>
 					<Link className='navbar-brand' to={'/'}>
 						Captains Rentals
 					</Link>
 					{mobileViewport ? (
-						<button onClick={toggleDropDown}>
-							<RxHamburgerMenu />
+						<button className='dropdown-btn' onClick={toggleDropDown}>
+							<RxHamburgerMenu size={'20px'} />
 						</button>
 					) : (
 						<div className='link-container'>
@@ -62,7 +88,7 @@ function Navbar() {
 					)}
 				</div>
 			</nav>
-			<div style={{ display: dropdownMenuDisplay }} className='dropdown'>
+			<div ref={dropdown} style={{ display: dropdownMenuDisplay }} className='dropdown'>
 				<Link to={'/'} className='navbar-link'>
 					Home
 				</Link>
