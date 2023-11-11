@@ -39,7 +39,9 @@
 .calendar-key-tile {
 	background-color: #5f8fa5;
 	border-radius: 0px;
-  padding: 0rem 1.54rem
+  padding: 0rem 1.54rem;
+	height: 24px;
+
 }
 
 .calendar-key-text {
