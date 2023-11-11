@@ -34,10 +34,12 @@ const resolvers = {
 		},
 	},
 	Mutation: {
-		createUser: async (parent, { firstName, lastName, username, userPassword }) => {
+		createUser: async (parent, { firstName, lastName, username, userPassword, adminCode }) => {
 			try {
-				if (!firstName || !lastName || !username || !userPassword) {
+				if (!firstName || !lastName || !username || !userPassword || !adminCode) {
 					throw new AuthenticationError('All fields must be filled to create a user.');
+				} else if (adminCode !== process.env.ADMIN_CODE) {
+					throw new AuthenticationError('Incorrect admin code');
 				}
 				const password = bcrypt.hashSync(userPassword, 10);
 

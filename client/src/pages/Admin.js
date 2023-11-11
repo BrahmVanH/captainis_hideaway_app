@@ -1,6 +1,8 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import Mousetrap from 'mousetrap';
 
 import SigninForm from '../components/Signin.js';
+import CreateUser from '../components/CreateUser/index.js';
 import AdminPropertyCard from '../components/AdminPropertyCard/index.js';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -13,6 +15,18 @@ import './Admin.css';
 function AdminPage() {
 	const main = useRef();
 	const smoother = useRef();
+	const [showCreateUser, setShowCreateUser] = useState(false);
+	
+
+	Mousetrap.bind('ctrl+alt+1+5', function () {
+		if (showCreateUser === false) {
+			console.log('show create user');
+			setShowCreateUser(true);
+		} else {
+			console.log('hide create user');
+			setShowCreateUser(false);
+		}
+	});
 
 	useLayoutEffect(() => {
 		createScrollSmoother(main, smoother);
@@ -25,19 +39,25 @@ function AdminPage() {
 			<div id='smooth-content'>
 				<Navbar />
 				<div className='admin-container'>
-					{Auth.loggedIn() ? (
-						<>
-							<div className='col-lg-10 admin-header-container card'>
-								<h1>Administrator Dashboard</h1>
-								<h4>Hi, Elyse</h4>
-							</div>
-							<div className='admin-property-card-container'>
-								<AdminPropertyCard propertyName={captainsHideaway} />
-								<AdminPropertyCard propertyName={captainsCottage} />
-							</div>
-						</>
+					{showCreateUser ? (
+						<CreateUser />
 					) : (
-						<SigninForm />
+						<>
+							{Auth.loggedIn() ? (
+								<>
+									<div className='col-lg-10 admin-header-container card'>
+										<h1>Administrator Dashboard</h1>
+										<h4>Hi, Elyse</h4>
+									</div>
+									<div className='admin-property-card-container'>
+										<AdminPropertyCard propertyName={captainsHideaway} />
+										<AdminPropertyCard propertyName={captainsCottage} />
+									</div>
+								</>
+							) : (
+								<SigninForm />
+							)}
+						</>
 					)}
 				</div>
 				<Footer />

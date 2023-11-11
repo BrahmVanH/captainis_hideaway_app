@@ -25,7 +25,7 @@ const typeDefs = gql`
 		queryUnavailableDatesByProperty(propertyName: String!): [Date]
 	}
 	type Mutation {
-		createUser(firstName: String!, lastName: String!, username: String!, userPassword: String!): Auth
+		createUser(firstName: String!, lastName: String!, username: String!, userPassword: String!, adminCode: String!): Auth
 		loginUser(username: String!, userPassword: String!): Auth
 		createUnavailableDate(propertyName: String!, dateValue: String!): Date
 		removeUnavailableDate(propertyName: String!, dateValue: String!): Date
