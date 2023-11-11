@@ -33,6 +33,7 @@ function CaptainsHideaway() {
 	const main = useRef();
 	const smoother = useRef();
 	const amenitiesComponent = useRef(null);
+	
 
 	const [thumbnailSize, setThumbnailSize] = useState('300');
 
@@ -43,6 +44,8 @@ function CaptainsHideaway() {
 	const isMediumViewport = () => {
 		return window.innerWidth < 766;
 	};
+
+
 
 	useEffect(() => {
 		if (isMobileViewport) {
@@ -69,9 +72,9 @@ function CaptainsHideaway() {
 				<Navbar />
 				<header onClick={toggleGalleryFullScreen} className='captains-hideaway-header masthead'></header>
 
-				<div className='d-flex align-items-center flex-column '>
-					<div className='col-md-10 d-flex'>
-						<div className='col-8'>
+				<div className='d-flex align-items-center flex-column'>
+					<div className='col-md-10 d-flex flex-lg-row flex-column justify-content-center'>
+						<div className='col-lg-8 col-12'>
 							<div className='overview-card card'>
 								<div className='captains-hideaway-card-body card-body d-flex flex-column'>
 									<h3 className='card-title'>Captain's Hideaway</h3>
@@ -190,7 +193,7 @@ function CaptainsHideaway() {
 					</div>
 					<div className='amenities-card card col-sm-11 col-md-10 ' style={{ margin: '0.5rem' }}>
 						<div className='captains-hideaway-card-body card-body d-flex flex-column' style={{ padding: '0.5rem' }}>
-							<div className='d-flex' style={{ padding: '0.5rem' }}>
+							<div className='d-flex flex-column flex-lg-row' style={{ padding: '0.5rem' }}>
 								<h3 style={{ margin: '0px', padding: '0.5rem' }}>Amenities</h3>
 								<div className='amenities-item-wrapper' style={{ margin: '0.5rem', fontSize: '14px', width: '90%', padding: '0.5rem' }}>
 									<div className='amenities-item-container' style={{ width: '100%', height: '100%' }}>

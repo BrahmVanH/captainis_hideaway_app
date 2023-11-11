@@ -8,6 +8,12 @@
 
 }
 
+@media only screen and (max-device-width: 992px) {
+  .captains-hideaway-header {
+		background-position: 0 0;
+	}
+}
+
 .image-gallery-wrapper {
   max-width: 800px;
   width: 100%;
@@ -19,6 +25,8 @@
 .overview-card {
 	padding: 1rem;
 	margin: 1rem 0rem;
+	width: 100%;
+
 }
 
 .overview-card .card-title {
@@ -39,6 +47,7 @@
 .overview {
 	padding: 0.5rem;
 	margin: 0.5rem;
+	
 }
 
 .overview-item {
@@ -141,6 +150,12 @@
 	flex-direction: row;
 }
 
+@media only screen and (max-device-width: 992px) {
+  .amenities-item-container {
+		flex-wrap: wrap;
+	}
+}
+
 .amenities-item {
 	display: flex;
 	align-items: center;
@@ -209,6 +224,12 @@
 	display: flex;
 	flex-direction: column;
 	padding: 0rem 10rem;
+}
+
+@media only screen and (max-device-width: 992px) {
+  .important-information {
+		padding: 0.5rem;
+	}
 }
 
 .important-information-text p {
