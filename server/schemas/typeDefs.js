@@ -9,6 +9,10 @@ const typeDefs = gql`
 		password: String!
 	}
 
+	type imageQueryData {
+		images: [String]
+	}
+
 	type Auth {
 		token: ID!
 		user: User
@@ -23,7 +27,7 @@ const typeDefs = gql`
 	type Query {
 		getAllUsers: [User]
 		queryUnavailableDatesByProperty(propertyName: String!): [Date]
-		getImages: [String]
+		getImages: imageQueryData
 	}
 	type Mutation {
 		createUser(firstName: String!, lastName: String!, username: String!, userPassword: String!, adminCode: String!): Auth

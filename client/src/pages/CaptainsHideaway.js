@@ -2,6 +2,9 @@ import React, { useRef, useLayoutEffect, useEffect, useState } from 'react';
 
 import ImageGallery from 'react-image-gallery';
 
+import { useQuery } from '@apollo/client';
+import { QUERY_IMAGES } from '../utils/queries';
+
 import { hideawayAmenities } from '../utils/captainsHideawayAmenities';
 
 import { CiCoffeeBean } from 'react-icons/ci';
@@ -33,9 +36,20 @@ function CaptainsHideaway() {
 	const main = useRef();
 	const smoother = useRef();
 	const amenitiesComponent = useRef(null);
+
+	const { loading, error, data} = useQuery(QUERY_IMAGES);
+
+	useEffect(() => {
+		if (!loading && data) {
+			console.log(data);
+		} else if (error) {
+			console.error(error);
+		}
+	})
 	
 
 	const [thumbnailSize, setThumbnailSize] = useState('300');
+
 
 	const isMobileViewport = () => {
 		return window.innerWidth < 577;
