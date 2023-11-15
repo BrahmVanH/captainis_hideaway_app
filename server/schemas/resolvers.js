@@ -32,6 +32,34 @@ const resolvers = {
 				return [{ message: 'Error in queryUnavailableDates...', details: err.message }];
 			}
 		},
+		getImages: async () => {
+			const bucketName = 'lakesuperiorcaptains';
+			const params = {
+				Bucket: bucketName,
+				Prefix: 'images/'
+			};
+
+			try {
+				const data = await s3.listObjectsV2(params).promise();
+
+				if (!data) {
+					throw new Error('Could not retrieve images from S3');
+				}
+
+				const imageUrls = data.Contents.map((item) => {
+					return s3.getSignedUrl('getObject', {
+						Bucket: 'lakesuperiorcaptains',
+						Key: item.Key,
+						Expires: 60,
+					});
+				});
+
+				return imageUrls;
+			} catch (err) {
+				return [{ message: 'Error in querying s3 for images', details: err.message }];
+
+			}
+		}
 	},
 	Mutation: {
 		createUser: async (parent, { firstName, lastName, username, userPassword, adminCode }) => {

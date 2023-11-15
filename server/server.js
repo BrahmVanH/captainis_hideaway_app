@@ -1,5 +1,6 @@
 const express = require('express');
 require('dotenv').config();
+import AWS from 'aws-sdk';
 const path = require('path');
 const { ApolloServer } = require('apollo-server-express');
 const cors = require('cors');
@@ -25,6 +26,15 @@ app.use(cors());
 if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../client/build')));
 }
+
+
+AWS.config.update({
+	accessKeyId: process.env.S3_ACCESS_KEY,
+	secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+	region: 'us-east-2',
+});
+
+const s3 = new AWS.S3();
 
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
