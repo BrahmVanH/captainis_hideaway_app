@@ -17,7 +17,7 @@ import CaptainsHideaway from './pages/CaptainsHideaway';
 import CaptainsCottage from './pages/CaptainsCottage';
 
 import '@csstools/normalize.css';
-import { fetchImages } from './utils/cdnImages';
+import { getImages } from './utils/s3Query';
 
 
 
@@ -29,7 +29,7 @@ const client = new ApolloClient({
 
 
 function App() {
-	fetchImages();
+	getImages();
 
 	// Register GSAP plugins for all components. ScrollSmoother relies on ScrollTrigger
 	gsap.registerPlugin(ScrollTrigger, ScrollSmoother);

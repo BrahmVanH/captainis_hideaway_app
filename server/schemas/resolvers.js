@@ -2,6 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { UnavailableDate, User } = require('../models');
 const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
+const s3 = require('../server');
 
 const resolvers = {
 	Query: {
@@ -35,8 +36,9 @@ const resolvers = {
 		getImages: async () => {
 			const bucketName = 'lakesuperiorcaptains';
 			const params = {
-				Bucket: bucketName,
-				Prefix: 'images/'
+				bucket: bucketName,
+				host: bucketName,
+				prefix: 'captains_hideaway_png/',
 			};
 
 			try {
@@ -48,9 +50,10 @@ const resolvers = {
 
 				const imageUrls = data.Contents.map((item) => {
 					return s3.getSignedUrl('getObject', {
-						Bucket: 'lakesuperiorcaptains',
-						Key: item.Key,
-						Expires: 60,
+						bucket: 'lakesuperiorcaptains',
+						host: bucketName,
+						key: item.Key,
+						expires: 60,
 					});
 				});
 

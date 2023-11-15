@@ -30,6 +30,7 @@ import { createScrollSmoother } from '../utils/gsapHelpers';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AmenitiesModal from '../components/AmenitiesModal';
+import { getImages } from '../utils/s3Query';
 
 function CaptainsHideaway() {
 	const imageGalleryRef = useRef(null);
@@ -37,15 +38,38 @@ function CaptainsHideaway() {
 	const smoother = useRef();
 	const amenitiesComponent = useRef(null);
 
-	const { loading, error, data} = useQuery(QUERY_IMAGES);
+	const [hideawayImages, setHideAwayImages] = useState([]);
 
-	useEffect(() => {
-		if (!loading && data) {
-			console.log(data);
-		} else if (error) {
-			console.error(error);
+	// const { loading, error, data} = useQuery(QUERY_IMAGES);
+
+	// useEffect(() => {
+	// 	if (!loading && data) {
+	// 		console.log(data);
+	// 	} else if (error) {
+	// 		console.error(error);
+	// 	}
+	// })
+
+	const getHideawayImages = async () => {
+		let captainsHideawayImages = [];
+		try {
+			captainsHideawayImages =  await getImages();
+			if (captainsHideawayImages.length > 0) {
+
+				setHideAwayImages(captainsHideawayImages);
+				console.log("set captainsHideawayImages", captainsHideawayImages);
+			} else {
+				console.log('no images yet');
+			}
+		} catch (err) {
+			throw new Error("there was an error fetching images");
 		}
-	})
+
+
+	}
+	useEffect(() => {
+		getHideawayImages()
+	}, []);
 	
 
 	const [thumbnailSize, setThumbnailSize] = useState('300');
