@@ -7,3 +7,29 @@
 	cursor: grab; /* Change cursor to a help pointer on hover */
 
 }
+
+@media only screen and (max-device-width: 992px) {
+  .captains-cottage-header {
+		background-position: 0 0;
+	}
+}
+
+.captains-cottage-card-body {
+	border-left: 3px solid transparent;
+	border-image-source: linear-gradient(white, #abccd8, #5f8fa5, #abccd8, white);
+	border-image-slice: 1;
+	border-image-outset: 0;
+
+	border-image-repeat: stretch;
+}
+.cottage-bedroom-description-container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+}
+
+.bedroom-description-loft-icons {
+	display: flex;
+	flex-direction: row;
+	
+}
