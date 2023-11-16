@@ -29,7 +29,6 @@ const client = new ApolloClient({
 
 
 function App() {
-	getImages();
 
 	// Register GSAP plugins for all components. ScrollSmoother relies on ScrollTrigger
 	gsap.registerPlugin(ScrollTrigger, ScrollSmoother);

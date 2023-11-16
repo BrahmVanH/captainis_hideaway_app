@@ -1,7 +1,10 @@
 import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
+import gsap from 'gsap';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 import ImageGallery from 'react-image-gallery';
 import AvailabilityCalendar from '../components/Calendar';
+import { cottageGalleryImages } from '../utils/gallery_image_helpers';
 
 import { createScrollSmoother } from '../utils/gsapHelpers';
 // import { cottageGalleryImages } from '../utils/gallery_image_helpers';
@@ -29,8 +32,15 @@ function CaptainsCottage() {
 
 
 	useLayoutEffect(() => {
-			createScrollSmoother(main, smoother);
-	}, [main, smoother]);
+		const ctx = gsap.context(() => {
+			// create the smooth scroller FIRST!
+			smoother.current = ScrollSmoother.create({
+				smooth: 1,
+				effects: true,
+			});
+		}, main);
+		return () => ctx.revert();
+	}, []);
 
 	const toggleGalleryFullScreen = () => {
 		imageGalleryRef.current.fullScreen();
@@ -276,7 +286,7 @@ function CaptainsCottage() {
 							</div>
 						</div>
 					</div>
-					<div className='image-gallery-wrapper'>{/* <ImageGallery ref={imageGalleryRef} showPlayButton={false} isFullScreen={true} items={cottageGalleryImages} /> */}</div>
+					<div className='image-gallery-wrapper'><ImageGallery ref={imageGalleryRef} showPlayButton={false} isFullScreen={true} items={cottageGalleryImages} /></div>
 				</div>
 				<Footer />
 			</div>

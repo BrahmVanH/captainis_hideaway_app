@@ -1,4 +1,6 @@
 import React, { useRef, useLayoutEffect, useEffect, useState } from 'react';
+import gsap from 'gsap';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 import ImageGallery from 'react-image-gallery';
 
@@ -12,7 +14,6 @@ import { IoBedOutline } from 'react-icons/io5';
 import { PiCookingPot, PiCouch, PiFlowerTulipDuotone } from 'react-icons/pi';
 import { MdOutlineOutdoorGrill, MdOutlineBrunchDining, MdOutlineKitchen } from 'react-icons/md';
 import { TbWifi, TbWashMachine, TbWashDry1, TbToolsKitchen2, TbDeviceTv, TbKayak } from 'react-icons/tb';
-
 
 import dishwasherIcon from '../assets/icons/dishwasher_icon.svg';
 import porchIcon from '../assets/icons/porch-icon-noun.svg';
@@ -55,7 +56,6 @@ function CaptainsHideaway() {
 		fetchHideawayImages();
 	}, []);
 
-
 	useEffect(() => {
 		if (hideawayImageUrls) {
 			setHideawayHeaderUrl(hideawayImageUrls.hideawayHeaderUrl);
@@ -71,22 +71,25 @@ function CaptainsHideaway() {
 	}, [hideawayHeaderUrl]);
 
 	useLayoutEffect(() => {
-		createScrollSmoother(main, smoother);
-	}, [main, smoother]);
-
-	const toggleGalleryFullScreen = () => {
-		// imageGalleryRef.current.fullScreen();
-		return
-	};
+		const ctx = gsap.context(() => {
+			// create the smooth scroller FIRST!
+			smoother.current = ScrollSmoother.create({
+				smooth: 1,
+				effects: true,
+			});
+		}, main);
+		return () => ctx.revert();
+	}, []);
+	
 
 	const propertyName = 'captainsHideaway';
 	return (
 		<div ref={main} id='smooth-wrapper'>
 			<div id='smooth-content'>
-				{hideawayImageUrls && !loading ? (
+				{hideawayHeaderUrl && hideawayGalleryUrls && !loading ? (
 					<>
 						<Navbar />
-						<header onClick={toggleGalleryFullScreen} style={mastheadBackgroundImg} className='captains-hideaway-header masthead'></header>
+						<header style={mastheadBackgroundImg} className='captains-hideaway-header masthead'></header>
 
 						<div className='d-flex align-items-center flex-column'>
 							<div className='col-lg-10 col-11 d-flex flex-lg-row flex-column justify-content-center'>
@@ -356,7 +359,7 @@ function CaptainsHideaway() {
 								</div>
 							</div>
 							<div className='image-gallery-wrapper'>
-								<ImageGallery ref={imageGalleryRef} isFullScreen={true} showPlayButton={false} items={hideawayGalleryUrls} />
+								<ImageGallery ref={imageGalleryRef} showPlayButton={false} items={hideawayGalleryUrls} />
 							</div>
 						</div>
 						<Footer />

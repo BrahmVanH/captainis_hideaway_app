@@ -62,3 +62,20 @@ export const getHideawayImgs = async () => {
 };
 
 // export const hideawayImgUrls = await getHideawayGalleryArray();
+
+export const cottageGalleryImages = createCottageGalleryImages();
+const createHideawayGalleryImages = () => {
+	let array = [];
+	fullSizeHideawayImages.keys().map((file) => {
+		const original = fullSizeHideawayImages(file);
+
+		array.push({
+			original: original,
+			thumbnail: original,
+		});
+	});
+	return array;
+};
+
+export const hideawayGalleryImages = createHideawayGalleryImages();
+
