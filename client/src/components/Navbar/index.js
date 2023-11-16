@@ -11,10 +11,10 @@ function Navbar() {
 	const [mobileViewport, setMobileViewport] = useState(false);
 	const [showDropdownMenu, setShowDropdownMenu] = useState(false);
 	const [dropdownMenuDisplay, setDropdownMenuDisplay] = useState('none');
-	
+
 	const nav = useRef();
 	const dropdown = useRef();
-	
+
 	const [isLargeViewport, setIsLargeViewport] = useState(null);
 
 	const checkLargeViewport = () => {
@@ -24,33 +24,8 @@ function Navbar() {
 	useEffect(() => {
 		const isLarge = checkLargeViewport();
 		setIsLargeViewport(isLarge);
-	})
+	});
 
-	useLayoutEffect(() => {
-		if (isLargeViewport) {
-			console.log(isLargeViewport);
-			let ctx = gsap.context(() => {
-				let tl = gsap.timeline();
-				tl.fromTo(dropdown.current, { y: -200 }, { y: 0, duration: 1, ease: 'power1.in' });
-			}, nav);
-			
-			return () => ctx.revert();
-		}
-	}, [showDropdownMenu]);
-
-	const dropdownOut = () => {
-		let ctx = gsap.context(() => {
-			let tl = gsap.timeline();
-			tl.fromTo(dropdown.current, {y: 0}, {
-				y: -200,
-				duration: 1,
-				ease: 'power1.out'
-			});
-			tl.add(() => setTimeout(setDropdownMenuDisplay('none'), 1))
-		});
-
-		return () => ctx.revert();
-	};
 
 	const isMediumViewport = () => {
 		return window.innerWidth < 766;
@@ -66,7 +41,7 @@ function Navbar() {
 	}, []);
 
 	useEffect(() => {
-		showDropdownMenu ? setDropdownMenuDisplay('') : dropdownOut();
+		showDropdownMenu ? setDropdownMenuDisplay('') : setDropdownMenuDisplay('none');
 	}, [showDropdownMenu]);
 
 	return (

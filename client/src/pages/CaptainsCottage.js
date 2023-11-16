@@ -27,21 +27,9 @@ function CaptainsCottage() {
 	const main = useRef();
 	const smoother = useRef();
 
-	const [isLargeViewport, setIsLargeViewport] = useState(null);
-
-	const checkLargeViewport = () => {
-		return window.innerWidth > 766;
-	};
-
-	useEffect(() => {
-		const isLarge = checkLargeViewport();
-		setIsLargeViewport(isLarge);
-	});
 
 	useLayoutEffect(() => {
-		if (isLargeViewport) {
 			createScrollSmoother(main, smoother);
-		}
 	}, [main, smoother]);
 
 	const toggleGalleryFullScreen = () => {

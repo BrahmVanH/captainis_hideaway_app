@@ -13,7 +13,6 @@ import { PiCookingPot, PiCouch, PiFlowerTulipDuotone } from 'react-icons/pi';
 import { MdOutlineOutdoorGrill, MdOutlineBrunchDining, MdOutlineKitchen } from 'react-icons/md';
 import { TbWifi, TbWashMachine, TbWashDry1, TbToolsKitchen2, TbDeviceTv, TbKayak } from 'react-icons/tb';
 
-import AvailabilityCalendar from '../components/Calendar';
 
 import dishwasherIcon from '../assets/icons/dishwasher_icon.svg';
 import porchIcon from '../assets/icons/porch-icon-noun.svg';
@@ -24,24 +23,24 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 
 import { getHideawayImgs } from '../utils/gallery_image_helpers';
 import { createScrollSmoother } from '../utils/gsapHelpers';
+
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import AvailabilityCalendar from '../components/Calendar';
 import AmenitiesModal from '../components/AmenitiesModal';
-import { getImages } from '../utils/s3Query';
 
 function CaptainsHideaway() {
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
 	const smoother = useRef();
 	const hideawayAmenitiesComponent = useRef(null);
-	
+
 	const [isLargeViewport, setIsLargeViewport] = useState(null);
 	const [hideawayGalleryUrls, setHideawayGalleryUrls] = useState([]);
 	const [hideawayHeaderUrl, setHideawayHeaderUrl] = useState('');
 	const [hideawayImageUrls, setHideawayImgUrls] = useState(null);
 	const [mastheadBackgroundImg, setMastheadBackgroundImg] = useState({});
 	const [loading, setLoading] = useState(true);
-	const [thumbnailSize, setThumbnailSize] = useState('300');
 
 	useEffect(() => {
 		const fetchHideawayImages = async () => {
@@ -55,6 +54,7 @@ function CaptainsHideaway() {
 
 		fetchHideawayImages();
 	}, []);
+
 
 	useEffect(() => {
 		if (hideawayImageUrls) {
@@ -70,52 +70,21 @@ function CaptainsHideaway() {
 		}
 	}, [hideawayHeaderUrl]);
 
-	// const isMobileViewport = () => {
-	// 	return window.innerWidth < 577;
-	// };
-
-	// const isMediumViewport = () => {
-	// 	return window.innerWidth < 766;
-	// };
-
-
-	const checkLargeViewport = () => {
-		return window.innerWidth > 766;
-	};
-
-	useEffect(() => {
-		const isLarge = checkLargeViewport();
-		setIsLargeViewport(isLarge);
-	});
-
-
-	// useEffect(() => {
-	// 	if (isMobileViewport) {
-	// 		setThumbnailSize('100');
-	// 	} else if (isMediumViewport) {
-	// 		setThumbnailSize('150');
-	// 	} else {
-	// 		setThumbnailSize('300');
-	// 	}
-	// });
-
 	useLayoutEffect(() => {
-		if (isLargeViewport) {
-			createScrollSmoother(main, smoother);
-		}
+		createScrollSmoother(main, smoother);
 	}, [main, smoother]);
 
 	const toggleGalleryFullScreen = () => {
 		// imageGalleryRef.current.fullScreen();
-		return;
+		return
 	};
 
 	const propertyName = 'captainsHideaway';
 	return (
-		<>
-			{hideawayImageUrls && !loading ? (
-				<div ref={main} id='smooth-wrapper'>
-					<div id='smooth-content'>
+		<div ref={main} id='smooth-wrapper'>
+			<div id='smooth-content'>
+				{hideawayImageUrls && !loading ? (
+					<>
 						<Navbar />
 						<header onClick={toggleGalleryFullScreen} style={mastheadBackgroundImg} className='captains-hideaway-header masthead'></header>
 
@@ -387,16 +356,16 @@ function CaptainsHideaway() {
 								</div>
 							</div>
 							<div className='image-gallery-wrapper'>
-								<ImageGallery ref={imageGalleryRef} thumbnailWidth={thumbnailSize} thumbnailHeight={thumbnailSize} showPlayButton={false} items={hideawayGalleryUrls} />
+								<ImageGallery ref={imageGalleryRef} isFullScreen={true} showPlayButton={false} items={hideawayGalleryUrls} />
 							</div>
 						</div>
 						<Footer />
-					</div>
-				</div>
-			) : (
-				<div>Loading</div>
-			)}
-		</>
+					</>
+				) : (
+					<div>Loading</div>
+				)}
+			</div>
+		</div>
 	);
 }
 
