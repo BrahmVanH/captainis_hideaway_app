@@ -4,7 +4,7 @@ import ImageGallery from 'react-image-gallery';
 import AvailabilityCalendar from '../components/Calendar';
 
 import { createScrollSmoother } from '../utils/gsapHelpers';
-import { cottageGalleryImages } from '../utils/gallery_image_helpers';
+// import { cottageGalleryImages } from '../utils/gallery_image_helpers';
 
 import { CiCoffeeBean } from 'react-icons/ci';
 import { GiBathtub, GiBunkBeds, GiBeachBucket, GiHeatHaze } from 'react-icons/gi';
@@ -276,7 +276,7 @@ useLayoutEffect(() => {
 						</div>
 					</div>
 					<div className='image-gallery-wrapper'>
-						<ImageGallery ref={imageGalleryRef} showPlayButton={false} isFullScreen={true} items={cottageGalleryImages} />
+						{/* <ImageGallery ref={imageGalleryRef} showPlayButton={false} isFullScreen={true} items={cottageGalleryImages} /> */}
 					</div>
 				</div>
 				<Footer />

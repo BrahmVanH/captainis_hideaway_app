@@ -22,7 +22,7 @@ const resolvers = {
 		queryUnavailableDatesByProperty: async (parent, { propertyName }) => {
 			try {
 				if (!propertyName) {
-					throw new Error("No property name was presented for querying dates");
+					throw new Error('No property name was presented for querying dates');
 				}
 				const dates = await UnavailableDate.find({ propertyName: propertyName });
 				if (!dates) {
@@ -33,36 +33,6 @@ const resolvers = {
 				return [{ message: 'Error in queryUnavailableDates...', details: err.message }];
 			}
 		},
-		getImages: async () => {
-			const bucketName = 'lakesuperiorcaptains';
-			const params = {
-				bucket: bucketName,
-				host: bucketName,
-				prefix: 'captains_hideaway_png/',
-			};
-
-			try {
-				const data = await s3.listObjectsV2(params).promise();
-
-				if (!data) {
-					throw new Error('Could not retrieve images from S3');
-				}
-
-				const imageUrls = data.Contents.map((item) => {
-					return s3.getSignedUrl('getObject', {
-						bucket: 'lakesuperiorcaptains',
-						host: bucketName,
-						key: item.Key,
-						expires: 60,
-					});
-				});
-
-				return imageUrls;
-			} catch (err) {
-				return [{ message: 'Error in querying s3 for images', details: err.message }];
-
-			}
-		}
 	},
 	Mutation: {
 		createUser: async (parent, { firstName, lastName, username, userPassword, adminCode }) => {
@@ -94,9 +64,8 @@ const resolvers = {
 		},
 		loginUser: async (parent, { username, userPassword }) => {
 			try {
-
-				if (!username || !userPassword ) {
-					throw new Error("username and password fields must be filled to log in")
+				if (!username || !userPassword) {
+					throw new Error('username and password fields must be filled to log in');
 				}
 				const user = await User.findOne({ username });
 				if (!user) {
@@ -104,7 +73,7 @@ const resolvers = {
 				}
 
 				const hashedPassword = user.password;
-				
+
 				const isPasswordValid = bcrypt.compareSync(userPassword, hashedPassword);
 
 				if (!isPasswordValid) {
