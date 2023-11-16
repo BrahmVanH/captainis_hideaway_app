@@ -1,4 +1,4 @@
-import React, { useRef, useLayoutEffect } from 'react';
+import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
 
 import ImageGallery from 'react-image-gallery';
 import AvailabilityCalendar from '../components/Calendar';
@@ -27,9 +27,22 @@ function CaptainsCottage() {
 	const main = useRef();
 	const smoother = useRef();
 
-useLayoutEffect(() => {
-	createScrollSmoother(main, smoother);
-}, []);
+	const [isLargeViewport, setIsLargeViewport] = useState(null);
+
+	const checkLargeViewport = () => {
+		return window.innerWidth > 766;
+	};
+
+	useEffect(() => {
+		const isLarge = checkLargeViewport();
+		setIsLargeViewport(isLarge);
+	});
+
+	useLayoutEffect(() => {
+		if (isLargeViewport) {
+			createScrollSmoother(main, smoother);
+		}
+	}, [main, smoother]);
 
 	const toggleGalleryFullScreen = () => {
 		imageGalleryRef.current.fullScreen();
@@ -43,12 +56,12 @@ useLayoutEffect(() => {
 				<header onClick={toggleGalleryFullScreen} className='captains-cottage-header masthead'></header>
 
 				<div className='d-flex align-items-center flex-column '>
-					<div className='col-md-10 d-flex'>
-						<div className='col-8'>
+					<div className='col-lg-10 col-11 d-flex flex-lg-row flex-column justify-content-center'>
+						<div className='col-lg-8 col-12'>
 							<div className='overview-card card'>
-								<div className='captains-hideaway-card-body card-body d-flex flex-column'>
+								<div className='captains-cottage-card-body card-body d-flex flex-column'>
 									<h3 className='card-title'>Captain's Cottage</h3>
-									<div className='overview d-flex justify-content-around'>
+									<div className='overview d-flex justify-content-lg-around justify-content-center'>
 										<div className='overview-item'>
 											<BsFillDoorOpenFill size='24px' className='overview-item-icon' />
 											<p>2 bedrooms</p>
@@ -65,16 +78,16 @@ useLayoutEffect(() => {
 								</div>
 							</div>
 							<div className='rooms-and-beds-card card'>
-								<div className='captains-hideaway-card-body card-body d-flex flex-column'>
-									<div className='rooms-and-beds-inner-container d-flex'>
+								<div className='captains-cottage-card-body card-body d-flex flex-column'>
+									<div className='rooms-and-beds-inner-container d-flex flex-lg-row flex-column'>
 										<h3 style={{ padding: '0.5rem 0.5rem 0.5rem 1rem', margin: '0px' }}>Rooms &amp; Beds</h3>
-										<div className='d-flex flex-row justify-content-between' style={{ padding: '0.5rem', width: '100%', margin: '0.5rem' }}>
-											<div className='bedroom-description-container'>
+										<div className='d-flex flex-row justify-content-between flex-lg-nowrap flex-wrap' style={{ padding: '0.5rem', width: '100%', margin: '0.5rem' }}>
+											<div className='cottage-bedroom-description-container'>
 												<p>Bedroom 1</p>
 												<LuBedDouble style={{ marginTop: '0.25rem' }} size='18px' />
 												<p className='bedroom-description-text'>1 Queen Bed</p>
 											</div>
-											<div className='bedroom-description-container'>
+											<div className='cottage-bedroom-description-container'>
 												<p>Common Area</p>
 												<div style={{ lineHeight: '20px', display: 'inline-block' }}>
 													<PiCouch style={{ marginTop: '0.25rem' }} size='16px' />
@@ -83,11 +96,13 @@ useLayoutEffect(() => {
 													1 Double Futon
 												</p>
 											</div>
-											<div className='bedroom-description-container'>
+											<div className='cottage-bedroom-description-container'>
 												<p>Loft</p>
-												<LuBedDouble style={{ marginTop: '0.25rem' }} size='18px' />
-												<LuBedSingle style={{ marginTop: '0.25rem' }} size='18px' />
-												<GiBunkBeds style={{ marginTop: '0.25rem' }} size='18px' />
+												<div className='bedroom-description-loft-icons'>
+													<LuBedDouble style={{ marginTop: '0.25rem' }} size='18px' />
+													<LuBedSingle style={{ marginTop: '0.25rem' }} size='18px' />
+													<GiBunkBeds style={{ marginTop: '0.25rem' }} size='18px' />
+												</div>
 												<p className='bedroom-description-text'>1 Queen, 1 Double, Twin Bunkbeds</p>
 											</div>
 										</div>
@@ -96,10 +111,10 @@ useLayoutEffect(() => {
 							</div>
 
 							<div className='spaces-card card'>
-								<div className='captains-hideaway-card-body card-body d-flex flex-column'>
+								<div className='captains-cottage-card-body card-body d-flex flex-column'>
 									<div className='d-flex' style={{ padding: '0.5rem' }}>
 										<h3 className='spaces-header-text'>Spaces</h3>
-										<div className='d-flex flex-row justify-content-around' style={{ width: '100%', padding: '0.5rem' }}>
+										<div className='d-flex flex-lg-row flex-column align-items-center justify-content-around' style={{ width: '100%', padding: '0.5rem' }}>
 											<div className='spaces-item-container'>
 												<img alt='deck icon' src={deckIcon} height={'18px'} />
 												<p className='spaces-text'>Deck/Patio</p>
@@ -122,7 +137,7 @@ useLayoutEffect(() => {
 
 					<div className='about-property-card card col-sm-11 col-md-10 ' style={{ padding: '0.5rem' }}>
 						<div className='captains-hideaway-card-body card-body d-flex flex-column'>
-							<div className='d-flex' style={{ padding: '0.5rem' }}>
+							<div className='d-flex flex-lg-row flex-column' style={{ padding: '0.5rem' }}>
 								<h3 className='about-property-header' style={{ margin: '0px', padding: '0.5rem' }}>
 									About the Property
 								</h3>
@@ -139,8 +154,8 @@ useLayoutEffect(() => {
 						</div>
 					</div>
 					<div className='amenities-card card col-sm-11 col-md-10 ' style={{ margin: '0.5rem' }}>
-						<div className='captains-hideaway-card-body card-body d-flex flex-column' style={{ padding: '0.5rem' }}>
-							<div className='d-flex' style={{ padding: '0.5rem' }}>
+						<div className='captains-cottage-card-body card-body d-flex flex-column' style={{ padding: '0.5rem' }}>
+							<div className='d-flex flex-column flex-lg-row' style={{ padding: '0.5rem' }}>
 								<h3 style={{ margin: '0px', padding: '0.5rem' }}>Amenities</h3>
 								<div className='amenities-item-wrapper' style={{ margin: '0.5rem', fontSize: '14px', width: '90%', padding: '0.5rem' }}>
 									<div className='amenities-item-container' style={{ width: '100%', height: '100%' }}>
@@ -148,6 +163,14 @@ useLayoutEffect(() => {
 											<div className='amenities-item'>
 												<TbToolsKitchen2 />
 												<p>Kitchen</p>
+											</div>
+											<div className='amenities-item'>
+												<GiHeatHaze />
+												<p>Heat</p>
+											</div>
+											<div className='amenities-item'>
+												<GiBeachBucket />
+												<p>Beach Access</p>
 											</div>
 										</div>
 										<div style={{ padding: '0.5rem' }}>
@@ -162,16 +185,6 @@ useLayoutEffect(() => {
 											<div className='amenities-item'>
 												<BsSun />
 												<p>Outdoor Space</p>
-											</div>
-										</div>
-										<div style={{ padding: '0.5rem' }}>
-											<div className='amenities-item'>
-												<GiHeatHaze />
-												<p>Heat</p>
-											</div>
-											<div className='amenities-item'>
-												<GiBeachBucket />
-												<p>Beach Access</p>
 											</div>
 										</div>
 										<div style={{ padding: '0.5rem' }}>
@@ -213,7 +226,7 @@ useLayoutEffect(() => {
 						</div>
 					</div>
 					<div className='house-rules-card card col-sm-11 col-md-10 '>
-						<div className='captains-hideaway-card-body card-body d-flex flex-column' style={{ padding: '0.5rem' }}>
+						<div className='captains-cottage-card-body card-body d-flex flex-column' style={{ padding: '0.5rem' }}>
 							<div className='house-rules-container'>
 								<h3 style={{ padding: '0.5rem' }}>House Rules</h3>
 								<div className='house-rules-text-wrapper'>
@@ -245,7 +258,7 @@ useLayoutEffect(() => {
 											<p style={{ margin: '0rem', padding: '0.5rem' }}>
 												All dogs on property must be approved by owner. If dogs are left unattended in house for more than 2 hours, renter will forfeit security deposit.
 											</p>
-											<p sstyle={{ padding: '0rem', margin: '0.5rem' }}>No Pit Bull Terrier breeds of any kind.</p>
+											<p style={{ padding: '0rem', margin: '0.5rem' }}>No Pit Bull Terrier breeds of any kind.</p>
 											<p style={{ margin: '0rem', padding: '0.5rem' }}>If you are inquiring about an earlier check-in, call Elyse day before your date for info.</p>
 										</div>
 									</div>
@@ -260,7 +273,7 @@ useLayoutEffect(() => {
 						</div>
 					</div>
 					<div className='important-information-card card col-sm-11 col-md-10 '>
-						<div className='captains-hideaway-card-body card-body d-flex flex-column' style={{ padding: '0.5rem' }}>
+						<div className='captains-cottage-card-body card-body d-flex flex-column' style={{ padding: '0.5rem' }}>
 							<div className='d-flex' style={{ padding: '0.5rem' }}>
 								<h3 style={{ padding: '0.5rem' }}>Important Information</h3>
 								<div className='important-information'>
@@ -275,9 +288,7 @@ useLayoutEffect(() => {
 							</div>
 						</div>
 					</div>
-					<div className='image-gallery-wrapper'>
-						{/* <ImageGallery ref={imageGalleryRef} showPlayButton={false} isFullScreen={true} items={cottageGalleryImages} /> */}
-					</div>
+					<div className='image-gallery-wrapper'>{/* <ImageGallery ref={imageGalleryRef} showPlayButton={false} isFullScreen={true} items={cottageGalleryImages} /> */}</div>
 				</div>
 				<Footer />
 			</div>

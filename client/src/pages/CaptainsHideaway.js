@@ -33,8 +33,9 @@ function CaptainsHideaway() {
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
 	const smoother = useRef();
-	const amenitiesComponent = useRef(null);
-
+	const hideawayAmenitiesComponent = useRef(null);
+	
+	const [isLargeViewport, setIsLargeViewport] = useState(null);
 	const [hideawayGalleryUrls, setHideawayGalleryUrls] = useState([]);
 	const [hideawayHeaderUrl, setHideawayHeaderUrl] = useState('');
 	const [hideawayImageUrls, setHideawayImgUrls] = useState(null);
@@ -63,8 +64,6 @@ function CaptainsHideaway() {
 		}
 	}, [hideawayImageUrls]);
 
-
-
 	useEffect(() => {
 		if (hideawayHeaderUrl) {
 			setMastheadBackgroundImg({ backgroundImage: `url(${hideawayHeaderUrl})` });
@@ -79,6 +78,17 @@ function CaptainsHideaway() {
 	// 	return window.innerWidth < 766;
 	// };
 
+
+	const checkLargeViewport = () => {
+		return window.innerWidth > 766;
+	};
+
+	useEffect(() => {
+		const isLarge = checkLargeViewport();
+		setIsLargeViewport(isLarge);
+	});
+
+
 	// useEffect(() => {
 	// 	if (isMobileViewport) {
 	// 		setThumbnailSize('100');
@@ -90,7 +100,9 @@ function CaptainsHideaway() {
 	// });
 
 	useLayoutEffect(() => {
-		createScrollSmoother(main, smoother);
+		if (isLargeViewport) {
+			createScrollSmoother(main, smoother);
+		}
 	}, [main, smoother]);
 
 	const toggleGalleryFullScreen = () => {
@@ -113,7 +125,7 @@ function CaptainsHideaway() {
 									<div className='overview-card card'>
 										<div className='captains-hideaway-card-body card-body d-flex flex-column'>
 											<h3 className='card-title'>Captain's Hideaway</h3>
-											<div className='overview d-flex justify-content-around'>
+											<div className='overview d-flex  justify-content-lg-around justify-content-center'>
 												<div className='overview-item'>
 													<BsFillDoorOpenFill size='24px' className='overview-item-icon' />
 													<p>4 bedrooms</p>
@@ -134,28 +146,28 @@ function CaptainsHideaway() {
 											<div className='rooms-and-beds-inner-container d-flex flex-lg-row flex-column'>
 												<h3 style={{ padding: '0.5rem 0.5rem 0.5rem 1rem', margin: '0px' }}>Rooms &amp; Beds</h3>
 												<div className='d-flex flex-row justify-content-between flex-lg-nowrap flex-wrap' style={{ padding: '0.5rem', width: '100%', margin: '0.5rem' }}>
-													<div className='bedroom-description-container'>
+													<div className='hideaway-bedroom-description-container'>
 														<p>Bedroom 1</p>
 														<IoBedOutline size='22px' />
 														<p className='bedroom-description-text'>1 King Bed</p>
 													</div>
-													<div className='bedroom-description-container'>
+													<div className='hideaway-bedroom-description-container'>
 														<p>Bedroom 2</p>
 														<LuBedDouble style={{ marginTop: '0.25rem' }} size='18px' />
 
 														<p className='bedroom-description-text'>1 Queen Bed</p>
 													</div>
-													<div className='bedroom-description-container'>
+													<div className='hideaway-bedroom-description-container'>
 														<p>Bedroom 3</p>
 														<LuBedSingle style={{ marginTop: '0.25rem' }} size='18px' />
 														<p className='bedroom-description-text'>1 Double Bed</p>
 													</div>
-													<div className='bedroom-description-container'>
+													<div className='hideaway-bedroom-description-container'>
 														<p>Bedroom 4</p>
 														<GiBunkBeds style={{ marginTop: '0.25rem' }} size='18px' />
 														<p className='bedroom-description-text'>1 Twin Bunk Bed</p>
 													</div>
-													<div className='bedroom-description-container'>
+													<div className='hideaway-bedroom-description-container'>
 														<p>Common Area</p>
 														<div style={{ lineHeight: '20px', display: 'inline-block' }}>
 															<PiCouch style={{ marginTop: '0.25rem' }} size='16px' />
@@ -200,7 +212,7 @@ function CaptainsHideaway() {
 										</div>
 									</div>
 								</div>
-								<AvailabilityCalendar id='#calendar' propertyName={propertyName} />
+								<AvailabilityCalendar id='calendar' propertyName={propertyName} />
 							</div>
 
 							<div className='about-property-card card col-sm-11 col-md-10 ' style={{ padding: '0.5rem' }}>
@@ -304,7 +316,7 @@ function CaptainsHideaway() {
 												</div>
 											</div>
 											<div className='d-flex justify-content-end'>
-												<AmenitiesModal btnRef={amenitiesComponent} htmlOpenClassName={'ReactModal__Html--open'} amenities={hideawayAmenities} />
+												<AmenitiesModal btnRef={hideawayAmenitiesComponent} htmlOpenClassName={'ReactModal__Html--open'} amenities={hideawayAmenities} />
 											</div>
 										</div>
 									</div>
@@ -343,7 +355,7 @@ function CaptainsHideaway() {
 													<p style={{ margin: '0rem', padding: '0.5rem' }}>
 														All dogs on property must be approved by owner. If dogs are left unattended in house for more than 2 hours, renter will forfeit security deposit.
 													</p>
-													<p sstyle={{ padding: '0rem', margin: '0.5rem' }}>No Pit Bull Terrier breeds of any kind.</p>
+													<p style={{ padding: '0rem', margin: '0.5rem' }}>No Pit Bull Terrier breeds of any kind.</p>
 													<p style={{ margin: '0rem', padding: '0.5rem' }}>If you are inquiring about an earlier check-in, call Elyse day before your date for info.</p>
 												</div>
 											</div>
