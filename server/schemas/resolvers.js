@@ -2,6 +2,7 @@ const { AuthenticationError } = require('apollo-server-express');
 const { UnavailableDate, User } = require('../models');
 const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
+const s3 = require('../server');
 
 const resolvers = {
 	Query: {
@@ -21,7 +22,7 @@ const resolvers = {
 		queryUnavailableDatesByProperty: async (parent, { propertyName }) => {
 			try {
 				if (!propertyName) {
-					throw new Error("No property name was presented for querying dates");
+					throw new Error('No property name was presented for querying dates');
 				}
 				const dates = await UnavailableDate.find({ propertyName: propertyName });
 				if (!dates) {
@@ -63,9 +64,8 @@ const resolvers = {
 		},
 		loginUser: async (parent, { username, userPassword }) => {
 			try {
-
-				if (!username || !userPassword ) {
-					throw new Error("username and password fields must be filled to log in")
+				if (!username || !userPassword) {
+					throw new Error('username and password fields must be filled to log in');
 				}
 				const user = await User.findOne({ username });
 				if (!user) {
@@ -73,7 +73,7 @@ const resolvers = {
 				}
 
 				const hashedPassword = user.password;
-				
+
 				const isPasswordValid = bcrypt.compareSync(userPassword, hashedPassword);
 
 				if (!isPasswordValid) {

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import gsap from 'gsap';
+
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
@@ -16,6 +17,9 @@ import CaptainsHideaway from './pages/CaptainsHideaway';
 import CaptainsCottage from './pages/CaptainsCottage';
 
 import '@csstools/normalize.css';
+import { getImages } from './utils/s3Query';
+
+
 
 
 const client = new ApolloClient({
@@ -25,6 +29,7 @@ const client = new ApolloClient({
 
 
 function App() {
+	getImages();
 
 	// Register GSAP plugins for all components. ScrollSmoother relies on ScrollTrigger
 	gsap.registerPlugin(ScrollTrigger, ScrollSmoother);

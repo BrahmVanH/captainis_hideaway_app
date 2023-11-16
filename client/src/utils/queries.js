@@ -19,3 +19,11 @@ export const QUERY_UNAVAILABLE_DATES = gql`
 		}
 	}
 `;
+
+// export const QUERY_IMAGES = gql`
+// 	query getImages {
+// 		getImages {
+			
+// 		}
+// 	}
+// `
