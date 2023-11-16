@@ -3,6 +3,7 @@ import gsap from 'gsap';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 import ImageGallery from 'react-image-gallery';
+import { hideawayGalleryImages } from '../utils/gallery_image_helpers';
 
 import { hideawayAmenities } from '../utils/captainsHideawayAmenities';
 
@@ -30,39 +31,48 @@ import Footer from '../components/Footer';
 import AvailabilityCalendar from '../components/Calendar';
 import AmenitiesModal from '../components/AmenitiesModal';
 
-function CaptainsHideaway() {
+function CaptainsHideaway(props) {
+	const { hideawayGalleryUrls, hideawayHeaderUrl } = props;
+	console.log(hideawayGalleryUrls);
+	console.log(hideawayHeaderUrl);
+
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
 	const smoother = useRef();
 	const hideawayAmenitiesComponent = useRef(null);
 
 	const [isLargeViewport, setIsLargeViewport] = useState(null);
-	const [hideawayGalleryUrls, setHideawayGalleryUrls] = useState([]);
-	const [hideawayHeaderUrl, setHideawayHeaderUrl] = useState('');
-	const [hideawayImageUrls, setHideawayImgUrls] = useState(null);
+	// const [hideawayGalleryUrls, setHideawayGalleryUrls] = useState([]);
+	// const [hideawayHeaderUrl, setHideawayHeaderUrl] = useState([]);
+	// const [hideawayImageUrls, setHideawayImgUrls] = useState([]);
 	const [mastheadBackgroundImg, setMastheadBackgroundImg] = useState({});
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
-		const fetchHideawayImages = async () => {
-			try {
-				const imageUrls = await getHideawayImgs();
-				setHideawayImgUrls(imageUrls);
-			} catch (error) {
-				console.error('Error fetching hideaway images:', error);
-			}
-		};
-
-		fetchHideawayImages();
-	}, []);
-
-	useEffect(() => {
-		if (hideawayImageUrls) {
-			setHideawayHeaderUrl(hideawayImageUrls.hideawayHeaderUrl);
-			setHideawayGalleryUrls(hideawayImageUrls.hideawayImgGalArr);
+		if (hideawayGalleryUrls && hideawayHeaderUrl) {
 			setLoading(false);
 		}
-	}, [hideawayImageUrls]);
+	})
+	// const fetchHideawayImages = async () => {
+	// 	try {
+	// 		const imageUrls = await getHideawayImgs();
+	// 		setHideawayImgUrls(imageUrls);
+	// 	} catch (error) {
+	// 		console.error('Error fetching hideaway images:', error);
+	// 	}
+	// };
+
+	// useEffect(() => {
+	// 	fetchHideawayImages();
+	// }, []);
+
+	// useEffect(() => {
+	// 	if (hideawayImageUrls) {
+	// 		setHideawayHeaderUrl(hideawayImageUrls.hideawayHeaderUrl);
+	// 		setHideawayGalleryUrls(hideawayImageUrls.hideawayImgGalArr);
+	// 		setLoading(false);
+	// 	}
+	// }, [hideawayImageUrls]);
 
 	useEffect(() => {
 		if (hideawayHeaderUrl) {
@@ -71,16 +81,8 @@ function CaptainsHideaway() {
 	}, [hideawayHeaderUrl]);
 
 	useLayoutEffect(() => {
-		const ctx = gsap.context(() => {
-			// create the smooth scroller FIRST!
-			smoother.current = ScrollSmoother.create({
-				smooth: 1,
-				effects: true,
-			});
-		}, main);
-		return () => ctx.revert();
-	}, []);
-	
+		createScrollSmoother(main, smoother);
+	}, [main]);
 
 	const propertyName = 'captainsHideaway';
 	return (
@@ -89,7 +91,7 @@ function CaptainsHideaway() {
 				{hideawayHeaderUrl && hideawayGalleryUrls && !loading ? (
 					<>
 						<Navbar />
-						<header style={mastheadBackgroundImg} className='captains-hideaway-header masthead'></header>
+						<header className='captains-hideaway-header masthead'></header>
 
 						<div className='d-flex align-items-center flex-column'>
 							<div className='col-lg-10 col-11 d-flex flex-lg-row flex-column justify-content-center'>
