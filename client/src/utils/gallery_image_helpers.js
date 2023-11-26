@@ -17,12 +17,11 @@ const createCottageGalleryImages = () => {
 	return array;
 };
 
-const getHideawayImgUrls = async () => {
+export const getHideawayImgUrls = async () => {
 	try {
-		const { hideawayGalleryUrls, hideawayHeaderUrl } = await getImages();
-		if (hideawayGalleryUrls.length > 0 && hideawayHeaderUrl != null) {
-			// console.log(hideawayGalleryUrls, hideawayHeaderUrl);
-			return { hideawayGalleryUrls, hideawayHeaderUrl };
+		const hideawayGalleryUrls = await getImages('hideawayGallery');
+		if (hideawayGalleryUrls.length > 0) {
+			return createHideawayImgGalArr(hideawayGalleryUrls);
 		} else {
 			console.log('no images yet');
 			return null;
@@ -45,10 +44,9 @@ const createHideawayImgGalArr = (imageUrls) => {
 	return galleryArray;
 };
 
-export const getHideawayImgs = async () => {
+export const getAllImgs = async () => {
 	try {
-		const { hideawayGalleryUrls, hideawayHeaderUrl } = await getHideawayImgUrls();
-		// console.log(hideawayGalleryUrls, hideawayHeaderUrl);
+		const { hideawayGalleryUrls, hideawayHeaderUrl, homeHeaderUrl } = await getHideawayImgUrls();
 		if (hideawayGalleryUrls.length > 0) {
 			const hideawayImgGalArr = createHideawayImgGalArr(hideawayGalleryUrls);
 
@@ -78,4 +76,3 @@ const createHideawayGalleryImages = () => {
 };
 
 export const hideawayGalleryImages = createHideawayGalleryImages();
-

@@ -3,7 +3,9 @@ import gsap from 'gsap';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 import ImageGallery from 'react-image-gallery';
-import { hideawayGalleryImages } from '../utils/gallery_image_helpers';
+
+import { getHideawayImgUrls } from '../utils/gallery_image_helpers';
+import { getImages } from '../utils/s3Query';
 
 import { hideawayAmenities } from '../utils/captainsHideawayAmenities';
 
@@ -23,7 +25,6 @@ import deckIcon from '../assets/icons/deck-icon-noun.svg';
 import './CaptainsHideaway.css';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
-import { getHideawayImgs } from '../utils/gallery_image_helpers';
 import { createScrollSmoother } from '../utils/gsapHelpers';
 
 import Navbar from '../components/Navbar';
@@ -31,48 +32,66 @@ import Footer from '../components/Footer';
 import AvailabilityCalendar from '../components/Calendar';
 import AmenitiesModal from '../components/AmenitiesModal';
 
-function CaptainsHideaway(props) {
-	const { hideawayGalleryUrls, hideawayHeaderUrl } = props;
-	console.log(hideawayGalleryUrls);
-	console.log(hideawayHeaderUrl);
-
+function CaptainsHideaway() {
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
 	const smoother = useRef();
 	const hideawayAmenitiesComponent = useRef(null);
-
+	const [propertyName, setPropertyName] = useState('captainsHideaway');
 	const [isLargeViewport, setIsLargeViewport] = useState(null);
-	// const [hideawayGalleryUrls, setHideawayGalleryUrls] = useState([]);
-	// const [hideawayHeaderUrl, setHideawayHeaderUrl] = useState([]);
-	// const [hideawayImageUrls, setHideawayImgUrls] = useState([]);
+	const [hideawayGalleryUrls, setHideawayGalleryUrls] = useState([]);
+	const [hideawayHeaderUrl, setHideawayHeaderUrl] = useState([]);
+	const [hideawayImgUrls, setHideawayImgUrls] = useState([]);
 	const [mastheadBackgroundImg, setMastheadBackgroundImg] = useState({});
 	const [loading, setLoading] = useState(true);
+	const [isIntersecting, setIntersecting] = useState(false);
+	const trigger = useRef(null);
+
+	const isElementInViewport = (ref) => {
+		
+			const observer = new IntersectionObserver(([entry]) => setIntersecting(entry.isIntersecting));
+			observer.observe(ref.current);
+			setTimeout(observer.disconnect(), 3000);
+		
+	};
+
+	const fetchHeaderImage = async () => {
+		console.log('fetching header image...');
+		try {
+			const headerUrl = await getImages('hideawayHeader');
+			if (headerUrl) {
+				console.log(headerUrl);
+				setHideawayHeaderUrl(headerUrl);
+			} else {
+				console.log('header url not retrieved');
+			}
+		} catch (error) {
+			console.error('Error fetching header image:', error);
+			setMastheadBackgroundImg('none');
+		}
+	};
+	const fetchGalleryImages = async () => {
+		try {
+			const imageUrls = await getHideawayImgUrls();
+			setHideawayImgUrls(imageUrls);
+		} catch (error) {
+			console.error('Error fetching hideaway images:', error);
+		}
+	};
+	useEffect(() => {
+		fetchHeaderImage();
+	}, []);
 
 	useEffect(() => {
-		if (hideawayGalleryUrls && hideawayHeaderUrl) {
-			setLoading(false);
+		if (isIntersecting) {
+			fetchGalleryImages();
 		}
-	})
-	// const fetchHideawayImages = async () => {
-	// 	try {
-	// 		const imageUrls = await getHideawayImgs();
-	// 		setHideawayImgUrls(imageUrls);
-	// 	} catch (error) {
-	// 		console.error('Error fetching hideaway images:', error);
-	// 	}
-	// };
+	}, [isIntersecting]);
 
-	// useEffect(() => {
-	// 	fetchHideawayImages();
-	// }, []);
-
-	// useEffect(() => {
-	// 	if (hideawayImageUrls) {
-	// 		setHideawayHeaderUrl(hideawayImageUrls.hideawayHeaderUrl);
-	// 		setHideawayGalleryUrls(hideawayImageUrls.hideawayImgGalArr);
-	// 		setLoading(false);
-	// 	}
-	// }, [hideawayImageUrls]);
+	useLayoutEffect(() => {
+		console.log('adding event listener...');
+		window.addEventListener('scroll', isElementInViewport);
+	}, []);
 
 	useEffect(() => {
 		if (hideawayHeaderUrl) {
@@ -80,18 +99,26 @@ function CaptainsHideaway(props) {
 		}
 	}, [hideawayHeaderUrl]);
 
+	useEffect(() => {
+		if (hideawayHeaderUrl) {
+			setLoading(false);
+		}
+	});
+
+	useEffect(() => {
+		console.log(trigger);
+	}, [trigger]);
+
 	useLayoutEffect(() => {
 		createScrollSmoother(main, smoother);
 	}, [main]);
-
-	const propertyName = 'captainsHideaway';
 	return (
 		<div ref={main} id='smooth-wrapper'>
 			<div id='smooth-content'>
 				{hideawayHeaderUrl && hideawayGalleryUrls && !loading ? (
 					<>
 						<Navbar />
-						<header className='captains-hideaway-header masthead'></header>
+						<header className='captains-hideaway-header masthead' style={mastheadBackgroundImg}></header>
 
 						<div className='d-flex align-items-center flex-column'>
 							<div className='col-lg-10 col-11 d-flex flex-lg-row flex-column justify-content-center'>
@@ -343,7 +370,7 @@ function CaptainsHideaway(props) {
 									</div>
 								</div>
 							</div>
-							<div className='important-information-card card col-sm-11 col-md-10 '>
+							<div ref={trigger} className='important-information-card card col-sm-11 col-md-10 '>
 								<div className='captains-hideaway-card-body card-body d-flex flex-column' style={{ padding: '0.5rem' }}>
 									<div className='d-flex' style={{ padding: '0.5rem' }}>
 										<h3 style={{ padding: '0.5rem' }}>Important Information</h3>

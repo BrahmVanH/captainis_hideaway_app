@@ -25,9 +25,10 @@ const getSignedUrl = (imageItem) => {
 	});
 };
 
-export const getImages = async () => {
+export const getImages = async (objectRequest) => {
 	const bucketName = 'lakesuperiorcaptains';
-	const headerImgKey = 'captains_hideaway_png/stairs_from_beach_rotated.png';
+	const hideawayHeaderImgKey = 'captains_hideaway_png/stairs_from_beach_rotated.png';
+	const homeHeaderImgKey = 'captains_hideaway_png/arial_shot_over_beach_side.png';
 	const params = {
 		Bucket: bucketName,
 		Prefix: 'captains_hideaway_png/',
@@ -35,24 +36,58 @@ export const getImages = async () => {
 
 	let hideawayGalleryUrls;
 	let hideawayHeaderUrl;
+	let homeHeaderUrl;
+	let objectResponse;
 
-	try {
-		const data = await s3.listObjectsV2(params).promise();
-		// console.log(data);
+	const tobeCottageGal = 'cottageGallery';
+	const tobeCottageHead = 'cottageHeader';
+	const tobeAbout = 'about';
+	if (objectRequest === 'hideawayGallery') {
+		try {
+			const data = await s3.listObjectsV2(params).promise();
 
-		if (data) {
-			const headerImgIndex = findImgIndex(data, headerImgKey)[0];
+			if (data) {
+				hideawayGalleryUrls = await data?.Contents.map((item) => {
+					return getSignedUrl(item);
+				});
 
-			hideawayHeaderUrl = await getSignedUrl(data.Contents[headerImgIndex]);
-
-			hideawayGalleryUrls = await data?.Contents.map((item) => {
-				return getSignedUrl(item);
-			});
-			return { hideawayGalleryUrls, hideawayHeaderUrl };
-		} else if (!data) {
-			throw new Error('Could not retrieve images from S3');
+				objectResponse = hideawayGalleryUrls;
+				return objectResponse;
+			} else if (!data) {
+				throw new Error('Could not retrieve images from S3');
+			}
+		} catch (err) {
+			return [{ message: 'Error in querying s3 for images', details: err.message }];
 		}
-	} catch (err) {
-		return [{ message: 'Error in querying s3 for images', details: err.message }];
+	} else if (objectRequest === 'hideawayHeader') {
+		try {
+			const data = await s3.listObjectsV2(params).promise();
+			if (data) {
+				const hideawayHeaderImgIndex = findImgIndex(data, hideawayHeaderImgKey)[0];
+				hideawayHeaderUrl = await getSignedUrl(data.Contents[hideawayHeaderImgIndex]);
+
+				objectResponse = hideawayHeaderUrl;
+				return objectResponse;
+			} else if (!data) {
+				throw new Error('Could not retrieve images from S3');
+			}
+		} catch (err) {
+			return [{ message: 'Error in querying s3 for images', details: err.message }];
+		}
+	} else if (objectRequest === 'homeHeader') {
+		try {
+			const data = await s3.listObjectsV2(params).promise();
+			if (data) {
+				const homeheaderImgIndex = findImgIndex(data, homeHeaderImgKey)[0];
+				homeHeaderUrl = await getSignedUrl(data.Contents[homeheaderImgIndex]);
+
+				objectResponse = homeHeaderUrl;
+				return objectResponse;
+			} else if (!data) {
+				throw new Error('Could not retrieve images from S3');
+			}
+		} catch (err) {
+			return [{ message: 'Error in querying s3 for images', details: err.message }];
+		}
 	}
 };

@@ -4,6 +4,9 @@ body {
 	width: 100vw;
 	overscroll-behavior-y: auto;
 }
+body {
+	background-color: rgba(116, 159, 177, 0.381) !important;
+}
 
 body.ReactModal__Body--open {
 	height: 100vh;

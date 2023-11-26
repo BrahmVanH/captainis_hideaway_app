@@ -1,6 +1,8 @@
-import React, { useLayoutEffect,  useRef } from 'react';
+import React, { useLayoutEffect,  useRef, useEffect, useState } from 'react';
 
 import { createScrollSmoother } from '../utils/gsapHelpers';
+// import { getHideawayImgs } from '../utils/gallery_image_helpers';
+
 
 
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -12,7 +14,32 @@ import Footer from '../components/Footer';
 function Home() {
 	const main = useRef();
 	const smoother = useRef();
+	const [hideawayGalleryUrls, setHideawayGalleryUrls] = useState([]);
+	const [hideawayHeaderUrl, setHideawayHeaderUrl] = useState([]);
+	const [hideawayImgUrls, setHideawayImgUrls] = useState([]);
+	const [homeHeaderUrl, setHomeHeaderUrl] = useState([]);
 
+	// const fetchHideawayImages = async () => {
+	// 	try {
+	// 		const imageUrls = await getHideawayImgs();
+	// 		setHideawayImgUrls(imageUrls);
+	// 	} catch (error) {
+	// 		console.error('Error fetching hideaway images:', error);
+	// 	}
+	// };
+
+		// useEffect(() => {
+		// 	fetchHideawayImages();
+		// }, []);
+
+		// 	useEffect(() => {
+		// 		if (hideawayImgUrls) {
+		// 			setHideawayHeaderUrl(hideawayImgUrls.hideawayHeaderUrl);
+		// 			setHideawayGalleryUrls(hideawayImgUrls.hideawayImgGalArr);
+		// 			setHomeHeaderUrl(hideawayImgUrls.homeHeaderUrl);
+		// 		}
+		// 	}, [hideawayImgUrls]);
+			
 	
 
 	useLayoutEffect(() => {
