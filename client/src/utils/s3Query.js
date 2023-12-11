@@ -65,8 +65,6 @@ export const getImgTags = async (imageBucket, imageItems) => {
 				})
 			);
 			if (taggingData.length > 0) {
-				console.log(taggingData);
-
 				return taggingData;
 			}
 		}
@@ -116,7 +114,6 @@ export const getImages = async (objectRequest) => {
 				const hideawayGalleryAltTags = await getImgTags(hideawayParams.Bucket, data);
 				if (hideawayGalleryAltTags.length > 0) {
 					objectResponse = hideawayGalleryAltTags;
-					console.log(objectResponse);
 				}
 				return objectResponse;
 			} else if (!data) {

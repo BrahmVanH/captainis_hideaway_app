@@ -31,6 +31,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AvailabilityCalendar from '../components/Calendar';
 import AmenitiesModal from '../components/AmenitiesModal';
+import Loading from '../components/Loading';
 
 function CaptainsHideaway() {
 	const imageGalleryRef = useRef(null);
@@ -47,15 +48,18 @@ function CaptainsHideaway() {
 	const [isIntersecting, setIntersecting] = useState(false);
 	const trigger = useRef(null);
 
+	useEffect(() => {
+		if (hideawayGalleryUrls && mastheadBackgroundImg) {
+			setLoading(false);
+		}
+	}, [hideawayGalleryUrls, mastheadBackgroundImg]);
 	// Use getImages to fetch header image and set state variable
 	const fetchHeaderImage = async () => {
 		try {
 			const headerUrl = await getImages('hideawayHeader');
 			if (headerUrl) {
 				setHideawayHeaderUrl(headerUrl);
-			} else {
-				console.log('header url not retrieved');
-			}
+			} 
 		} catch (error) {
 			console.error('Error fetching header image:', error);
 			setMastheadBackgroundImg('none');
@@ -63,10 +67,8 @@ function CaptainsHideaway() {
 	};
 
 	const fetchGalleryImages = async () => {
-		console.log('fetching gallery images...');
 		try {
 			const imageUrls = await getHideawayImgUrls();
-			console.log("successfully retrieved gallery images", imageUrls);
 			setHideawayGalleryUrls(imageUrls);
 		} catch (error) {
 			console.error('Error fetching hideaway images:', error);
@@ -79,22 +81,11 @@ function CaptainsHideaway() {
 		fetchGalleryImages();
 	}, []);
 
-	// useLayoutEffect(() => {
-	// 	console.log('adding event listener...');
-	// 	window.addEventListener('scroll', isElementInViewport);
-	// }, []);
-
 	useEffect(() => {
 		if (hideawayHeaderUrl) {
 			setMastheadBackgroundImg({ backgroundImage: `url(${hideawayHeaderUrl})` });
 		}
 	}, [hideawayHeaderUrl]);
-
-	useEffect(() => {
-		if (hideawayHeaderUrl) {
-			setLoading(false);
-		}
-	});
 
 	// useLayoutEffect(() => {
 	// 	createScrollSmoother(main, smoother);
@@ -103,10 +94,10 @@ function CaptainsHideaway() {
 	return (
 		<div ref={main} id='smooth-wrapper'>
 			<div id='smooth-content'>
-				{hideawayHeaderUrl && hideawayGalleryUrls && !loading ? (
+				{!loading ? (
 					<>
 						<Navbar />
-						<header className='captains-hideaway-header masthead' style={mastheadBackgroundImg}></header>
+						<header className='captains-hideaway-header masthead' style={mastheadBackgroundImg} alt='house at top of hill from beach'></header>
 
 						<div className='d-flex align-items-center flex-column'>
 							<div className='col-lg-10 col-11 d-flex flex-lg-row flex-column justify-content-center'>
@@ -376,13 +367,13 @@ function CaptainsHideaway() {
 								</div>
 							</div>
 							<div className='image-gallery-wrapper'>
-								<ImageGallery ref={imageGalleryRef} showPlayButton={false} items={hideawayGalleryUrls} />
+								<ImageGallery ref={imageGalleryRef} showPlayButton={false} items={hideawayGalleryUrls} lazyLoad={true} />
 							</div>
 						</div>
 						<Footer />
 					</>
 				) : (
-					<div>Loading</div>
+					<Loading />
 				)}
 			</div>
 		</div>

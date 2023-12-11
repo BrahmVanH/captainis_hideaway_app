@@ -23,9 +23,6 @@ export const getHideawayImgUrls = async () => {
 		const hideawayGalleryAltTags = await getImages('hideawayGalleryAltTags');
 		if (hideawayGalleryUrls.length > 0) {
 			return createHideawayImgGalArr(hideawayGalleryAltTags, hideawayGalleryUrls);
-		} else {
-			console.log('no images yet');
-			return null;
 		}
 	} catch (err) {
 		throw new Error('there was an error fetching images');
@@ -40,7 +37,7 @@ const createHideawayImgGalArr = (hideawayGalleryAltTags, imageUrls) => {
 			original: original,
 			thumbnail: original,
 			originalAlt: null,
-			thumbnailAlt: null
+			thumbnailAlt: null,
 		});
 	});
 	for (let i = 0; i < galleryArray.length; i++) {
@@ -58,7 +55,7 @@ export const getAllImgs = async () => {
 
 			return { hideawayImgGalArr, hideawayHeaderUrl };
 		} else {
-			console.log('couldnt create image gallery array');
+			console.error('couldnt create image gallery array');
 		}
 	} catch (err) {
 		console.error('there was an error getting hideaway gallery url array', err);
@@ -80,9 +77,5 @@ const createHideawayGalleryImages = () => {
 	});
 	return array;
 };
-
-
-
-
 
 export const hideawayGalleryImages = createHideawayGalleryImages();

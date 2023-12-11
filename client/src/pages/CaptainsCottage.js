@@ -2,6 +2,10 @@ import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
+import Loading from '../components/Loading';
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
+
 import ImageGallery from 'react-image-gallery';
 import AvailabilityCalendar from '../components/Calendar';
 import { cottageGalleryImages } from '../utils/gallery_image_helpers';
@@ -22,14 +26,11 @@ import deckIcon from '../assets/icons/deck-icon-noun.svg';
 
 import './CaptainsCottage.css';
 import 'react-image-gallery/styles/css/image-gallery.css';
-import Footer from '../components/Footer';
-import Navbar from '../components/Navbar';
 
 function CaptainsCottage() {
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
 	const smoother = useRef();
-
 
 	useLayoutEffect(() => {
 		const ctx = gsap.context(() => {
@@ -286,7 +287,9 @@ function CaptainsCottage() {
 							</div>
 						</div>
 					</div>
-					<div className='image-gallery-wrapper'><ImageGallery ref={imageGalleryRef} showPlayButton={false} isFullScreen={true} items={cottageGalleryImages} /></div>
+					<div className='image-gallery-wrapper'>
+						<ImageGallery ref={imageGalleryRef} showPlayButton={false} isFullScreen={true} items={cottageGalleryImages} />
+					</div>
 				</div>
 				<Footer />
 			</div>

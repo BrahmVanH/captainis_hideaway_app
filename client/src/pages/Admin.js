@@ -20,10 +20,8 @@ function AdminPage() {
 
 	Mousetrap.bind('ctrl+alt+1+5', function () {
 		if (showCreateUser === false) {
-			console.log('show create user');
 			setShowCreateUser(true);
 		} else {
-			console.log('hide create user');
 			setShowCreateUser(false);
 		}
 	});

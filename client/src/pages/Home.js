@@ -7,13 +7,16 @@ import { createScrollSmoother } from '../utils/gsapHelpers';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css';
+
 import PropertyCard from '../components/PropertyCard';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
+
 function Home() {
 	const main = useRef();
 	const smoother = useRef();
+
 	const [hideawayGalleryUrls, setHideawayGalleryUrls] = useState([]);
 	const [hideawayHeaderUrl, setHideawayHeaderUrl] = useState([]);
 	const [hideawayImgUrls, setHideawayImgUrls] = useState([]);
