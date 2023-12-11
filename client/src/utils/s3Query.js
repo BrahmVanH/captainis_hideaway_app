@@ -17,24 +17,76 @@ const findImgIndex = (data, imgKey) => {
 	}
 };
 
-const getSignedUrl = (imageItem) => {
+const getSignedUrl = (imageBucket, imageItem) => {
 	return s3.getSignedUrl('getObject', {
-		Bucket: 'lakesuperiorcaptains',
+		Bucket: imageBucket,
 		Key: imageItem.Key,
 		Expires: 60,
 	});
 };
 
+// Takes in the object list from S3 bucket, parses the image's unique key
+// and returns as array
+const parseS3ImgTags = (listObjectsData) => {
+	const imgKeys = [];
+	if (listObjectsData) {
+		const contents = listObjectsData.contents;
+		contents.map((imgObject) => {
+			// const splitKey = imgObject.Key.split('/');
+			// imgKeys.push(splitKey[1]);
+			imgKeys.push(imgObject.Key);
+		});
+	}
+
+	return imgKeys;
+};
+
+export const getImgTags = async (imageBucket, imageItems) => {
+	try {
+		if (imageItems) {
+			const taggingData = [];
+
+			await Promise.all(
+				imageItems.Contents.map(async (item) => {
+					try {
+						const response = await s3
+							.getObjectTagging({
+								Bucket: imageBucket,
+								Key: item.Key,
+							})
+							.promise();
+
+						if (response.TagSet[0]) {
+							taggingData.push(response.TagSet[0].Value);
+						}
+					} catch (error) {
+						console.error('Error retrieving image tags for', item.Key, error);
+					}
+				})
+			);
+			if (taggingData.length > 0) {
+				console.log(taggingData);
+
+				return taggingData;
+			}
+		}
+	} catch (err) {
+		console.error('there was an error in retrieving image tags', err);
+	}
+};
+
+
 export const getImages = async (objectRequest) => {
 	const bucketName = 'lakesuperiorcaptains';
 	const hideawayHeaderImgKey = 'captains_hideaway_png/stairs_from_beach_rotated.png';
 	const homeHeaderImgKey = 'captains_hideaway_png/arial_shot_over_beach_side.png';
-	const params = {
+	const hideawayParams = {
 		Bucket: bucketName,
 		Prefix: 'captains_hideaway_png/',
 	};
 
 	let hideawayGalleryUrls;
+	let hideawayGalleryAltTags;
 	let hideawayHeaderUrl;
 	let homeHeaderUrl;
 	let objectResponse;
@@ -44,14 +96,28 @@ export const getImages = async (objectRequest) => {
 	const tobeAbout = 'about';
 	if (objectRequest === 'hideawayGallery') {
 		try {
-			const data = await s3.listObjectsV2(params).promise();
-
+			const data = await s3.listObjectsV2(hideawayParams).promise();
 			if (data) {
 				hideawayGalleryUrls = await data?.Contents.map((item) => {
-					return getSignedUrl(item);
+					return getSignedUrl(hideawayParams.Bucket, item);
 				});
-
 				objectResponse = hideawayGalleryUrls;
+				return objectResponse;
+			} else if (!data) {
+				throw new Error('Could not retrieve images from S3');
+			}
+		} catch (err) {
+			return [{ message: 'Error in querying s3 for images', details: err.message }];
+		}
+	} else if (objectRequest === 'hideawayGalleryAltTags') {
+		try {
+			const data = await s3.listObjectsV2(hideawayParams).promise();
+			if (data) {
+				const hideawayGalleryAltTags = await getImgTags(hideawayParams.Bucket, data);
+				if (hideawayGalleryAltTags.length > 0) {
+					objectResponse = hideawayGalleryAltTags;
+					console.log(objectResponse);
+				}
 				return objectResponse;
 			} else if (!data) {
 				throw new Error('Could not retrieve images from S3');
@@ -61,10 +127,10 @@ export const getImages = async (objectRequest) => {
 		}
 	} else if (objectRequest === 'hideawayHeader') {
 		try {
-			const data = await s3.listObjectsV2(params).promise();
+			const data = await s3.listObjectsV2(hideawayParams).promise();
 			if (data) {
 				const hideawayHeaderImgIndex = findImgIndex(data, hideawayHeaderImgKey)[0];
-				hideawayHeaderUrl = await getSignedUrl(data.Contents[hideawayHeaderImgIndex]);
+				hideawayHeaderUrl = await getSignedUrl(hideawayParams.Bucket, data.Contents[hideawayHeaderImgIndex]);
 
 				objectResponse = hideawayHeaderUrl;
 				return objectResponse;
@@ -76,10 +142,10 @@ export const getImages = async (objectRequest) => {
 		}
 	} else if (objectRequest === 'homeHeader') {
 		try {
-			const data = await s3.listObjectsV2(params).promise();
+			const data = await s3.listObjectsV2(hideawayParams).promise();
 			if (data) {
 				const homeheaderImgIndex = findImgIndex(data, homeHeaderImgKey)[0];
-				homeHeaderUrl = await getSignedUrl(data.Contents[homeheaderImgIndex]);
+				homeHeaderUrl = await getSignedUrl(hideawayParams.Bucket, data.Contents[homeheaderImgIndex]);
 
 				objectResponse = homeHeaderUrl;
 				return objectResponse;

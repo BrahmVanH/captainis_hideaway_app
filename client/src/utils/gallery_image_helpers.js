@@ -20,8 +20,9 @@ const createCottageGalleryImages = () => {
 export const getHideawayImgUrls = async () => {
 	try {
 		const hideawayGalleryUrls = await getImages('hideawayGallery');
+		const hideawayGalleryAltTags = await getImages('hideawayGalleryAltTags');
 		if (hideawayGalleryUrls.length > 0) {
-			return createHideawayImgGalArr(hideawayGalleryUrls);
+			return createHideawayImgGalArr(hideawayGalleryAltTags, hideawayGalleryUrls);
 		} else {
 			console.log('no images yet');
 			return null;
@@ -31,16 +32,21 @@ export const getHideawayImgUrls = async () => {
 	}
 };
 
-const createHideawayImgGalArr = (imageUrls) => {
+const createHideawayImgGalArr = (hideawayGalleryAltTags, imageUrls) => {
 	let galleryArray = [];
 	imageUrls.map((url) => {
 		const original = url;
-
 		galleryArray.push({
 			original: original,
 			thumbnail: original,
+			originalAlt: null,
+			thumbnailAlt: null
 		});
 	});
+	for (let i = 0; i < galleryArray.length; i++) {
+		galleryArray[i].originalAlt = hideawayGalleryAltTags[i];
+		galleryArray[i].thumbnailAlt = hideawayGalleryAltTags[i];
+	}
 	return galleryArray;
 };
 
@@ -74,5 +80,9 @@ const createHideawayGalleryImages = () => {
 	});
 	return array;
 };
+
+
+
+
 
 export const hideawayGalleryImages = createHideawayGalleryImages();

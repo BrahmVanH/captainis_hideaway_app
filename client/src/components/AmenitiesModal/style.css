@@ -1,13 +1,36 @@
 .open-modal-btn {
-  font-size: 14px;
-  background-color: transparent;
-  color: black;
-  border: none;
-  text-decoration: underline;
+	font-size: 14px;
+	background-color: transparent;
+	color: black;
+	border: none;
+	text-decoration: underline;
+}
+
+.amenities-modal {
+	top: '50%';
+	left: '50%';
+	right: 'auto';
+	bottom: 'auto';
+	width: '50%';
+	border-radius: '6px';
+	margin-right: '-50%';
+	max-height: '50vh';
+	overflow-y: 'auto';
+	/* Webkit-overflow-scrolling: 'touch'; */
+	transform: 'translate(-50%; -50%)';
+	border-bottom: '3px solid transparent';
+	border-image-source: 'linear-gradient(to right, white, #abccd8, #5f8fa5, #abccd8, white)';
+	border-image-slice: '1';
+	border-image-outset: '0';
+	border-image-repeat: 'stretch';
+}
+
+.amenities-modal-inner-container {
+	background-color: white;
 }
 
 .amenities-modal-inner-container h3 {
-  border-bottom: 3px solid transparent;
+	border-bottom: 3px solid transparent;
 	border-image-source: linear-gradient(to right, white, #abccd8, #5f8fa5, #abccd8, white);
 	border-image-slice: 1;
 	border-image-outset: 0;
@@ -15,41 +38,36 @@
 }
 
 .amenities-item-columns {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
 }
 
 .amenities-section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 
 .amenities-list {
-  text-align: center;
-  
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
+	text-align: center;
 
-
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
 }
 
 .amenities-list-item {
-  max-width: 225px;
-  list-style-type: none;
-  overflow-wrap: break-word;
-  font-size: 14px;
+	max-width: 225px;
+	list-style-type: none;
+	overflow-wrap: break-word;
+	font-size: 14px;
 }
 .close-btn-container {
-  width: 100%;
-  position: sticky;
-  bottom: 0px;
-  display: flex;
-  justify-content: flex-end;
+	width: 100%;
+	position: sticky;
+	bottom: 0px;
+	display: flex;
+	justify-content: flex-end;
 }
-
-
-

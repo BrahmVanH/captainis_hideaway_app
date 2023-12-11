@@ -8,6 +8,13 @@
 
 }
 
+/* class added to body when dialog modal is open */
+.sl-scroll-lock {
+    position: fixed;
+    inline-size: 100%;
+    overflow-y: scroll !important; 
+}
+
 @media only screen and (max-device-width: 992px) {
   .captains-hideaway-header {
 		background-position: 0 0;

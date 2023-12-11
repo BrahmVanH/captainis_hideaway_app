@@ -47,20 +47,11 @@ function CaptainsHideaway() {
 	const [isIntersecting, setIntersecting] = useState(false);
 	const trigger = useRef(null);
 
-	const isElementInViewport = (ref) => {
-		
-			const observer = new IntersectionObserver(([entry]) => setIntersecting(entry.isIntersecting));
-			observer.observe(ref.current);
-			setTimeout(observer.disconnect(), 3000);
-		
-	};
-
+	// Use getImages to fetch header image and set state variable
 	const fetchHeaderImage = async () => {
-		console.log('fetching header image...');
 		try {
 			const headerUrl = await getImages('hideawayHeader');
 			if (headerUrl) {
-				console.log(headerUrl);
 				setHideawayHeaderUrl(headerUrl);
 			} else {
 				console.log('header url not retrieved');
@@ -70,28 +61,28 @@ function CaptainsHideaway() {
 			setMastheadBackgroundImg('none');
 		}
 	};
+
 	const fetchGalleryImages = async () => {
+		console.log('fetching gallery images...');
 		try {
 			const imageUrls = await getHideawayImgUrls();
-			setHideawayImgUrls(imageUrls);
+			console.log("successfully retrieved gallery images", imageUrls);
+			setHideawayGalleryUrls(imageUrls);
 		} catch (error) {
 			console.error('Error fetching hideaway images:', error);
 		}
 	};
+
+	// Fetch header and gallery images on page load
 	useEffect(() => {
 		fetchHeaderImage();
+		fetchGalleryImages();
 	}, []);
 
-	useEffect(() => {
-		if (isIntersecting) {
-			fetchGalleryImages();
-		}
-	}, [isIntersecting]);
-
-	useLayoutEffect(() => {
-		console.log('adding event listener...');
-		window.addEventListener('scroll', isElementInViewport);
-	}, []);
+	// useLayoutEffect(() => {
+	// 	console.log('adding event listener...');
+	// 	window.addEventListener('scroll', isElementInViewport);
+	// }, []);
 
 	useEffect(() => {
 		if (hideawayHeaderUrl) {
@@ -105,13 +96,10 @@ function CaptainsHideaway() {
 		}
 	});
 
-	useEffect(() => {
-		console.log(trigger);
-	}, [trigger]);
+	// useLayoutEffect(() => {
+	// 	createScrollSmoother(main, smoother);
+	// }, [main]);
 
-	useLayoutEffect(() => {
-		createScrollSmoother(main, smoother);
-	}, [main]);
 	return (
 		<div ref={main} id='smooth-wrapper'>
 			<div id='smooth-content'>

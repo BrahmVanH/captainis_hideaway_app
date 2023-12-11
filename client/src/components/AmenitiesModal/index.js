@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Button } from 'react-bootstrap';
 import Modal from 'react-modal';
+import SlDialog from '@shoelace-style/shoelace/dist/react/dialog';
 import _ from 'lodash';
 
 import './style.css';
@@ -8,7 +9,7 @@ import './style.css';
 function AmenitiesModal(props) {
 	const amenities = props.amenities;
 	const ref = props.btnRef;
-	const [isOpen, setIsOpen] = useState(false);
+	const [open, setOpen] = useState(false);
 
 	const customStyles = {
 		overlay: {
@@ -40,20 +41,12 @@ function AmenitiesModal(props) {
 	};
 
 
-	function openModal(event) {
-		event.preventDefault();
-		setIsOpen(true);
-	}
-
-	function closeModal() {
-		setIsOpen(false);
-	}
 	return (
 		<div>
-			<Button className='open-modal-btn' ref={ref} onClick={(event) => openModal(event)}>
+			<Button className='open-modal-btn' ref={ref} onClick={() => setOpen(true)}>
 				See more...
 			</Button>
-			<Modal isOpen={isOpen} onRequestClose={closeModal} style={customStyles} contentLabel='Amenities Modal'>
+			<SlDialog className='amenities-modal' open={open} onSlAfterHide={() => setOpen(false)} style={customStyles} label='amenities-dialog'>
 				<div className='amenities-modal-inner-container d-flex flex-column align-items-center'>
 					<h3>Amenities</h3>
 					<div className='amenities-items-container d-flex flex-column align-items-center'>
@@ -91,10 +84,10 @@ function AmenitiesModal(props) {
 						))}
 					</div>
 					<div className='close-btn-container'>
-						<Button onClick={closeModal}>Close</Button>
+						<Button onClick={() => setOpen(false)}>Close</Button>
 					</div>
 				</div>
-			</Modal>
+			</SlDialog>
 		</div>
 	);
 }
