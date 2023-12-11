@@ -20,10 +20,11 @@ export const QUERY_UNAVAILABLE_DATES = gql`
 	}
 `;
 
-// export const QUERY_IMAGES = gql`
-// 	query getImages {
-// 		getImages {
+export const QUERY_S3_OBJECTS = gql`
+
+	query queryS3ByObjectType($objectType: String!) {
+		queryS3ByObjectType(objectType: $objectType) {
 			
-// 		}
-// 	}
-// `
+		}
+	}
+`

@@ -4,6 +4,7 @@ import { hideawayAmenities } from './captainsHideawayAmenities';
 const fullSizeHideawayImages = require.context('../assets/img/captains_hideaway_png', false, /\.(png|jpe?g|gif|svg)$/);
 const fullSizeCottageImages = require.context('../assets/img/captains_cottage_png', false, /\.(png|jpe?g|gif|svg)$/);
 
+// Creates an array of gallery images for react-image-gallery
 const createCottageGalleryImages = () => {
 	let array = [];
 	fullSizeCottageImages.keys().map((file) => {
@@ -17,9 +18,11 @@ const createCottageGalleryImages = () => {
 	return array;
 };
 
+// Retrieves image URLs from server-side S3 query
 export const getHideawayImgUrls = async () => {
 	try {
 		const hideawayGalleryUrls = await getImages('hideawayGallery');
+		console.log(hideawayGalleryUrls);
 		const hideawayGalleryAltTags = await getImages('hideawayGalleryAltTags');
 		if (hideawayGalleryUrls.length > 0) {
 			return createHideawayImgGalArr(hideawayGalleryAltTags, hideawayGalleryUrls);

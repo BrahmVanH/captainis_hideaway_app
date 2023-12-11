@@ -3,6 +3,7 @@ const { UnavailableDate, User } = require('../models');
 const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
 const s3 = require('../server');
+const { getImages } = require('../utils/s3Query');
 
 const resolvers = {
 	Query: {
@@ -31,6 +32,26 @@ const resolvers = {
 				return dates;
 			} catch (err) {
 				return [{ message: 'Error in queryUnavailableDates...', details: err.message }];
+			}
+		},
+		queryS3ByObjectType: async (parent, { objectType }) => {
+			// Receives object type
+			try {
+				if (!objectType) {
+					throw new Error('No object type was presented for query');
+				}
+
+				// calls S3 getImages instead of .find
+				const objectResponse = await getImages(objectType);
+
+				if (!objectResponse) {
+					throw new Error('Something went wrong in fetching object from S3');
+				}
+
+				return objectResponse;
+				// returns object response
+			} catch (err) {
+				return [{ message: 'Error in queryS3ByObjectType...', details: err.message }];
 			}
 		},
 	},

@@ -1,6 +1,5 @@
 const express = require('express');
 require('dotenv').config();
-const AWS = require('aws-sdk');
 const path = require('path');
 const { ApolloServer } = require('apollo-server-express');
 const cors = require('cors');
@@ -27,22 +26,14 @@ if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-// JS SDK v3 does not support global configuration.
-// Codemod has attempted to pass values to each service client in this file.
-// You may need to update clients outside of this file, if they use global config.
-AWS.config.update({
-	accessKeyId: process.env.S3_ACCESS_KEY,
-	secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-	region: 'us-east-2',
-});
-
-const s3 = new AWS.S3();
-const bucketName = 'lakesuperiorcaptains';
-
-const params = {
-	Bucket: bucketName,
-	Key: 'captains_hideaway_png/arial_shot_beach_and_lake_side.png',
-};
+// // JS SDK v3 does not support global configuration.
+// // Codemod has attempted to pass values to each service client in this file.
+// // You may need to update clients outside of this file, if they use global config.
+// AWS.config.update({
+// 	accessKeyId: process.env.S3_ACCESS_KEY,
+// 	secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+// 	region: 'us-east-2',
+// });
 
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
@@ -60,4 +51,3 @@ const startApolloServer = async (typeDefs, resolvers) => {
 // Call the async function to start the server
 startApolloServer(typeDefs, resolvers);
 
-module.exports = { s3 };
