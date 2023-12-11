@@ -25,22 +25,6 @@ const getSignedUrl = (imageBucket, imageItem) => {
 	});
 };
 
-// Takes in the object list from S3 bucket, parses the image's unique key
-// and returns as array
-const parseS3ImgTags = (listObjectsData) => {
-	const imgKeys = [];
-	if (listObjectsData) {
-		const contents = listObjectsData.contents;
-		contents.map((imgObject) => {
-			// const splitKey = imgObject.Key.split('/');
-			// imgKeys.push(splitKey[1]);
-			imgKeys.push(imgObject.Key);
-		});
-	}
-
-	return imgKeys;
-};
-
 export const getImgTags = async (imageBucket, imageItems) => {
 	try {
 		if (imageItems) {

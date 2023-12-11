@@ -2,7 +2,7 @@
   "name": "captains_hideaway-app",
   "version": "1.0.0",
   "description": "",
-  "proxy": "http://localhost:3001",
+  "proxy": "/graphql",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
