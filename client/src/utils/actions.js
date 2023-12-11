@@ -1,0 +1,1 @@
+export const SET_NEW_ERROR = "SET_THROW_ERROR";
