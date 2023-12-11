@@ -20,10 +20,19 @@ const typeDefs = gql`
 		dateValue: String!
 	}
 
+	type imageObject {
+		original: String
+		thumbnail: String
+		originalAlt: String
+		thumbnailAlt: String
+	}
+
+
 	type Query {
 		getAllUsers: [User]
 		queryUnavailableDatesByProperty(propertyName: String!): [Date]
 		queryS3ByObjectType(objectType: String!): [String]
+		getHideawayImages(): [imageObject]
 	}
 	type Mutation {
 		createUser(firstName: String!, lastName: String!, username: String!, userPassword: String!, adminCode: String!): Auth

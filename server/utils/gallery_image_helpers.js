@@ -1,5 +1,3 @@
-import { QUERY_S3_OBJECTS } from './queries';
-import { useQuery } from '@apollo/client';
 import { getImages } from './s3Query';
 import { hideawayAmenities } from './captainsHideawayAmenities';
 
@@ -22,7 +20,7 @@ const createCottageGalleryImages = () => {
 };
 
 // Retrieves image URLs from server-side S3 query
-export const getHideawayImgUrls = async () => {
+const getHideawayImgUrls = async () => {
 	try {
 		const hideawayGalleryUrls = await getImages('hideawayGallery');
 		console.log(hideawayGalleryUrls);
@@ -85,3 +83,6 @@ const createHideawayGalleryImages = () => {
 };
 
 export const hideawayGalleryImages = createHideawayGalleryImages();
+
+
+module.exports = {getHideawayImgUrls};

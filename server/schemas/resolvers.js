@@ -4,6 +4,7 @@ const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
 const s3 = require('../server');
 const { getImages } = require('../utils/s3Query');
+const { getHideawayImgUrls } = require('../utils/gallery_image_helpers');
 
 const resolvers = {
 	Query: {
@@ -50,6 +51,16 @@ const resolvers = {
 
 				return objectResponse;
 				// returns object response
+			} catch (err) {
+				return [{ message: 'Error in queryS3ByObjectType...', details: err.message }];
+			}
+		},
+		getHideawayImages: async () => {
+			try {
+				const objectResponse = await getHideawayImgUrls();
+				if (!objectResponse) {
+					throw new Error('Something went wrong in fetching object from S3');
+				}
 			} catch (err) {
 				return [{ message: 'Error in queryS3ByObjectType...', details: err.message }];
 			}
