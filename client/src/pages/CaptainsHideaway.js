@@ -35,8 +35,6 @@ import AvailabilityCalendar from '../components/Calendar';
 import AmenitiesModal from '../components/AmenitiesModal';
 import Loading from '../components/Loading';
 
-import { gql } from '@apollo/client';
-
 function CaptainsHideaway() {
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
@@ -52,13 +50,13 @@ function CaptainsHideaway() {
 	const [isIntersecting, setIntersecting] = useState(false);
 	const trigger = useRef(null);
 
-	
-
+	// Allows view to be painted when masthead image and gallery image objects are loaded
 	useEffect(() => {
 		if (hideawayGalObjs && mastheadBackgroundImg) {
 			setIsLoading(false);
 		}
 	}, [hideawayGalObjs, mastheadBackgroundImg]);
+
 	// Use getImages to fetch header image and set state variable
 	const fetchHeaderImage = async () => {
 		try {
@@ -74,39 +72,13 @@ function CaptainsHideaway() {
 
 	const { loading, error, data } = useQuery(GET_HIDEAWAY_IMAGES);
 
-	useEffect(() => {
-		if (error) {
-			console.log('error in querying server: ', error);
-		}
-	}, [error]);
-	// const fetchGalleryImages = async () => {
-	// 	try {
-	// 		const imageUrls = await getHideawayImgUrls();
-	// 		setHideawayGalleryUrls(imageUrls);
-	// 	} catch (error) {
-	// 		console.error('Error fetching hideaway images:', error);
-	// 	}
-	// };
 
 	useEffect(() => {
 		if (!loading && data) {
-			console.log(data.getHideawayImages);
-		
-			setHideawayGalObjs(data.getHideawayImages);
+			setHideawayHeaderUrl(data.getHideawayImages.hideawayHeaderUrl);
+			setHideawayGalObjs(data.getHideawayImages.galleryArray);
 		}
 	}, [loading, data]);
-
-	useEffect(() => {
-		console.log(hideawayGalObjs);
-	}, [hideawayGalObjs]);
-
-
-
-	// Fetch header and gallery images on page load
-	useEffect(() => {
-		fetchHeaderImage();
-		// fetchGalleryImages();
-	}, []);
 
 	useEffect(() => {
 		if (hideawayHeaderUrl) {

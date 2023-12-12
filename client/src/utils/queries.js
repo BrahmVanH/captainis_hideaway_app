@@ -20,21 +20,16 @@ export const QUERY_UNAVAILABLE_DATES = gql`
 	}
 `;
 
-// export const QUERY_S3_OBJECTS = gql`
-// 	query queryS3ByObjectType($objectType: String!) {
-// 		queryS3ByObjectType(objectType: $objectType) {
-// 			imageObject
-// 		}
-// 	}
-// `;
-
 export const GET_HIDEAWAY_IMAGES = gql`
 	query GetHideawayImages {
 		getHideawayImages {
-			original
-			thumbnail
-			originalAlt
-			thumbnailAlt
+			hideawayHeaderUrl
+			galleryArray {
+				original
+				thumbnail
+				originalAlt
+				thumbnailAlt
+			}
 		}
 	}
 `;

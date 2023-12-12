@@ -24,7 +24,6 @@ const createCottageGalleryImages = () => {
 export const getHideawayImgUrls = async () => {
 	try {
 		const hideawayGalleryUrls = await getImages('hideawayGallery');
-		console.log(hideawayGalleryUrls);
 		const hideawayGalleryAltTags = await getImages('hideawayGalleryAltTags');
 		if (hideawayGalleryUrls.length > 0) {
 			return createHideawayImgGalArr(hideawayGalleryAltTags, hideawayGalleryUrls);

@@ -20,19 +20,19 @@ const { getImages } = require('./s3Query');
 
 // Retrieves image URLs from server-side S3 query
 const getHideawayImgUrls = async () => {
-	console.log('getting images in image helpers - server');
 	try {
 		const hideawayGalleryUrls = await getImages('hideawayGallery');
 		const hideawayGalleryAltTags = await getImages('hideawayGalleryAltTags');
-		if (hideawayGalleryUrls.length > 0) {
-			return createHideawayImgGalArr(hideawayGalleryAltTags, hideawayGalleryUrls);
+		const hideawayHeaderUrl = await getImages('hideawayHeader');
+		if (hideawayGalleryUrls.length > 0 && hideawayGalleryAltTags.length > 0 && hideawayHeaderUrl) {
+			return createHideawayImgGalArr(hideawayGalleryAltTags, hideawayGalleryUrls, hideawayHeaderUrl);
 		}
 	} catch (err) {
 		throw new Error('there was an error fetching images');
 	}
 };
 
-const createHideawayImgGalArr = (hideawayGalleryAltTags, imageUrls) => {
+const createHideawayImgGalArr = (hideawayGalleryAltTags, imageUrls, hideawayHeaderUrl) => {
 	let galleryArray = [];
 	imageUrls.map((url) => {
 		const original = url;
@@ -47,7 +47,7 @@ const createHideawayImgGalArr = (hideawayGalleryAltTags, imageUrls) => {
 		galleryArray[i].originalAlt = hideawayGalleryAltTags[i];
 		galleryArray[i].thumbnailAlt = hideawayGalleryAltTags[i];
 	}
-	return galleryArray;
+	return { hideawayHeaderUrl, galleryArray };
 };
 
 const getAllImgs = async () => {
