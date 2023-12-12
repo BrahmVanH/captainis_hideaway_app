@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import gsap from 'gsap';
 
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
@@ -15,10 +15,8 @@ import ContactPage from './pages/Contact';
 import AdminPage from './pages/Admin';
 import CaptainsHideaway from './pages/CaptainsHideaway';
 import CaptainsCottage from './pages/CaptainsCottage';
-import Loading from './components/Loading';
 
 import '@csstools/normalize.css';
-import { getImages } from './utils/s3Query';
 import NotFound from './pages/404';
 
 const client = new ApolloClient({

@@ -1,7 +1,9 @@
 import React, { useRef, useLayoutEffect, useEffect, useState } from 'react';
+import { useQuery } from '@apollo/client';
 import gsap from 'gsap';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
+import { GET_HIDEAWAY_IMAGES } from '../utils/queries';
 import ImageGallery from 'react-image-gallery';
 
 import { getHideawayImgUrls } from '../utils/gallery_image_helpers';
@@ -33,6 +35,8 @@ import AvailabilityCalendar from '../components/Calendar';
 import AmenitiesModal from '../components/AmenitiesModal';
 import Loading from '../components/Loading';
 
+import { gql } from '@apollo/client';
+
 function CaptainsHideaway() {
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
@@ -40,45 +44,68 @@ function CaptainsHideaway() {
 	const hideawayAmenitiesComponent = useRef(null);
 	const [propertyName, setPropertyName] = useState('captainsHideaway');
 	const [isLargeViewport, setIsLargeViewport] = useState(null);
-	const [hideawayGalleryUrls, setHideawayGalleryUrls] = useState([]);
+	const [hideawayGalObjs, setHideawayGalObjs] = useState(null);
 	const [hideawayHeaderUrl, setHideawayHeaderUrl] = useState([]);
 	const [hideawayImgUrls, setHideawayImgUrls] = useState([]);
 	const [mastheadBackgroundImg, setMastheadBackgroundImg] = useState({});
-	const [loading, setLoading] = useState(true);
+	const [isLoading, setIsLoading] = useState(true);
 	const [isIntersecting, setIntersecting] = useState(false);
 	const trigger = useRef(null);
 
+	
+
 	useEffect(() => {
-		if (hideawayGalleryUrls && mastheadBackgroundImg) {
-			setLoading(false);
+		if (hideawayGalObjs && mastheadBackgroundImg) {
+			setIsLoading(false);
 		}
-	}, [hideawayGalleryUrls, mastheadBackgroundImg]);
+	}, [hideawayGalObjs, mastheadBackgroundImg]);
 	// Use getImages to fetch header image and set state variable
 	const fetchHeaderImage = async () => {
 		try {
 			const headerUrl = await getImages('hideawayHeader');
 			if (headerUrl) {
 				setHideawayHeaderUrl(headerUrl);
-			} 
+			}
 		} catch (error) {
 			console.error('Error fetching header image:', error);
 			setMastheadBackgroundImg('none');
 		}
 	};
 
-	const fetchGalleryImages = async () => {
-		try {
-			const imageUrls = await getHideawayImgUrls();
-			setHideawayGalleryUrls(imageUrls);
-		} catch (error) {
-			console.error('Error fetching hideaway images:', error);
+	const { loading, error, data } = useQuery(GET_HIDEAWAY_IMAGES);
+
+	useEffect(() => {
+		if (error) {
+			console.log('error in querying server: ', error);
 		}
-	};
+	}, [error]);
+	// const fetchGalleryImages = async () => {
+	// 	try {
+	// 		const imageUrls = await getHideawayImgUrls();
+	// 		setHideawayGalleryUrls(imageUrls);
+	// 	} catch (error) {
+	// 		console.error('Error fetching hideaway images:', error);
+	// 	}
+	// };
+
+	useEffect(() => {
+		if (!loading && data) {
+			console.log(data.getHideawayImages);
+		
+			setHideawayGalObjs(data.getHideawayImages);
+		}
+	}, [loading, data]);
+
+	useEffect(() => {
+		console.log(hideawayGalObjs);
+	}, [hideawayGalObjs]);
+
+
 
 	// Fetch header and gallery images on page load
 	useEffect(() => {
 		fetchHeaderImage();
-		fetchGalleryImages();
+		// fetchGalleryImages();
 	}, []);
 
 	useEffect(() => {
@@ -94,7 +121,7 @@ function CaptainsHideaway() {
 	return (
 		<div ref={main} id='smooth-wrapper'>
 			<div id='smooth-content'>
-				{!loading ? (
+				{!isLoading ? (
 					<>
 						<Navbar />
 						<header className='captains-hideaway-header masthead' style={mastheadBackgroundImg} alt='house at top of hill from beach'></header>
@@ -367,7 +394,7 @@ function CaptainsHideaway() {
 								</div>
 							</div>
 							<div className='image-gallery-wrapper'>
-								<ImageGallery ref={imageGalleryRef} showPlayButton={false} items={hideawayGalleryUrls} lazyLoad={true} />
+								<ImageGallery ref={imageGalleryRef} showPlayButton={false} items={hideawayGalObjs} lazyLoad={true} />
 							</div>
 						</div>
 						<Footer />

@@ -58,14 +58,13 @@ export const getItemsElement = (itemsArray) => {
 export const isLocalEnvironment = () => {
 	if (window.location.hostname === 'localhost') {
 		return true;
+	} else if (process.env.NODE_ENV === 'production') {
+		return true;
 	}
-
 };
 
 export const isElementInViewport = (el) => {
 	console.log('checking if element is in viewport');
 	const rect = el.getBoundingClientRect();
 	return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth);
-}
-
-
+};

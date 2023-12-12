@@ -61,6 +61,7 @@ const resolvers = {
 				if (!objectResponse) {
 					throw new Error('Something went wrong in fetching object from S3');
 				}
+				return objectResponse;
 			} catch (err) {
 				return [{ message: 'Error in queryS3ByObjectType...', details: err.message }];
 			}

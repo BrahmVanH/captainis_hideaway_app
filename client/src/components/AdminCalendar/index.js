@@ -120,7 +120,7 @@ function AdminCalendar(props) {
 	return (
 		<div>
 			<div className='admin-calendar-container'>
-				<Calendar onChange={handleDateChange} value={date} onClickDay={onClickDay} tileClassName={tileClassName} />
+				<Calendar tileContent={tileContent} onChange={handleDateChange} value={date} onClickDay={onClickDay} tileClassName={tileClassName} />
 			</div>
 		</div>
 	);

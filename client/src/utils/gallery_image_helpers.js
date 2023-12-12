@@ -1,7 +1,6 @@
-import { QUERY_S3_OBJECTS } from './queries';
-import { useQuery } from '@apollo/client';
+// import { QUERY_S3_OBJECTS } from './queries';
+// import { useQuery } from '@apollo/client';
 import { getImages } from './s3Query';
-import { hideawayAmenities } from './captainsHideawayAmenities';
 
 
 const fullSizeHideawayImages = require.context('../assets/img/captains_hideaway_png', false, /\.(png|jpe?g|gif|svg)$/);

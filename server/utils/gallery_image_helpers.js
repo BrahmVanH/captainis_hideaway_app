@@ -1,29 +1,28 @@
-import { getImages } from './s3Query';
-import { hideawayAmenities } from './captainsHideawayAmenities';
+// import { getImages } from './s3Query';
+const { getImages } = require('./s3Query');
 
+// const fullSizeHideawayImages = require.context('../assets/img/captains_hideaway_png', false, /\.(png|jpe?g|gif|svg)$/);
+// const fullSizeCottageImages = require.context('../assets/img/captains_cottage_png', false, /\.(png|jpe?g|gif|svg)$/);
 
-const fullSizeHideawayImages = require.context('../assets/img/captains_hideaway_png', false, /\.(png|jpe?g|gif|svg)$/);
-const fullSizeCottageImages = require.context('../assets/img/captains_cottage_png', false, /\.(png|jpe?g|gif|svg)$/);
+// // Creates an array of gallery images for react-image-gallery
+// const createCottageGalleryImages = () => {
+// 	let array = [];
+// 	fullSizeCottageImages.keys().map((file) => {
+// 		const original = fullSizeCottageImages(file);
 
-// Creates an array of gallery images for react-image-gallery
-const createCottageGalleryImages = () => {
-	let array = [];
-	fullSizeCottageImages.keys().map((file) => {
-		const original = fullSizeCottageImages(file);
-
-		array.push({
-			original: original,
-			thumbnail: original,
-		});
-	});
-	return array;
-};
+// 		array.push({
+// 			original: original,
+// 			thumbnail: original,
+// 		});
+// 	});
+// 	return array;
+// };
 
 // Retrieves image URLs from server-side S3 query
 const getHideawayImgUrls = async () => {
+	console.log('getting images in image helpers - server');
 	try {
 		const hideawayGalleryUrls = await getImages('hideawayGallery');
-		console.log(hideawayGalleryUrls);
 		const hideawayGalleryAltTags = await getImages('hideawayGalleryAltTags');
 		if (hideawayGalleryUrls.length > 0) {
 			return createHideawayImgGalArr(hideawayGalleryAltTags, hideawayGalleryUrls);
@@ -51,7 +50,7 @@ const createHideawayImgGalArr = (hideawayGalleryAltTags, imageUrls) => {
 	return galleryArray;
 };
 
-export const getAllImgs = async () => {
+const getAllImgs = async () => {
 	try {
 		const { hideawayGalleryUrls, hideawayHeaderUrl, homeHeaderUrl } = await getHideawayImgUrls();
 		if (hideawayGalleryUrls.length > 0) {
@@ -68,7 +67,7 @@ export const getAllImgs = async () => {
 
 // export const hideawayImgUrls = await getHideawayGalleryArray();
 
-export const cottageGalleryImages = createCottageGalleryImages();
+// const cottageGalleryImages = createCottageGalleryImages();
 const createHideawayGalleryImages = () => {
 	let array = [];
 	fullSizeHideawayImages.keys().map((file) => {
@@ -82,7 +81,6 @@ const createHideawayGalleryImages = () => {
 	return array;
 };
 
-export const hideawayGalleryImages = createHideawayGalleryImages();
+// const hideawayGalleryImages = createHideawayGalleryImages();
 
-
-module.exports = {getHideawayImgUrls};
+module.exports = { getHideawayImgUrls };
