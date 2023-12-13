@@ -42,3 +42,26 @@ export const REMOVE_UNAVAILABLE_DATE = gql`
 		}
 	}
 `;
+
+
+export const LOG_APOLLO_ERROR = gql`
+	mutation LogApolloError($error: ApolloErrorInput) {
+		logApolloError(error: $error) {
+			name
+			networkResponseUrl
+			errorMessage
+			networkErrorName
+			graphQLErrors {
+				message
+				extensions {
+					code
+					exception {
+						stacktrace
+					}
+				}
+			}
+			networkErrorStatus
+			stack
+		}
+	}
+`;

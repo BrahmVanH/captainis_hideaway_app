@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { UnavailableDate, User } = require('../models');
+const { UnavailableDate, User, ApolloError } = require('../models');
 const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
 const s3 = require('../server');
@@ -64,6 +64,22 @@ const resolvers = {
 				return objectResponse;
 			} catch (err) {
 				return [{ message: 'Error in queryS3ByObjectType...', details: err.message }];
+			}
+		},
+		getApolloErrors: async () => {
+			try {
+				const allApolloErrors = await ApolloError.find({});
+
+				if (!allApolloErrors) {
+					throw new Error('Something went wrong finding all Apollo Errors');
+				}
+				if (allApolloErrors) {
+					console.log(allApolloErrors[13]);
+				}
+
+				return allApolloErrors;
+			} catch (err) {
+				return [{ message: 'Error in querying Apollo Errors...', details: err.message }];
 			}
 		},
 	},
@@ -151,6 +167,23 @@ const resolvers = {
 				return unavailableDate;
 			} catch (err) {
 				throw new Error('Error in removing unavailable date from db: ' + err.message);
+			}
+		},
+		logApolloError: async (parent, { error }) => {
+			try {
+				if (!error) {
+					throw new Error('apollo error is not defined');
+				}
+				const newApolloError = await ApolloError.create(error);
+
+				if (!newApolloError) {
+					throw new Error('Could not create new apollo error');
+				}
+
+				return newApolloError;
+			} catch (err) {
+				console.error(err);
+				throw new Error('Error in creating new apollo error');
 			}
 		},
 	},
