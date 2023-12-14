@@ -6,7 +6,11 @@ const { Provider } = ErrorContext;
 
 const ErrorProvider = ({ value = [], ...props }) => {
 	const [state, dispatch] = useErrorReducer({
-		throwError: false
+		throwError: false,
+		errorMessage: {
+			code: null,
+			message: null,
+		},
 	});
 	return <Provider value={[state, dispatch]} {...props} />;
 };

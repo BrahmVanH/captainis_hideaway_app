@@ -88,14 +88,14 @@ const typeDefs = gql`
 		queryUnavailableDatesByProperty(propertyName: String!): [Date]
 		queryS3ByObjectType(objectType: String!): String
 		getHideawayImages: hideawayImgPack
-		getApolloErrors: [ApolloError]
+		# getApolloErrors: [ApolloError]
 	}
 	type Mutation {
 		createUser(firstName: String!, lastName: String!, username: String!, userPassword: String!, adminCode: String!): Auth
 		loginUser(username: String!, userPassword: String!): Auth
 		createUnavailableDate(propertyName: String!, dateValue: String!): Date
 		removeUnavailableDate(propertyName: String!, dateValue: String!): Date
-		logApolloError(error: ApolloErrorInput): ApolloError
+		# logApolloError(error: ApolloErrorInput): ApolloError
 	}
 `;
 

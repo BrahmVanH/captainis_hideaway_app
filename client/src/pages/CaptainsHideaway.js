@@ -4,7 +4,7 @@ import gsap from 'gsap';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 import { GET_HIDEAWAY_IMAGES } from '../utils/queries';
-import { LOG_APOLLO_ERROR } from '../utils/mutations';
+// import { LOG_APOLLO_ERROR } from '../utils/mutations';
 import ImageGallery from 'react-image-gallery';
 
 import { hideawayAmenities } from '../utils/captainsHideawayAmenities';
@@ -32,7 +32,7 @@ import Footer from '../components/Footer';
 import AvailabilityCalendar from '../components/Calendar';
 import AmenitiesModal from '../components/AmenitiesModal';
 import Loading from '../components/Loading';
-import { parseApolloError } from '../utils/errorHelpers';
+// import { parseApolloError } from '../utils/errorHelpers';
 
 function CaptainsHideaway() {
 	const imageGalleryRef = useRef(null);
@@ -45,7 +45,7 @@ function CaptainsHideaway() {
 	const [mastheadBackgroundImg, setMastheadBackgroundImg] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const trigger = useRef(null);
-	const [errorObj, setErrorObj] = useState(null);
+	// const [errorObj, setErrorObj] = useState(null);
 
 	// Allows view to be painted when masthead image and gallery image objects are loaded
 	useEffect(() => {
@@ -56,23 +56,23 @@ function CaptainsHideaway() {
 
 	const { loading, error, data } = useQuery(GET_HIDEAWAY_IMAGES);
 
-	const [logApolloError, { loading: logErrorLoading, error: logErrorErr, data: logErrorData }] = useMutation(LOG_APOLLO_ERROR);
+	// const [logApolloError, { loading: logErrorLoading, error: logErrorErr, data: logErrorData }] = useMutation(LOG_APOLLO_ERROR);
 
-	const handleErrorLog = async () => {
-		if (errorObj.type === 'apollo') {
-			console.log(errorObj);
-			console.log('typeOf errorObj: ', typeof errorObj.error);
-			const errorObject = parseApolloError(errorObj.error);
-			console.log(errorObject);
-			logApolloError(errorObject);
-		}
-	};
+	// const handleErrorLog = async () => {
+	// 	if (errorObj.type === 'apollo') {
+	// 		console.log(errorObj);
+	// 		console.log('typeOf errorObj: ', typeof errorObj.error);
+	// 		const errorObject = parseApolloError(errorObj.error);
+	// 		console.log(errorObject);
+	// 		logApolloError(errorObject);
+	// 	}
+	// };
 	
 
 
 	useEffect(() => {
 		if (errorObj !== null) {
-			handleErrorLog();
+			// handleErrorLog();
 		}
 	}, [errorObj]);
 
