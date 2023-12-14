@@ -23,6 +23,7 @@
 	"license": "MIT",
 	"dependencies": {
 		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-		"apollo-server-express": "^3.12.1"
+		"apollo-server-express": "^3.12.1",
+		"logrocket": "^7.0.0"
 	}
 }
