@@ -47,7 +47,7 @@ function SigninForm() {
 
 			if (!loading && error) {
 				resetLoginForm();
-				setShowAlert(true);
+				// setShowAlert(true);
 			}
 			// Logs user in and stores token
 			Auth.login(data.loginUser.token);

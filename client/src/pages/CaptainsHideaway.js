@@ -80,7 +80,7 @@ function CaptainsHideaway() {
 				throwError: true,
 				errorMessage: {
 					code: error?.networkError?.statusCode,
-					message: "Sorry, there was a network error while fetching the photos for this page. The issue should be resolved with a refresh."
+					message: "Sorry, there was a network error while loading this page. The issue should be resolved with a refresh."
 				},
 			});
 		}

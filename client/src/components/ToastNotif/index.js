@@ -15,6 +15,7 @@ const ToastNotif = ({ children }) => {
 	const [body, setBody] = useState(null);
 	const [errorCode, setErrorCode] = useState(null);
 	const [toastFired, setToastFired] = useState(false);
+	const [onCloseFireCount, setCloseFireCount] = useState(1);
 
 	const resetErrorState = () => {
 		dispatch({
@@ -29,6 +30,20 @@ const ToastNotif = ({ children }) => {
 		setErrorCode(null);
 		setToastFired(false);
 	};
+
+	const handleClose = () => {
+		if (onCloseFireCount % 2 === 0 ) {
+			resetErrorState();
+		}
+		let inc = onCloseFireCount;
+		inc++;
+		setCloseFireCount(inc);
+	};
+
+	useEffect(() => {
+		console.log(toastFired, new Date().getMilliseconds(new Date()));
+	}, [toastFired]);
+
 	useEffect(() => {
 		// console.log()
 		if (throwError === true && errorMessage.code !== null) {
@@ -43,7 +58,9 @@ const ToastNotif = ({ children }) => {
 		console.log(errorCode);
 		if (toastFired === true && errorCode !== null) {
 			console.log('calling toast.error');
-			toast.error(`${errorCode}: ${body}`);
+			toast.error(`${errorCode}: ${body}`, {
+				onClose: () => handleClose(),
+			});
 		}
 	}, [toastFired]);
 
