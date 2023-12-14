@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const LdsGrid = styled.div`
@@ -72,8 +72,19 @@ const LdsGrid = styled.div`
 `;
 
 const Loading = () => {
+	const [message1Display, setMessage1Display] = useState('none');
+	const [message2Display, setMessage2Display] = useState('none');
+
+	const showMessage = () => {
+		setMessage1Display('');
+		setMessage2Display('');
+	};
+
+	useEffect(() => {
+		setTimeout(showMessage, 15000);
+	});
 	return (
-		<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100vw' }}>
+		<div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100vw' }}>
 			<LdsGrid>
 				<div></div>
 				<div></div>
@@ -85,6 +96,10 @@ const Loading = () => {
 				<div></div>
 				<div></div>
 			</LdsGrid>
+			<div>
+				<h4 style={{ display: message1Display }}>This is getting awkward</h4>
+				<h5 style={{ display: message2Display }}>...try refreshing the page</h5>
+			</div>
 		</div>
 	);
 };

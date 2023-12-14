@@ -1,13 +1,11 @@
 import React, { useRef, useLayoutEffect, useEffect, useState } from 'react';
-import { useQuery } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import gsap from 'gsap';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 import { GET_HIDEAWAY_IMAGES } from '../utils/queries';
+import { LOG_APOLLO_ERROR } from '../utils/mutations';
 import ImageGallery from 'react-image-gallery';
-
-import { getHideawayImgUrls } from '../utils/gallery_image_helpers';
-import { getImages } from '../utils/s3Query';
 
 import { hideawayAmenities } from '../utils/captainsHideawayAmenities';
 
@@ -34,6 +32,7 @@ import Footer from '../components/Footer';
 import AvailabilityCalendar from '../components/Calendar';
 import AmenitiesModal from '../components/AmenitiesModal';
 import Loading from '../components/Loading';
+import { parseApolloError } from '../utils/errorHelpers';
 
 function CaptainsHideaway() {
 	const imageGalleryRef = useRef(null);
@@ -41,14 +40,12 @@ function CaptainsHideaway() {
 	const smoother = useRef();
 	const hideawayAmenitiesComponent = useRef(null);
 	const [propertyName, setPropertyName] = useState('captainsHideaway');
-	const [isLargeViewport, setIsLargeViewport] = useState(null);
 	const [hideawayGalObjs, setHideawayGalObjs] = useState(null);
 	const [hideawayHeaderUrl, setHideawayHeaderUrl] = useState([]);
-	const [hideawayImgUrls, setHideawayImgUrls] = useState([]);
 	const [mastheadBackgroundImg, setMastheadBackgroundImg] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
-	const [isIntersecting, setIntersecting] = useState(false);
 	const trigger = useRef(null);
+	const [errorObj, setErrorObj] = useState(null);
 
 	// Allows view to be painted when masthead image and gallery image objects are loaded
 	useEffect(() => {
@@ -57,28 +54,49 @@ function CaptainsHideaway() {
 		}
 	}, [hideawayGalObjs, mastheadBackgroundImg]);
 
-	// Use getImages to fetch header image and set state variable
-	const fetchHeaderImage = async () => {
-		try {
-			const headerUrl = await getImages('hideawayHeader');
-			if (headerUrl) {
-				setHideawayHeaderUrl(headerUrl);
-			}
-		} catch (error) {
-			console.error('Error fetching header image:', error);
-			setMastheadBackgroundImg('none');
+	const { loading, error, data } = useQuery(GET_HIDEAWAY_IMAGES);
+
+	const [logApolloError, { loading: logErrorLoading, error: logErrorErr, data: logErrorData }] = useMutation(LOG_APOLLO_ERROR);
+
+	const handleErrorLog = async () => {
+		if (errorObj.type === 'apollo') {
+			console.log(errorObj);
+			console.log('typeOf errorObj: ', typeof errorObj.error);
+			const errorObject = parseApolloError(errorObj.error);
+			console.log(errorObject);
+			logApolloError(errorObject);
 		}
 	};
-
-	const { loading, error, data } = useQuery(GET_HIDEAWAY_IMAGES);
+	
 
 
 	useEffect(() => {
-		if (!loading && data) {
+		if (errorObj !== null) {
+			handleErrorLog();
+		}
+	}, [errorObj]);
+
+	useEffect(() => {
+		if (logErrorErr) {
+			console.log(logErrorErr);
+		} else if (logErrorData) {
+			console.loG(logErrorData);
+		}
+	}, [logErrorErr, logErrorData]);
+
+	useEffect(() => {
+		if (!error && !loading && data) {
 			setHideawayHeaderUrl(data.getHideawayImages.hideawayHeaderUrl);
 			setHideawayGalObjs(data.getHideawayImages.galleryArray);
+		} else if (error) {
+			console.log('logging apollo error');
+			
+			setErrorObj({
+				type: 'apollo',
+				error: error,
+			});
 		}
-	}, [loading, data]);
+	}, [loading, data, error]);
 
 	useEffect(() => {
 		if (hideawayHeaderUrl) {
@@ -86,9 +104,9 @@ function CaptainsHideaway() {
 		}
 	}, [hideawayHeaderUrl]);
 
-	// useLayoutEffect(() => {
-	// 	createScrollSmoother(main, smoother);
-	// }, [main]);
+	useLayoutEffect(() => {
+		createScrollSmoother(main, smoother);
+	}, [main]);
 
 	return (
 		<div ref={main} id='smooth-wrapper'>
