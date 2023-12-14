@@ -2,14 +2,18 @@ import { useReducer } from 'react';
 import { SET_THROW_ERROR } from './actions';
 
 export const reducer = (state, action) => {
-	if (action.type === SET_THROW_ERROR) {
-		return {
-			...state.items,
-			throwError: [...action.throwError],
-		};
+	switch (action.type) {
+		case SET_THROW_ERROR:
+			return {
+				...state.items,
+				throwError: action.throwError,
+				errorMessage: action.errorMessage,
+			};
+		default:
+			return state;
 	}
 };
 
-export function useMessageReducer(initialState) {
+export function useErrorReducer(initialState) {
 	return useReducer(reducer, initialState);
 }

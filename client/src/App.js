@@ -18,6 +18,8 @@ import CaptainsCottage from './pages/CaptainsCottage';
 
 import '@csstools/normalize.css';
 import NotFound from './pages/404';
+import { ErrorProvider } from './utils/ErrorContext';
+import ToastNotif from './components/ToastNotif';
 
 const client = new ApolloClient({
 	uri: isLocalEnvironment ? 'http://localhost:3001/graphql' : '/graphql',
@@ -31,15 +33,19 @@ function App() {
 	return (
 		<ApolloProvider client={client}>
 			<Router>
-				<Routes>
-					<Route path='/' element={<Home />} />
-					<Route path='/captains_hideaway' element={<CaptainsHideaway />} />
-					<Route path='/captains_cottage' element={<CaptainsCottage />} />
-					<Route path='/about' element={<About />} />
-					<Route path='/contact' element={<ContactPage />} />
-					<Route path='/admin' element={<AdminPage />} />
-					<Route path='*' element={<NotFound />} />
-				</Routes>
+				<ErrorProvider>
+					<ToastNotif>
+						<Routes>
+							<Route path='/' element={<Home />} />
+							<Route path='/captains_hideaway' element={<CaptainsHideaway />} />
+							<Route path='/captains_cottage' element={<CaptainsCottage />} />
+							<Route path='/about' element={<About />} />
+							<Route path='/contact' element={<ContactPage />} />
+							<Route path='/admin' element={<AdminPage />} />
+							<Route path='*' element={<NotFound />} />
+						</Routes>
+					</ToastNotif>
+				</ErrorProvider>
 			</Router>
 		</ApolloProvider>
 	);
