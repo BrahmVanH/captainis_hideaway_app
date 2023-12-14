@@ -32,7 +32,9 @@ const ToastNotif = ({ children }) => {
 	};
 
 	const handleClose = () => {
-		if (onCloseFireCount % 2 === 0 ) {
+		if (process.env.NODE_ENV !== 'production' && onCloseFireCount % 2 === 0) {
+			resetErrorState();
+		} else if (process.env.NODE_ENV === 'production') {
 			resetErrorState();
 		}
 		let inc = onCloseFireCount;
