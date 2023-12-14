@@ -1,1 +1,1 @@
-export const SET_NEW_ERROR = "SET_THROW_ERROR";
+export const SET_THROW_ERROR = "SET_THROW_ERROR";

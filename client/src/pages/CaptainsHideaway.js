@@ -4,7 +4,9 @@ import gsap from 'gsap';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 import { GET_HIDEAWAY_IMAGES } from '../utils/queries';
-import { LOG_APOLLO_ERROR } from '../utils/mutations';
+import { useErrorContext } from '../utils/ErrorContext';
+import { SET_THROW_ERROR } from '../utils/actions';
+
 import ImageGallery from 'react-image-gallery';
 
 import { hideawayAmenities } from '../utils/captainsHideawayAmenities';
@@ -32,9 +34,20 @@ import Footer from '../components/Footer';
 import AvailabilityCalendar from '../components/Calendar';
 import AmenitiesModal from '../components/AmenitiesModal';
 import Loading from '../components/Loading';
-import { parseApolloError } from '../utils/errorHelpers';
 
 function CaptainsHideaway() {
+	// Global error state context - () => displays error message over app view
+	const [state, dispatch] = useErrorContext();
+	// const {
+	// 	throwError,
+	// 	errorMessage,
+	// 		code,
+	// 		message,
+	// 	} = state;
+	
+		useEffect(() => {
+			console.log(state);
+		}, [state]);
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
 	const smoother = useRef();
@@ -45,7 +58,7 @@ function CaptainsHideaway() {
 	const [mastheadBackgroundImg, setMastheadBackgroundImg] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const trigger = useRef(null);
-	const [errorObj, setErrorObj] = useState(null);
+	// const [errorObj, setErrorObj] = useState(null);
 
 	// Allows view to be painted when masthead image and gallery image objects are loaded
 	useEffect(() => {
@@ -56,44 +69,19 @@ function CaptainsHideaway() {
 
 	const { loading, error, data } = useQuery(GET_HIDEAWAY_IMAGES);
 
-	const [logApolloError, { loading: logErrorLoading, error: logErrorErr, data: logErrorData }] = useMutation(LOG_APOLLO_ERROR);
-
-	const handleErrorLog = async () => {
-		if (errorObj.type === 'apollo') {
-			console.log(errorObj);
-			console.log('typeOf errorObj: ', typeof errorObj.error);
-			const errorObject = parseApolloError(errorObj.error);
-			console.log(errorObject);
-			logApolloError(errorObject);
-		}
-	};
-	
-
-
-	useEffect(() => {
-		if (errorObj !== null) {
-			handleErrorLog();
-		}
-	}, [errorObj]);
-
-	useEffect(() => {
-		if (logErrorErr) {
-			console.log(logErrorErr);
-		} else if (logErrorData) {
-			console.loG(logErrorData);
-		}
-	}, [logErrorErr, logErrorData]);
-
 	useEffect(() => {
 		if (!error && !loading && data) {
 			setHideawayHeaderUrl(data.getHideawayImages.hideawayHeaderUrl);
 			setHideawayGalObjs(data.getHideawayImages.galleryArray);
 		} else if (error) {
-			console.log('logging apollo error');
-			
-			setErrorObj({
-				type: 'apollo',
-				error: error,
+			console.log(error);
+			dispatch({
+				type: SET_THROW_ERROR,
+				throwError: true,
+				errorMessage: {
+					code: error?.networkError?.statusCode,
+					message: "Sorry, there was a network error while loading this page. The issue should be resolved with a refresh."
+				},
 			});
 		}
 	}, [loading, data, error]);

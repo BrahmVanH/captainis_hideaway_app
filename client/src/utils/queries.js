@@ -24,7 +24,6 @@ export const GET_HIDEAWAY_IMAGES = gql`
 	query GetHideawayImages {
 		getHideawayImages {
 			hideawayHeaderUrl
-			banton
 			galleryArray {
 				original
 				thumbnail
