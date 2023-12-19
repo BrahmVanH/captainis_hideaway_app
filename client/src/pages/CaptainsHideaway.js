@@ -45,9 +45,7 @@ function CaptainsHideaway() {
 	// 		message,
 	// 	} = state;
 	
-		useEffect(() => {
-			console.log(state);
-		}, [state]);
+	
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
 	const smoother = useRef();
@@ -74,7 +72,6 @@ function CaptainsHideaway() {
 			setHideawayHeaderUrl(data.getHideawayImages.hideawayHeaderUrl);
 			setHideawayGalObjs(data.getHideawayImages.galleryArray);
 		} else if (error) {
-			console.log(error);
 			dispatch({
 				type: SET_THROW_ERROR,
 				throwError: true,

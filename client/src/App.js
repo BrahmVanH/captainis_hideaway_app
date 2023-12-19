@@ -24,19 +24,19 @@ import CaptainsCottage from './pages/CaptainsCottage';
 import { isLocalEnvironment } from './utils/helpers';
 import '@csstools/normalize.css';
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-	if (graphQLErrors) {
-		graphQLErrors.forEach(({ message, locations, path }) => {
+// const errorLink = onError(({ graphQLErrors, networkError }) => {
+// 	if (graphQLErrors) {
+// 		graphQLErrors.forEach(({ message, locations, path }) => {
 
-			// LogRocket.captureMessage(`[GraphQL error]: ${message}`);
-		});
-	}
+// 			// LogRocket.captureMessage(`[GraphQL error]: ${message}`);
+// 		});
+// 	}
 
-	if (networkError) {
+// 	if (networkError) {
 
-		// LogRocket.captureMessage(`[Network error]: ${networkError}`);
-	}
-});
+// 		// LogRocket.captureMessage(`[Network error]: ${networkError}`);
+// 	}
+// });
 
 const client = new ApolloClient({
 	uri: isLocalEnvironment ? 'http://localhost:3001/graphql' : '/graphql',
