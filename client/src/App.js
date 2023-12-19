@@ -41,7 +41,7 @@ import '@csstools/normalize.css';
 const client = new ApolloClient({
 	uri: isLocalEnvironment ? 'http://localhost:3001/graphql' : '/graphql',
 	cache: new InMemoryCache(),
-	link: errorLink,
+	// link: errorLink,
 });
 
 function App() {
