@@ -87,9 +87,7 @@ const getImages = async (objectRequest) => {
 	const aboutImgKey = 'about_us.jpg';
 
 	let hideawayGalleryUrls;
-	let hideawayGalleryAltTags;
-	let hideawayHeaderUrl;
-	let homeHeaderUrl;
+	
 	let objectResponse;
 
 	const tobeCottageGal = 'cottageGallery';
@@ -101,7 +99,7 @@ const getImages = async (objectRequest) => {
 			try {
 				const data = await s3.listObjectsV2(hideawayParams).promise();
 				if (data) {
-					hideawayGalleryUrls = await data?.Contents.map((item) => {
+					hideawayGalleryUrls = data?.Contents.map((item) => {
 						return getSignedUrl(hideawayParams.Bucket, item);
 					});
 					const objectResponse = hideawayGalleryUrls;
@@ -132,7 +130,7 @@ const getImages = async (objectRequest) => {
 				const data = await s3.listObjectsV2(hideawayParams).promise();
 				if (data) {
 					const headerImgIndex = findImgIndex(data, hideawayHeaderImgKey)[0];
-					const headerUrl = await getSignedUrl(hideawayParams.Bucket, data.Contents[headerImgIndex]);
+					const headerUrl = getSignedUrl(hideawayParams.Bucket, data.Contents[headerImgIndex]);
 
 					const objectResponse = headerUrl;
 					return objectResponse;
@@ -147,13 +145,13 @@ const getImages = async (objectRequest) => {
 				const data = await s3.listObjectsV2(homePageParams).promise();
 				if (data) {
 					const headerImgIndex = findImgIndex(data, homeHeaderImgKey);
-					const headerImgUrl = await getSignedUrl(homePageParams.Bucket, data.Contents[headerImgIndex]);
-			
+					const headerImgUrl = getSignedUrl(homePageParams.Bucket, data.Contents[headerImgIndex]);
+
 					const hideawayImgIndex = findImgIndex(data, homePgHideawayImgKey)[0];
-					const hideawayImgUrl = await getSignedUrl(homePageParams.Bucket, data.Contents[hideawayImgIndex]);
+					const hideawayImgUrl = getSignedUrl(homePageParams.Bucket, data.Contents[hideawayImgIndex]);
 
 					const cottageImgIndex = findImgIndex(data, homePgCottageImgKey)[0];
-					const cottageImgUrl = await getSignedUrl(homePageParams.Bucket, data.Contents[cottageImgIndex]);
+					const cottageImgUrl = getSignedUrl(homePageParams.Bucket, data.Contents[cottageImgIndex]);
 
 					return { headerImgUrl, hideawayImgUrl, cottageImgUrl };
 				}
@@ -168,7 +166,11 @@ const getImages = async (objectRequest) => {
 
 					return imgUrl;
 				}
+			} catch (err) {
+				return [{ message: 'Error in querying s3 for homepage images', details: err.message }];
 			}
+		default:
+			return null;
 	}
 };
 
