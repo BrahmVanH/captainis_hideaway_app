@@ -34,9 +34,9 @@ const typeDefs = gql`
 	# scalar ApolloError
 
 	type homePgImgPack {
-		homeHeaderUrl: String
-		hideawayCardUrl: String
-		cottageCardUrl: String
+		headerImgUrl: String
+		hideawayImgUrl: String
+		cottageImgUrl: String
 	}
 
 	type hideawayImgPack {

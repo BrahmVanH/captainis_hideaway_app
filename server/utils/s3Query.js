@@ -64,13 +64,13 @@ const getImgTags = async (imageBucket, imageItems) => {
 const getImages = async (objectRequest) => {
 	const bucketName = 'lakesuperiorcaptains';
 
-	const homeHeaderImgKey = 'captains_hideaway_png/arial_shot_over_beach_side.png';
-	const homePgHideawayImgKey = 'captains_hideaway_png/stairs_from_beach_2.png';
-	const homePgCottageImgKey = 'captains_cottage_png/back_exterior_side_with_lake.png';
+	const homeHeaderImgKey = 'home_page/arial_shot_over_beach_side.png';
+	const homePgHideawayImgKey = 'home_page/stairs_from_beach_2.png';
+	const homePgCottageImgKey = 'home_page/back_exterior_side_with_lake.png';
 	const homePageParams = {
 		Bucket: bucketName,
 		Prefix: 'home_page/',
-	}
+	};
 
 	const hideawayHeaderImgKey = 'captains_hideaway_png/stairs_from_beach_rotated.png';
 	const hideawayParams = {
@@ -83,6 +83,8 @@ const getImages = async (objectRequest) => {
 		Bucket: bucketName,
 		Prefix: 'captains_cottage_png/',
 	};
+
+	const aboutImgKey = 'about_us.jpg';
 
 	let hideawayGalleryUrls;
 	let hideawayGalleryAltTags;
@@ -144,20 +146,28 @@ const getImages = async (objectRequest) => {
 			try {
 				const data = await s3.listObjectsV2(homePageParams).promise();
 				if (data) {
-					const headerImgIndex = findImgIndex(data, homeHeaderImgKey)[0];
+					const headerImgIndex = findImgIndex(data, homeHeaderImgKey);
 					const headerImgUrl = await getSignedUrl(homePageParams.Bucket, data.Contents[headerImgIndex]);
-					
+			
 					const hideawayImgIndex = findImgIndex(data, homePgHideawayImgKey)[0];
 					const hideawayImgUrl = await getSignedUrl(homePageParams.Bucket, data.Contents[hideawayImgIndex]);
 
 					const cottageImgIndex = findImgIndex(data, homePgCottageImgKey)[0];
 					const cottageImgUrl = await getSignedUrl(homePageParams.Bucket, data.Contents[cottageImgIndex]);
 
-					return {headerImgUrl, hideawayImgUrl, cottageImgUrl}
+					return { headerImgUrl, hideawayImgUrl, cottageImgUrl };
 				}
 			} catch (err) {
 				return [{ message: 'Error in querying s3 for homepage images', details: err.message }];
+			}
+		case 'aboutPage':
+			try {
+				const data = await s3.getObject(bucketName, aboutImgKey).promise();
+				if (data) {
+					const imgUrl = getSignedUrl(data);
 
+					return imgUrl;
+				}
 			}
 	}
 };
