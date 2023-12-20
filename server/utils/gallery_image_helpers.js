@@ -18,6 +18,18 @@ const { getImages } = require('./s3Query');
 // 	return array;
 // };
 
+const getHomeImgUrls = async () => {
+	try {
+		const { headerImgUrl, hideawayImgUrl, cottageImgUrl} = await getImages('homePage');
+		
+		if (headerImgUrl && hideawayImgUrl && cottageImgUrl) {
+			return { headerImgUrl, hideawayImgUrl, cottageImgUrl };
+		}
+	} catch (err) {
+		throw new Error('there was an error fetching homepage images');
+	}
+};
+
 // Retrieves image URLs from server-side S3 query
 const getHideawayImgUrls = async () => {
 	try {
@@ -28,11 +40,35 @@ const getHideawayImgUrls = async () => {
 			return createHideawayImgGalArr(hideawayGalleryAltTags, hideawayGalleryUrls, hideawayHeaderUrl);
 		}
 	} catch (err) {
-		throw new Error('there was an error fetching images');
+		throw new Error('there was an error fetching hideaway images');
 	}
 };
 
-const createHideawayImgGalArr = (hideawayGalleryAltTags, imageUrls, hideawayHeaderUrl) => {
+const getCottageImgUrls = async () => {
+	try {
+		const cottageGalleryUrls = await getImages('cottageGallery');
+		const cottageGalleryAltTags = await getImages('cottageGalleryAltTags');
+		const cottageHeaderUrl = await getImages('cottageHeader');
+		if (hideawayGalleryUrls.length > 0 && hideawayGalleryAltTags.length > 0 && hideawayHeaderUrl) {
+			return createImgGalArr(cottageGalleryAltTags, cottageGalleryUrls, cottageHeaderUrl);
+		}
+	} catch (err) {
+		throw new Error('there was an error fetching cottage images');
+	}
+};
+
+const getAboutImgUrl = async () => {
+	try {
+		const cardImgUrl = await getImages('aboutPage');
+		if (headerImgUrl && hideawayImgUrl && cottageImgUrl) {
+			return { cardImgUrl };
+		}
+	} catch (err) {
+		throw new Error('there was an error fetching about image');
+	}
+};
+
+const createImgGalArr = (galleryAltTags, imageUrls, headerUrl) => {
 	let galleryArray = [];
 	imageUrls.map((url) => {
 		const original = url;
@@ -44,10 +80,10 @@ const createHideawayImgGalArr = (hideawayGalleryAltTags, imageUrls, hideawayHead
 		});
 	});
 	for (let i = 0; i < galleryArray.length; i++) {
-		galleryArray[i].originalAlt = hideawayGalleryAltTags[i];
-		galleryArray[i].thumbnailAlt = hideawayGalleryAltTags[i];
+		galleryArray[i].originalAlt = galleryAltTags[i];
+		galleryArray[i].thumbnailAlt = galleryAltTags[i];
 	}
-	return { hideawayHeaderUrl, galleryArray };
+	return { headerUrl, galleryArray };
 };
 
 const getAllImgs = async () => {
@@ -83,4 +119,4 @@ const createHideawayGalleryImages = () => {
 
 // const hideawayGalleryImages = createHideawayGalleryImages();
 
-module.exports = { getHideawayImgUrls };
+module.exports = { getHideawayImgUrls, getCottageImgUrls, getAboutImgUrl, getHomeImgUrls };

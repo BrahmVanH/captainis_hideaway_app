@@ -33,69 +33,36 @@ const typeDefs = gql`
 
 	# scalar ApolloError
 
+	type homePgImgPack {
+		headerImgUrl: String
+		hideawayImgUrl: String
+		cottageImgUrl: String
+	}
+
 	type hideawayImgPack {
 		hideawayHeaderUrl: String
 		galleryArray: [imageObject]
 	}
 
-	type ApolloError {
-		name: String
-		networkResponseUrl: String
-		errorMessage: String
-		networkErrorName: String
-		graphQLErrors: [GraphQLError]
-		networkErrorStatus: Int
-		stack: String
-	}
-
-	input ApolloErrorInput {
-		name: String
-		networkResponseUrl: String
-		errorMessage: String
-		networkErrorName: String
-		graphQLErrors: [GraphQLErrorInput]
-		networkErrorStatus: Int
-		stack: String
-	}
-
-	type GraphQLError {
-		message: String
-		extensions: GraphQLErrorExtensions
-	}
-	input GraphQLErrorInput {
-		message: String
-		extensions: GraphQLErrorExtensionsInput
-	}
-
-	type GraphQLErrorExtensions {
-		code: String
-		exception: GraphQLErrorExtensionsException
-	}
-	input GraphQLErrorExtensionsInput {
-		code: String
-		exception: GraphQLErrorExtensionsExceptionInput
-	}
-
-	type GraphQLErrorExtensionsException {
-		stacktrace: [String]
-	}
-	input GraphQLErrorExtensionsExceptionInput {
-		stacktrace: [String]
+	type cottageImgPack {
+		cottageHeaderUrl: String
+		galleryArray: [imageObject]
 	}
 
 	type Query {
 		getAllUsers: [User]
 		queryUnavailableDatesByProperty(propertyName: String!): [Date]
 		queryS3ByObjectType(objectType: String!): String
-		getHideawayImages: hideawayImgPack
-		# getApolloErrors: [ApolloError]
+		getHomePgImgs: homePgImgPack
+		getHideawayImgs: hideawayImgPack
+		getCottageImgs: cottageImgPack
+		getAboutPgImg: String
 	}
 	type Mutation {
 		createUser(firstName: String!, lastName: String!, username: String!, userPassword: String!, adminCode: String!): Auth
 		loginUser(username: String!, userPassword: String!): Auth
 		createUnavailableDate(propertyName: String!, dateValue: String!): Date
 		removeUnavailableDate(propertyName: String!, dateValue: String!): Date
-		# logApolloError(error: ApolloErrorInput): ApolloError
 	}
 `;
 

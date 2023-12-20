@@ -4,7 +4,7 @@ const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
 const s3 = require('../server');
 const { getImages } = require('../utils/s3Query');
-const { getHideawayImgUrls } = require('../utils/gallery_image_helpers');
+const { getHideawayImgUrls, getCottageImgUrls, getHomeImgUrls } = require('../utils/gallery_image_helpers');
 
 const resolvers = {
 	Query: {
@@ -55,7 +55,20 @@ const resolvers = {
 				return [{ message: 'Error in queryS3ByObjectType...', details: err.message }];
 			}
 		},
-		getHideawayImages: async () => {
+		getHomePgImgs: async () => {
+			try {
+				const { headerImgUrl, hideawayImgUrl, cottageImgUrl } = await getImages('homePage');
+				if (!headerImgUrl || !hideawayImgUrl || !cottageImgUrl) {
+					throw new Error('Something went wrong in fetching object from s3');
+				}
+				if (headerImgUrl && hideawayImgUrl && cottageImgUrl) {
+					return { headerImgUrl, hideawayImgUrl, cottageImgUrl };
+				}
+			} catch (err) {
+				return [{ message: 'Error in getHomePgImgs...', details: err.message }];
+			}
+		},
+		getHideawayImgs: async () => {
 			try {
 				const objectResponse = await getHideawayImgUrls();
 				if (!objectResponse) {
@@ -63,25 +76,31 @@ const resolvers = {
 				}
 				return objectResponse;
 			} catch (err) {
-				return [{ message: 'Error in queryS3ByObjectType...', details: err.message }];
+				return [{ message: 'Error in getHideawayImages...', details: err.message }];
 			}
 		},
-		// getApolloErrors: async () => {
-		// 	try {
-		// 		const allApolloErrors = await ApolloError.find({});
-
-		// 		if (!allApolloErrors) {
-		// 			throw new Error('Something went wrong finding all Apollo Errors');
-		// 		}
-		// 		if (allApolloErrors) {
-		// 			console.log(allApolloErrors[13]);
-		// 		}
-
-		// 		return allApolloErrors;
-		// 	} catch (err) {
-		// 		return [{ message: 'Error in querying Apollo Errors...', details: err.message }];
-		// 	}
-		// },
+		getCottageImgs: async () => {
+			try {
+				const objectResponse = await getCottageImgUrls();
+				if (!objectResponse) {
+					throw new Error('Something went wrong in fetching object from S3');
+				}
+				return objectResponse;
+			} catch (err) {
+				return [{ message: 'Error in getCottageImgs...', details: err.message }];
+			}
+		},
+		getAboutPgImg: async () => {
+			try {
+				const objectResponse = await getAboutImgUrl();
+				if (!objectResponse) {
+					throw new Error('Something went wrong in fetching object from s3');
+				}
+				return objectResponse;
+			} catch (err) {
+				return [{ message: 'Error in getHomePgImgs...', details: err.message }];
+			}
+		},
 	},
 	Mutation: {
 		createUser: async (parent, { firstName, lastName, username, userPassword, adminCode }) => {
