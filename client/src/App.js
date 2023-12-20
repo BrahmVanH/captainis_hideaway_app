@@ -39,7 +39,7 @@ import '@csstools/normalize.css';
 // });
 
 const client = new ApolloClient({
-	uri: isLocalEnvironment ? 'http://localhost:3001/graphql' : '/graphql',
+	uri: process.env.NODE_ENV === 'production' ? '/graphql' : 'http://localhost:3001/graphql',
 	cache: new InMemoryCache(),
 	// link: errorLink,
 });

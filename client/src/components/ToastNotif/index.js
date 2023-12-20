@@ -9,9 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const ToastNotif = ({ children }) => {
 	const [state, dispatch] = useErrorContext();
 	const { throwError, errorMessage } = state;
-	useEffect(() => {
-		console.log(state);
-	}, [state]);
 	const [body, setBody] = useState(null);
 	const [errorCode, setErrorCode] = useState(null);
 	const [toastFired, setToastFired] = useState(false);
@@ -42,14 +39,9 @@ const ToastNotif = ({ children }) => {
 		setCloseFireCount(inc);
 	};
 
-	useEffect(() => {
-		console.log(toastFired, new Date().getMilliseconds(new Date()));
-	}, [toastFired]);
 
 	useEffect(() => {
-		// console.log()
 		if (throwError === true && errorMessage.code !== null) {
-			console.log('recieved error message, setting Toast state variables');
 			setBody(errorMessage.message);
 			setErrorCode(errorMessage.code);
 			setToastFired(true);
@@ -57,9 +49,7 @@ const ToastNotif = ({ children }) => {
 	}, [throwError]);
 
 	useEffect(() => {
-		console.log(errorCode);
 		if (toastFired === true && errorCode !== null) {
-			console.log('calling toast.error');
 			toast.error(`${errorCode}: ${body}`, {
 				onClose: () => handleClose(),
 			});

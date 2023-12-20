@@ -3,7 +3,6 @@ export const parseApolloError = (apolloError) => {
 		console.log('Error in parsing error object. Please refresh');
 	}
 	
-
 	const { name, message: errorMessage, networkError, stack } = apolloError;
 	const networkResponseUrl = networkError?.response?.url;
 	const { name: networkErrorName, statusCode: networkErrorStatus } = networkError;
