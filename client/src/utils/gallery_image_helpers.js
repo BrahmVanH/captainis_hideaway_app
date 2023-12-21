@@ -3,7 +3,6 @@
 import { getImages } from './s3Query';
 
 
-const fullSizeHideawayImages = require.context('../assets/img/captains_hideaway_png', false, /\.(png|jpe?g|gif|svg)$/);
 const fullSizeCottageImages = require.context('../assets/img/captains_cottage_png', false, /\.(png|jpe?g|gif|svg)$/);
 
 // Creates an array of gallery images for react-image-gallery
@@ -53,7 +52,7 @@ const createHideawayImgGalArr = (hideawayGalleryAltTags, imageUrls) => {
 
 export const getAllImgs = async () => {
 	try {
-		const { hideawayGalleryUrls, hideawayHeaderUrl, homeHeaderUrl } = await getHideawayImgUrls();
+		const { hideawayGalleryUrls, hideawayHeaderUrl} = await getHideawayImgUrls();
 		if (hideawayGalleryUrls.length > 0) {
 			const hideawayImgGalArr = createHideawayImgGalArr(hideawayGalleryUrls);
 
@@ -65,8 +64,6 @@ export const getAllImgs = async () => {
 		console.error('there was an error getting hideaway gallery url array', err);
 	}
 };
-
-// export const hideawayImgUrls = await getHideawayGalleryArray();
 
 export const cottageGalleryImages = createCottageGalleryImages();
 const createHideawayGalleryImages = () => {
@@ -82,4 +79,3 @@ const createHideawayGalleryImages = () => {
 	return array;
 };
 
-export const hideawayGalleryImages = createHideawayGalleryImages();
