@@ -6,10 +6,6 @@ import { Link } from 'react-router-dom';
 import './style.css';
 
 function PropertyCard(props) {
-	useEffect(() => {
-		console.log(props.property);
-	}, [props]);
-
 	const property = props.property;
 	const [responsiveImageStyle, setResponsiveImageStyle] = useState({
 		maxHeight: '300px',
@@ -25,10 +21,6 @@ function PropertyCard(props) {
 
 		medium ? setResponsiveImageStyle({ width: '100%', padding: '0.5rem' }) : setResponsiveImageStyle({ maxHeight: '300px', maxWidth: '400px', margin: '1rem' });
 	}, []);
-
-	// useEffect(() => {
-	// 	console.log(property);
-	// }, [property]);
 
 	return (
 		<div className='col-lg-8 col-md-10 col-sm-11 d-flex flex-lg-row flex-column-reverse align-items-center rental-card card'>

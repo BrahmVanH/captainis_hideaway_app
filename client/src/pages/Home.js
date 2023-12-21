@@ -33,7 +33,6 @@ function Home() {
 
 	useEffect(() => {
 		if (!error && !loading && data) {
-			console.log(data);
 			setHeaderUrl(data.getHomePgImgs.headerImgUrl);
 			setCottageImgUrl(data.getHomePgImgs.cottageImgUrl);
 			setHideawayImgUrl(data.getHomePgImgs.hideawayImgUrl);
@@ -55,7 +54,6 @@ function Home() {
 
 	useEffect(() => {
 		if (headerUrl !== null && cottageImgUrl !== null && hideawayImgUrl !== null) {
-			console.log('setting url states');
 			setHideawayCard({
 				title: 'Captains Hideaway',
 				description:
@@ -72,11 +70,7 @@ function Home() {
 		}
 	}, [headerUrl, cottageImgUrl, hideawayImgUrl]);
 
-	useEffect(() => {
-		if (hideawayCard) {
-			console.log(hideawayCard);
-		}
-	}, [hideawayCard]);
+
 
 	return (
 		<>
