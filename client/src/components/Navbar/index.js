@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import Auth from '../../utils/auth';
 import { RxHamburgerMenu } from 'react-icons/rx';
 
+import logoSvg from '../../assets/logo/logo.svg';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
@@ -25,7 +26,6 @@ function Navbar() {
 		const isLarge = checkLargeViewport();
 		setIsLargeViewport(isLarge);
 	});
-
 
 	const isMediumViewport = () => {
 		return window.innerWidth < 766;
@@ -49,7 +49,7 @@ function Navbar() {
 			<nav ref={nav} className='navbar navbar-expand navigation-clean navbar-light'>
 				<div className='navbar-inner-container container'>
 					<Link className='navbar-brand' to={'/'}>
-						Captains Rentals
+						<img src={logoSvg} height={'50px'} width={'50px'} />
 					</Link>
 					{mobileViewport ? (
 						<button className='dropdown-btn' onClick={toggleDropDown}>

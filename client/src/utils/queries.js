@@ -34,10 +34,14 @@ export const GET_HIDEAWAY_IMAGES = gql`
 	}
 `;
 
-export const GET_APOLLO_ERRORS = gql`
-	query getApolloErrors {
-		getApolloErrors {
-			error
+export const GET_HOME_PG_IMGS = gql`
+	query GetHomePgImgs {
+		getHomePgImgs {
+			headerImgUrl
+			hideawayImgUrl
+			cottageImgUrl
 		}
 	}
 `;
+
+
