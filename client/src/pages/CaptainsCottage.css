@@ -1,16 +1,21 @@
 .captains-cottage-header {
-	background-image: url('../assets/img/captains_cottage_png/back_exterior_side_with_lake.png');
-	background-position: 0 -300px;
+	background-image: url('../assets/img/captains_cottage_png/back_exterior_side_with_lake_cropped.png');
+	background-position: 0 -200px;
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: 90% ;
 	height: 400px;
 	cursor: grab; /* Change cursor to a help pointer on hover */
-
 }
 
 @media only screen and (max-device-width: 992px) {
-  .captains-cottage-header {
-		background-position: 0 0;
+	.captains-cottage-header {
+		background-position: -100px 0;
+		background-image: ('../assets/img/captains_cottage_png/back_exterior_side_with_lake.png');
+		background-size: 150% 80%;
+	}
+
+	.main-content {
+		transform: translateY(-82.5px);
 	}
 }
 
@@ -19,7 +24,6 @@
 	border-image-source: linear-gradient(white, #abccd8, #5f8fa5, #abccd8, white);
 	border-image-slice: 1;
 	border-image-outset: 0;
-
 	border-image-repeat: stretch;
 }
 .cottage-bedroom-description-container {
@@ -31,5 +35,4 @@
 .bedroom-description-loft-icons {
 	display: flex;
 	flex-direction: row;
-	
 }

@@ -50,7 +50,10 @@ function SigninForm() {
 				// setShowAlert(true);
 			}
 			// Logs user in and stores token
-			Auth.login(data.loginUser.token);
+			if (data) {
+				console.log("login data: ", data);
+				Auth.login(data.loginUser.token);
+			}
 
 			window.location.assign('/admin');
 		} catch (err) {

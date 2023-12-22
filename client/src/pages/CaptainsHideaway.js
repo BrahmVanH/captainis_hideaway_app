@@ -1,7 +1,7 @@
 import React, { useRef, useLayoutEffect, useEffect, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-import gsap from 'gsap';
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
+// import gsap from 'gsap';
+// import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 import { GET_HIDEAWAY_IMAGES } from '../utils/queries';
 import { useErrorContext } from '../utils/ErrorContext';
@@ -27,7 +27,7 @@ import deckIcon from '../assets/icons/deck-icon-noun.svg';
 import './CaptainsHideaway.css';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
-import { createScrollSmoother } from '../utils/gsapHelpers';
+// import { createScrollSmoother } from '../utils/gsapHelpers';
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -44,15 +44,14 @@ function CaptainsHideaway() {
 	// 		code,
 	// 		message,
 	// 	} = state;
-	
-	
+
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
 	const smoother = useRef();
 	const hideawayAmenitiesComponent = useRef(null);
 	const [propertyName, setPropertyName] = useState('captainsHideaway');
 	const [hideawayGalObjs, setHideawayGalObjs] = useState(null);
-	const [hideawayHeaderUrl, setHideawayHeaderUrl] = useState([]);
+	const [headerUrl, setHeaderUrl] = useState([]);
 	const [mastheadBackgroundImg, setMastheadBackgroundImg] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const trigger = useRef(null);
@@ -69,29 +68,30 @@ function CaptainsHideaway() {
 
 	useEffect(() => {
 		if (!error && !loading && data) {
-			setHideawayHeaderUrl(data.getHideawayImages.hideawayHeaderUrl);
-			setHideawayGalObjs(data.getHideawayImages.galleryArray);
+			console.log('heres the data: ', data);
+			setHeaderUrl(data.getHideawayImgs.headerUrl);
+			setHideawayGalObjs(data.getHideawayImgs.galleryArray);
 		} else if (error) {
 			dispatch({
 				type: SET_THROW_ERROR,
 				throwError: true,
 				errorMessage: {
 					code: error?.networkError?.statusCode,
-					message: "Sorry, there was a network error while loading this page. The issue should be resolved with a refresh."
+					message: 'Sorry, there was a network error while loading this page. The issue should be resolved with a refresh.',
 				},
 			});
 		}
 	}, [loading, data, error]);
 
 	useEffect(() => {
-		if (hideawayHeaderUrl) {
-			setMastheadBackgroundImg({ backgroundImage: `url(${hideawayHeaderUrl})` });
+		if (headerUrl) {
+			setMastheadBackgroundImg({ backgroundImage: `url(${headerUrl})` });
 		}
-	}, [hideawayHeaderUrl]);
+	}, [headerUrl]);
 
-	useLayoutEffect(() => {
-		createScrollSmoother(main, smoother);
-	}, [main]);
+	// useLayoutEffect(() => {
+	// 	createScrollSmoother(main, smoother);
+	// }, [main]);
 
 	return (
 		<div ref={main} id='smooth-wrapper'>

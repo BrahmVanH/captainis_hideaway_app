@@ -48,9 +48,9 @@ function Home() {
 		}
 	}, [loading, data, error]);
 
-	useLayoutEffect(() => {
-		createScrollSmoother(main, smoother);
-	}, []);
+	// useLayoutEffect(() => {
+	// 	createScrollSmoother(main, smoother);
+	// }, []);
 
 	useEffect(() => {
 		if (headerUrl !== null && cottageImgUrl !== null && hideawayImgUrl !== null) {

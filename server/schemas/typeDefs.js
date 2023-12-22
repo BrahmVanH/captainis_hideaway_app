@@ -40,7 +40,7 @@ const typeDefs = gql`
 	}
 
 	type hideawayImgPack {
-		hideawayHeaderUrl: String
+		headerUrl: String
 		galleryArray: [imageObject]
 	}
 

@@ -71,10 +71,15 @@ const resolvers = {
 		getHideawayImgs: async () => {
 			try {
 				const objectResponse = await getHideawayImgUrls();
+
 				if (!objectResponse) {
 					throw new Error('Something went wrong in fetching object from S3');
 				}
-				return objectResponse;
+				if (objectResponse) {
+					return objectResponse;
+				} else {
+					return null;
+				}
 			} catch (err) {
 				return [{ message: 'Error in getHideawayImages...', details: err.message }];
 			}
@@ -110,13 +115,13 @@ const resolvers = {
 				} else if (adminCode !== process.env.ADMIN_CODE) {
 					throw new AuthenticationError('Incorrect admin code');
 				}
-				const password = bcrypt.hashSync(userPassword, 10);
+				// const password = bcrypt.hashSync(userPassword, 10);
 
 				const newUser = await User.create({
 					firstName,
 					lastName,
 					username,
-					password,
+					password: userPassword,
 				});
 
 				if (!newUser) {
@@ -140,9 +145,7 @@ const resolvers = {
 					throw new AuthenticationError("Can't find user with that username");
 				}
 
-				const hashedPassword = user.password;
-
-				const isPasswordValid = bcrypt.compareSync(userPassword, hashedPassword);
+				const isPasswordValid = user.isCorrectPassword(userPassword);
 
 				if (!isPasswordValid) {
 					throw new AuthenticationError('Incorrect Password!');

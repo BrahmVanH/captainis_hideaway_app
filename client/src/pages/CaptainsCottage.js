@@ -52,9 +52,12 @@ function CaptainsCottage() {
 		<div ref={main} id='smooth-wrapper'>
 			<div id='smooth-content'>
 				<Navbar />
-				<header onClick={toggleGalleryFullScreen} className='captains-cottage-header masthead'></header>
+				{/* <header onClick={toggleGalleryFullScreen} className='captains-cottage-header masthead'></header> */}
+				<div className='col-lg-10 d-flex justify-content-center' style={{ overflow: 'hidden', height: '600px', margin: 'auto' }}>
+					<img src='assets/img/back_exterior_side_with_lake copy.png' height='700px' width='1100px' />
+				</div>
 
-				<div className='d-flex align-items-center flex-column '>
+				<div className='main-content d-flex align-items-center flex-column '>
 					<div className='col-lg-10 col-11 d-flex flex-lg-row flex-column justify-content-center'>
 						<div className='col-lg-8 col-12'>
 							<div className='overview-card card'>

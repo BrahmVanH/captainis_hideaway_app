@@ -87,7 +87,7 @@ const getImages = async (objectRequest) => {
 	const aboutImgKey = 'about_us.jpg';
 
 	let hideawayGalleryUrls;
-	
+
 	let objectResponse;
 
 	const tobeCottageGal = 'cottageGallery';
@@ -115,10 +115,12 @@ const getImages = async (objectRequest) => {
 				const data = await s3.listObjectsV2(hideawayParams).promise();
 				if (data) {
 					const hideawayGalleryAltTags = await getImgTags(hideawayParams.Bucket, data);
+
 					if (hideawayGalleryAltTags.length > 0) {
-						const objectResponse = hideawayGalleryAltTags;
+						return hideawayGalleryAltTags;
+					} else {
+						return null;
 					}
-					return objectResponse;
 				} else if (!data) {
 					throw new Error('Could not retrieve images from S3');
 				}
@@ -131,9 +133,11 @@ const getImages = async (objectRequest) => {
 				if (data) {
 					const headerImgIndex = findImgIndex(data, hideawayHeaderImgKey)[0];
 					const headerUrl = getSignedUrl(hideawayParams.Bucket, data.Contents[headerImgIndex]);
-
-					const objectResponse = headerUrl;
-					return objectResponse;
+					if (headerUrl) {
+						return headerUrl;
+					} else {
+						return null;
+					}
 				} else if (!data) {
 					throw new Error('Could not retrieve images from S3');
 				}

@@ -20,8 +20,8 @@ const { getImages } = require('./s3Query');
 
 const getHomeImgUrls = async () => {
 	try {
-		const { headerImgUrl, hideawayImgUrl, cottageImgUrl} = await getImages('homePage');
-		
+		const { headerImgUrl, hideawayImgUrl, cottageImgUrl } = await getImages('homePage');
+
 		if (headerImgUrl && hideawayImgUrl && cottageImgUrl) {
 			return { headerImgUrl, hideawayImgUrl, cottageImgUrl };
 		}
@@ -34,10 +34,12 @@ const getHomeImgUrls = async () => {
 const getHideawayImgUrls = async () => {
 	try {
 		const hideawayGalleryUrls = await getImages('hideawayGallery');
+
 		const hideawayGalleryAltTags = await getImages('hideawayGalleryAltTags');
 		const hideawayHeaderUrl = await getImages('hideawayHeader');
 		if (hideawayGalleryUrls.length > 0 && hideawayGalleryAltTags.length > 0 && hideawayHeaderUrl) {
-			return createHideawayImgGalArr(hideawayGalleryAltTags, hideawayGalleryUrls, hideawayHeaderUrl);
+			// this one is working
+			return createImgGalArr(hideawayGalleryAltTags, hideawayGalleryUrls, hideawayHeaderUrl);
 		}
 	} catch (err) {
 		throw new Error('there was an error fetching hideaway images');
@@ -50,7 +52,12 @@ const getCottageImgUrls = async () => {
 		const cottageGalleryAltTags = await getImages('cottageGalleryAltTags');
 		const cottageHeaderUrl = await getImages('cottageHeader');
 		if (hideawayGalleryUrls.length > 0 && hideawayGalleryAltTags.length > 0 && hideawayHeaderUrl) {
-			return createImgGalArr(cottageGalleryAltTags, cottageGalleryUrls, cottageHeaderUrl);
+			const response = createImgGalArr(cottageGalleryAltTags, cottageGalleryUrls, cottageHeaderUrl);
+			if (response) {
+
+				console.log(response);
+				return response;
+			}
 		}
 	} catch (err) {
 		throw new Error('there was an error fetching cottage images');
@@ -83,15 +90,16 @@ const createImgGalArr = (galleryAltTags, imageUrls, headerUrl) => {
 		galleryArray[i].originalAlt = galleryAltTags[i];
 		galleryArray[i].thumbnailAlt = galleryAltTags[i];
 	}
+	// this one works
 	return { headerUrl, galleryArray };
 };
 
 const getAllImgs = async () => {
 	try {
-		const { hideawayGalleryUrls, hideawayHeaderUrl, homeHeaderUrl } = await getHideawayImgUrls();
-		if (hideawayGalleryUrls.length > 0) {
+		const { hideawayGalleryUrls, hideawayHeaderUrl } = await getHideawayImgUrls();
+		if (hideawayGalleryUrls.length > 0 && hideawayHeaderUrl) {
 			const hideawayImgGalArr = createHideawayImgGalArr(hideawayGalleryUrls);
-
+			console.log("yahooh: ", ideawayHeaderUrl);
 			return { hideawayImgGalArr, hideawayHeaderUrl };
 		} else {
 			console.error('couldnt create image gallery array');

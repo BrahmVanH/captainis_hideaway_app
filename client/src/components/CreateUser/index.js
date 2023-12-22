@@ -55,7 +55,7 @@ function CreateUser() {
 			// Logs user in and stores token
 			Auth.login(data.createUser.token);
 
-			window.location.assign('/admin');
+			window.location.assign('/#/admin');
 		} catch (err) {
 			console.error(err);
 			setShowAlert(true);

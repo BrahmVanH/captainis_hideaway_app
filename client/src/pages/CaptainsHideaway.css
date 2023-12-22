@@ -1,6 +1,5 @@
 .captains-hideaway-header {
-	background-image: url('../assets/img/stairs_from_beach_rotated.png');
-	background-position: 0 -200px;
+	background-position: 0 -250px;
 	background-repeat: no-repeat;
 	background-size: cover;
 	height: 400px;
@@ -16,7 +15,7 @@
 
 @media only screen and (max-device-width: 992px) {
 	.captains-hideaway-header {
-		background-position: 0 0;
+		background-position: -100px 0;
 	}
 }
 

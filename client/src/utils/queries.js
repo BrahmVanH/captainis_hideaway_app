@@ -21,9 +21,9 @@ export const QUERY_UNAVAILABLE_DATES = gql`
 `;
 
 export const GET_HIDEAWAY_IMAGES = gql`
-	query GetHideawayImages {
-		getHideawayImages {
-			hideawayHeaderUrl
+	query GetHideawayImgs {
+		getHideawayImgs {
+			headerUrl
 			galleryArray {
 				original
 				thumbnail
