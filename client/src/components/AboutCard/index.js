@@ -2,7 +2,6 @@ import React from 'react';
 
 import './style.css';
 
-import temp_photo from '../../assets/img/temp_about_us.png';
 
 function AboutCard(props) {
 	const image = props.image;

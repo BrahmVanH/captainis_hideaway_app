@@ -4,7 +4,8 @@ import { Link } from 'react-router-dom';
 import Auth from '../../utils/auth';
 import { RxHamburgerMenu } from 'react-icons/rx';
 
-import logoSvg from '../../assets/logo/logo.svg';
+import mobileLogoSvg from '../../assets/logo/logo.svg';
+import logoSvg from '../../assets/logo/logo_no_trees.svg'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
@@ -12,7 +13,8 @@ function Navbar() {
 	const [mobileViewport, setMobileViewport] = useState(false);
 	const [showDropdownMenu, setShowDropdownMenu] = useState(false);
 	const [dropdownMenuDisplay, setDropdownMenuDisplay] = useState('none');
-
+	const [brandLogo, setBrandLogo] = useState({
+		image: mobileLogoSvg, width: '100px'});
 	const nav = useRef();
 	const dropdown = useRef();
 
@@ -38,6 +40,9 @@ function Navbar() {
 	useEffect(() => {
 		const mobile = isMediumViewport();
 		mobile ? setMobileViewport(true) : setMobileViewport(false);
+		mobile ? setBrandLogo({
+			image: mobileLogoSvg, width: '75px'}) : setBrandLogo({
+			image: logoSvg, width: '125px'});
 	}, []);
 
 	useEffect(() => {
@@ -46,10 +51,10 @@ function Navbar() {
 
 	return (
 		<>
-			<nav ref={nav} className='navbar navbar-expand navigation-clean navbar-light'>
-				<div className='navbar-inner-container container'>
+			<nav ref={nav} className='my-navbar navbar-expand navigation-clean navbar-light'>
+				<div className='navbar-inner-container '>
 					<Link className='navbar-brand' to={'/'}>
-						<img src={logoSvg} height={'50px'} width={'50px'} />
+						<img src={brandLogo.image}  width={brandLogo.width} />
 					</Link>
 					{mobileViewport ? (
 						<button className='dropdown-btn' onClick={toggleDropDown}>
