@@ -1,23 +1,9 @@
-// import { getImages } from './s3Query';
 const { getImages } = require('./s3Query');
 
-// const fullSizeHideawayImages = require.context('../assets/img/captains_hideaway_png', false, /\.(png|jpe?g|gif|svg)$/);
-// const fullSizeCottageImages = require.context('../assets/img/captains_cottage_png', false, /\.(png|jpe?g|gif|svg)$/);
 
-// // Creates an array of gallery images for react-image-gallery
-// const createCottageGalleryImages = () => {
-// 	let array = [];
-// 	fullSizeCottageImages.keys().map((file) => {
-// 		const original = fullSizeCottageImages(file);
 
-// 		array.push({
-// 			original: original,
-// 			thumbnail: original,
-// 		});
-// 	});
-// 	return array;
-// };
-
+// Takes in alt tags, gallery image urls and header url from property pages and
+// formats an array for image gallery in client
 const createImgGalArr = (galleryAltTags, imageUrls, headerUrl) => {
 	let galleryArray = [];
 	imageUrls.map((url) => {
@@ -37,6 +23,8 @@ const createImgGalArr = (galleryAltTags, imageUrls, headerUrl) => {
 	return { headerUrl, galleryArray };
 };
 
+// Retrieves Home page image URLs from server-side S3 query
+
 const getHomeImgUrls = async () => {
 	try {
 		const { headerImgUrl, hideawayImgUrl, cottageImgUrl } = await getImages('homePage');
@@ -49,24 +37,20 @@ const getHomeImgUrls = async () => {
 	}
 };
 
-// Retrieves image URLs from server-side S3 query
+// Retrieves hideaway property page image URLs from server-side S3 query
 const getHideawayImgUrls = async () => {
 	try {
 		const { headerUrl, hideawayGalleryObjects } = await getImages('hideawayImgPack');
 		const hideawayGalleryAltTags = hideawayGalleryObjects.map((object) => {
-			console.log('object alt tag: ', object.altTag);
 			return object.altTag;
 		});
 		const hideawayGalleryUrls = hideawayGalleryObjects.map((object) => {
-			console.log('object signUrl: ', object.signedUrl);
 
 			return object.signedUrl;
 		});
 		if (hideawayGalleryUrls.length > 0 && hideawayGalleryAltTags.length > 0 && headerUrl) {
-			// this one is working
 			const response = createImgGalArr(hideawayGalleryAltTags, hideawayGalleryUrls, headerUrl);
 			if (response) {
-				console.log('response: ', response);
 				return response;
 			}
 		}
@@ -74,6 +58,8 @@ const getHideawayImgUrls = async () => {
 		throw new Error('there was an error fetching hideaway images');
 	}
 };
+
+// Retrieves cottage property page image URLs from server-side S3 query
 
 const getCottageImgUrls = async () => {
 	try {
@@ -95,6 +81,8 @@ const getCottageImgUrls = async () => {
 	}
 };
 
+// Retrieves about us image URLs from server-side S3 query
+
 const getAboutImgUrl = async () => {
 	try {
 		const cardImgUrl = await getImages('aboutPage');
@@ -105,37 +93,5 @@ const getAboutImgUrl = async () => {
 		throw new Error('there was an error fetching about image');
 	}
 };
-
-const getAllImgs = async () => {
-	try {
-		const { hideawayGalleryUrls, hideawayHeaderUrl } = await getHideawayImgUrls();
-		if (hideawayGalleryUrls.length > 0 && hideawayHeaderUrl) {
-			const hideawayImgGalArr = createHideawayImgGalArr(hideawayGalleryUrls);
-			return { hideawayImgGalArr, hideawayHeaderUrl };
-		} else {
-			console.error('couldnt create image gallery array');
-		}
-	} catch (err) {
-		console.error('there was an error getting hideaway gallery url array', err);
-	}
-};
-
-// export const hideawayImgUrls = await getHideawayGalleryArray();
-
-// const cottageGalleryImages = createCottageGalleryImages();
-const createHideawayGalleryImages = () => {
-	let array = [];
-	fullSizeHideawayImages.keys().map((file) => {
-		const original = fullSizeHideawayImages(file);
-
-		array.push({
-			original: original,
-			thumbnail: original,
-		});
-	});
-	return array;
-};
-
-// const hideawayGalleryImages = createHideawayGalleryImages();
 
 module.exports = { getHideawayImgUrls, getCottageImgUrls, getAboutImgUrl, getHomeImgUrls };

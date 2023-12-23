@@ -57,7 +57,6 @@ function CaptainsCottage() {
 	// Set img state variables when data present without error or loading
 	useEffect(() => {
 		if (!error && !loading && data) {
-			console.log(data);
 			setHeaderUrl(data.getCottageImgs.headerUrl);
 			setCottageGalObjs(data.getCottageImgs.galleryArray);
 		} else if (error) {

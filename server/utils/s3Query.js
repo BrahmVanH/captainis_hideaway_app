@@ -40,7 +40,6 @@ const getImgTag = async (imageBucket, imageItem) => {
 				.promise();
 
 			if (altTag) {
-				// console.log('altTag.tagSet: ', altTag.TagSet[0]?.Value);
 				return altTag.TagSet[0]?.Value;
 			}
 		}
@@ -120,7 +119,6 @@ const getImages = async (objectRequest) => {
 			try {
 				const data = await s3.listObjectsV2(cottageParams).promise();
 				if (data) {
-					// console.log(data);
 					const headerImgIndex = findImgIndex(data, cottageHeaderImgKey)[0];
 					const headerUrl = getSignedUrl(cottageParams.Bucket, data.Contents[headerImgIndex]);
 
@@ -135,7 +133,6 @@ const getImages = async (objectRequest) => {
 					);
 
 					if (headerUrl && cottageGalleryObjects) {
-						console.log('gallery objects length: ', cottageGalleryObjects.length);
 						return { headerUrl, cottageGalleryObjects };
 					}
 				}
