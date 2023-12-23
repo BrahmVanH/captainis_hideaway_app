@@ -73,8 +73,10 @@ const resolvers = {
 				const objectResponse = await getHideawayImgUrls();
 
 				if (!objectResponse) {
+					console.log("no object reponse")
 					throw new Error('Something went wrong in fetching hideaway object from S3');
 				} else if (objectResponse) {
+					console.log(objectResponse);
 					return objectResponse;
 				} else {
 					return null;

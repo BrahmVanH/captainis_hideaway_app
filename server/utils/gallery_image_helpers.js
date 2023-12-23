@@ -52,13 +52,23 @@ const getHomeImgUrls = async () => {
 // Retrieves image URLs from server-side S3 query
 const getHideawayImgUrls = async () => {
 	try {
-		const hideawayGalleryUrls = await getImages('hideawayGallery');
+		const { headerUrl, hideawayGalleryObjects } = await getImages('hideawayImgPack');
+		const hideawayGalleryAltTags = hideawayGalleryObjects.map((object) => {
+			console.log('object alt tag: ', object.altTag);
+			return object.altTag;
+		});
+		const hideawayGalleryUrls = hideawayGalleryObjects.map((object) => {
+			console.log('object signUrl: ', object.signedUrl);
 
-		const hideawayGalleryAltTags = await getImages('hideawayGalleryAltTags');
-		const hideawayHeaderUrl = await getImages('hideawayHeader');
-		if (hideawayGalleryUrls.length > 0 && hideawayGalleryAltTags.length > 0 && hideawayHeaderUrl) {
+			return object.signedUrl;
+		});
+		if (hideawayGalleryUrls.length > 0 && hideawayGalleryAltTags.length > 0 && headerUrl) {
 			// this one is working
-			return createImgGalArr(hideawayGalleryAltTags, hideawayGalleryUrls, hideawayHeaderUrl);
+			const response = createImgGalArr(hideawayGalleryAltTags, hideawayGalleryUrls, headerUrl);
+			if (response) {
+				console.log('response: ', response);
+				return response;
+			}
 		}
 	} catch (err) {
 		throw new Error('there was an error fetching hideaway images');
@@ -68,13 +78,12 @@ const getHideawayImgUrls = async () => {
 const getCottageImgUrls = async () => {
 	try {
 		const { headerUrl, cottageGalleryObjects } = await getImages('cottageImgPack');
-		console.log("objects: ", cottageGalleryObjects);
 		const cottageGalleryAltTags = cottageGalleryObjects.map((object) => {
-			return object.altTag
-		})
+			return object.altTag;
+		});
 		const cottageGalleryUrls = cottageGalleryObjects.map((object) => {
-			return object.signedUrl
-		})
+			return object.signedUrl;
+		});
 		if (cottageGalleryUrls.length > 0 && cottageGalleryAltTags.length > 0 && headerUrl) {
 			const response = createImgGalArr(cottageGalleryAltTags, cottageGalleryUrls, headerUrl);
 			if (response) {
@@ -96,8 +105,6 @@ const getAboutImgUrl = async () => {
 		throw new Error('there was an error fetching about image');
 	}
 };
-
-
 
 const getAllImgs = async () => {
 	try {

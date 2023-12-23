@@ -74,99 +74,7 @@ const getImages = async (objectRequest) => {
 
 	const aboutImgKey = 'about_us.jpg';
 
-	let hideawayGalleryUrls;
-
-	let objectResponse;
-
 	switch (objectRequest) {
-		case 'hideawayGallery':
-			try {
-				const data = await s3.listObjectsV2(hideawayParams).promise();
-				if (data) {
-					hideawayGalleryUrls = data?.Contents.map((item) => {
-						return getSignedUrl(hideawayParams.Bucket, item);
-					});
-					const objectResponse = hideawayGalleryUrls;
-					return objectResponse;
-				} else if (!data) {
-					throw new Error('Could not retrieve images from S3');
-				}
-			} catch (err) {
-				return [{ message: 'Error in querying s3 for images', details: err.message }];
-			}
-		case 'hideawayGalleryAltTags':
-			try {
-				const data = await s3.listObjectsV2(hideawayParams).promise();
-				if (data) {
-					const hideawayGalleryAltTags = await getImgTags(hideawayParams.Bucket, data);
-
-					if (hideawayGalleryAltTags.length > 0) {
-						return hideawayGalleryAltTags;
-					} else {
-						return null;
-					}
-				} else if (!data) {
-					throw new Error('Could not retrieve images from S3');
-				}
-			} catch (err) {
-				return [{ message: 'Error in querying s3 for images', details: err.message }];
-			}
-		case 'hideawayHeader':
-			try {
-				const data = await s3.listObjectsV2(hideawayParams).promise();
-				if (data) {
-					const headerImgIndex = findImgIndex(data, hideawayHeaderImgKey)[0];
-					const headerUrl = getSignedUrl(hideawayParams.Bucket, data.Contents[headerImgIndex]);
-					if (headerUrl) {
-						return headerUrl;
-					} else {
-						return null;
-					}
-				} else if (!data) {
-					throw new Error('Could not retrieve images from S3');
-				}
-			} catch (err) {
-				return [{ message: 'Error in querying s3 for hideaway images', details: err.message }];
-			}
-		case 'cottageImgPack':
-			try {
-				const data = await s3.listObjectsV2(cottageParams).promise();
-				if (data) {
-					// console.log(data);
-					const headerImgIndex = findImgIndex(data, cottageHeaderImgKey)[0];
-					const headerUrl = getSignedUrl(cottageParams.Bucket, data.Contents[headerImgIndex]);
-
-					const cottageGalleryObjects = await Promise.all(
-						data?.Contents.filter((object) => object.Key !== 'captains_cottage_png/').map(async (item) => {
-							console.log(item);
-							const altTag = await getImgTag(cottageParams.Bucket, item);
-							const signedUrl = getSignedUrl(cottageParams.Bucket, item);
-							console.log({ altTag, signedUrl });
-							if ((altTag, signedUrl)) {
-								return { altTag, signedUrl };
-							}
-						})
-					);
-
-					// const cottageGalleryData = await Promise.all(
-					// 	data?.Contents.map(async (item) => {
-					// 		const imageUrl = getSignedUrl(cottageParams.Bucket, item);
-					// 		const altTag = await getImgTags(cottageParams.Bucket, item);
-					// 		return { imageUrl, altTag: altTag[0] || null };
-					// 	})
-					// );
-
-					// const cottageGalleryUrls = cottageGalleryData.map((item) => item.imageUrl);
-					// const cottageGalleryAltTags = cottageGalleryData.map((item) => item.altTag);
-
-					if (headerUrl && cottageGalleryObjects) {
-						console.log('gallery objects length: ', cottageGalleryObjects.length);
-						return { headerUrl, cottageGalleryObjects };
-					}
-				}
-			} catch (err) {
-				return [{ message: 'Error in querying s3 for cottage images', details: err.message }];
-			}
 		case 'homePage':
 			try {
 				const data = await s3.listObjectsV2(homePageParams).promise();
@@ -184,6 +92,55 @@ const getImages = async (objectRequest) => {
 				}
 			} catch (err) {
 				return [{ message: 'Error in querying s3 for homepage images', details: err.message }];
+			}
+		case 'hideawayImgPack':
+			try {
+				const data = await s3.listObjectsV2(hideawayParams).promise();
+				if (data) {
+					const headerImgIndex = findImgIndex(data, hideawayHeaderImgKey)[0];
+					const headerUrl = getSignedUrl(hideawayParams.Bucket, data.Contents[headerImgIndex]);
+					const hideawayGalleryObjects = await Promise.all(
+						data?.Contents.filter((object) => object.Key !== 'captains_hideaway_png/').map(async (item) => {
+							const altTag = await getImgTag(hideawayParams.Bucket, item);
+							const signedUrl = getSignedUrl(hideawayParams.Bucket, item);
+							if ((altTag, signedUrl)) {
+								return { altTag, signedUrl };
+							}
+						})
+					);
+
+					if (headerUrl && hideawayGalleryObjects) {
+						return { headerUrl, hideawayGalleryObjects };
+					}
+				}
+			} catch (err) {
+				return [{ message: 'Error in querying s3 for cottage images', details: err.message }];
+			}
+		case 'cottageImgPack':
+			try {
+				const data = await s3.listObjectsV2(cottageParams).promise();
+				if (data) {
+					// console.log(data);
+					const headerImgIndex = findImgIndex(data, cottageHeaderImgKey)[0];
+					const headerUrl = getSignedUrl(cottageParams.Bucket, data.Contents[headerImgIndex]);
+
+					const cottageGalleryObjects = await Promise.all(
+						data?.Contents.filter((object) => object.Key !== 'captains_cottage_png/').map(async (item) => {
+							const altTag = await getImgTag(cottageParams.Bucket, item);
+							const signedUrl = getSignedUrl(cottageParams.Bucket, item);
+							if ((altTag, signedUrl)) {
+								return { altTag, signedUrl };
+							}
+						})
+					);
+
+					if (headerUrl && cottageGalleryObjects) {
+						console.log('gallery objects length: ', cottageGalleryObjects.length);
+						return { headerUrl, cottageGalleryObjects };
+					}
+				}
+			} catch (err) {
+				return [{ message: 'Error in querying s3 for cottage images', details: err.message }];
 			}
 		case 'aboutPage':
 			try {

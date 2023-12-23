@@ -14,7 +14,6 @@ import Navbar from '../components/Navbar';
 
 import ImageGallery from 'react-image-gallery';
 import AvailabilityCalendar from '../components/Calendar';
-import { cottageGalleryImages } from '../utils/gallery_image_helpers';
 
 import { createScrollSmoother } from '../utils/gsapHelpers';
 // import { cottageGalleryImages } from '../utils/gallery_image_helpers';
