@@ -144,6 +144,27 @@ const getImages = async (objectRequest) => {
 			} catch (err) {
 				return [{ message: 'Error in querying s3 for hideaway images', details: err.message }];
 			}
+		case 'cottageImgPack':
+			try {
+				let headerUrl;
+				let cottageGalleryUrls;
+				let cottageGalleryAltTags;
+				const data = await s3.listObjectsV2(cottageParams).promise();
+				if (data) {
+					headerImgIndex = findImgIndex(data, cottageHeaderImgKey)[0];
+					headerUrl = getSignedUrl(cottageParams.Bucket);
+					cottageGalleryUrls = data?.Contents.map((item) => {
+						return getSignedUrl(cottageParams.Bucket, item);
+					});
+					cottageGalleryAltTags = await getImgTags(cottageParams.Bucket, data);
+
+					if (headerUrl && cottageGalleryUrls && cottageGalleryAltTags) {
+						return { headerUrl, cottageGalleryUrls, cottageGalleryAltTags };
+					}
+				}
+			} catch (err) {
+				return [{ message: 'Error in querying s3 for cottage images', details: err.message }];
+			}
 		case 'homePage':
 			try {
 				const data = await s3.listObjectsV2(homePageParams).promise();

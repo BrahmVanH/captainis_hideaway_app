@@ -45,7 +45,7 @@ const typeDefs = gql`
 	}
 
 	type cottageImgPack {
-		cottageHeaderUrl: String
+		headerUrl: String
 		galleryArray: [imageObject]
 	}
 

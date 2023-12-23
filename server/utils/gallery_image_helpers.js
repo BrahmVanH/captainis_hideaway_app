@@ -48,10 +48,8 @@ const getHideawayImgUrls = async () => {
 
 const getCottageImgUrls = async () => {
 	try {
-		const cottageGalleryUrls = await getImages('cottageGallery');
-		const cottageGalleryAltTags = await getImages('cottageGalleryAltTags');
-		const cottageHeaderUrl = await getImages('cottageHeader');
-		if (hideawayGalleryUrls.length > 0 && hideawayGalleryAltTags.length > 0 && hideawayHeaderUrl) {
+		const { headerUrl, cottageGalleryUrls, cottageGalleryAltTags } = await getImages('cottageImgPack');
+		if (hideawayGalleryUrls.length > 0 && hideawayGalleryAltTags.length > 0 && headerUrl) {
 			const response = createImgGalArr(cottageGalleryAltTags, cottageGalleryUrls, cottageHeaderUrl);
 			if (response) {
 

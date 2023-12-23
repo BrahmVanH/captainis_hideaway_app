@@ -73,9 +73,8 @@ const resolvers = {
 				const objectResponse = await getHideawayImgUrls();
 
 				if (!objectResponse) {
-					throw new Error('Something went wrong in fetching object from S3');
-				}
-				if (objectResponse) {
+					throw new Error('Something went wrong in fetching hideaway object from S3');
+				} else if (objectResponse) {
 					return objectResponse;
 				} else {
 					return null;
@@ -88,9 +87,12 @@ const resolvers = {
 			try {
 				const objectResponse = await getCottageImgUrls();
 				if (!objectResponse) {
-					throw new Error('Something went wrong in fetching object from S3');
+					throw new Error('Something went wrong in fetching cottage object from S3');
+				} else if (objectResponse) {
+					return objectResponse;
+				} else {
+					return null;
 				}
-				return objectResponse;
 			} catch (err) {
 				return [{ message: 'Error in getCottageImgs...', details: err.message }];
 			}
