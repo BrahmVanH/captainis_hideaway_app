@@ -11,34 +11,6 @@ function AmenitiesModal(props) {
 	const ref = props.btnRef;
 	const [open, setOpen] = useState(false);
 
-	const customStyles = {
-		// overlay: {
-		// 	position: 'sticky',
-		// 	top: 0,
-		// 	left: 0,
-		// 	right: 0,
-		// 	bottom: 0,
-		// 	zIndex: 1000,
-		// },
-		// panel: {
-		// top: '50%',
-		// left: '50%',
-		// right: 'auto',
-		// bottom: 'auto',
-		// width: '50%',
-		// borderRadius: '6px',
-		// marginRight: '-50%',
-		// maxHeight: '100px',
-		// overflowY: 'scroll',
-		// webkitOverflowScrolling: 'touch',
-		// transform: 'translate(-50%, -50%)',
-		// borderBottom: '3px solid transparent',
-		// borderImageSource: 'linear-gradient(to right, white, #abccd8, #5f8fa5, #abccd8, white)',
-		// borderImageSlice: '1',
-		// borderImageOutset: '0',
-		// borderImageRepeat: 'stretch',
-		// },
-	};
 
 	return (
 		<div>
@@ -83,7 +55,7 @@ function AmenitiesModal(props) {
 						))}
 					</div>
 					<div className='close-btn-container'>
-						<Button onClick={() => setOpen(false)}>Close</Button>
+						<Button className='btn-dark btn-sm' onClick={() => setOpen(false)}>Close</Button>
 					</div>
 				</div>
 			</SlDialog>

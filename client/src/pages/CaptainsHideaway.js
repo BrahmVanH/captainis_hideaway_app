@@ -9,8 +9,6 @@ import { SET_THROW_ERROR } from '../utils/actions';
 
 import ImageGallery from 'react-image-gallery';
 
-import { hideawayAmenities } from '../utils/captainsHideawayAmenities';
-
 import { CiCoffeeBean } from 'react-icons/ci';
 import { GiBathtub, GiBunkBeds, GiBeachBucket, GiThermometerCold, GiHeatHaze } from 'react-icons/gi';
 import { BsFillDoorOpenFill, BsSun } from 'react-icons/bs';
@@ -23,6 +21,8 @@ import { TbWifi, TbWashMachine, TbWashDry1, TbToolsKitchen2, TbDeviceTv, TbKayak
 import dishwasherIcon from '../assets/icons/dishwasher_icon.svg';
 import porchIcon from '../assets/icons/porch-icon-noun.svg';
 import deckIcon from '../assets/icons/deck-icon-noun.svg';
+
+import { hideawayAmenities } from '../utils/captainsHideawayAmenities';
 
 import './CaptainsHideaway.css';
 import 'react-image-gallery/styles/css/image-gallery.css';

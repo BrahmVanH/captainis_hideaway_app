@@ -27,6 +27,7 @@
 	border-image-repeat: stretch; 
 	border: 2px solid #5f8fa5;
 	border-radius: 6px;
+	background-color: white;
 
 	z-index: 2000;
 }
@@ -74,10 +75,10 @@
 	font-size: 14px;
 }
 .close-btn-container {
-	padding: 0rem 1rem;
+	padding: 0rem 0rem;
 	width: 100%;
 	position: sticky;
 	bottom: 0px;
 	display: flex;
-	justify-content: flex-end;
+	justify-content: flex-start;
 }
