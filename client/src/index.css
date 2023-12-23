@@ -8,12 +8,6 @@ body {
 	background-color: rgba(116, 159, 177, 0.381) !important;
 }
 
-body.ReactModal__Body--open {
-	height: 100vh;
-	overflow-y: hidden;
-	padding-right: 15px;
-}
-
 #root {
 	display: flex;
 	flex-direction: column;

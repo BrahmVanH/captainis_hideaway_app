@@ -7,6 +7,8 @@
 	"scripts": {
 		"start": "node server.js",
 		"watch": "nodemon server.js",
+		"build": "npm run minify && webpack",
+		"minify": "terser ./*.js --output dist --mangle --compress",
 		"seed": "node seeders/seed.js"
 	},
 	"keywords": [],
