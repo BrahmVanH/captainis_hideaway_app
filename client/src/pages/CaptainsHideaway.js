@@ -54,8 +54,17 @@ function CaptainsHideaway() {
 	const [headerUrl, setHeaderUrl] = useState([]);
 	const [mastheadBackgroundImg, setMastheadBackgroundImg] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
+	const [mainContentStyle, setMainContentStyle] = useState({
+		transform: 'translateY(0px)',
+	});
+	const [imageStyle, setImageStyle] = useState({
+		width: '1200px',
+	});
+	useEffect(() => {
+		window.innerWidth < 500 ? setImageStyle({ width: '600px', height: '350px' }) : setImageStyle({ width: '1200px', height: '800px' });
+		window.innerWidth < 500 ? setMainContentStyle({ transform: 'translateY(-250.5px)' }) : setMainContentStyle({ transform: 'translateY(0px)' });
+	}, []);
 	const trigger = useRef(null);
-	// const [errorObj, setErrorObj] = useState(null);
 
 	// Allows view to be painted when masthead image and gallery image objects are loaded
 	useEffect(() => {
@@ -82,15 +91,14 @@ function CaptainsHideaway() {
 		}
 	}, [loading, data, error]);
 
-	useEffect(() => {
-		if (headerUrl) {
-			setMastheadBackgroundImg({ backgroundImage: `url(${headerUrl})` });
-		}
-	}, [headerUrl]);
 
 	// useLayoutEffect(() => {
 	// 	createScrollSmoother(main, smoother);
 	// }, [main]);
+
+	const toggleGalleryFullScreen = () => {
+		imageGalleryRef.current.fullScreen();
+	};
 
 	return (
 		<div ref={main} id='smooth-wrapper'>
@@ -98,9 +106,10 @@ function CaptainsHideaway() {
 				{!isLoading ? (
 					<>
 						<Navbar />
-						<header className='captains-hideaway-header masthead' style={mastheadBackgroundImg} alt='house at top of hill from beach'></header>
-
-						<div className='d-flex align-items-center flex-column'>
+						<div onClick={toggleGalleryFullScreen} className='mt-2 col-lg-10 d-flex justify-content-center' style={{ overflow: 'hidden', height: '600px', margin: 'auto' }}>
+							<img style={imageStyle} src={headerUrl} />
+						</div>
+						<div style={mainContentStyle} className='d-flex align-items-center flex-column'>
 							<div className='col-lg-10 col-11 d-flex flex-lg-row flex-column justify-content-center'>
 								<div className='col-lg-8 col-12'>
 									<div className='overview-card card'>

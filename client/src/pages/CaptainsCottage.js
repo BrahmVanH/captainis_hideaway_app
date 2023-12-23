@@ -44,13 +44,24 @@ function CaptainsCottage() {
 	const [mastheadBackgroundImg, setMastheadBackgroundImg] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [cottageGalObjs, setCottageGalObjs] = useState(null);
+	const [mainContentStyle, setMainContentStyle] = useState({
+		transform: 'translateY(0px)',
+	});
+	const [imageStyle, setImageStyle] = useState({
+		width: '1100px',
+	});
+
+	useEffect(() => {
+		window.innerWidth < 500 ? setImageStyle({ width: '600px', height: '350px' }) : setImageStyle({ width: '1100px' });
+		window.innerWidth < 500 ? setMainContentStyle({ transform: 'translateY(-250.5px)' }) : setMainContentStyle({ transform: 'translateY(0px)' });
+	}, []);
 
 	// Allows view to be painted when masthead image and gallery image objects are loaded
 	useEffect(() => {
-		if (cottageGalObjs && mastheadBackgroundImg) {
+		if (cottageGalObjs) {
 			setIsLoading(false);
 		}
-	}, [cottageGalObjs, mastheadBackgroundImg]);
+	}, [cottageGalObjs]);
 
 	const { loading, error, data } = useQuery(GET_COTTAGE_IMAGES);
 
@@ -72,11 +83,7 @@ function CaptainsCottage() {
 	}, [loading, data, error]);
 
 	// Set masthead img background if headerUrl state variable valuable
-	useEffect(() => {
-		if (headerUrl) {
-			setMastheadBackgroundImg({ backgroundImage: `url(${headerUrl})` });
-		}
-	}, [headerUrl]);
+	;
 
 	// useLayoutEffect(() => {
 	// 	const ctx = gsap.context(() => {
@@ -89,9 +96,9 @@ function CaptainsCottage() {
 	// 	return () => ctx.revert();
 	// }, []);
 
-	// const toggleGalleryFullScreen = () => {
-	// 	imageGalleryRef.current.fullScreen();
-	// };
+	const toggleGalleryFullScreen = () => {
+		imageGalleryRef.current.fullScreen();
+	};
 
 	const propertyName = 'captainsCottage';
 	return (
@@ -100,12 +107,11 @@ function CaptainsCottage() {
 				{!isLoading ? (
 					<>
 						<Navbar />
-						{/* <header onClick={toggleGalleryFullScreen} className='captains-cottage-header masthead'></header> */}
-						<div className='col-lg-10 d-flex justify-content-center' style={{ overflow: 'hidden', height: '600px', margin: 'auto' }}>
-							<img src={headerUrl} height='700px' width='1100px' />
+						<div onClick={toggleGalleryFullScreen} className='mt-2 col-lg-10 d-flex justify-content-center' style={{ overflow: 'hidden', height: '600px', margin: 'auto' }}>
+							<img style={imageStyle} src={headerUrl} />
 						</div>
 
-						<div className='main-content d-flex align-items-center flex-column '>
+						<div style={mainContentStyle} className='d-flex align-items-center flex-column '>
 							<div className='col-lg-10 col-11 d-flex flex-lg-row flex-column justify-content-center'>
 								<div className='col-lg-8 col-12'>
 									<div className='overview-card card'>

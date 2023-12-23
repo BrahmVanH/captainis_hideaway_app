@@ -73,7 +73,7 @@ const getImages = async (objectRequest) => {
 		Prefix: 'captains_hideaway_png/',
 	};
 
-	const cottageHeaderImgKey = 'captains_cottage_png/back_exterior_side_with_lake.png';
+	const cottageHeaderImgKey = 'captains_cottage_png/back_exterior_side_with_lake_cropped.png';
 	const cottageParams = {
 		Bucket: bucketName,
 		Prefix: 'captains_cottage_png/',
@@ -131,13 +131,15 @@ const getImages = async (objectRequest) => {
 					const headerUrl = getSignedUrl(cottageParams.Bucket, data.Contents[headerImgIndex]);
 
 					const cottageGalleryObjects = await Promise.all(
-						data?.Contents.filter((object) => object.Key !== 'captains_cottage_png/').map(async (item) => {
-							const altTag = await getImgTag(cottageParams.Bucket, item);
-							const signedUrl = getSignedUrl(cottageParams.Bucket, item);
-							if ((altTag, signedUrl)) {
-								return { altTag, signedUrl };
-							}
-						})
+						data?.Contents.filter((object) => object.Key !== 'captains_cottage_png/')
+							.filter((object) => object.Key !== 'captains_cottage_png/captains_cottage_png/back_exterior_side_with_lake_cropped.png')
+							.map(async (item) => {
+								const altTag = await getImgTag(cottageParams.Bucket, item);
+								const signedUrl = getSignedUrl(cottageParams.Bucket, item);
+								if ((altTag, signedUrl)) {
+									return { altTag, signedUrl };
+								}
+							})
 					);
 
 					if (headerUrl && cottageGalleryObjects) {
@@ -152,7 +154,6 @@ const getImages = async (objectRequest) => {
 				// const data = await s3.getObject(bucketName, aboutImgKey).promise();
 				const imgUrl = getSignedUrl(bucketName, aboutImgKey);
 				if (imgUrl) {
-
 					return imgUrl;
 				}
 			} catch (err) {
