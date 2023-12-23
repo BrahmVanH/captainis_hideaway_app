@@ -68,6 +68,7 @@ const getHideawayImgUrls = async () => {
 const getCottageImgUrls = async () => {
 	try {
 		const { headerUrl, cottageGalleryObjects } = await getImages('cottageImgPack');
+		console.log("objects: ", cottageGalleryObjects);
 		const cottageGalleryAltTags = cottageGalleryObjects.map((object) => {
 			return object.altTag
 		})

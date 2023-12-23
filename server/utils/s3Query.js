@@ -132,18 +132,18 @@ const getImages = async (objectRequest) => {
 			try {
 				const data = await s3.listObjectsV2(cottageParams).promise();
 				if (data) {
+					// console.log(data);
 					const headerImgIndex = findImgIndex(data, cottageHeaderImgKey)[0];
 					const headerUrl = getSignedUrl(cottageParams.Bucket, data.Contents[headerImgIndex]);
 
 					const cottageGalleryObjects = await Promise.all(
-						data?.Contents.map(async (item) => {
+						data?.Contents.filter((object) => object.Key !== 'captains_cottage_png/').map(async (item) => {
+							console.log(item);
 							const altTag = await getImgTag(cottageParams.Bucket, item);
 							const signedUrl = getSignedUrl(cottageParams.Bucket, item);
 							console.log({ altTag, signedUrl });
 							if ((altTag, signedUrl)) {
 								return { altTag, signedUrl };
-							} else {
-								return null;
 							}
 						})
 					);
@@ -159,9 +159,8 @@ const getImages = async (objectRequest) => {
 					// const cottageGalleryUrls = cottageGalleryData.map((item) => item.imageUrl);
 					// const cottageGalleryAltTags = cottageGalleryData.map((item) => item.altTag);
 
-					if (headerUrl && cottageGalleryObjects[0] !== undefined) {
-					
-						console.log('gallery objects: ', cottageGalleryObjects);
+					if (headerUrl && cottageGalleryObjects) {
+						console.log('gallery objects length: ', cottageGalleryObjects.length);
 						return { headerUrl, cottageGalleryObjects };
 					}
 				}
