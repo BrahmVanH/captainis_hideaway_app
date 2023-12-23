@@ -1,22 +1,9 @@
 .captains-cottage-header {
-	background-image: url('../assets/img/captains_cottage_png/back_exterior_side_with_lake_cropped.png');
 	background-position: 0 -200px;
 	background-repeat: no-repeat;
 	background-size: 90% ;
 	height: 400px;
 	cursor: grab; /* Change cursor to a help pointer on hover */
-}
-
-@media only screen and (max-device-width: 992px) {
-	.captains-cottage-header {
-		background-position: -100px 0;
-		background-image: ('../assets/img/captains_cottage_png/back_exterior_side_with_lake.png');
-		background-size: 150% 80%;
-	}
-
-	.main-content {
-		transform: translateY(-82.5px);
-	}
 }
 
 .captains-cottage-card-body {
