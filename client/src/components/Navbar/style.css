@@ -1,4 +1,4 @@
-.navbar {
+.my-navbar {
  border-bottom: 5px solid rgb(200, 188, 167, 0.6);
 
  z-index: 1000; 
@@ -9,6 +9,12 @@
 .navbar-inner-container {
   display: flex;
   justify-content: space-between;
+  padding: 0.5rem 2rem;
+}
+
+.link-container {
+  display: flex;
+  align-items: center;
 }
 .navbar-link {
   padding: 1rem;
