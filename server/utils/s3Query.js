@@ -90,10 +90,6 @@ const getImages = async (objectRequest) => {
 
 	let objectResponse;
 
-	const tobeCottageGal = 'cottageGallery';
-	const tobeCottageHead = 'cottageHeader';
-	const tobeAbout = 'about';
-
 	switch (objectRequest) {
 		case 'hideawayGallery':
 			try {
@@ -146,19 +142,23 @@ const getImages = async (objectRequest) => {
 			}
 		case 'cottageImgPack':
 			try {
-				let headerUrl;
-				let cottageGalleryUrls;
-				let cottageGalleryAltTags;
+				console.log('getting cottage image pack');
+				
 				const data = await s3.listObjectsV2(cottageParams).promise();
 				if (data) {
-					headerImgIndex = findImgIndex(data, cottageHeaderImgKey)[0];
-					headerUrl = getSignedUrl(cottageParams.Bucket);
-					cottageGalleryUrls = data?.Contents.map((item) => {
+					console.log(data);
+					const headerImgIndex = findImgIndex(data, cottageHeaderImgKey)[0];
+					const headerUrl = getSignedUrl(cottageParams.Bucket, data.Contents[headerImgIndex]);
+					if (headerUrl) { 
+						console.log("headerUrl: ", headerUrl);
+					}
+					const cottageGalleryUrls = data?.Contents.map((item) => {
 						return getSignedUrl(cottageParams.Bucket, item);
 					});
 					cottageGalleryAltTags = await getImgTags(cottageParams.Bucket, data);
 
 					if (headerUrl && cottageGalleryUrls && cottageGalleryAltTags) {
+						console.log("the goods: ", headerUrl, cottageGalleryUrls, cottageGalleryAltTags);
 						return { headerUrl, cottageGalleryUrls, cottageGalleryAltTags };
 					}
 				}

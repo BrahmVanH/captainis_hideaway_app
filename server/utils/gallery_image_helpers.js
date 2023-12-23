@@ -18,6 +18,25 @@ const { getImages } = require('./s3Query');
 // 	return array;
 // };
 
+const createImgGalArr = (galleryAltTags, imageUrls, headerUrl) => {
+	let galleryArray = [];
+	imageUrls.map((url) => {
+		const original = url;
+		galleryArray.push({
+			original: original,
+			thumbnail: original,
+			originalAlt: null,
+			thumbnailAlt: null,
+		});
+	});
+	for (let i = 0; i < galleryArray.length; i++) {
+		galleryArray[i].originalAlt = galleryAltTags[i];
+		galleryArray[i].thumbnailAlt = galleryAltTags[i];
+	}
+	// this one works
+	return { headerUrl, galleryArray };
+};
+
 const getHomeImgUrls = async () => {
 	try {
 		const { headerImgUrl, hideawayImgUrl, cottageImgUrl } = await getImages('homePage');
@@ -48,12 +67,13 @@ const getHideawayImgUrls = async () => {
 
 const getCottageImgUrls = async () => {
 	try {
+		// console.log('getting cottage img urls');
 		const { headerUrl, cottageGalleryUrls, cottageGalleryAltTags } = await getImages('cottageImgPack');
-		if (hideawayGalleryUrls.length > 0 && hideawayGalleryAltTags.length > 0 && headerUrl) {
-			const response = createImgGalArr(cottageGalleryAltTags, cottageGalleryUrls, cottageHeaderUrl);
+		console.log("the goods in helpers: ", headerUrl, cottageGalleryUrls, cottageGalleryAltTags);
+		if (cottageGalleryUrls.length > 0 && cottageGalleryAltTags.length > 0 && headerUrl) {
+			const response = createImgGalArr(cottageGalleryAltTags, cottageGalleryUrls, headerUrl);
 			if (response) {
-
-				console.log(response);
+				console.log('response: ', response);
 				return response;
 			}
 		}
@@ -73,31 +93,13 @@ const getAboutImgUrl = async () => {
 	}
 };
 
-const createImgGalArr = (galleryAltTags, imageUrls, headerUrl) => {
-	let galleryArray = [];
-	imageUrls.map((url) => {
-		const original = url;
-		galleryArray.push({
-			original: original,
-			thumbnail: original,
-			originalAlt: null,
-			thumbnailAlt: null,
-		});
-	});
-	for (let i = 0; i < galleryArray.length; i++) {
-		galleryArray[i].originalAlt = galleryAltTags[i];
-		galleryArray[i].thumbnailAlt = galleryAltTags[i];
-	}
-	// this one works
-	return { headerUrl, galleryArray };
-};
+
 
 const getAllImgs = async () => {
 	try {
 		const { hideawayGalleryUrls, hideawayHeaderUrl } = await getHideawayImgUrls();
 		if (hideawayGalleryUrls.length > 0 && hideawayHeaderUrl) {
 			const hideawayImgGalArr = createHideawayImgGalArr(hideawayGalleryUrls);
-			console.log("yahooh: ", ideawayHeaderUrl);
 			return { hideawayImgGalArr, hideawayHeaderUrl };
 		} else {
 			console.error('couldnt create image gallery array');
