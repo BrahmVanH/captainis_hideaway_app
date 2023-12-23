@@ -3,20 +3,11 @@
 	background-repeat: no-repeat;
 	background-size: cover;
 	height: 400px;
-	/* cursor: grab;  */
+	cursor: grab; 
 }
 
-/* class added to body when dialog modal is open */
 .sl-scroll-lock {
-	position: fixed;
-	inline-size: 100%;
-	overflow-y: scroll !important;
-}
-
-@media only screen and (max-device-width: 992px) {
-	.captains-hideaway-header {
-		background-position: -100px 0;
-	}
+	overflow-y: hidden !important;
 }
 
 .image-gallery-wrapper {
@@ -112,12 +103,6 @@
 	padding: 0.5rem;
 }
 
-@media only screen and (min-device-width: 993px) and (max-device-width: 1241px) {
-	.spaces-item-container {
-		flex-direction: column;
-	}
-}
-
 .spaces-item-container p {
 	margin: 0rem 0.5rem;
 	padding: 0;
@@ -128,7 +113,6 @@
 	border-image-source: linear-gradient(white, #abccd8, #5f8fa5, #abccd8, white);
 	border-image-slice: 1;
 	border-image-outset: 0;
-
 	border-image-repeat: stretch;
 }
 
@@ -158,12 +142,6 @@
 	display: flex;
 	justify-content: space-evenly;
 	flex-direction: row;
-}
-
-@media only screen and (max-device-width: 992px) {
-	.amenities-item-container {
-		flex-wrap: wrap;
-	}
 }
 
 .amenities-item {
@@ -236,16 +214,28 @@
 	padding: 0rem 10rem;
 }
 
-@media only screen and (max-device-width: 992px) {
-	.important-information {
-		padding: 0.5rem;
-	}
-}
-
 .important-information-text p {
 	margin: 0;
 	padding: 0.5rem;
 	width: 75%;
 	text-align: start;
 	align-self: left;
+}
+
+@media only screen and (min-device-width: 993px) and (max-device-width: 1241px) {
+	.spaces-item-container {
+		flex-direction: column;
+	}
+}
+
+@media only screen and (max-device-width: 992px) {
+	.amenities-item-container {
+		flex-wrap: wrap;
+	}
+	.important-information {
+		padding: 0.5rem;
+	}
+	.captains-hideaway-header {
+		background-position: -100px 0;
+	}
 }

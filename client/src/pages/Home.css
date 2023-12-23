@@ -1,19 +1,37 @@
-
-
 .home-header {
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: 0px -50px;
-  display: flex;
-  justify-content: flex-start;
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: 0px -50px;
+	display: flex;
+	justify-content: flex-start;
 }
 
 .welcome-message-container {
-  height: 400px;
-  display: flex;
-  justify-content: left;
-  align-items: center;
+	height: 400px;
+	display: flex;
+	justify-content: left;
+	align-items: center;
 }
 
+.welcome-message-text {
+	overflow-wrap: break-word;
+	text-shadow: -0.5px -0.5px 0 #000, 0.5px -0.5px 0 #000, -0.5px 0.5px 0 #000, 0.5px 0.5px 0 #000;
+}
 
+@media only screen and (max-device-width: 776px) {
+	.welcome-message-container {
+		padding-bottom: 4rem;
+		justify-content: center;
+	}
 
+	.welcome-message-container div {
+		display: flex;
+		justify-content: center;
+		width: 100%;
+	}
+	.welcome-message-text {
+		width: 80%;
+		text-align: center;
+		text-shadow: -0.5px -0.5px 0 #747474, 0.5px -0.5px 0 #747474, -0.5px 0.5px 0 #747474, 0.5px 0.5px 0 #747474;
+	}
+}

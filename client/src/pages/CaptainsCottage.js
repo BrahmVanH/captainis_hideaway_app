@@ -1,4 +1,5 @@
 import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
+import { useQuery } from '@apollo/client';
 import gsap from 'gsap';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
@@ -6,17 +7,16 @@ import { GET_COTTAGE_IMAGES } from '../utils/queries';
 import { useErrorContext } from '../utils/ErrorContext';
 import { SET_THROW_ERROR } from '../utils/actions';
 
-import { useQuery } from '@apollo/client';
 
 import Loading from '../components/Loading';
 import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
 import ImageGallery from 'react-image-gallery';
+import AmenitiesModal from '../components/AmenitiesModal';
 import AvailabilityCalendar from '../components/Calendar';
 
 import { createScrollSmoother } from '../utils/gsapHelpers';
-// import { cottageGalleryImages } from '../utils/gallery_image_helpers';
 
 import { CiCoffeeBean } from 'react-icons/ci';
 import { GiBathtub, GiBunkBeds, GiBeachBucket, GiHeatHaze } from 'react-icons/gi';
@@ -29,6 +29,8 @@ import { TbWifi, TbWashMachine, TbToolsKitchen2, TbDeviceTv, TbKayak } from 'rea
 import dishwasherIcon from '../assets/icons/dishwasher_icon.svg';
 import deckIcon from '../assets/icons/deck-icon-noun.svg';
 
+import { cottageAmenities } from '../utils/cottageAmenities';
+
 import './CaptainsCottage.css';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
@@ -36,6 +38,7 @@ function CaptainsCottage() {
 	// Global error state context - () => displays error message over app view
 	const [state, dispatch] = useErrorContext();
 
+	const cottageAmenitiesComponent = useRef(null);
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
 	const smoother = useRef();
@@ -273,11 +276,9 @@ function CaptainsCottage() {
 													</div>
 												</div>
 											</div>
-											{/* <div className='d-flex justify-content-end'>
-								<button className='btn btn-sm' type='button' style='text-decoration: underline;margin: 0px 2rem;'>
-									See more...
-								</button>
-							</div> */}
+											<div className='d-flex justify-content-end'>
+												<AmenitiesModal btnRef={cottageAmenitiesComponent} htmlOpenClassName={'ReactModal__Html--open'} amenities={cottageAmenities} />
+											</div>
 										</div>
 									</div>
 								</div>

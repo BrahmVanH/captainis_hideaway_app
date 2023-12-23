@@ -11,42 +11,13 @@ function AmenitiesModal(props) {
 	const ref = props.btnRef;
 	const [open, setOpen] = useState(false);
 
-	const customStyles = {
-		overlay: {
-			position: 'sticky',
-			top: 0,
-			left: 0,
-			right: 0,
-			bottom: 0,
-			zIndex: 1000,
-		},
-		content: {
-			top: '50%',
-			left: '50%',
-			right: 'auto',
-			bottom: 'auto',
-			width: '50%',
-			borderRadius: '6px',
-			marginRight: '-50%',
-			maxHeight: '50vh',
-			overflowY: 'auto',
-			WebkitOverflowScrolling: 'touch',
-			transform: 'translate(-50%, -50%)',
-			borderBottom: '3px solid transparent',
-			borderImageSource: 'linear-gradient(to right, white, #abccd8, #5f8fa5, #abccd8, white)',
-			borderImageSlice: '1',
-			borderImageOutset: '0',
-			borderImageRepeat: 'stretch',
-		},
-	};
-
 
 	return (
 		<div>
 			<Button className='open-modal-btn' ref={ref} onClick={() => setOpen(true)}>
 				See more...
 			</Button>
-			<SlDialog className='amenities-modal' open={open} onSlAfterHide={() => setOpen(false)} style={customStyles} label='amenities-dialog'>
+			<SlDialog className='amenities-modal' open={open} onSlAfterHide={() => setOpen(false)} style={{overflowY: 'hidden'}}>
 				<div className='amenities-modal-inner-container d-flex flex-column align-items-center'>
 					<h3>Amenities</h3>
 					<div className='amenities-items-container d-flex flex-column align-items-center'>
@@ -84,7 +55,7 @@ function AmenitiesModal(props) {
 						))}
 					</div>
 					<div className='close-btn-container'>
-						<Button onClick={() => setOpen(false)}>Close</Button>
+						<Button className='btn-dark btn-sm' onClick={() => setOpen(false)}>Close</Button>
 					</div>
 				</div>
 			</SlDialog>
