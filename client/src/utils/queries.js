@@ -57,3 +57,9 @@ export const GET_COTTAGE_IMAGES = gql`
 		}
 	}
 `;
+
+export const GET_ABOUT_PG_IMAGES = gql`
+	query Query {
+		getAboutPgImg
+	}
+`;

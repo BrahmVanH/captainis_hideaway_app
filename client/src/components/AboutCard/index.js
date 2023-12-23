@@ -4,14 +4,20 @@ import './style.css';
 
 import temp_photo from '../../assets/img/temp_about_us.png';
 
-function AboutCard() {
+function AboutCard(props) {
+	const image = props.image;
+
 	return (
 		<div className='card about-us-card align-self-center col-lg-5 col-11 '>
 			<h3 className='text-center mb-4'>About Us</h3>
 			<div className='d-flex flex-column align-items-center justify-content-around'>
-				<div className='about-image-container'>
-					<img className='about-us-image' alt='Property owneres standing together over beach' src={temp_photo} height='300px' width='240px' />
-				</div>
+				{image ? (
+					<div className='about-image-container'>
+						<img className='about-us-image' src={image} width='240px' />
+					</div>
+				) : (
+					<></>
+				)}
 				<p className='about-us-text'>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lobortis scelerisque fermentum dui faucibus in ornare. Ac turpis
 					egestas integer eget aliquet nibh. Egestas integer eget aliquet nibh. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Pharetra diam sit amet nisl. Quis commodo odio aenean sed
