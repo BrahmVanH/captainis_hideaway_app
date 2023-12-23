@@ -3,7 +3,7 @@
 	background-repeat: no-repeat;
 	background-size: 90% ;
 	height: 400px;
-	cursor: grab; /* Change cursor to a help pointer on hover */
+	cursor: grab; 
 }
 
 .captains-cottage-card-body {

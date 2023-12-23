@@ -81,10 +81,8 @@ function Home() {
 						<header style={{ backgroundImage: `url(${headerUrl})` }} className='home-header text-center text-white masthead'>
 							<div className='overlay'>
 								<div className='container welcome-message-container'>
-									<div className='row'>
-										<div className='col-xl-9 mx-auto position-relative'>
-											<h1>Welcome To Michigan's Upper Peninsula</h1>
-										</div>
+										<div style={{textAlign: 'left'}} className='col-xl-9 mx-auto position-relative'>
+											<h1 className='welcome-message-text'>Welcome to Captain's at Lake Superior</h1>
 									</div>
 								</div>
 							</div>
