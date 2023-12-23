@@ -22,11 +22,19 @@ const findImgIndex = (data, imgKey) => {
 };
 
 const getSignedUrl = (imageBucket, imageItem) => {
-	return s3.getSignedUrl('getObject', {
-		Bucket: imageBucket,
-		Key: imageItem.Key,
-		Expires: 60,
-	});
+	if (imageItem.Key) {
+		return s3.getSignedUrl('getObject', {
+			Bucket: imageBucket,
+			Key: imageItem.Key,
+			Expires: 60,
+		});
+	} else {
+		return s3.getSignedUrl('getObject', {
+			Bucket: imageBucket,
+			Key: imageItem,
+			Expires: 60,
+		});
+	}
 };
 
 const getImgTag = async (imageBucket, imageItem) => {
@@ -141,9 +149,9 @@ const getImages = async (objectRequest) => {
 			}
 		case 'aboutPage':
 			try {
-				const data = await s3.getObject(bucketName, aboutImgKey).promise();
-				if (data) {
-					const imgUrl = getSignedUrl(data);
+				// const data = await s3.getObject(bucketName, aboutImgKey).promise();
+				const imgUrl = getSignedUrl(bucketName, aboutImgKey);
+				if (imgUrl) {
 
 					return imgUrl;
 				}

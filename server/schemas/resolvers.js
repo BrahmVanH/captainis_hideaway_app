@@ -4,7 +4,7 @@ const { signToken } = require('../utils/auth');
 const bcrypt = require('bcrypt');
 const s3 = require('../server');
 const { getImages } = require('../utils/s3Query');
-const { getHideawayImgUrls, getCottageImgUrls, getHomeImgUrls } = require('../utils/gallery_image_helpers');
+const { getHideawayImgUrls, getCottageImgUrls, getHomeImgUrls, getAboutImgUrl } = require('../utils/gallery_image_helpers');
 
 const resolvers = {
 	Query: {
@@ -103,7 +103,9 @@ const resolvers = {
 				if (!objectResponse) {
 					throw new Error('Something went wrong in fetching object from s3');
 				}
-				return objectResponse;
+				if (objectResponse) {
+					return objectResponse;
+				}
 			} catch (err) {
 				return [{ message: 'Error in getHomePgImgs...', details: err.message }];
 			}

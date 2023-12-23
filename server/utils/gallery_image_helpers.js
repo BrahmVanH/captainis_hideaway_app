@@ -1,7 +1,5 @@
 const { getImages } = require('./s3Query');
 
-
-
 // Takes in alt tags, gallery image urls and header url from property pages and
 // formats an array for image gallery in client
 const createImgGalArr = (galleryAltTags, imageUrls, headerUrl) => {
@@ -45,7 +43,6 @@ const getHideawayImgUrls = async () => {
 			return object.altTag;
 		});
 		const hideawayGalleryUrls = hideawayGalleryObjects.map((object) => {
-
 			return object.signedUrl;
 		});
 		if (hideawayGalleryUrls.length > 0 && hideawayGalleryAltTags.length > 0 && headerUrl) {
@@ -86,8 +83,8 @@ const getCottageImgUrls = async () => {
 const getAboutImgUrl = async () => {
 	try {
 		const cardImgUrl = await getImages('aboutPage');
-		if (headerImgUrl && hideawayImgUrl && cottageImgUrl) {
-			return { cardImgUrl };
+		if (cardImgUrl) {
+			return cardImgUrl;
 		}
 	} catch (err) {
 		throw new Error('there was an error fetching about image');
