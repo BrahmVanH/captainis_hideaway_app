@@ -35,6 +35,9 @@ import AvailabilityCalendar from '../components/Calendar';
 import AmenitiesModal from '../components/AmenitiesModal';
 import Loading from '../components/Loading';
 
+
+
+
 function CaptainsHideaway() {
 	// Global error state context - () => displays error message over app view
 	const [state, dispatch] = useErrorContext();
