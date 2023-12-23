@@ -12,6 +12,10 @@ import { createScrollSmoother } from '../utils/gsapHelpers.js';
 
 import './Admin.css';
 
+
+
+
+
 function AdminPage() {
 	const main = useRef();
 	const smoother = useRef();
