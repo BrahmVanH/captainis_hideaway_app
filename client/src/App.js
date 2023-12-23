@@ -3,7 +3,7 @@ import gsap from 'gsap';
 
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloProvider, InMemoryCache, gql, makeVar } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
@@ -38,9 +38,76 @@ import '@csstools/normalize.css';
 // 	}
 // });
 
+
+// Define cache policies
+const cache = new InMemoryCache({
+	typePolicies: {
+		Query: {
+			fields: {
+				// Customize cache behavior for img queries
+				getHomePgImgs: {
+					// Specify cache key fields for the getHomePgImgs query
+					keyArgs: [],
+					// Specify how to merge incoming data with existing data in the cache
+					merge(existing, incoming) {
+						return incoming;
+					},
+				},
+				getHideawayImgs: {
+					keyArgs: [],
+					merge(existing, incoming) {
+						return incoming;
+					},
+				},
+				getCottageImgs: {
+					keyArgs: [],
+					merge(existing, incoming) {
+						return incoming;
+					},
+				},
+				getAboutPgImg: {
+					keyArgs: [],
+					merge(existing, incoming) {
+						return incoming;
+					},
+				},
+			},
+		},
+	},
+});
+
+const typeDefs = gql`
+	type imageObject {
+		original: String
+		thumbnail: String
+		originalAlt: String
+		thumbnailAlt: String
+	}
+	type homePgImgPack {
+		headerImgUrl: String
+		hideawayImgUrl: String
+		cottageImgUrl: String
+	}
+	type hideawayImgPack {
+		headerUrl: String
+		galleryArray: [imageObject]
+	}
+	type cottageImgPack {
+		headerUrl: String
+		galleryArray: [imageObject]
+	}
+	type Query {
+		getHomePgImgs: homePgImgPack
+		getHideawayImgs: hideawayImgPack
+		getCottageImgs: cottageImgPack
+		getAboutPgImg: String
+	}
+`;
+
 const client = new ApolloClient({
 	uri: process.env.NODE_ENV === 'production' ? '/graphql' : 'http://localhost:3001/graphql',
-	cache: new InMemoryCache(),
+	cache: cache,
+	typeDefs: typeDefs,
 	// link: errorLink,
 });
 
