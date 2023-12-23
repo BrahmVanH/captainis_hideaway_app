@@ -29,31 +29,19 @@ const getSignedUrl = (imageBucket, imageItem) => {
 	});
 };
 
-const getImgTags = async (imageBucket, imageItems) => {
+const getImgTag = async (imageBucket, imageItem) => {
 	try {
-		if (imageItems) {
-			const taggingData = [];
-
-			await Promise.all(
-				imageItems.Contents.map(async (item) => {
-					try {
-						const response = await s3
-							.getObjectTagging({
-								Bucket: imageBucket,
-								Key: item.Key,
-							})
-							.promise();
-
-						if (response.TagSet[0]) {
-							taggingData.push(response.TagSet[0].Value);
-						}
-					} catch (error) {
-						console.error('Error retrieving image tags for', item.Key, error);
-					}
+		if (imageItem) {
+			const altTag = await s3
+				.getObjectTagging({
+					Bucket: imageBucket,
+					Key: imageItem?.Key,
 				})
-			);
-			if (taggingData.length > 0) {
-				return taggingData;
+				.promise();
+
+			if (altTag) {
+				// console.log('altTag.tagSet: ', altTag.TagSet[0]?.Value);
+				return altTag.TagSet[0]?.Value;
 			}
 		}
 	} catch (err) {
@@ -142,24 +130,39 @@ const getImages = async (objectRequest) => {
 			}
 		case 'cottageImgPack':
 			try {
-				console.log('getting cottage image pack');
-				
 				const data = await s3.listObjectsV2(cottageParams).promise();
 				if (data) {
-					console.log(data);
 					const headerImgIndex = findImgIndex(data, cottageHeaderImgKey)[0];
 					const headerUrl = getSignedUrl(cottageParams.Bucket, data.Contents[headerImgIndex]);
-					if (headerUrl) { 
-						console.log("headerUrl: ", headerUrl);
-					}
-					const cottageGalleryUrls = data?.Contents.map((item) => {
-						return getSignedUrl(cottageParams.Bucket, item);
-					});
-					cottageGalleryAltTags = await getImgTags(cottageParams.Bucket, data);
 
-					if (headerUrl && cottageGalleryUrls && cottageGalleryAltTags) {
-						console.log("the goods: ", headerUrl, cottageGalleryUrls, cottageGalleryAltTags);
-						return { headerUrl, cottageGalleryUrls, cottageGalleryAltTags };
+					const cottageGalleryObjects = await Promise.all(
+						data?.Contents.map(async (item) => {
+							const altTag = await getImgTag(cottageParams.Bucket, item);
+							const signedUrl = getSignedUrl(cottageParams.Bucket, item);
+							console.log({ altTag, signedUrl });
+							if ((altTag, signedUrl)) {
+								return { altTag, signedUrl };
+							} else {
+								return null;
+							}
+						})
+					);
+
+					// const cottageGalleryData = await Promise.all(
+					// 	data?.Contents.map(async (item) => {
+					// 		const imageUrl = getSignedUrl(cottageParams.Bucket, item);
+					// 		const altTag = await getImgTags(cottageParams.Bucket, item);
+					// 		return { imageUrl, altTag: altTag[0] || null };
+					// 	})
+					// );
+
+					// const cottageGalleryUrls = cottageGalleryData.map((item) => item.imageUrl);
+					// const cottageGalleryAltTags = cottageGalleryData.map((item) => item.altTag);
+
+					if (headerUrl && cottageGalleryObjects[0] !== undefined) {
+					
+						console.log('gallery objects: ', cottageGalleryObjects);
+						return { headerUrl, cottageGalleryObjects };
 					}
 				}
 			} catch (err) {

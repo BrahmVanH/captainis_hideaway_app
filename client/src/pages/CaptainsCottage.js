@@ -55,9 +55,10 @@ function CaptainsCottage() {
 
 	const { loading, error, data } = useQuery(GET_COTTAGE_IMAGES);
 
+	// Set img state variables when data present without error or loading
 	useEffect(() => {
 		if (!error && !loading && data) {
-			console.log('heres the data: ', data);
+			console.log(data);
 			setHeaderUrl(data.getCottageImgs.headerUrl);
 			setCottageGalObjs(data.getCottageImgs.galleryArray);
 		} else if (error) {
@@ -72,6 +73,7 @@ function CaptainsCottage() {
 		}
 	}, [loading, data, error]);
 
+	// Set masthead img background if headerUrl state variable valuable
 	useEffect(() => {
 		if (headerUrl) {
 			setMastheadBackgroundImg({ backgroundImage: `url(${headerUrl})` });
@@ -342,7 +344,7 @@ function CaptainsCottage() {
 								</div>
 							</div>
 							<div className='image-gallery-wrapper'>
-								<ImageGallery ref={cottageGalObjs} showPlayButton={false} isFullScreen={true} items={cottageGalleryImages} />
+								<ImageGallery ref={imageGalleryRef} showPlayButton={false} isFullScreen={true} items={cottageGalObjs} />
 							</div>
 						</div>
 						<Footer />

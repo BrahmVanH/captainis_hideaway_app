@@ -67,13 +67,16 @@ const getHideawayImgUrls = async () => {
 
 const getCottageImgUrls = async () => {
 	try {
-		// console.log('getting cottage img urls');
-		const { headerUrl, cottageGalleryUrls, cottageGalleryAltTags } = await getImages('cottageImgPack');
-		console.log("the goods in helpers: ", headerUrl, cottageGalleryUrls, cottageGalleryAltTags);
+		const { headerUrl, cottageGalleryObjects } = await getImages('cottageImgPack');
+		const cottageGalleryAltTags = cottageGalleryObjects.map((object) => {
+			return object.altTag
+		})
+		const cottageGalleryUrls = cottageGalleryObjects.map((object) => {
+			return object.signedUrl
+		})
 		if (cottageGalleryUrls.length > 0 && cottageGalleryAltTags.length > 0 && headerUrl) {
 			const response = createImgGalArr(cottageGalleryAltTags, cottageGalleryUrls, headerUrl);
 			if (response) {
-				console.log('response: ', response);
 				return response;
 			}
 		}

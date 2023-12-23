@@ -68,7 +68,6 @@ function CaptainsHideaway() {
 
 	useEffect(() => {
 		if (!error && !loading && data) {
-			console.log('heres the data: ', data);
 			setHeaderUrl(data.getHideawayImgs.headerUrl);
 			setHideawayGalObjs(data.getHideawayImgs.galleryArray);
 		} else if (error) {

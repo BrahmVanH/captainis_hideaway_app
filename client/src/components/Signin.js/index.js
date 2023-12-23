@@ -51,7 +51,6 @@ function SigninForm() {
 			}
 			// Logs user in and stores token
 			if (data) {
-				console.log("login data: ", data);
 				Auth.login(data.loginUser.token);
 			}
 
