@@ -1,7 +1,10 @@
 import React, { useRef, useLayoutEffect, useEffect, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
-// import gsap from 'gsap';
-// import { ScrollSmoother } from 'gsap/ScrollSmoother';
+
+
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 import { GET_HIDEAWAY_IMAGES } from '../utils/queries';
 import { useErrorContext } from '../utils/ErrorContext';
@@ -27,7 +30,6 @@ import { hideawayAmenities } from '../utils/captainsHideawayAmenities';
 import './CaptainsHideaway.css';
 import 'react-image-gallery/styles/css/image-gallery.css';
 
-// import { createScrollSmoother } from '../utils/gsapHelpers';
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -95,9 +97,18 @@ function CaptainsHideaway() {
 	}, [loading, data, error]);
 
 
-	// useLayoutEffect(() => {
-	// 	createScrollSmoother(main, smoother);
-	// }, [main]);
+	useLayoutEffect(() => {
+		gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+		const ctx = gsap.context(() => {
+			// create the smooth scroller FIRST!
+			smoother.current = ScrollSmoother.create({
+				smooth: 1,
+				effects: true,
+			});
+		}, main);
+		return () => ctx.revert();
+	}, []);
 
 	const toggleGalleryFullScreen = () => {
 		imageGalleryRef.current.fullScreen();

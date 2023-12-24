@@ -5,8 +5,6 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
-import { createScrollSmoother } from '../utils/gsapHelpers';
-
 import { GET_HOME_PG_IMGS } from '../utils/queries';
 import { useErrorContext } from '../utils/ErrorContext';
 import { SET_THROW_ERROR } from '../utils/actions';
