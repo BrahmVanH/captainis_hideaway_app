@@ -1,8 +1,8 @@
 import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
+import {  } from 'gsap/ScrollSmoother';
 
 import { GET_COTTAGE_IMAGES } from '../utils/queries';
 import { useErrorContext } from '../utils/ErrorContext';

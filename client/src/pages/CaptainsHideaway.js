@@ -3,8 +3,7 @@ import { useQuery, useMutation } from '@apollo/client';
 
 
 import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
 
 import { GET_HIDEAWAY_IMAGES } from '../utils/queries';
 import { useErrorContext } from '../utils/ErrorContext';
@@ -37,9 +36,6 @@ import AvailabilityCalendar from '../components/Calendar';
 import AmenitiesModal from '../components/AmenitiesModal';
 import Loading from '../components/Loading';
 
-
-
-
 function CaptainsHideaway() {
 	// Global error state context - () => displays error message over app view
 	const [state, dispatch] = useErrorContext();
@@ -54,17 +50,26 @@ function CaptainsHideaway() {
 	const main = useRef();
 	const smoother = useRef();
 	const hideawayAmenitiesComponent = useRef(null);
+	
+	// State variables 
 	const [propertyName, setPropertyName] = useState('captainsHideaway');
 	const [hideawayGalObjs, setHideawayGalObjs] = useState(null);
 	const [headerUrl, setHeaderUrl] = useState([]);
 	const [mastheadBackgroundImg, setMastheadBackgroundImg] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
+
+	// Amenity modal acts weird, modulating this variable will
+	// directly affect the visibility of modal
 	const [mainContentStyle, setMainContentStyle] = useState({
 		transform: 'translateY(0px)',
 	});
+
+	// Header image style
 	const [imageStyle, setImageStyle] = useState({
 		width: '1200px',
 	});
+
+	// Responsive page layout
 	useEffect(() => {
 		window.innerWidth < 500 ? setImageStyle({ width: '600px', height: '350px' }) : setImageStyle({ width: '1200px', height: '800px' });
 		window.innerWidth < 500 ? setMainContentStyle({ transform: 'translateY(-250.5px)' }) : setMainContentStyle({ transform: 'translateY(0px)' });
@@ -78,8 +83,10 @@ function CaptainsHideaway() {
 		}
 	}, [hideawayGalObjs, mastheadBackgroundImg]);
 
+	// Get images from AWS S3
 	const { loading, error, data } = useQuery(GET_HIDEAWAY_IMAGES);
 
+	// Setting state variables, view-rendering is dependent on these
 	useEffect(() => {
 		if (!error && !loading && data) {
 			setHeaderUrl(data.getHideawayImgs.headerUrl);
@@ -97,6 +104,7 @@ function CaptainsHideaway() {
 	}, [loading, data, error]);
 
 
+	// Apply gsap effects on architecture before view is painted
 	useLayoutEffect(() => {
 		gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -109,6 +117,7 @@ function CaptainsHideaway() {
 		return () => ctx.revert();
 	}, []);
 
+	// Click on header image to toggle image gallery full screen
 	const toggleGalleryFullScreen = () => {
 		imageGalleryRef.current.fullScreen();
 	};

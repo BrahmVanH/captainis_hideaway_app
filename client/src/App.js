@@ -113,7 +113,6 @@ const client = new ApolloClient({
 
 function App() {
 	// Register GSAP plugins for all components. ScrollSmoother relies on ScrollTrigger
-	gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 	return (
 		<ApolloProvider client={client}>

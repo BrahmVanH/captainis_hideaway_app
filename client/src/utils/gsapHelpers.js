@@ -1,7 +1,9 @@
 import gsap from 'gsap';
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
 
 export const createScrollSmoother = (main, smoother) => {
+	gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
 	const ctx = gsap.context(() => {
 		// create the smooth scroller FIRST!
 		smoother.current = ScrollSmoother.create({
