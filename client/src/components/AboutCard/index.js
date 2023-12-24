@@ -18,14 +18,10 @@ function AboutCard(props) {
 					<></>
 				)}
 				<p className='about-us-text'>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Lobortis scelerisque fermentum dui faucibus in ornare. Ac turpis
-					egestas integer eget aliquet nibh. Egestas integer eget aliquet nibh. Donec ac odio tempor orci dapibus ultrices in iaculis nunc. Pharetra diam sit amet nisl. Quis commodo odio aenean sed
-					adipiscing diam. Tristique magna sit amet purus gravida quis blandit. Pellentesque elit eget gravida cum sociis natoque penatibus. Placerat vestibulum lectus mauris ultrices. Pharetra diam
-					sit amet nisl suscipit. Enim blandit volutpat maecenas volutpat blandit aliquam etiam. Ac turpis egestas maecenas pharetra. Accumsan in nisl nisi scelerisque eu ultrices vitae auctor eu.
-					Turpis massa tincidunt dui ut. Vitae tempus quam pellentesque nec. Diam volutpat commodo sed egestas egestas fringilla phasellus faucibus scelerisque. Magna fermentum iaculis eu non diam
-					phasellus vestibulum lorem. Non curabitur gravida arcu ac. Tempus egestas sed sed risus pretium quam vulputate. Dis parturient montes nascetur ridiculus mus mauris vitae ultricies. Pulvinar
-					etiam non quam lacus suspendisse faucibus. Nullam vehicula ipsum a arcu. Quam id leo in vitae turpis massa sed. Egestas sed tempus urna et pharetra pharetra massa. Hendrerit gravida rutrum
-					quisque non tellus orci.
+					The UP has always been a home away from home for us. Our hopes are that you find yourself just as welcomed as we did when we first found this property. Captain’s Hideaway was a dream come
+					true for us. The chance to retreive to a private getaway with our family offers all of us a chance to get away from the day-to-day and come back together. We hope that extending our reprieve
+					to you will offer you the same chance to check out and take it all in. The UP offers outdoor enthusiasts of all genres a chance to take in the untouched grace of North America, where the
+					rich tapestry of ecology, topography, and landscape unfolds in a mesmerizing display.
 				</p>
 			</div>
 		</div>

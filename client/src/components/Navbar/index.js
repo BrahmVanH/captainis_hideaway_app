@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import gsap from 'gsap';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Auth from '../../utils/auth';
 import { RxHamburgerMenu } from 'react-icons/rx';
 
@@ -17,6 +17,8 @@ function Navbar() {
 		image: mobileLogoSvg, width: '100px'});
 	const nav = useRef();
 	const dropdown = useRef();
+
+	
 
 	const [isLargeViewport, setIsLargeViewport] = useState(null);
 
@@ -54,7 +56,7 @@ function Navbar() {
 			<nav ref={nav} className='my-navbar navbar-expand navigation-clean navbar-light'>
 				<div className='navbar-inner-container '>
 					<Link className='navbar-brand' to={'/'}>
-						<img src={brandLogo.image}  width={brandLogo.width} />
+						<img src={brandLogo.image} width={brandLogo.width} />
 					</Link>
 					{mobileViewport ? (
 						<button className='dropdown-btn' onClick={toggleDropDown}>
@@ -62,15 +64,15 @@ function Navbar() {
 						</button>
 					) : (
 						<div className='link-container'>
-							<Link to={'/'} className='navbar-link'>
+							<NavLink  to={'/'} className='navbar-link'>
 								Home
-							</Link>
-							<Link to={'/about'} className='navbar-link'>
+							</NavLink>
+							<NavLink to={'/about'} className='navbar-link'>
 								About Us
-							</Link>
-							<Link to={'/contact'} className='navbar-link'>
+							</NavLink>
+							<NavLink to={'/contact'} className='navbar-link'>
 								Contact
-							</Link>
+							</NavLink>
 							{Auth.loggedIn() ? (
 								<Link to='/' onClick={() => Auth.logout()} className='navbar-link'>
 									Log Out

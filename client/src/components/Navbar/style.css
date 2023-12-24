@@ -6,6 +6,13 @@
  background-color: white;
 }
 
+.navbar-inner-container a.active {
+  border-bottom: 2px solid transparent;
+  border-image-source: url('../../assets/SVG/active.svg');
+  border-image-slice: 1;
+	border-image-outset: 0;
+	border-image-repeat: stretch;
+}
 .navbar-inner-container {
   display: flex;
   justify-content: space-between;
