@@ -1,8 +1,11 @@
 import React, { useLayoutEffect, useRef, useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
+import gsap from 'gsap';
+
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 import { createScrollSmoother } from '../utils/gsapHelpers';
-// import { getHideawayImgs } from '../utils/gallery_image_helpers';
 
 import { GET_HOME_PG_IMGS } from '../utils/queries';
 import { useErrorContext } from '../utils/ErrorContext';
@@ -48,9 +51,18 @@ function Home() {
 		}
 	}, [loading, data, error]);
 
-	// useLayoutEffect(() => {
-	// 	createScrollSmoother(main, smoother);
-	// }, []);
+	useLayoutEffect(() => {
+		gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+		const ctx = gsap.context(() => {
+			// create the smooth scroller FIRST!
+			smoother.current = ScrollSmoother.create({
+				smooth: 1,
+				effects: true,
+			});
+		}, main);
+		return () => ctx.revert();
+	}, []);
 
 	useEffect(() => {
 		if (headerUrl !== null && cottageImgUrl !== null && hideawayImgUrl !== null) {
@@ -70,19 +82,17 @@ function Home() {
 		}
 	}, [headerUrl, cottageImgUrl, hideawayImgUrl]);
 
-
-
 	return (
-		<>
-			{hideawayCard !== null && cottageCard !== null && headerUrl !== null && !loading ? (
-				<div id='smooth-wrapper' ref={main}>
-					<div id='smooth-content'>
+		<div id='smooth-wrapper' ref={main}>
+			<div id='smooth-content'>
+				{hideawayCard !== null && cottageCard !== null && headerUrl !== null && !loading ? (
+					<>
 						<Navbar />
 						<header style={{ backgroundImage: `url(${headerUrl})` }} className='home-header text-center text-white masthead'>
 							<div className='overlay'>
 								<div className='container welcome-message-container'>
-										<div style={{textAlign: 'left'}} className='col-xl-9 mx-auto position-relative'>
-											<h1 className='welcome-message-text'>Welcome to Captain's at Lake Superior</h1>
+									<div style={{ textAlign: 'left' }} className='col-xl-9 mx-auto position-relative'>
+										<h1 className='welcome-message-text'>Welcome to Captain's at Lake Superior</h1>
 									</div>
 								</div>
 							</div>
@@ -92,12 +102,12 @@ function Home() {
 							<PropertyCard data-speed='0.8' property={cottageCard} />
 						</section>
 						<Footer />
-					</div>
-				</div>
-			) : (
-				<Loading />
-			)}
-		</>
+					</>
+				) : (
+					<Loading />
+				)}
+			</div>
+		</div>
 	);
 }
 
