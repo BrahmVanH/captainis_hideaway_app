@@ -6,6 +6,8 @@
 	text-decoration: underline;
 }
 
+
+
 .amenities-modal::part(base) {
 	z-index: 10000 !important;
 	transform: translateY(-600px);
@@ -24,12 +26,25 @@
 	border-image-source: linear-gradient(to right, white, #abccd8, #5f8fa5, #abccd8, white);
 	border-image-slice: 1;
 	border-image-outset: 0;
-	border-image-repeat: stretch; 
+	border-image-repeat: stretch;
 	border: 2px solid #5f8fa5;
 	border-radius: 6px;
 	background-color: white;
 
 	z-index: 2000;
+}
+@media only screen and (max-device-width: 776px) {
+	.amenities-modal::part(panel) {
+		width: 75%;
+	}
+	.amenities-modal::part(base) {
+		transform: translateY(-300px);
+	}
+	@media only screen and (max-device-width: 992px) {
+		.amenities-modal::part(panel) {
+			width: 90%;
+		}
+	}
 }
 
 .amenities-modal::part(body) {
@@ -59,7 +74,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 80%
+	width: 80%;
 }
 
 .amenities-list {

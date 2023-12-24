@@ -45,6 +45,7 @@ function CaptainsCottage() {
 	const [headerUrl, setHeaderUrl] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [cottageGalObjs, setCottageGalObjs] = useState(null);
+	const [modalIsOpen, setModalIsOpen] = useState(false);
 
 	const [mainContentStyle, setMainContentStyle] = useState({
 		transform: 'translateY(0px)',
@@ -54,10 +55,32 @@ function CaptainsCottage() {
 		width: '1100px',
 	});
 
+	const setSetModalIsOpen = (open) => {
+		console.log('event opening...');
+
+		setModalIsOpen(open);
+	}
+
 	useEffect(() => {
 		window.innerWidth < 500 ? setImageStyle({ width: '600px', height: '350px' }) : setImageStyle({ width: '1100px' });
 		window.innerWidth < 500 ? setMainContentStyle({ transform: 'translateY(-250.5px)' }) : setMainContentStyle({ transform: 'translateY(0px)' });
 	}, []);
+
+	// Adjusts body position to prevent style issues on modal open 
+	  // const scrollAmntBtnToView = () => cottageAmenitiesComponent.current.scrollIntoView();  
+
+		  // useEffect(() => {
+			// 	if (modalIsOpen) {
+			// 		const modalHeight = document.querySelector('.amenities-modal').offsetHeight;
+			// 		console.log(modalHeight);
+			// 		const scrollPosition = window.scrollY;
+			// 		const newPosition = scrollPosition + modalHeight / 2;
+			// 		window.scrollTo({
+			// 			top: newPosition,
+			// 			behavior: 'smooth',
+			// 		});
+			// 	}
+			// }, [modalIsOpen]);
 
 	// Allows view to be painted when masthead image and gallery image objects are loaded
 	useEffect(() => {
