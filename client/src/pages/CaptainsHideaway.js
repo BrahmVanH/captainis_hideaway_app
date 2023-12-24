@@ -101,7 +101,6 @@ function CaptainsHideaway() {
 		gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 		const ctx = gsap.context(() => {
-			// create the smooth scroller FIRST!
 			smoother.current = ScrollSmoother.create({
 				smooth: 1,
 				effects: true,

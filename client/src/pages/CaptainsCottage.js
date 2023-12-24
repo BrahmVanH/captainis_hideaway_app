@@ -1,12 +1,12 @@
 import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
 
 import { GET_COTTAGE_IMAGES } from '../utils/queries';
 import { useErrorContext } from '../utils/ErrorContext';
 import { SET_THROW_ERROR } from '../utils/actions';
-
 
 import Loading from '../components/Loading';
 import Footer from '../components/Footer';
@@ -16,7 +16,6 @@ import ImageGallery from 'react-image-gallery';
 import AmenitiesModal from '../components/AmenitiesModal';
 import AvailabilityCalendar from '../components/Calendar';
 
-import { createScrollSmoother } from '../utils/gsapHelpers';
 
 import { CiCoffeeBean } from 'react-icons/ci';
 import { GiBathtub, GiBunkBeds, GiBeachBucket, GiHeatHaze } from 'react-icons/gi';
@@ -44,12 +43,13 @@ function CaptainsCottage() {
 	const smoother = useRef();
 
 	const [headerUrl, setHeaderUrl] = useState([]);
-	const [mastheadBackgroundImg, setMastheadBackgroundImg] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
 	const [cottageGalObjs, setCottageGalObjs] = useState(null);
+
 	const [mainContentStyle, setMainContentStyle] = useState({
 		transform: 'translateY(0px)',
 	});
+
 	const [imageStyle, setImageStyle] = useState({
 		width: '1100px',
 	});
@@ -85,20 +85,17 @@ function CaptainsCottage() {
 		}
 	}, [loading, data, error]);
 
-	// Set masthead img background if headerUrl state variable valuable
-	;
 
-	// useLayoutEffect(() => {
-	// 	const ctx = gsap.context(() => {
-	// 		// create the smooth scroller FIRST!
-	// 		smoother.current = ScrollSmoother.create({
-	// 			smooth: 1,
-	// 			effects: true,
-	// 		});
-	// 	}, main);
-	// 	return () => ctx.revert();
-	// }, []);
-
+	useLayoutEffect(() => {
+		gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+		const ctx = gsap.context(() => {
+			smoother.current = ScrollSmoother.create({
+				smooth: 1,
+				effects: true,
+			});
+		}, main);
+		return () => ctx.revert();
+	}, []);
 	const toggleGalleryFullScreen = () => {
 		imageGalleryRef.current.fullScreen();
 	};
