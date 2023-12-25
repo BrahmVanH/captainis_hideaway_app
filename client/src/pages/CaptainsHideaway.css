@@ -154,6 +154,21 @@
 	padding: 0.5rem;
 }
 
+ .open-modal-btn {
+	font-size: 14px;
+	background-color: transparent;
+	color: black;
+	border: none;
+	text-decoration: underline;
+}
+
+.open-modal-btn:hover {
+	background-color: transparent;
+	color: black;
+	font-size: 15px;
+	text-decoration: none;
+}
+
 .show-amenities {
 	border-bottom: 3px solid transparent;
 	border-image-source: linear-gradient(to right, white, #abccd8, #5f8fa5, #abccd8, white);

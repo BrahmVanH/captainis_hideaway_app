@@ -2,7 +2,8 @@ import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import gsap from 'gsap';
 import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
-import {} from 'gsap/ScrollSmoother';
+
+import _ from 'lodash';
 
 import { GET_COTTAGE_IMAGES } from '../utils/queries';
 import { useErrorContext } from '../utils/ErrorContext';
@@ -13,21 +14,21 @@ import Footer from '../components/Footer';
 import Navbar from '../components/Navbar';
 
 import ImageGallery from 'react-image-gallery';
-import AmenitiesModal from '../components/AmenitiesModal';
 import AvailabilityCalendar from '../components/Calendar';
+import { Button } from 'react-bootstrap';
 
 import { CiCoffeeBean } from 'react-icons/ci';
 import { GiBathtub, GiBunkBeds, GiBeachBucket, GiHeatHaze } from 'react-icons/gi';
 import { BsFillDoorOpenFill, BsSun } from 'react-icons/bs';
 import { LuBedDouble, LuBedSingle } from 'react-icons/lu';
 import { PiCookingPot, PiCouch, PiFlowerTulipDuotone } from 'react-icons/pi';
-import { MdOutlineOutdoorGrill, MdOutlineBrunchDining, MdOutlineKitchen } from 'react-icons/md';
-import { TbWifi, TbWashMachine, TbToolsKitchen2, TbDeviceTv, TbKayak } from 'react-icons/tb';
+import { MdOutlineOutdoorGrill, MdOutlineKitchen } from 'react-icons/md';
+import { TbWifi, TbToolsKitchen2, TbDeviceTv, TbKayak } from 'react-icons/tb';
 
 import dishwasherIcon from '../assets/icons/dishwasher_icon.svg';
 import deckIcon from '../assets/icons/deck-icon-noun.svg';
 
-import { cottageAmenities } from '../utils/cottageAmenities';
+import amenities from '../utils/amenities.json';
 
 import './CaptainsCottage.css';
 import 'react-image-gallery/styles/css/image-gallery.css';
@@ -52,6 +53,30 @@ function CaptainsCottage() {
 	const [imageStyle, setImageStyle] = useState({
 		width: '1100px',
 	});
+
+	// Add class to amenities card when user chooses to 'see more...'
+	const [showAmenitiesClass, setShowAmenitiesClass] = useState('');
+	const [moreAmenitiesDisplay, setMoreAmenitiesDisplay] = useState({ display: 'none' });
+	const [showAmenities, setShowAmenities] = useState(false);
+	const [cottageAmenities, setCottageAmenities] = useState(amenities.cottageAmenities);
+
+	useEffect(() => {
+		amenities ? console.log(amenities) : console.log('no amenities');
+		cottageAmenities ? console.log(cottageAmenities) : console.log('no cottage amenities');
+	}, [amenities]);
+
+	// Reveal additional amenities when user clicks 'see more...' button
+	const revealAmenities = () => {
+		if (!showAmenities) {
+			setShowAmenitiesClass('show-amenities');
+			setMoreAmenitiesDisplay({ display: '' });
+			setShowAmenities(true);
+		} else {
+			setShowAmenitiesClass('');
+			setMoreAmenitiesDisplay({ display: 'none' });
+			setShowAmenities(false);
+		}
+	};
 
 	useEffect(() => {
 		window.innerWidth < 500 ? setImageStyle({ width: '600px', height: '350px' }) : setImageStyle({ width: '1100px' });
@@ -271,8 +296,59 @@ function CaptainsCottage() {
 													</div>
 												</div>
 											</div>
-											<div className='d-flex justify-content-end'>
-												<AmenitiesModal btnRef={cottageAmenitiesComponent} htmlOpenClassName={'ReactModal__Html--open'} amenities={cottageAmenities} />
+											<div>
+												{cottageAmenities ? (
+													<div style={moreAmenitiesDisplay}>
+														<div className='more-amenities-container'>
+															{cottageAmenities.map((group) => (
+																<div className='amenities-section' key={group.type}>
+																	<h4>{group.type}</h4>
+																	<div className='amenities-items'>
+																		{group.items.length > 8 ? (
+																			<div className='amenities-item-columns'>
+																				{_.chunk(group.items, 8).map((list) => (
+																					<ul className='amenities-list' key={list}>
+																						{list.map((item) => {
+																							return (
+																								<li className='amenities-list-item' key={item}>
+																									{item}
+																								</li>
+																							);
+																						})}
+																					</ul>
+																				))}
+																			</div>
+																		) : (
+																			<ul className='amenities-list'>
+																				{group.items.map((item) => {
+																					return (
+																						<li className='amenities-list-item' key={item}>
+																							{item}
+																						</li>
+																					);
+																				})}
+																			</ul>
+																		)}
+																	</div>
+																</div>
+															))}
+														</div>
+													</div>
+												) : (
+													<></>
+												)}
+
+												<div className='d-flex justify-content-end'>
+													{!showAmenities ? (
+														<button className='open-modal-btn' onClick={() => revealAmenities()}>
+															See more...
+														</button>
+													) : (
+														<button className='open-modal-btn' onClick={() => revealAmenities()}>
+															See less...
+														</button>
+													)}
+												</div>
 											</div>
 										</div>
 									</div>

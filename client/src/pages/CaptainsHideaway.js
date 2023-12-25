@@ -1,5 +1,5 @@
 import React, { useRef, useLayoutEffect, useEffect, useState } from 'react';
-import { useQuery, useMutation } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import gsap from 'gsap';
 import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
@@ -25,17 +25,15 @@ import dishwasherIcon from '../assets/icons/dishwasher_icon.svg';
 import porchIcon from '../assets/icons/porch-icon-noun.svg';
 import deckIcon from '../assets/icons/deck-icon-noun.svg';
 
-import { hideawayAmenities } from '../utils/captainsHideawayAmenities';
-import amenities from '../utils/amenities.json';
-import './CaptainsHideaway.css';
-import 'react-image-gallery/styles/css/image-gallery.css';
-
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AvailabilityCalendar from '../components/Calendar';
-import AmenitiesModal from '../components/AmenitiesModal';
 import Loading from '../components/Loading';
 import { Button } from 'react-bootstrap';
+
+import amenities from '../utils/amenities.json';
+import './CaptainsHideaway.css';
+import 'react-image-gallery/styles/css/image-gallery.css';
 
 function CaptainsHideaway() {
 	// Global error state context - () => displays error message over app view
@@ -50,7 +48,6 @@ function CaptainsHideaway() {
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
 	const smoother = useRef();
-	const hideawayAmenitiesComponent = useRef(null);
 
 	// State variables
 	const [propertyName, setPropertyName] = useState('captainsHideaway');
@@ -76,11 +73,7 @@ function CaptainsHideaway() {
 	const [showAmenities, setShowAmenities] = useState(false);
 	const [hideawayAmenities, setHideawayAmenities] = useState(amenities.hideawayAmenities);
 
-	useEffect(() => {
-		amenities ? console.log(amenities) : console.log('no amenities');
-		hideawayAmenities ? console.log(hideawayAmenities) : console.log('no hideaway amenities');
-	}, [amenities]);
-
+	// Reveal additional amenities when user clicks 'see more...' button
 	const revealAmenities = () => {
 		if (!showAmenities) {
 			setShowAmenitiesClass('show-amenities');
@@ -350,9 +343,9 @@ function CaptainsHideaway() {
 													</div>
 												</div>
 											</div>
-											<div className=''>
+											<div>
 												{hideawayAmenities ? (
-													<div style={moreAmenitiesDisplay} className=''>
+													<div style={moreAmenitiesDisplay}>
 														<div className='more-amenities-container'>
 															{hideawayAmenities.map((group) => (
 																<div className='amenities-section' key={group.type}>
@@ -393,9 +386,15 @@ function CaptainsHideaway() {
 												)}
 
 												<div className='d-flex justify-content-end'>
-													<Button className='btn-dark open-modal-btn' onClick={() => revealAmenities()}>
-														See more...
-													</Button>
+													{!showAmenities ? (
+														<button className='open-modal-btn' onClick={() => revealAmenities()}>
+															See more...
+														</button>
+													) : (
+														<button className='open-modal-btn' onClick={() => revealAmenities()}>
+															See less...
+														</button>
+													)}
 												</div>
 											</div>
 										</div>
