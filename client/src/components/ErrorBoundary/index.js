@@ -10,7 +10,7 @@ class ErrorBoundary extends Component {
 	}
 
 	componentDidCatch(error, errorInfo) {
-		// LogRocket.captureException(error);
+		LogRocket.captureException(error);
 		this.setState({ hasError: true });
 	}
 

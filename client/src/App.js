@@ -1,9 +1,5 @@
 import React from 'react';
-import gsap from 'gsap';
-
-import { ScrollSmoother } from 'gsap/ScrollSmoother';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ApolloClient, ApolloProvider, InMemoryCache, gql, makeVar } from '@apollo/client';
+import { ApolloClient, ApolloLink, ApolloProvider, HttpLink, InMemoryCache, gql, makeVar } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
@@ -23,58 +19,6 @@ import CaptainsCottage from './pages/CaptainsCottage';
 
 import { isLocalEnvironment } from './utils/helpers';
 import '@csstools/normalize.css';
-
-// const errorLink = onError(({ graphQLErrors, networkError }) => {
-// 	if (graphQLErrors) {
-// 		graphQLErrors.forEach(({ message, locations, path }) => {
-
-// 			// LogRocket.captureMessage(`[GraphQL error]: ${message}`);
-// 		});
-// 	}
-
-// 	if (networkError) {
-
-// 		// LogRocket.captureMessage(`[Network error]: ${networkError}`);
-// 	}
-// });
-
-
-// Define cache policies
-const cache = new InMemoryCache({
-	typePolicies: {
-		Query: {
-			fields: {
-				// Customize cache behavior for img queries
-				getHomePgImgs: {
-					// Specify cache key fields for the getHomePgImgs query
-					keyArgs: [],
-					// Specify how to merge incoming data with existing data in the cache
-					merge(existing, incoming) {
-						return incoming;
-					},
-				},
-				getHideawayImgs: {
-					keyArgs: [],
-					merge(existing, incoming) {
-						return incoming;
-					},
-				},
-				getCottageImgs: {
-					keyArgs: [],
-					merge(existing, incoming) {
-						return incoming;
-					},
-				},
-				getAboutPgImg: {
-					keyArgs: [],
-					merge(existing, incoming) {
-						return incoming;
-					},
-				},
-			},
-		},
-	},
-});
 
 const typeDefs = gql`
 	type imageObject {
@@ -104,12 +48,65 @@ const typeDefs = gql`
 	}
 `;
 
-const client = new ApolloClient({
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+	if (graphQLErrors) {
+		graphQLErrors.forEach(({ message, locations, path }) => {
+			LogRocket.captureMessage(`[GraphQL error]: ${message}`);
+		});
+	}
+
+	if (networkError) {
+		LogRocket.captureMessage(`[Network error]: ${networkError}`);
+	}
+});
+
+const httpLink = new HttpLink({
 	uri: process.env.NODE_ENV === 'production' ? '/graphql' : 'http://localhost:3001/graphql',
+});
+const link = ApolloLink.from([errorLink, httpLink]);
+
+
+// Define cache policies
+const cache = new InMemoryCache({
+	typePolicies: {
+		Query: {
+			fields: {
+				getHomePgImgs: {
+					keyArgs: [],
+					merge(existing, incoming) {
+						return incoming;
+					},
+				},
+				getHideawayImgs: {
+					keyArgs: [],
+					merge(existing, incoming) {
+						return incoming;
+					},
+				},
+				getCottageImgs: {
+					keyArgs: [],
+					merge(existing, incoming) {
+						return incoming;
+					},
+				},
+				getAboutPgImg: {
+					keyArgs: [],
+					merge(existing, incoming) {
+						return incoming;
+					},
+				},
+			},
+		},
+	},
+});
+
+const client = new ApolloClient({
+	link,
 	cache: cache,
 	typeDefs: typeDefs,
-	// link: errorLink,
 });
+
+
 
 function App() {
 	// Register GSAP plugins for all components. ScrollSmoother relies on ScrollTrigger
