@@ -1,4 +1,4 @@
-.open-modal-btn {
+/* .open-modal-btn {
 	font-size: 14px;
 	background-color: transparent;
 	color: black;
@@ -6,19 +6,25 @@
 	text-decoration: underline;
 }
 
-
-
 .amenities-modal::part(base) {
 	z-index: 10000 !important;
-	transform: translateY(-600px);
 	border: 2px solid #5f8fa5;
 	border-radius: 6px;
+	
+	align-items: center;
+	height: 100vh;
+	display: flex;
 }
 
 .amenities-modal::part(header) {
 	display: none;
 }
 .amenities-modal::part(panel) {
+	position: fixed;
+	left: auto;
+	right: auto;
+	margin: auto;
+	align-self: center;
 	max-height: 50vh !important;
 	width: 30%;
 	overflow-y: hidden;
@@ -96,4 +102,4 @@
 	bottom: 0px;
 	display: flex;
 	justify-content: flex-start;
-}
+} */

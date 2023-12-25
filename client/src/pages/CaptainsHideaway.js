@@ -1,9 +1,10 @@
 import React, { useRef, useLayoutEffect, useEffect, useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 
-
 import gsap from 'gsap';
 import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
+
+import _ from 'lodash';
 
 import { GET_HIDEAWAY_IMAGES } from '../utils/queries';
 import { useErrorContext } from '../utils/ErrorContext';
@@ -25,16 +26,16 @@ import porchIcon from '../assets/icons/porch-icon-noun.svg';
 import deckIcon from '../assets/icons/deck-icon-noun.svg';
 
 import { hideawayAmenities } from '../utils/captainsHideawayAmenities';
-
+import amenities from '../utils/amenities.json';
 import './CaptainsHideaway.css';
 import 'react-image-gallery/styles/css/image-gallery.css';
-
 
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AvailabilityCalendar from '../components/Calendar';
 import AmenitiesModal from '../components/AmenitiesModal';
 import Loading from '../components/Loading';
+import { Button } from 'react-bootstrap';
 
 function CaptainsHideaway() {
 	// Global error state context - () => displays error message over app view
@@ -50,8 +51,8 @@ function CaptainsHideaway() {
 	const main = useRef();
 	const smoother = useRef();
 	const hideawayAmenitiesComponent = useRef(null);
-	
-	// State variables 
+
+	// State variables
 	const [propertyName, setPropertyName] = useState('captainsHideaway');
 	const [hideawayGalObjs, setHideawayGalObjs] = useState(null);
 	const [headerUrl, setHeaderUrl] = useState([]);
@@ -68,6 +69,29 @@ function CaptainsHideaway() {
 	const [imageStyle, setImageStyle] = useState({
 		width: '1200px',
 	});
+
+	// Add class to amenities card when user chooses to 'see more...'
+	const [showAmenitiesClass, setShowAmenitiesClass] = useState('');
+	const [moreAmenitiesDisplay, setMoreAmenitiesDisplay] = useState({ display: 'none' });
+	const [showAmenities, setShowAmenities] = useState(false);
+	const [hideawayAmenities, setHideawayAmenities] = useState(amenities.hideawayAmenities);
+
+	useEffect(() => {
+		amenities ? console.log(amenities) : console.log('no amenities');
+		hideawayAmenities ? console.log(hideawayAmenities) : console.log('no hideaway amenities');
+	}, [amenities]);
+
+	const revealAmenities = () => {
+		if (!showAmenities) {
+			setShowAmenitiesClass('show-amenities');
+			setMoreAmenitiesDisplay({ display: '' });
+			setShowAmenities(true);
+		} else {
+			setShowAmenitiesClass('');
+			setMoreAmenitiesDisplay({ display: 'none' });
+			setShowAmenities(false);
+		}
+	};
 
 	// Responsive page layout
 	useEffect(() => {
@@ -102,7 +126,6 @@ function CaptainsHideaway() {
 			});
 		}
 	}, [loading, data, error]);
-
 
 	// Apply gsap effects on architecture before view is painted
 	useLayoutEffect(() => {
@@ -255,7 +278,7 @@ function CaptainsHideaway() {
 									<div className='d-flex flex-column flex-lg-row' style={{ padding: '0.5rem' }}>
 										<h3 style={{ margin: '0px', padding: '0.5rem' }}>Amenities</h3>
 										<div className='amenities-item-wrapper' style={{ margin: '0.5rem', fontSize: '14px', width: '90%', padding: '0.5rem' }}>
-											<div className='amenities-item-container' style={{ width: '100%', height: '100%' }}>
+											<div className={`amenities-item-container ${showAmenitiesClass}`} style={{ width: '100%', height: '100%' }}>
 												<div style={{ padding: '0.5rem' }}>
 													<div className='amenities-item'>
 														<TbToolsKitchen2 />
@@ -327,8 +350,53 @@ function CaptainsHideaway() {
 													</div>
 												</div>
 											</div>
-											<div className='d-flex justify-content-end'>
-												<AmenitiesModal btnRef={hideawayAmenitiesComponent} htmlOpenClassName={'ReactModal__Html--open'} amenities={hideawayAmenities} />
+											<div className=''>
+												{hideawayAmenities ? (
+													<div style={moreAmenitiesDisplay} className=''>
+														<div className='more-amenities-container'>
+															{hideawayAmenities.map((group) => (
+																<div className='amenities-section' key={group.type}>
+																	<h4>{group.type}</h4>
+																	<div className='amenities-items'>
+																		{group.items.length > 8 ? (
+																			<div className='amenities-item-columns'>
+																				{_.chunk(group.items, 8).map((list) => (
+																					<ul className='amenities-list' key={list}>
+																						{list.map((item) => {
+																							return (
+																								<li className='amenities-list-item' key={item}>
+																									{item}
+																								</li>
+																							);
+																						})}
+																					</ul>
+																				))}
+																			</div>
+																		) : (
+																			<ul className='amenities-list'>
+																				{group.items.map((item) => {
+																					return (
+																						<li className='amenities-list-item' key={item}>
+																							{item}
+																						</li>
+																					);
+																				})}
+																			</ul>
+																		)}
+																	</div>
+																</div>
+															))}
+														</div>
+													</div>
+												) : (
+													<></>
+												)}
+
+												<div className='d-flex justify-content-end'>
+													<Button className='btn-dark open-modal-btn' onClick={() => revealAmenities()}>
+														See more...
+													</Button>
+												</div>
 											</div>
 										</div>
 									</div>
