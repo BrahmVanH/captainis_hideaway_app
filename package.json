@@ -1,7 +1,7 @@
 {
-	"name": "captains_hideaway-app",
+	"name": "LakeSuperiorCaptains",
 	"version": "1.0.0",
-	"description": "",
+	"description": "A full stack application for managing property rental SEO and availability",
 	"main": "index.js",
 	"engines": {
 		"node": "20.x"
