@@ -54,7 +54,7 @@ function SigninForm() {
 				Auth.login(data.loginUser.token);
 			}
 
-			window.location.assign('/admin');
+			window.location.assign('/#/admin');
 		} catch (err) {
 			console.error(err);
 			setShowAlert(true);
