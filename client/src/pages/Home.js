@@ -29,20 +29,6 @@ function Home() {
 	const [hideawayCard, setHideawayCard] = useState(null);
 	const [cottageCard, setCottageCard] = useState(null);
 
-	const hideawayCardDetails = {
-		title: "Captain's Hideaway",
-		description:
-			"This 4 bedroom, 3 full bath home overlooking spectacular Lake Superior is every vacationer's dream. Spend your days hunting for agates on the beaches of Lake Superior, beach access is simply a few steps away from the back porch. If relaxing indoors is more your speed, spend the day lounging in the 4 season room that overlooks miles and miles of unobstructed views of Lake Superior.",
-		urlEndpoint: '/captains_hideaway',
-		imagePath: hideawayImgUrl,
-	};
-
-	const cottageCardDetails = {
-		title: "Captain's Cottage",
-		description: '3 acres of private Lake Superior beach front! Located on the North Country Trail. Muskallonge Lake located directly behind the property for great fishing, hiking or kayaking. ',
-		urlEndpoint: '/captains_cottage',
-		imagePath: cottageImgUrl,
-	};
 	const { loading, error, data } = useQuery(GET_HOME_PG_IMGS);
 
 	useEffect(() => {
@@ -50,7 +36,7 @@ function Home() {
 			setHeaderUrl(data.getHomePgImgs.headerImgUrl);
 			setCottageImgUrl(data.getHomePgImgs.cottageImgUrl);
 			setHideawayImgUrl(data.getHomePgImgs.hideawayImgUrl);
-		} else if (error) {
+		} else if (error && state) {
 			dispatch({
 				type: SET_THROW_ERROR,
 				throwError: true,
@@ -60,7 +46,7 @@ function Home() {
 				},
 			});
 		}
-	}, [loading, data, error]);
+	}, [loading, data, error, state, dispatch]);
 
 	useLayoutEffect(() => {
 		gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -78,8 +64,19 @@ function Home() {
 	// When image urls available from s3, pass property props to cards
 	useEffect(() => {
 		if (headerUrl !== null && cottageImgUrl !== null && hideawayImgUrl !== null) {
-			setHideawayCard(hideawayCardDetails);
-			setCottageCard(cottageCardDetails);
+			setHideawayCard({
+		title: "Captain's Hideaway",
+		description:
+			"This 4 bedroom, 3 full bath home overlooking spectacular Lake Superior is every vacationer's dream. Spend your days hunting for agates on the beaches of Lake Superior, beach access is simply a few steps away from the back porch. If relaxing indoors is more your speed, spend the day lounging in the 4 season room that overlooks miles and miles of unobstructed views of Lake Superior.",
+		urlEndpoint: '/captains_hideaway',
+		imagePath: hideawayImgUrl,
+	});
+			setCottageCard({
+				title: "Captain's Cottage",
+				description: '3 acres of private Lake Superior beach front! Located on the North Country Trail. Muskallonge Lake located directly behind the property for great fishing, hiking or kayaking. ',
+				urlEndpoint: '/captains_cottage',
+				imagePath: cottageImgUrl,
+			});
 		}
 	}, [headerUrl, cottageImgUrl, hideawayImgUrl]);
 

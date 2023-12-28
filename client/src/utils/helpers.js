@@ -4,7 +4,7 @@ import _ from 'lodash';
 // containing only the dateValue
 export const getDateValues = (unavailableDates) => {
 	let unavailableDateValues = [];
-	unavailableDates.map((dateObject) => {
+	unavailableDates.forEach((dateObject) => {
 		unavailableDateValues.push(new Date(dateObject.dateValue));
 	});
 

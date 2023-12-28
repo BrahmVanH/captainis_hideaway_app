@@ -27,12 +27,6 @@ const typeDefs = gql`
 		thumbnailAlt: String
 	}
 
-	# type ApolloError {
-	# 	error: String!
-	# }
-
-	# scalar ApolloError
-
 	type homePgImgPack {
 		headerImgUrl: String
 		hideawayImgUrl: String
@@ -52,7 +46,6 @@ const typeDefs = gql`
 	type Query {
 		getAllUsers: [User]
 		queryUnavailableDatesByProperty(propertyName: String!): [Date]
-		queryS3ByObjectType(objectType: String!): String
 		getHomePgImgs: homePgImgPack
 		getHideawayImgs: hideawayImgPack
 		getCottageImgs: cottageImgPack

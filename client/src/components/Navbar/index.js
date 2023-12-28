@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useRef, useLayoutEffect } from 'react';
-import gsap from 'gsap';
+import React, { useEffect, useState, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Auth from '../../utils/auth';
 import { RxHamburgerMenu } from 'react-icons/rx';
@@ -17,19 +16,6 @@ function Navbar() {
 		image: mobileLogoSvg, width: '100px'});
 	const nav = useRef();
 	const dropdown = useRef();
-
-	
-
-	const [isLargeViewport, setIsLargeViewport] = useState(null);
-
-	const checkLargeViewport = () => {
-		return window.innerWidth > 766;
-	};
-
-	useEffect(() => {
-		const isLarge = checkLargeViewport();
-		setIsLargeViewport(isLarge);
-	});
 
 	const isMediumViewport = () => {
 		return window.innerWidth < 766;
@@ -56,7 +42,7 @@ function Navbar() {
 			<nav ref={nav} className='my-navbar navbar-expand navigation-clean navbar-light'>
 				<div className='navbar-inner-container '>
 					<Link className='navbar-brand' to={'/'}>
-						<img src={brandLogo.image} width={brandLogo.width} />
+						<img alt='Captains Lake Superior branding' src={brandLogo.image} width={brandLogo.width} />
 					</Link>
 					{mobileViewport ? (
 						<button className='dropdown-btn' onClick={toggleDropDown}>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { ApolloClient, ApolloLink, ApolloProvider, HttpLink, InMemoryCache, gql, makeVar } from '@apollo/client';
+import { ApolloClient, ApolloLink, ApolloProvider, HttpLink, InMemoryCache, gql } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
@@ -17,7 +17,6 @@ import AdminPage from './pages/Admin';
 import CaptainsHideaway from './pages/CaptainsHideaway';
 import CaptainsCottage from './pages/CaptainsCottage';
 
-import { isLocalEnvironment } from './utils/helpers';
 import '@csstools/normalize.css';
 
 const typeDefs = gql`
@@ -65,7 +64,6 @@ const httpLink = new HttpLink({
 });
 const link = ApolloLink.from([errorLink, httpLink]);
 
-
 // Define cache policies
 const cache = new InMemoryCache({
 	typePolicies: {
@@ -105,8 +103,6 @@ const client = new ApolloClient({
 	cache: cache,
 	typeDefs: typeDefs,
 });
-
-
 
 function App() {
 	// Register GSAP plugins for all components. ScrollSmoother relies on ScrollTrigger

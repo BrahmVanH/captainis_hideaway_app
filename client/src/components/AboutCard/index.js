@@ -12,7 +12,7 @@ function AboutCard(props) {
 			<div className='d-flex flex-column align-items-center justify-content-around'>
 				{image ? (
 					<div className='about-image-container'>
-						<img className='about-us-image' src={image} width='240px' />
+						<img alt='Chris and Elyse, the owners, in front of Lake Superior' className='about-us-image' src={image} width='240px' />
 					</div>
 				) : (
 					<></>

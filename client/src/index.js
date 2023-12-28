@@ -1,11 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import reportWebVitals from './reportWebVitals';
 import LogRocket from 'logrocket';
 
 import App from './App';
-import './normalize.css';
 import './index.css';
 
 import setupLogRocketReact from 'logrocket-react';
@@ -20,4 +18,3 @@ root.render(
 	</React.StrictMode>
 );
 
-reportWebVitals();
