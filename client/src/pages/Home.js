@@ -90,7 +90,7 @@ function Home() {
 							<div className='overlay'>
 								<div className='container welcome-message-container'>
 									<div style={{ textAlign: 'left' }} className='col-xl-9 mx-auto position-relative'>
-										<h1 className='welcome-message-text'>Welcome to Captain's at Lake Superior</h1>
+										<h1 className='welcome-message-text'>Welcome to Captain's Properties on Lake Superior</h1>
 									</div>
 								</div>
 							</div>
