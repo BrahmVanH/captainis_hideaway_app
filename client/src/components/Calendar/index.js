@@ -4,8 +4,8 @@ import { Button } from 'react-bootstrap';
 
 import { QUERY_UNAVAILABLE_DATES } from '../../utils/queries';
 import { useQuery } from '@apollo/client';
-import { useErrorContext } from '../utils/ErrorContext';
-import { SET_THROW_ERROR } from '../utils/actions';
+import { useErrorContext } from '../../utils/ErrorContext';
+import { SET_THROW_ERROR } from '../../utils/actions';
 
 import { getDateValues } from '../../utils/helpers';
 
