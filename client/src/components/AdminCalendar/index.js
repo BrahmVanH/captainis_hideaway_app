@@ -156,6 +156,10 @@ function AdminCalendar(props) {
 			<div className='admin-calendar-container'>
 				<Calendar tileContent={tileContent} onChange={handleDateChange} value={date} onClickDay={onClickDay} tileClassName={tileClassName} />
 			</div>
+			<div className='calendar-key'>
+				<div className='calendar-key-tile' />
+				<p className='calendar-key-text'>Booked</p>
+			</div>
 		</div>
 	);
 }
