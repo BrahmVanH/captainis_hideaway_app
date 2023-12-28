@@ -4,6 +4,8 @@ import { Button } from 'react-bootstrap';
 
 import { QUERY_UNAVAILABLE_DATES } from '../../utils/queries';
 import { useQuery } from '@apollo/client';
+import { useErrorContext } from '../utils/ErrorContext';
+import { SET_THROW_ERROR } from '../utils/actions';
 
 import { getDateValues } from '../../utils/helpers';
 
@@ -11,13 +13,23 @@ import 'react-calendar/dist/Calendar.css';
 import './style.css';
 
 function AvailabilityCalendar(props) {
-	const propertyName = props.propertyName;
+	const [propertyName, setPropertyName] = useState(null);
+
+	// Global error state context - () => displays error message over app view
+	const [state, dispatch] = useErrorContext();
+
 	const [date, setDate] = useState(new Date());
 	const [unavailableDates, setUnavailableDates] = useState([]);
 
 	const { loading, error, data } = useQuery(QUERY_UNAVAILABLE_DATES, {
 		variables: { propertyName },
 	});
+
+	useEffect(() => {
+		if (props) {
+			setPropertyName(props.propertyName);
+		}
+	}, [props]);
 
 	useEffect(() => {
 		if (error) {
@@ -28,10 +40,17 @@ function AvailabilityCalendar(props) {
 	useEffect(() => {
 		if (!loading && data) {
 			setUnavailableDates(data.queryUnavailableDatesByProperty);
-		} else {
-			return;
+		} else if (error && state) {
+			dispatch({
+				type: SET_THROW_ERROR,
+				throwError: true,
+				errorMessage: {
+					code: error?.networkError?.statusCode,
+					message: 'Sorry, there was a network error while loading this page. The issue should be resolved with a refresh.',
+				},
+			});
 		}
-	}, [loading, data]);
+	}, [loading, data, error]);
 
 	// Function to generate custom class for the current day
 	const tileClassName = ({ date, view }) => {
@@ -67,7 +86,7 @@ function AvailabilityCalendar(props) {
 
 	return (
 		<div>
-			<div className=' calendar-container p-2 m-2 d-flex flex-column justify-content-center align-items-center' >
+			<div className=' calendar-container p-2 m-2 d-flex flex-column justify-content-center align-items-center'>
 				{loading ? <div> Loading Calendar... </div> : <Calendar onChange={handleDateChange} value={date} tileDisabled={tileContent} tileClassName={tileClassName} />}
 				<div className='calendar-key-container'>
 					<div className='calendar-key'>
