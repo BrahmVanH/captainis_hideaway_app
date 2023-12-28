@@ -5,7 +5,7 @@ import { QUERY_UNAVAILABLE_DATES } from '../../utils/queries';
 import { CREATE_UNAVAILABLE_DATE, REMOVE_UNAVAILABLE_DATE } from '../../utils/mutations';
 import { useErrorContext } from '../../utils/ErrorContext';
 import { SET_THROW_ERROR } from '../../utils/actions';
-import { useQuery, useMutation } from '@apollo/client';
+import { useLazyQuery, useMutation } from '@apollo/client';
 
 import { getDateValues, isSameDay } from '../../utils/helpers';
 
@@ -21,16 +21,15 @@ function AdminCalendar(props) {
 	const [unavailableDates, setUnavailableDates] = useState(null);
 
 	// Checks database for booked dates for the passed in property
-	const { loading, error, data } = useQuery(QUERY_UNAVAILABLE_DATES, {
+	const [getUnavailableDates, { loading, error, data }] = useLazyQuery(QUERY_UNAVAILABLE_DATES, {
 		variables: { propertyName },
 	});
 
-	// TODO: Handle this error with global context
 	useEffect(() => {
-		if (error) {
-			console.error({ message: 'There was an error querying the db from calendar', details: error });
+		if (propertyName) {
+			getUnavailableDates(propertyName);
 		}
-	}, [loading, error, data]);
+	}, [propertyName]);
 
 	const [createUnavailableDate] = useMutation(CREATE_UNAVAILABLE_DATE);
 	const [removeUnavailableDate] = useMutation(REMOVE_UNAVAILABLE_DATE);
@@ -38,7 +37,6 @@ function AdminCalendar(props) {
 	// Set the unavailableDates state to the query response. Contains an array of dates
 	useEffect(() => {
 		if (!loading && data) {
-			console.log('unavailable dates retrieved...', data);
 			setUnavailableDates(data.queryUnavailableDatesByProperty);
 		} else if (error && !loading) {
 			dispatch({
@@ -58,7 +56,7 @@ function AdminCalendar(props) {
 
 	// Function to generate custom class for the current day
 	const tileClassName = ({ date, view }) => {
-		if (!!unavailableDates) {
+		if (unavailableDates !== null && unavailableDates.length > 0) {
 			const unavailableDateValues = getDateValues(unavailableDates);
 			if (unavailableDateValues.some((unavailableDate) => isSameDay(unavailableDate, date))) {
 				return 'admin-unavailable-day';
@@ -71,7 +69,7 @@ function AdminCalendar(props) {
 	// This creates an elements to be appended to each date on the calendar that matches a date in a new unavailableDates array
 	// created from calling getDateValues
 	const tileContent = ({ date, view }) => {
-		if (!!unavailableDates) {
+		if (unavailableDates !== null && unavailableDates.length > 0) {
 			const unavailableDateValues = getDateValues(unavailableDates);
 			const isUnavailable = unavailableDateValues.some((unavailableDate) =>
 				view === 'month'
@@ -130,8 +128,7 @@ function AdminCalendar(props) {
 	// and returns a value if there is a match. the value is created as an unavailableDate object in db
 	// if there is no return value from the filter, the matching date object will be removed from the db
 	const checkIfUnavailable = (value) => {
-		console.log('checking if unavailable...');
-		if (unavailableDates.length > 0) {
+		if (unavailableDates !== null && unavailableDates.length > 0) {
 			const proposedDate = unavailableDates.filter((date) => date.dateValue === value);
 			if (proposedDate.length === 0) {
 				handleAddUnavailableDate(value);
@@ -144,7 +141,6 @@ function AdminCalendar(props) {
 	};
 	// This is a handler function that is called when the user clicks on a date on the calendar
 	const onClickDay = (value, event) => {
-		console.log('handling onClickDay...');
 		const date = new Date(value);
 		checkIfUnavailable(date.toISOString());
 	};
