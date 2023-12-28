@@ -1,6 +1,8 @@
 import React, { useLayoutEffect, useRef, useEffect, useState } from 'react';
-import { useQuery } from '@apollo/client';
 import gsap from 'gsap';
+import LogRocket from 'logrocket';
+
+import { useQuery } from '@apollo/client';
 
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
@@ -37,6 +39,8 @@ function Home() {
 			setCottageImgUrl(data.getHomePgImgs.cottageImgUrl);
 			setHideawayImgUrl(data.getHomePgImgs.hideawayImgUrl);
 		} else if (error && state) {
+			LogRocket.captureException(error);
+
 			dispatch({
 				type: SET_THROW_ERROR,
 				throwError: true,

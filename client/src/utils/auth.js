@@ -9,7 +9,7 @@ class AuthService {
 	loggedIn() {
 		// Checks if there is a saved token and it's still valid
 		const token = this.getToken();
-		return !!token && !this.isTokenExpired(token); 
+		return !!token && !this.isTokenExpired(token);
 	}
 
 	// This uses decode from jwt-decode to decode user token and check if it is expired
@@ -18,7 +18,9 @@ class AuthService {
 			const decoded = decode(token);
 			if (decoded.exp < Date.now() / 1000) {
 				return true;
-			} else return false;
+			} else {
+				return false;
+			}
 		} catch (err) {
 			return false;
 		}
@@ -36,7 +38,6 @@ class AuthService {
 		localStorage.setItem('id_token', idToken);
 		window.location.assign('/');
 	}
-
 
 	logout() {
 		// Clear user token and profile data from localStorage

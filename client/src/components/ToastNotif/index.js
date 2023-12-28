@@ -15,6 +15,7 @@ const ToastNotif = ({ children }) => {
 	const [onCloseFireCount, setCloseFireCount] = useState(1);
 
 	const resetErrorState = () => {
+		
 		dispatch({
 			type: SET_THROW_ERROR,
 			throwError: false,

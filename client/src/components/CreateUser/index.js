@@ -15,7 +15,6 @@ function CreateUser() {
 		adminCode: '',
 	});
 
-
 	const [showAlert, setShowAlert] = useState(false);
 
 	const [createUser] = useMutation(CREATE_USER);
@@ -50,17 +49,15 @@ function CreateUser() {
 
 			if (!loading && error) {
 				resetLoginForm();
-				setShowAlert(true);
-			}
-			// Logs user in and stores token
-			Auth.login(data.createUser.token);
+			} else if (!loading && data) {
+				// Logs user in and stores token
+				Auth.login(data.createUser.token);
 
-			window.location.assign('/#/admin');
+				window.location.assign('/#/admin');
+			}
 		} catch (err) {
-			console.error(err);
 			setShowAlert(true);
 		}
-
 	};
 
 	return (
@@ -73,29 +70,29 @@ function CreateUser() {
 					There was an error
 				</Alert>
 				<div className='mb-3'>
-					<Form.Group controlId='formBasicName' required>
-						<Form.Control onChange={handleInputChange} value={createUserFormData.firstName} type='name' name='firstName' placeholder='First Name' />
+					<Form.Group  required>
+						<Form.Control autoComplete='first-name' onChange={handleInputChange} value={createUserFormData.firstName} type='name' name='firstName' placeholder='First Name' />
 					</Form.Group>
 				</div>
 				<div className='mb-3'>
-					<Form.Group controlId='formBasicName' required>
-						<Form.Control onChange={handleInputChange} value={createUserFormData.lastName} type='name' name='lastName' placeholder='Last Name' />
+					<Form.Group required>
+						<Form.Control autoComplete='last-name' onChange={handleInputChange} value={createUserFormData.lastName} type='name' name='lastName' placeholder='Last Name' />
 					</Form.Group>
 				</div>
 				<div className='mb-3'>
-					<Form.Group controlId='formBasicUsername' required>
-						<Form.Control onChange={handleInputChange} value={createUserFormData.username} type='username' name='username' placeholder='Username' />
+					<Form.Group required>
+						<Form.Control autoComplete='new-username' onChange={handleInputChange} value={createUserFormData.username} type='username' name='username' placeholder='Username' />
 					</Form.Group>
 				</div>
 
 				<div className='mb-3'>
-					<Form.Group controlId='formBasicPassword' required>
-						<Form.Control onChange={handleInputChange} value={createUserFormData.userPassword} type='password' name='userPassword' placeholder='Password' />
+					<Form.Group required>
+						<Form.Control autoComplete='new-password' onChange={handleInputChange} value={createUserFormData.userPassword} type='password' name='userPassword' placeholder='Password' />
 					</Form.Group>
 				</div>
 				<div className='mb-3'>
-					<Form.Group controlId='formBasicPassword' required>
-						<Form.Control onChange={handleInputChange} value={createUserFormData.adminCode} type='password' name='adminCode' placeholder='Admin Code' />
+					<Form.Group required>
+						<Form.Control autoComplete='admin-code' onChange={handleInputChange} value={createUserFormData.adminCode} type='password' name='adminCode' placeholder='Admin Code' />
 					</Form.Group>
 				</div>
 				<div>

@@ -1,6 +1,8 @@
 import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
-import { useQuery } from '@apollo/client';
+import LogRocket from 'logrocket';
 import gsap from 'gsap';
+
+import { useQuery } from '@apollo/client';
 import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
 
 import _ from 'lodash';
@@ -91,6 +93,8 @@ function CaptainsCottage() {
 			setHeaderUrl(data.getCottageImgs.headerUrl);
 			setCottageGalObjs(data.getCottageImgs.galleryArray);
 		} else if (error && state) {
+			LogRocket.captureException(error);
+
 			dispatch({
 				type: SET_THROW_ERROR,
 				throwError: true,
