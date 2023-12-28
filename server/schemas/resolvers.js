@@ -95,7 +95,6 @@ const resolvers = {
 				if (!firstName || !lastName || !username || !userPassword || !adminCode) {
 					throw new AuthenticationError('All fields must be filled to create a user.');
 				} else if (adminCode !== process.env.ADMIN_CODE) {
-					console.log(adminCode);
 					throw new AuthenticationError('Incorrect admin code');
 				} else {
 					const newUser = await User.create({

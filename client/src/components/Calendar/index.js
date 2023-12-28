@@ -3,7 +3,7 @@ import Calendar from 'react-calendar';
 import { Button } from 'react-bootstrap';
 
 import { QUERY_UNAVAILABLE_DATES } from '../../utils/queries';
-import { useQuery } from '@apollo/client';
+import { useLazyQuery } from '@apollo/client';
 import { useErrorContext } from '../../utils/ErrorContext';
 import { SET_THROW_ERROR } from '../../utils/actions';
 
@@ -13,29 +13,22 @@ import 'react-calendar/dist/Calendar.css';
 import './style.css';
 
 function AvailabilityCalendar(props) {
-	const [propertyName, setPropertyName] = useState(null);
-
+	const propertyName = props?.propertyName;
 	// Global error state context - () => displays error message over app view
 	const [state, dispatch] = useErrorContext();
 
 	const [date, setDate] = useState(new Date());
 	const [unavailableDates, setUnavailableDates] = useState([]);
 
-	const { loading, error, data } = useQuery(QUERY_UNAVAILABLE_DATES, {
+	const [getUnavailableDates, { error, loading, data }] = useLazyQuery(QUERY_UNAVAILABLE_DATES, {
 		variables: { propertyName },
 	});
 
 	useEffect(() => {
-		if (props) {
-			setPropertyName(props.propertyName);
+		if (propertyName) {
+			getUnavailableDates(propertyName);
 		}
-	}, [props]);
-
-	useEffect(() => {
-		if (error) {
-			console.error({ message: 'There was an error querying the db from calendar', details: error });
-		}
-	}, [loading, error, data]);
+	}, [propertyName]);
 
 	useEffect(() => {
 		if (!loading && data) {
@@ -67,7 +60,7 @@ function AvailabilityCalendar(props) {
 	// 	created from calling getDateValues
 	const tileContent = ({ date, view }) => {
 		const unavailableDateValues = getDateValues(unavailableDates);
-		if (unavailableDates.length > 0) {
+		if (unavailableDates !== null && unavailableDates.length > 0) {
 			const isUnavailable = unavailableDateValues.some((unavailableDate) =>
 				view === 'month'
 					? unavailableDate.getFullYear() === date.getFullYear() && unavailableDate.getMonth() === date.getMonth() && unavailableDate.toDateString() === date.toDateString()

@@ -44,3 +44,12 @@
 .info-btn:hover {
   opacity: 0.9;
 }
+
+.prop-card-img {
+  border-radius: 6px !important;
+}
+@media only screen and (max-device-width: 776px) {
+ .prop-card-img {
+  border-radius: 10px !important;
+} 
+}

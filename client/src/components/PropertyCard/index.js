@@ -35,7 +35,7 @@ function PropertyCard(props) {
 					</Link>
 				</div>
 			</div>
-			<Image style={responsiveImageStyle} rounded alt='captains hideaway house from the beach' src={property.imagePath} className='align-self-center align-self-lg-start col-sm-10 card-img-bottom' />
+			<img style={responsiveImageStyle} alt='captains hideaway house from the beach' src={property.imagePath} className='prop-card-img align-self-center align-self-lg-start col-sm-10 card-img-bottom' />
 		</div>
 	);
 }
