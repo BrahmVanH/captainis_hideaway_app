@@ -3,6 +3,8 @@ import Calendar from 'react-calendar';
 
 import { QUERY_UNAVAILABLE_DATES } from '../../utils/queries';
 import { CREATE_UNAVAILABLE_DATE, REMOVE_UNAVAILABLE_DATE } from '../../utils/mutations';
+import { useErrorContext } from '../../utils/ErrorContext';
+import { SET_THROW_ERROR } from '../../utils/actions';
 import { useQuery, useMutation } from '@apollo/client';
 
 import { getDateValues, isSameDay } from '../../utils/helpers';
@@ -11,6 +13,8 @@ import 'react-calendar/dist/Calendar.css';
 import './style.css';
 
 function AdminCalendar(props) {
+	const [state, dispatch] = useErrorContext();
+
 	const propertyName = props.propertyName;
 
 	const [date, setDate] = useState(new Date());
@@ -33,8 +37,15 @@ function AdminCalendar(props) {
 	useEffect(() => {
 		if (!loading && data) {
 			setUnavailableDates(data.queryUnavailableDatesByProperty);
-		} else {
-			return;
+		} else if (error && !loading) {
+			dispatch({
+				type: SET_THROW_ERROR,
+				throwError: true,
+				errorMessage: {
+					code: error?.networkError?.statusCode,
+					message: 'Sorry, there was a network error while loading this page. The issue should be resolved with a refresh.',
+				},
+			});
 		}
 	}, [data, loading]);
 
@@ -76,10 +87,9 @@ function AdminCalendar(props) {
 		try {
 			const { data, error } = await createUnavailableDate({ variables: { propertyName: propertyName, dateValue: value } });
 			if (!error & data) {
-
 				reloadPage();
 			} else if (error) {
-				alert("There was an issue booking this date, please refresh and try again.");
+				alert('There was an issue booking this date, please refresh and try again.');
 			}
 		} catch (err) {
 			console.error(err);
@@ -89,8 +99,19 @@ function AdminCalendar(props) {
 	// This removes an entry from the database representing a date that was unavailable to rent
 	const handleRemoveUnavailableDate = async (value) => {
 		try {
-			const { data } = await removeUnavailableDate({ variables: { propertyName: propertyName, dateValue: value } });
-			reloadPage();
+			const { error, loading, data } = await removeUnavailableDate({ variables: { propertyName: propertyName, dateValue: value } });
+			if (data && !loading && !error) {
+				reloadPage();
+			} else if (error && !loading) {
+				dispatch({
+					type: SET_THROW_ERROR,
+					throwError: true,
+					errorMessage: {
+						code: error?.networkError?.statusCode,
+						message: 'Sorry, there was a network error while loading this page. The issue should be resolved with a refresh.',
+					},
+				});
+			}
 		} catch (err) {
 			console.error(err);
 		}

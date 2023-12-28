@@ -29,7 +29,6 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import AvailabilityCalendar from '../components/Calendar';
 import Loading from '../components/Loading';
-import { Button } from 'react-bootstrap';
 
 import amenities from '../utils/amenities.json';
 import './CaptainsHideaway.css';
@@ -38,30 +37,25 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 function CaptainsHideaway() {
 	// Global error state context - () => displays error message over app view
 	const [state, dispatch] = useErrorContext();
-	// const {
-	// 	throwError,
-	// 	errorMessage,
-	// 		code,
-	// 		message,
-	// 	} = state;
+
+	const propertyName = 'captainsHideaway';
+	const hideawayAmenities = amenities.hideawayAmenities;
 
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
 	const smoother = useRef();
 
 	// State variables
-	const [propertyName, setPropertyName] = useState('captainsHideaway');
 	const [hideawayGalObjs, setHideawayGalObjs] = useState(null);
 	const [headerUrl, setHeaderUrl] = useState([]);
-	const [mastheadBackgroundImg, setMastheadBackgroundImg] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
-
+	
 	// Amenity modal acts weird, modulating this variable will
 	// directly affect the visibility of modal
 	const [mainContentStyle, setMainContentStyle] = useState({
 		transform: 'translateY(0px)',
 	});
-
+	
 	// Header image style
 	const [imageStyle, setImageStyle] = useState({
 		width: '1200px',
@@ -71,7 +65,6 @@ function CaptainsHideaway() {
 	const [showAmenitiesClass, setShowAmenitiesClass] = useState('');
 	const [moreAmenitiesDisplay, setMoreAmenitiesDisplay] = useState({ display: 'none' });
 	const [showAmenities, setShowAmenities] = useState(false);
-	const [hideawayAmenities, setHideawayAmenities] = useState(amenities.hideawayAmenities);
 
 	// Reveal additional amenities when user clicks 'see more...' button
 	const revealAmenities = () => {
@@ -95,10 +88,10 @@ function CaptainsHideaway() {
 
 	// Allows view to be painted when masthead image and gallery image objects are loaded
 	useEffect(() => {
-		if (hideawayGalObjs && mastheadBackgroundImg) {
+		if (hideawayGalObjs && headerUrl) {
 			setIsLoading(false);
 		}
-	}, [hideawayGalObjs, mastheadBackgroundImg]);
+	}, [hideawayGalObjs, headerUrl]);
 
 	// Get images from AWS S3
 	const { loading, error, data } = useQuery(GET_HIDEAWAY_IMAGES);
@@ -108,7 +101,7 @@ function CaptainsHideaway() {
 		if (!error && !loading && data) {
 			setHeaderUrl(data.getHideawayImgs.headerUrl);
 			setHideawayGalObjs(data.getHideawayImgs.galleryArray);
-		} else if (error) {
+		} else if (error && state) {
 			dispatch({
 				type: SET_THROW_ERROR,
 				throwError: true,
@@ -145,7 +138,7 @@ function CaptainsHideaway() {
 					<>
 						<Navbar />
 						<div onClick={toggleGalleryFullScreen} className='mt-2 col-lg-10 d-flex justify-content-center' style={{ overflow: 'hidden', height: '600px', margin: 'auto' }}>
-							<img style={imageStyle} src={headerUrl} />
+							<img alt='house at top of hill from beach' style={imageStyle} src={headerUrl} />
 						</div>
 						<div style={mainContentStyle} className='d-flex align-items-center flex-column'>
 							<div className='col-lg-10 col-11 d-flex flex-lg-row flex-column justify-content-center'>

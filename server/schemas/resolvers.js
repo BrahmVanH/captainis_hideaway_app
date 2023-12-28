@@ -1,8 +1,6 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { UnavailableDate, User, ApolloError } = require('../models');
+const { UnavailableDate, User } = require('../models');
 const { signToken } = require('../utils/auth');
-const bcrypt = require('bcrypt');
-const s3 = require('../server');
 const { getImages } = require('../utils/s3Query');
 const { getHideawayImgUrls, getCottageImgUrls, getHomeImgUrls, getAboutImgUrl } = require('../utils/gallery_image_helpers');
 
@@ -33,26 +31,6 @@ const resolvers = {
 				return dates;
 			} catch (err) {
 				return [{ message: 'Error in queryUnavailableDates...', details: err.message }];
-			}
-		},
-		queryS3ByObjectType: async (parent, { objectType }) => {
-			// Receives object type
-			try {
-				if (!objectType) {
-					throw new Error('No object type was presented for query');
-				}
-
-				// calls S3 getImages instead of .find
-				const objectResponse = await getImages(objectType);
-
-				if (!objectResponse) {
-					throw new Error('Something went wrong in fetching object from S3');
-				}
-
-				return objectResponse;
-				// returns object response
-			} catch (err) {
-				return [{ message: 'Error in queryS3ByObjectType...', details: err.message }];
 			}
 		},
 		getHomePgImgs: async () => {
@@ -195,23 +173,6 @@ const resolvers = {
 				throw new Error('Error in removing unavailable date from db: ' + err.message);
 			}
 		},
-		// logApolloError: async (parent, { error }) => {
-		// 	try {
-		// 		if (!error) {
-		// 			throw new Error('apollo error is not defined');
-		// 		}
-		// 		const newApolloError = await ApolloError.create(error);
-
-		// 		if (!newApolloError) {
-		// 			throw new Error('Could not create new apollo error');
-		// 		}
-
-		// 		return newApolloError;
-		// 	} catch (err) {
-		// 		console.error(err);
-		// 		throw new Error('Error in creating new apollo error');
-		// 	}
-		// },
 	},
 };
 

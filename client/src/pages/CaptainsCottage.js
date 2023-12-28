@@ -15,7 +15,6 @@ import Navbar from '../components/Navbar';
 
 import ImageGallery from 'react-image-gallery';
 import AvailabilityCalendar from '../components/Calendar';
-import { Button } from 'react-bootstrap';
 
 import { CiCoffeeBean } from 'react-icons/ci';
 import { GiBathtub, GiBunkBeds, GiBeachBucket, GiHeatHaze } from 'react-icons/gi';
@@ -37,7 +36,6 @@ function CaptainsCottage() {
 	// Global error state context - () => displays error message over app view
 	const [state, dispatch] = useErrorContext();
 
-	const cottageAmenitiesComponent = useRef(null);
 	const imageGalleryRef = useRef(null);
 	const main = useRef();
 	const smoother = useRef();
@@ -58,12 +56,7 @@ function CaptainsCottage() {
 	const [showAmenitiesClass, setShowAmenitiesClass] = useState('');
 	const [moreAmenitiesDisplay, setMoreAmenitiesDisplay] = useState({ display: 'none' });
 	const [showAmenities, setShowAmenities] = useState(false);
-	const [cottageAmenities, setCottageAmenities] = useState(amenities.cottageAmenities);
-
-	useEffect(() => {
-		amenities ? console.log(amenities) : console.log('no amenities');
-		cottageAmenities ? console.log(cottageAmenities) : console.log('no cottage amenities');
-	}, [amenities]);
+	const cottageAmenities = amenities.cottageAmenities;
 
 	// Reveal additional amenities when user clicks 'see more...' button
 	const revealAmenities = () => {
@@ -97,7 +90,7 @@ function CaptainsCottage() {
 		if (!error && !loading && data) {
 			setHeaderUrl(data.getCottageImgs.headerUrl);
 			setCottageGalObjs(data.getCottageImgs.galleryArray);
-		} else if (error) {
+		} else if (error && state) {
 			dispatch({
 				type: SET_THROW_ERROR,
 				throwError: true,
@@ -131,7 +124,7 @@ function CaptainsCottage() {
 					<>
 						<Navbar />
 						<div onClick={toggleGalleryFullScreen} className='mt-2 col-lg-10 d-flex justify-content-center' style={{ overflow: 'hidden', height: '600px', margin: 'auto' }}>
-							<img style={imageStyle} src={headerUrl} />
+							<img alt='rear exterior of house with lake in background' style={imageStyle} src={headerUrl} />
 						</div>
 
 						<div style={mainContentStyle} className='d-flex align-items-center flex-column '>
@@ -238,7 +231,7 @@ function CaptainsCottage() {
 									<div className='d-flex flex-column flex-lg-row' style={{ padding: '0.5rem' }}>
 										<h3 style={{ margin: '0px', padding: '0.5rem' }}>Amenities</h3>
 										<div className='amenities-item-wrapper' style={{ margin: '0.5rem', fontSize: '14px', width: '90%', padding: '0.5rem' }}>
-											<div className='amenities-item-container' style={{ width: '100%', height: '100%' }}>
+											<div className={`amenities-item-container ${showAmenitiesClass}`} style={{ width: '100%', height: '100%' }}>
 												<div style={{ padding: '0.5rem' }}>
 													<div className='amenities-item'>
 														<TbToolsKitchen2 />

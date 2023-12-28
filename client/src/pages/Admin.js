@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 
 import gsap from 'gsap';
 import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
@@ -12,7 +12,6 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
 import Auth from '../utils/auth.js';
-import { createScrollSmoother } from '../utils/gsapHelpers.js';
 
 import './Admin.css';
 
@@ -20,7 +19,6 @@ function AdminPage() {
 	const main = useRef();
 	const smoother = useRef();
 	const [showCreateUser, setShowCreateUser] = useState(false);
-	
 
 	Mousetrap.bind('ctrl+alt+1+5', function () {
 		if (showCreateUser === false) {
@@ -30,18 +28,17 @@ function AdminPage() {
 		}
 	});
 
-		useLayoutEffect(() => {
-			gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+	useLayoutEffect(() => {
+		gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-			const ctx = gsap.context(() => {
-				smoother.current = ScrollSmoother.create({
-					smooth: 1,
-					effects: true,
-				});
-			}, main);
-			return () => ctx.revert();
-		}, []);
-
+		const ctx = gsap.context(() => {
+			smoother.current = ScrollSmoother.create({
+				smooth: 1,
+				effects: true,
+			});
+		}, main);
+		return () => ctx.revert();
+	}, []);
 
 	const captainsHideaway = 'captainsHideaway';
 	const captainsCottage = 'captainsCottage';
