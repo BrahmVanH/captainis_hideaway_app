@@ -18,12 +18,14 @@ function AdminCalendar(props) {
 	const propertyName = props.propertyName;
 
 	const [date, setDate] = useState(new Date());
-	const [unavailableDates, setUnavailableDates] = useState([]);
+	const [unavailableDates, setUnavailableDates] = useState(null);
 
+	// Checks database for booked dates for the passed in property
 	const { loading, error, data } = useQuery(QUERY_UNAVAILABLE_DATES, {
 		variables: { propertyName },
 	});
 
+	// TODO: Handle this error with global context
 	useEffect(() => {
 		if (error) {
 			console.error({ message: 'There was an error querying the db from calendar', details: error });
@@ -36,6 +38,7 @@ function AdminCalendar(props) {
 	// Set the unavailableDates state to the query response. Contains an array of dates
 	useEffect(() => {
 		if (!loading && data) {
+			console.log('unavailable dates retrieved...', data);
 			setUnavailableDates(data.queryUnavailableDatesByProperty);
 		} else if (error && !loading) {
 			dispatch({
@@ -55,18 +58,21 @@ function AdminCalendar(props) {
 
 	// Function to generate custom class for the current day
 	const tileClassName = ({ date, view }) => {
-		const unavailableDateValues = getDateValues(unavailableDates);
-		if (unavailableDateValues.some((unavailableDate) => isSameDay(unavailableDate, date))) {
-			return 'admin-unavailable-day';
+		if (!!unavailableDates) {
+			const unavailableDateValues = getDateValues(unavailableDates);
+			if (unavailableDateValues.some((unavailableDate) => isSameDay(unavailableDate, date))) {
+				return 'admin-unavailable-day';
+			} else {
+				return '';
+			}
 		}
-		return '';
 	};
 
 	// This creates an elements to be appended to each date on the calendar that matches a date in a new unavailableDates array
 	// created from calling getDateValues
 	const tileContent = ({ date, view }) => {
-		const unavailableDateValues = getDateValues(unavailableDates);
-		if (unavailableDates.length > 0) {
+		if (!!unavailableDates) {
+			const unavailableDateValues = getDateValues(unavailableDates);
 			const isUnavailable = unavailableDateValues.some((unavailableDate) =>
 				view === 'month'
 					? unavailableDate.getFullYear() === date.getFullYear() && unavailableDate.getMonth() === date.getMonth() && unavailableDate.toDateString() === date.toDateString()
@@ -85,35 +91,38 @@ function AdminCalendar(props) {
 	// This adds an entry to the datebase representing a date that is unavailable to rent
 	const handleAddUnavailableDate = async (value) => {
 		try {
-			const { data, error } = await createUnavailableDate({ variables: { propertyName: propertyName, dateValue: value } });
-			if (!error & data) {
+			const { loading, error, data } = await createUnavailableDate({ variables: { propertyName: propertyName, dateValue: value } });
+			if (!loading && !error && data) {
 				reloadPage();
-			} else if (error) {
-				alert('There was an issue booking this date, please refresh and try again.');
 			}
 		} catch (err) {
-			console.error(err);
+			dispatch({
+				type: SET_THROW_ERROR,
+				throwError: true,
+				errorMessage: {
+					code: err?.networkError?.statusCode,
+					message: 'Sorry, there was a network error while loading this page. The issue should be resolved with a refresh.',
+				},
+			});
 		}
 	};
 
 	// This removes an entry from the database representing a date that was unavailable to rent
 	const handleRemoveUnavailableDate = async (value) => {
 		try {
-			const { error, loading, data } = await removeUnavailableDate({ variables: { propertyName: propertyName, dateValue: value } });
+			const { loading, error, data } = await removeUnavailableDate({ variables: { propertyName: propertyName, dateValue: value } });
 			if (data && !loading && !error) {
 				reloadPage();
-			} else if (error && !loading) {
-				dispatch({
-					type: SET_THROW_ERROR,
-					throwError: true,
-					errorMessage: {
-						code: error?.networkError?.statusCode,
-						message: 'Sorry, there was a network error while loading this page. The issue should be resolved with a refresh.',
-					},
-				});
 			}
 		} catch (err) {
-			console.error(err);
+			dispatch({
+				type: SET_THROW_ERROR,
+				throwError: true,
+				errorMessage: {
+					code: err?.networkError?.statusCode,
+					message: 'Sorry, there was a network error while loading this page. The issue should be resolved with a refresh.',
+				},
+			});
 		}
 	};
 
@@ -121,6 +130,7 @@ function AdminCalendar(props) {
 	// and returns a value if there is a match. the value is created as an unavailableDate object in db
 	// if there is no return value from the filter, the matching date object will be removed from the db
 	const checkIfUnavailable = (value) => {
+		console.log('checking if unavailable...');
 		if (unavailableDates.length > 0) {
 			const proposedDate = unavailableDates.filter((date) => date.dateValue === value);
 			if (proposedDate.length === 0) {
@@ -134,6 +144,7 @@ function AdminCalendar(props) {
 	};
 	// This is a handler function that is called when the user clicks on a date on the calendar
 	const onClickDay = (value, event) => {
+		console.log('handling onClickDay...');
 		const date = new Date(value);
 		checkIfUnavailable(date.toISOString());
 	};
