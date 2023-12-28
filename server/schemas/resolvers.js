@@ -97,22 +97,22 @@ const resolvers = {
 				} else if (adminCode !== process.env.ADMIN_CODE) {
 					console.log(adminCode);
 					throw new AuthenticationError('Incorrect admin code');
+				} else {
+					const newUser = await User.create({
+						firstName,
+						lastName,
+						username,
+						password: userPassword,
+					});
+
+					if (!newUser) {
+						throw new AuthenticationError('There was an error creating user. Try again.');
+					}
+
+					const token = signToken(newUser);
+
+					return { token, newUser };
 				}
-
-				const newUser = await User.create({
-					firstName,
-					lastName,
-					username,
-					password: userPassword,
-				});
-
-				if (!newUser) {
-					throw new AuthenticationError('There was an error creating user. Try again.');
-				}
-
-				const token = signToken(newUser);
-
-				return { token, newUser };
 			} catch (err) {
 				throw new Error('Error in creating user: ' + err.message);
 			}
