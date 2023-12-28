@@ -51,13 +51,13 @@ function ContactForm() {
 					There was an issue sending your message. Please refresh and try again.
 				</Alert>
 				<div className='mb-3'>
-					<Form.Group controlId='formBasicName' required>
-						<Form.Control type='name' name='from_name' placeholder='Name' />
+					<Form.Group  required>
+						<Form.Control autoComplete='name' type='name' name='from_name' placeholder='Name' />
 					</Form.Group>
 				</div>
 				<div className='mb-3'>
-					<Form.Group controlId='formBasicEmail' required>
-						<Form.Control type='email' name='from_email' placeholder='Email Address' />
+					<Form.Group required>
+						<Form.Control autoComplete='email' type='email' name='from_email' placeholder='Email Address' />
 					</Form.Group>
 				</div>
 				<div className='mb-3'>

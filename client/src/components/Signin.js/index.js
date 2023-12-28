@@ -12,7 +12,6 @@ function SigninForm() {
 		userPassword: '',
 	});
 
-
 	const [showAlert, setShowAlert] = useState(false);
 
 	const [loginUser] = useMutation(LOGIN_USER);
@@ -47,19 +46,15 @@ function SigninForm() {
 
 			if (!loading && error) {
 				resetLoginForm();
-				// setShowAlert(true);
-			}
-			// Logs user in and stores token
-			if (data) {
+			} else if (!loading && data) {
+				// Logs user in and stores token
 				Auth.login(data.loginUser.token);
+				window.location.assign('/#/admin');
 			}
 
-			window.location.assign('/#/admin');
 		} catch (err) {
-			console.error(err);
 			setShowAlert(true);
 		}
-
 	};
 
 	return (
@@ -73,12 +68,12 @@ function SigninForm() {
 				</Alert>
 				<div className='mb-3'>
 					<Form.Group controlId='formBasicUsername' required>
-						<Form.Control onChange={handleInputChange} value={loginFormData.username} type='username' name='username' placeholder='Username' />
+						<Form.Control autoComplete='username' onChange={handleInputChange} value={loginFormData.username} type='username' name='username' placeholder='Username' />
 					</Form.Group>
 				</div>
 				<div className='mb-3'>
 					<Form.Group controlId='formBasicPassword' required>
-						<Form.Control onChange={handleInputChange} value={loginFormData.userPassword} type='password' name='userPassword' placeholder='Password' />
+						<Form.Control autoComplete='current-password' onChange={handleInputChange} value={loginFormData.userPassword} type='password' name='userPassword' placeholder='Password' />
 					</Form.Group>
 				</div>
 				<div>

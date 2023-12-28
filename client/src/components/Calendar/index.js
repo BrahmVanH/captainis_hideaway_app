@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import LogRocket from 'logrocket';
 import Calendar from 'react-calendar';
 import { Button } from 'react-bootstrap';
 
@@ -34,6 +35,8 @@ function AvailabilityCalendar(props) {
 		if (!loading && data) {
 			setUnavailableDates(data.queryUnavailableDatesByProperty);
 		} else if (error && state) {
+			LogRocket.captureException(error);
+
 			dispatch({
 				type: SET_THROW_ERROR,
 				throwError: true,

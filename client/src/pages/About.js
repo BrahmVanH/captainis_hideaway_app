@@ -1,4 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import LogRocket from 'logrocket';
 
 import { createScrollSmoother } from '../utils/gsapHelpers';
 import { useQuery } from '@apollo/client';
@@ -25,6 +26,7 @@ function About() {
 		if (!loading && !error && data) {
 			setCardImgUrl(data.getAboutPgImg);
 		} else if (error) {
+			LogRocket.captureException(error);
 			dispatchEvent({
 				type: SET_THROW_ERROR,
 				throwError: true,

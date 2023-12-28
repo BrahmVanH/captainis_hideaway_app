@@ -1,7 +1,8 @@
 import React, { useRef, useLayoutEffect, useEffect, useState } from 'react';
-import { useQuery } from '@apollo/client';
-
+import LogRocket from 'logrocket';
 import gsap from 'gsap';
+
+import { useQuery } from '@apollo/client';
 import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
 
 import _ from 'lodash';
@@ -49,13 +50,13 @@ function CaptainsHideaway() {
 	const [hideawayGalObjs, setHideawayGalObjs] = useState(null);
 	const [headerUrl, setHeaderUrl] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-	
+
 	// Amenity modal acts weird, modulating this variable will
 	// directly affect the visibility of modal
 	const [mainContentStyle, setMainContentStyle] = useState({
 		transform: 'translateY(0px)',
 	});
-	
+
 	// Header image style
 	const [imageStyle, setImageStyle] = useState({
 		width: '1200px',
@@ -102,6 +103,8 @@ function CaptainsHideaway() {
 			setHeaderUrl(data.getHideawayImgs.headerUrl);
 			setHideawayGalObjs(data.getHideawayImgs.galleryArray);
 		} else if (error && state) {
+			LogRocket.captureException(error);
+
 			dispatch({
 				type: SET_THROW_ERROR,
 				throwError: true,
