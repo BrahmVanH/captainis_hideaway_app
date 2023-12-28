@@ -139,6 +139,23 @@ const resolvers = {
 				throw new Error('Error in logging in user: ' + err.message);
 			}
 		},
+		removeUser: async (parent, { username, userPassword }) => {
+			try {
+				if (!username) {
+					throw new Error('username  fields must be filled to remove');
+				}
+				const user = await User.findOneAndRemove({ username });
+				if (!user) {
+					throw new AuthenticationError("Can't find user with that username");
+				}
+
+				if (user) {
+					return { user };
+				}
+			} catch (err) {
+				throw new Error('Error in removing in user: ' + err.message);
+			}
+		},
 		createUnavailableDate: async (parent, { propertyName, dateValue }) => {
 			try {
 				if (!dateValue) {
