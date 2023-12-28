@@ -86,7 +86,7 @@ function AvailabilityCalendar(props) {
 				{loading ? <div> Loading Calendar... </div> : <Calendar onChange={handleDateChange} value={date} tileDisabled={tileContent} tileClassName={tileClassName} />}
 				<div className='calendar-key-container'>
 					<div className='calendar-key'>
-						<Button className='calendar-key-tile' disabled={true} />
+						<div className='calendar-key-tile' />
 						<p className='calendar-key-text'>Booked</p>
 					</div>
 				</div>
