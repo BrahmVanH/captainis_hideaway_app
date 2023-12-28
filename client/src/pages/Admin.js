@@ -57,7 +57,7 @@ function AdminPage() {
 										<h1>Administrator Dashboard</h1>
 										<h4>Hi, Elyse</h4>
 									</div>
-									<div className='admin-property-card-container'>
+									<div className='admin-property-card-container d-flex flex-md-row flex-column '>
 										<AdminPropertyCard propertyName={captainsHideaway} />
 										<AdminPropertyCard propertyName={captainsCottage} />
 									</div>
