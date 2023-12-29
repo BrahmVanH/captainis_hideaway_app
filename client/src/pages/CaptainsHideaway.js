@@ -462,7 +462,7 @@ function CaptainsHideaway() {
 								</div>
 							</div>
 							<div className='image-gallery-wrapper'>
-								<ImageGallery ref={imageGalleryRef} showPlayButton={false} items={hideawayGalObjs} lazyLoad={true} />
+								<ImageGallery ref={imageGalleryRef} showPlayButton={false} items={hideawayGalObjs} />
 							</div>
 						</div>
 						<Footer />
