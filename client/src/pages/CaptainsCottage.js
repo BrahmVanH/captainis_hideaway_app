@@ -140,11 +140,11 @@ function CaptainsCottage() {
 											<div className='overview d-flex justify-content-lg-around justify-content-center'>
 												<div className='overview-item'>
 													<BsFillDoorOpenFill size='24px' className='overview-item-icon' />
-													<p>2 bedrooms</p>
+													<p>2 Bedrooms</p>
 												</div>
 												<div className='overview-item'>
 													<GiBathtub size='24px' className='overview-item-icon' />
-													<p>1 bathrooms</p>
+													<p>1 Bathrooms</p>
 												</div>
 												<div className='overview-item'>
 													<LuBedDouble size='24px' className='overview-item-icon' />

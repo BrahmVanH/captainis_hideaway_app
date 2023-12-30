@@ -152,11 +152,11 @@ function CaptainsHideaway() {
 											<div className='overview d-flex  justify-content-lg-around justify-content-center'>
 												<div className='overview-item'>
 													<BsFillDoorOpenFill size='24px' className='overview-item-icon' />
-													<p>4 bedrooms</p>
+													<p>4 Bedrooms</p>
 												</div>
 												<div className='overview-item'>
 													<GiBathtub size='24px' className='overview-item-icon' />
-													<p>3 bathrooms</p>
+													<p>3 Bathrooms</p>
 												</div>
 												<div className='overview-item'>
 													<LuBedDouble size='24px' className='overview-item-icon' />
