@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito&display=swap');
+
+* {
+  font-family: 'Nunito', serif !important;
+}
+
 html,
 body {
 	height: 100vh;
@@ -14,6 +20,3 @@ body {
 	min-height: 100vh;
 }
 
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-}

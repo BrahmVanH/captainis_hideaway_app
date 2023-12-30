@@ -16,7 +16,6 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './Home.css';
 
 function Home() {

@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom/client';
 import LogRocket from 'logrocket';
 
 import App from './App';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
 
 import setupLogRocketReact from 'logrocket-react';
