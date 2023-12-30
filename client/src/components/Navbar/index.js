@@ -5,7 +5,6 @@ import { RxHamburgerMenu } from 'react-icons/rx';
 
 import mobileLogoSvg from '../../assets/logo/logo.svg';
 import logoSvg from '../../assets/logo/logo_no_trees.svg'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './style.css';
 
 function Navbar() {
