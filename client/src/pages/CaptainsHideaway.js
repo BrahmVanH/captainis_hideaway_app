@@ -169,8 +169,8 @@ function CaptainsHideaway() {
 										<div className='captains-hideaway-card-body card-body d-flex flex-column'>
 											<div className='rooms-and-beds-inner-container d-flex flex-lg-row flex-column'>
 												<h3 style={{ padding: '0.5rem 0.5rem 0.5rem 1rem', margin: '0px' }}>Rooms &amp; Beds</h3>
-												<div className='d-flex flex-row justify-content-between flex-lg-nowrap flex-wrap' style={{ padding: '0.5rem', width: '100%', margin: '0.5rem' }}>
-													<div className='hideaway-bedroom-description-container'>
+												<div className='d-flex flex-row justify-content-between flex-md-nowrap flex-wrap' style={{ padding: '0.5rem', width: '100%', margin: '0.5rem' }}>
+													<div className='hideaway-bedroom-description-container '>
 														<p>Bedroom 1</p>
 														<IoBedOutline size='22px' />
 														<p className='bedroom-description-text'>1 King Bed</p>

@@ -17,9 +17,32 @@
 	display: flex;
 	align-items: center;
 	flex-direction: column;
+	padding: 0.5rem;
+	margin: 0.5rem;
+
 }
 
 .bedroom-description-loft-icons {
 	display: flex;
-	flex-direction: row;
+	flex-direction: row !important;
+}
+
+@media only screen and (max-device-width: 776px) {
+
+	.captains-cottage-card-body div {
+		flex-direction: column ;
+	}
+	.captains-cottage-card-body h3 {
+		text-align: center;
+		border-bottom: 3px solid transparent;
+		border-image-source: linear-gradient(to right, white, #abccd8, #5f8fa5, #abccd8, white);
+		border-image-slice: 1;
+		border-image-outset: 0;
+		border-image-repeat: stretch;
+
+	}
+
+	.captains-hideaway-card-body {
+		border: none;
+	}
 }
