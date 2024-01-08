@@ -12,7 +12,6 @@ const ToastNotif = ({ children }) => {
 	const [body, setBody] = useState(null);
 	const [errorCode, setErrorCode] = useState(null);
 	const [toastFired, setToastFired] = useState(false);
-	const [onCloseFireCount, setCloseFireCount] = useState(1);
 
 	const resetErrorState = () => {
 		
@@ -30,14 +29,7 @@ const ToastNotif = ({ children }) => {
 	};
 
 	const handleClose = () => {
-		if (process.env.NODE_ENV !== 'production' && onCloseFireCount % 2 === 0) {
 			resetErrorState();
-		} else if (process.env.NODE_ENV === 'production') {
-			resetErrorState();
-		}
-		let inc = onCloseFireCount;
-		inc++;
-		setCloseFireCount(inc);
 	};
 
 

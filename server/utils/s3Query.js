@@ -21,6 +21,7 @@ const findImgIndex = (data, imgKey) => {
 	}
 };
 
+
 const getSignedUrl = (imageBucket, imageItem) => {
 	if (imageItem.Key) {
 		return s3.getSignedUrl('getObject', {
