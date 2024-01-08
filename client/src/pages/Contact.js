@@ -1,5 +1,5 @@
-import React, { useLayoutEffect, useRef } from 'react';
-
+import React, { useLayoutEffect, useRef, useEffect } from 'react';
+import ReactGA from 'react-ga';
 import gsap from 'gsap';
 import { ScrollTrigger, ScrollSmoother } from 'gsap/all';
 
@@ -10,6 +10,10 @@ import Footer from '../components/Footer';
 import './Contact.css';
 
 function ContactPage() {
+	useEffect(() => {
+		ReactGA.pageview(window.location.pathname + window.location.search);
+	}, []);
+
 	const main = useRef();
 	const smoother = useRef();
 

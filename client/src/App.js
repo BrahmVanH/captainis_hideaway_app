@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import ReactGA from 'react-ga';
 import { ApolloClient, ApolloLink, ApolloProvider, HttpLink, InMemoryCache, gql } from '@apollo/client';
 import { onError } from '@apollo/client/link/error';
 
@@ -18,6 +19,8 @@ import CaptainsHideaway from './pages/CaptainsHideaway';
 import CaptainsCottage from './pages/CaptainsCottage';
 
 import '@csstools/normalize.css';
+
+
 
 const typeDefs = gql`
 	type imageObject {
@@ -105,7 +108,10 @@ const client = new ApolloClient({
 });
 
 function App() {
-	// Register GSAP plugins for all components. ScrollSmoother relies on ScrollTrigger
+
+	 useEffect(() => {
+			ReactGA.pageview(window.location.pathname + window.location.search);
+		}, []);
 
 	return (
 		<ApolloProvider client={client}>

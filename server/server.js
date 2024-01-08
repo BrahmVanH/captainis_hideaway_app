@@ -26,15 +26,6 @@ if (process.env.NODE_ENV === 'production') {
 	app.use(express.static(path.join(__dirname, '../client/build')));
 }
 
-// // JS SDK v3 does not support global configuration.
-// // Codemod has attempted to pass values to each service client in this file.
-// // You may need to update clients outside of this file, if they use global config.
-// AWS.config.update({
-// 	accessKeyId: process.env.S3_ACCESS_KEY,
-// 	secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-// 	region: 'us-east-2',
-// });
-
 // Create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async (typeDefs, resolvers) => {
 	await server.start();
