@@ -80,7 +80,13 @@ module.exports = function (proxy, allowedHost) {
 			overlay: {
 				errors: false,
 				warnings: false,
-				runtimeErrors: false,
+				runtimeErrors: (error) => {
+					if (error.message === 'ResizeObserver loop limit exceeded') {
+						return false;
+					}
+
+					return true;
+				},
 			},
 		},
 		devMiddleware: {
