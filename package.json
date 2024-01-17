@@ -1,6 +1,6 @@
 {
 	"name": "LakeSuperiorCaptains",
-	"version": "1.0.0",
+	"version": "1.1.0",
 	"description": "A full stack application for managing property rental SEO and availability",
 	"main": "index.js",
 	"engines": {
