@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
-import ReactGA from 'react-ga';
+// import ReactGA from 'react-ga';
 
 const NotFound = () => {
-	useEffect(() => {
-		ReactGA.pageview(window.location.pathname + window.location.search);
-	}, []);
+	// useEffect(() => {
+	// 	ReactGA.pageview(window.location.pathname + window.location.search);
+	// }, []);
 
 	const notFoundImage = '../assets/img/NotFoundImage.png';
 	return (

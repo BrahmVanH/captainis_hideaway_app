@@ -1,5 +1,5 @@
 import React, { useLayoutEffect, useRef, useState, useEffect } from 'react';
-import ReactGA from 'react-ga';
+// import ReactGA from 'react-ga';
 
 
 import gsap from 'gsap';
@@ -18,9 +18,9 @@ import Auth from '../utils/auth.js';
 import './Admin.css';
 
 function AdminPage() {
-	 useEffect(() => {
-			ReactGA.pageview(window.location.pathname + window.location.search);
-		}, []);
+	//  useEffect(() => {
+	// 		ReactGA.pageview(window.location.pathname + window.location.search);
+	// 	}, []);
 
 	const main = useRef();
 	const smoother = useRef();

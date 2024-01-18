@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import LogRocket from 'logrocket';
-import ReactGA from 'react-ga';
+// import ReactGA from 'react-ga';
 
 
 import { createScrollSmoother } from '../utils/gsapHelpers';
@@ -15,9 +15,9 @@ import Footer from '../components/Footer';
 import Loading from '../components/Loading';
 
 function About() {
-	 useEffect(() => {
-			ReactGA.pageview(window.location.pathname + window.location.search);
-		}, []);
+	//  useEffect(() => {
+	// 		ReactGA.pageview(window.location.pathname + window.location.search);
+	// 	}, []);
 
 	const [state, dispatch] = useErrorContext();
 

@@ -1,6 +1,7 @@
-import React, {useEffect} from 'react';
-import ReactGA from 'react-ga';
+import React, { useEffect } from 'react';
+// import ReactGA from 'react-ga';
 import { ApolloClient, ApolloLink, ApolloProvider, HttpLink, InMemoryCache, gql } from '@apollo/client';
+
 import { onError } from '@apollo/client/link/error';
 
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
@@ -19,8 +20,6 @@ import CaptainsHideaway from './pages/CaptainsHideaway';
 import CaptainsCottage from './pages/CaptainsCottage';
 
 import '@csstools/normalize.css';
-
-
 
 const typeDefs = gql`
 	type imageObject {
@@ -65,6 +64,8 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
 const httpLink = new HttpLink({
 	uri: process.env.NODE_ENV === 'production' ? '/graphql' : 'http://localhost:3001/graphql',
 });
+
+
 const link = ApolloLink.from([errorLink, httpLink]);
 
 // Define cache policies
@@ -108,10 +109,9 @@ const client = new ApolloClient({
 });
 
 function App() {
-
-	 useEffect(() => {
-			ReactGA.pageview(window.location.pathname + window.location.search);
-		}, []);
+	// useEffect(() => {
+	// 	ReactGA.pageview(window.location.pathname + window.location.search);
+	// }, []);
 
 	return (
 		<ApolloProvider client={client}>
