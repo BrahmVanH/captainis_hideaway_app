@@ -1,7 +1,7 @@
 import React, { useLayoutEffect, useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
 import LogRocket from 'logrocket';
-import ReactGA from 'react-ga'
+// import ReactGA from 'react-ga'
 
 import { useQuery } from '@apollo/client';
 
@@ -20,9 +20,9 @@ import Loading from '../components/Loading';
 import './Home.css';
 
 function Home() {
-	 useEffect(() => {
-			ReactGA.pageview(window.location.pathname + window.location.search);
-		}, []);
+	//  useEffect(() => {
+	// 		ReactGA.pageview(window.location.pathname + window.location.search);
+	// 	}, []);
 
 	const [state, dispatch] = useErrorContext();
 

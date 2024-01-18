@@ -1,7 +1,7 @@
 import React, { useRef, useLayoutEffect, useEffect, useState } from 'react';
 import LogRocket from 'logrocket';
 import gsap from 'gsap';
-import ReactGA from 'react-ga';
+// import ReactGA from 'react-ga';
 
 
 import { useQuery } from '@apollo/client';
@@ -39,9 +39,9 @@ import 'react-image-gallery/styles/css/image-gallery.css';
 
 function CaptainsHideaway() {
 	
-	 useEffect(() => {
-			ReactGA.pageview(window.location.pathname + window.location.search);
-		}, []);
+	//  useEffect(() => {
+	// 		ReactGA.pageview(window.location.pathname + window.location.search);
+	// 	}, []);
 
 	// Global error state context - () => displays error message over app view
 	const [state, dispatch] = useErrorContext();
