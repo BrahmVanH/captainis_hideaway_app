@@ -1,24 +1,33 @@
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
-const userSchema = new Schema({
-	firstName: {
-		type: String,
-		required: true,
+const userSchema = new Schema(
+	{
+		firstName: {
+			type: String,
+			required: true,
+			minLength: 1,
+			maxLength: 50,
+		},
+		lastName: {
+			type: String,
+			required: true,
+			minLength: 1,
+			maxLength: 50,
+		},
+		username: {
+			type: String,
+			required: true,
+			minLength: 1,
+			maxLength: 50,
+		},
+		password: {
+			type: String,
+			required: true,
+			minLength: 1,
+			maxLength: 50,
+		},
 	},
-	lastName: {
-		type: String,
-		required: true,
-	},
-	username: {
-		type: String,
-		required: true,
-	},
-	password: {
-		type: String,
-		required: true,
-	},
-},
 	{
 		toJSON: {
 			virtuals: true,

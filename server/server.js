@@ -4,10 +4,9 @@ const path = require('path');
 const { ApolloServer } = require('apollo-server-express');
 const cors = require('cors');
 const { authMiddleware } = require('./utils/auth');
-
+const mongoSanitize = require('express-mongo-sanitize');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
-
 const app = express();
 const PORT = process.env.PORT || 3001;
 
@@ -20,6 +19,7 @@ const server = new ApolloServer({
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cors());
+app.use(mongoSanitize());
 
 // if we're in production, serve client/build as static assets
 if (process.env.NODE_ENV === 'production') {
@@ -41,4 +41,3 @@ const startApolloServer = async (typeDefs, resolvers) => {
 
 // Call the async function to start the server
 startApolloServer(typeDefs, resolvers);
-
