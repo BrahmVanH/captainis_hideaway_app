@@ -1,6 +1,5 @@
 import React, { useLayoutEffect, useRef, useEffect, useState } from 'react';
 import gsap from 'gsap';
-import LogRocket from 'logrocket';
 // import ReactGA from 'react-ga'
 
 import { useQuery } from '@apollo/client';
@@ -43,8 +42,6 @@ function Home() {
 			setCottageImgUrl(data.getHomePgImgs.cottageImgUrl);
 			setHideawayImgUrl(data.getHomePgImgs.hideawayImgUrl);
 		} else if (error && state) {
-			LogRocket.captureException(error);
-
 			dispatch({
 				type: SET_THROW_ERROR,
 				throwError: true,
@@ -73,12 +70,12 @@ function Home() {
 	useEffect(() => {
 		if (headerUrl !== null && cottageImgUrl !== null && hideawayImgUrl !== null) {
 			setHideawayCard({
-		title: "Captain's Hideaway",
-		description:
-			"This 4 bedroom, 3 full bath home overlooking spectacular Lake Superior is every vacationer's dream. Spend your days hunting for agates on the beaches of Lake Superior, beach access is simply a few steps away from the back porch. If relaxing indoors is more your speed, spend the day lounging in the 4 season room that overlooks miles and miles of unobstructed views of Lake Superior.",
-		urlEndpoint: '/captains_hideaway',
-		imagePath: hideawayImgUrl,
-	});
+				title: "Captain's Hideaway",
+				description:
+					"This 4 bedroom, 3 full bath home overlooking spectacular Lake Superior is every vacationer's dream. Spend your days hunting for agates on the beaches of Lake Superior, beach access is simply a few steps away from the back porch. If relaxing indoors is more your speed, spend the day lounging in the 4 season room that overlooks miles and miles of unobstructed views of Lake Superior.",
+				urlEndpoint: '/captains_hideaway',
+				imagePath: hideawayImgUrl,
+			});
 			setCottageCard({
 				title: "Captain's Cottage",
 				description: '3 acres of private Lake Superior beach front! Located on the North Country Trail. Muskallonge Lake located directly behind the property for great fishing, hiking or kayaking. ',

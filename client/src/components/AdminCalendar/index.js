@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import LogRocket from 'logrocket';
 import Calendar from 'react-calendar';
 
 import { QUERY_UNAVAILABLE_DATES } from '../../utils/queries';
@@ -40,7 +39,6 @@ function AdminCalendar(props) {
 		if (!loading && data) {
 			setUnavailableDates(data.queryUnavailableDatesByProperty);
 		} else if (error && !loading) {
-			LogRocket.captureException(error);
 			dispatch({
 				type: SET_THROW_ERROR,
 				throwError: true,
@@ -96,8 +94,6 @@ function AdminCalendar(props) {
 				reloadPage();
 			}
 		} catch (err) {
-			LogRocket.captureException(err);
-
 			dispatch({
 				type: SET_THROW_ERROR,
 				throwError: true,
@@ -117,7 +113,6 @@ function AdminCalendar(props) {
 				reloadPage();
 			}
 		} catch (err) {
-			LogRocket.captureException(err);
 
 			dispatch({
 				type: SET_THROW_ERROR,

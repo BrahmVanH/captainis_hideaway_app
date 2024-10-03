@@ -1,0 +1,51 @@
+{
+	"properties": [
+		{
+			"name": "Captain's Hideaway",
+			"overviewItems": [
+				{
+					"name": "Bedrooms",
+					"text": " 4 Bedrooms",
+					"icon": "<BsFillDoorOpenFill size='24px' className='.pt-2'>"
+				},
+				{
+					"name": "Bathrooms",
+					"text": "3 Bathrooms",
+					"icon": "<GiBathtub size='24px' className='.pt-2' />"
+				},
+				{
+					"name": "Number of occupants",
+					"text": "Sleeps 10",
+					"icon": "<LuBedDouble size='24px' className='.pt-2' />"
+				}
+			],
+			"roomsBedsItems": [
+				{
+					"room": "Bedroom 1",
+					"beds": "1 King bed",
+					"icon": "<IoBedOutline size='22px' className='.mt-1' />"
+				},
+				{
+					"room": "Bedroom 2",
+					"beds": "1 Queen bed",
+					"icon": "<LuBedDouble size='22px' className='.mt-1' />"
+				},
+				{
+					"room": "Bedroom 3",
+					"beds": "1 Double Bed",
+					"icon": "<LuBedSingle size='22px' className='.mt-1' />"
+				},
+				{
+					"room": "Bedroom 4",
+					"beds": "1 Twin beds",
+					"icon": "<GiBunkBeds size='22px' className='.mt-1' />"
+				},
+				{
+					"room": "Common Area",
+					"beds": "2 Sofa Beds",
+					"icon": "<PiCouch size='22px' className='.mt-1' /><PiCouch size='22px' className='.mt-1' />"
+				}
+			]
+		}
+	]
+}

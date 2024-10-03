@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import LogRocket from 'logrocket';
 
 class ErrorBoundary extends Component {
 	constructor(props) {
@@ -10,7 +9,6 @@ class ErrorBoundary extends Component {
 	}
 
 	componentDidCatch(error, errorInfo) {
-		LogRocket.captureException(error);
 		this.setState({ hasError: true });
 	}
 

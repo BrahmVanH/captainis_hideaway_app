@@ -1,5 +1,4 @@
 import React, { useRef, useLayoutEffect, useState, useEffect } from 'react';
-import LogRocket from 'logrocket';
 import gsap from 'gsap';
 // import ReactGA from 'react-ga';
 
@@ -98,7 +97,6 @@ function CaptainsCottage() {
 			setHeaderUrl(data.getCottageImgs.headerUrl);
 			setCottageGalObjs(data.getCottageImgs.galleryArray);
 		} else if (error && state) {
-			LogRocket.captureException(error);
 
 			dispatch({
 				type: SET_THROW_ERROR,

@@ -1,5 +1,4 @@
 import React, { useRef, useLayoutEffect, useEffect, useState } from 'react';
-import LogRocket from 'logrocket';
 import gsap from 'gsap';
 // import ReactGA from 'react-ga';
 
@@ -110,7 +109,6 @@ function CaptainsHideaway() {
 			setHeaderUrl(data.getHideawayImgs.headerUrl);
 			setHideawayGalObjs(data.getHideawayImgs.galleryArray);
 		} else if (error && state) {
-			LogRocket.captureException(error);
 
 			dispatch({
 				type: SET_THROW_ERROR,
@@ -147,6 +145,7 @@ function CaptainsHideaway() {
 				{!isLoading ? (
 					<>
 						<Navbar />
+						
 						<div onClick={toggleGalleryFullScreen} className='mt-2 col-lg-10 d-flex justify-content-center' style={{ overflow: 'hidden', height: '600px', margin: 'auto' }}>
 							<img alt='house at top of hill from beach' style={imageStyle} src={headerUrl} />
 						</div>

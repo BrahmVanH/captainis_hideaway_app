@@ -6,8 +6,6 @@ import { onError } from '@apollo/client/link/error';
 
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 
-import LogRocket from 'logrocket';
-
 import NotFound from './pages/404';
 import ErrorBoundary from './components/ErrorBoundary';
 import { ErrorProvider } from './utils/ErrorContext';
@@ -49,24 +47,10 @@ const typeDefs = gql`
 	}
 `;
 
-const errorLink = onError(({ graphQLErrors, networkError }) => {
-	if (graphQLErrors) {
-		graphQLErrors.forEach(({ message, locations, path }) => {
-			LogRocket.captureMessage(`[GraphQL error]: ${message}`);
-		});
-	}
 
-	if (networkError) {
-		LogRocket.captureMessage(`[Network error]: ${networkError}`);
-	}
-});
-
-const httpLink = new HttpLink({
+const link = new HttpLink({
 	uri: process.env.NODE_ENV === 'production' ? '/graphql' : 'http://localhost:3001/graphql',
 });
-
-
-const link = ApolloLink.from([errorLink, httpLink]);
 
 // Define cache policies
 const cache = new InMemoryCache({
