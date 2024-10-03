@@ -1,16 +1,17 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
 const dateSchema = new Schema({
-  propertyName: {
-    type: String,
-    require: true
-  },
-  dateValue: {
-    type: String,
-    require: true
-  }
+	propertyName: {
+		type: String,
+		required: true,
+		enum: ['captainsHideaway', 'captainsCottage'],
+	},
+	dateValue: {
+		type: String,
+		required: true,
+	},
 });
 
-const UnavailableDate = model("UnavailableDate", dateSchema);
+const UnavailableDate = model('UnavailableDate', dateSchema);
 
 module.exports = UnavailableDate;

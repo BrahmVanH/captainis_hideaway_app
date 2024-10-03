@@ -8,8 +8,9 @@
 
 .welcome-message-container {
 	height: 400px;
+	width: 100%;
 	display: flex;
-	justify-content: left;
+	justify-content: center;
 	align-items: center;
 }
 
@@ -22,6 +23,7 @@
 .overlay {
 	background-color: rgba(0, 0, 0, 0.4);
 	height: 20% !important;
+	width: 100%;
 }
 
 @media only screen and (max-device-width: 776px) {
