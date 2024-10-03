@@ -1,5 +1,4 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import LogRocket from 'logrocket';
 // import ReactGA from 'react-ga';
 
 
@@ -32,7 +31,6 @@ function About() {
 		if (!loading && !error && data) {
 			setCardImgUrl(data.getAboutPgImg);
 		} else if (error) {
-			LogRocket.captureException(error);
 			dispatchEvent({
 				type: SET_THROW_ERROR,
 				throwError: true,

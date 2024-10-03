@@ -1,14 +1,10 @@
 const AWS = require('aws-sdk');
 
-if (process.env.NODE_ENV !== 'production') {
-	AWS.config.loadFromPath('./utils/awsCredentials.json');
-} else if (process.env.NODE_ENV == 'production') {
-	AWS.config.update({
-		accessKeyId: process.env.S3_ACCESS_KEY,
-		secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
-		region: process.env.S3_REGION,
-	});
-}
+AWS.config.update({
+	accessKeyId: process.env.S3_ACCESS_KEY,
+	secretAccessKey: process.env.S3_SECRET_ACCESS_KEY,
+	region: process.env.S3_REGION,
+});
 
 const s3 = new AWS.S3();
 
@@ -20,7 +16,6 @@ const findImgIndex = (data, imgKey) => {
 		return 0;
 	}
 };
-
 
 const getSignedUrl = (imageBucket, imageItem) => {
 	if (imageItem.Key) {
@@ -86,20 +81,24 @@ const getImages = async (objectRequest) => {
 		case 'homePage':
 			try {
 				const data = await s3.listObjectsV2(homePageParams).promise();
-				if (data) {
-					const headerImgIndex = findImgIndex(data, homeHeaderImgKey);
-					const headerImgUrl = getSignedUrl(homePageParams.Bucket, data.Contents[headerImgIndex]);
 
-					const hideawayImgIndex = findImgIndex(data, homePgHideawayImgKey)[0];
-					const hideawayImgUrl = getSignedUrl(homePageParams.Bucket, data.Contents[hideawayImgIndex]);
-
-					const cottageImgIndex = findImgIndex(data, homePgCottageImgKey)[0];
-					const cottageImgUrl = getSignedUrl(homePageParams.Bucket, data.Contents[cottageImgIndex]);
-
-					return { headerImgUrl, hideawayImgUrl, cottageImgUrl };
+				if (!data) {
+					console.error('no data returned from s3');
+					throw new Error('no data returned from s3');
 				}
+				const headerImgIndex = findImgIndex(data, homeHeaderImgKey);
+				const headerImgUrl = getSignedUrl(homePageParams.Bucket, data.Contents[headerImgIndex]);
+
+				const hideawayImgIndex = findImgIndex(data, homePgHideawayImgKey)[0];
+				const hideawayImgUrl = getSignedUrl(homePageParams.Bucket, data.Contents[hideawayImgIndex]);
+
+				const cottageImgIndex = findImgIndex(data, homePgCottageImgKey)[0];
+				const cottageImgUrl = getSignedUrl(homePageParams.Bucket, data.Contents[cottageImgIndex]);
+
+				return { headerImgUrl, hideawayImgUrl, cottageImgUrl };
 			} catch (err) {
-				return [{ message: 'Error in querying s3 for homepage images', details: err.message }];
+				console.error('Error in querying s3 for homepage images', err);
+				throw new Error('Error in querying s3 for homepage images', err);
 			}
 		case 'hideawayImgPack':
 			try {
